@@ -1,0 +1,45 @@
+name: Phase1 Issue
+description: Phase1で着手するタスクの登録用テンプレート
+title: "[Phase1] "
+labels:
+  - phase1
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Phase1のタスクを整理するためのテンプレートです。
+  - type: input
+    id: objective
+    attributes:
+      label: 目的
+      description: このIssueで達成したいこと
+      placeholder: 例) ダッシュボードの主要KPI表示を実装する
+    validations:
+      required: true
+  - type: textarea
+    id: tasks
+    attributes:
+      label: 作業内容
+      description: 実施する作業をチェックリストで記載
+      placeholder: |
+        - [ ] 仕様確認
+        - [ ] 実装
+        - [ ] テスト
+    validations:
+      required: true
+  - type: textarea
+    id: done_definition
+    attributes:
+      label: 完了条件
+      description: このIssueが完了と判断できる条件
+      placeholder: 例) PRがmainにマージされ、動作確認が完了している
+    validations:
+      required: true
+  - type: input
+    id: due
+    attributes:
+      label: 目標日
+      description: 任意（YYYY-MM-DD）
+      placeholder: 2026-03-15
+    validations:
+      required: false

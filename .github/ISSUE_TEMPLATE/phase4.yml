@@ -1,0 +1,45 @@
+name: Phase4 Issue
+description: Phase4で着手するタスクの登録用テンプレート
+title: "[Phase4] "
+labels:
+  - phase4
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Phase4のタスクを整理するためのテンプレートです。
+  - type: input
+    id: objective
+    attributes:
+      label: 目的
+      description: このIssueで達成したいこと
+      placeholder: 例) リリース準備と運用ドキュメント整備
+    validations:
+      required: true
+  - type: textarea
+    id: tasks
+    attributes:
+      label: 作業内容
+      description: 実施する作業をチェックリストで記載
+      placeholder: |
+        - [ ] 最終テスト
+        - [ ] ドキュメント更新
+        - [ ] リリース手順確認
+    validations:
+      required: true
+  - type: textarea
+    id: done_definition
+    attributes:
+      label: 完了条件
+      description: このIssueが完了と判断できる条件
+      placeholder: 例) リリース作業が完了し、運用手順がチームで共有されている
+    validations:
+      required: true
+  - type: input
+    id: due
+    attributes:
+      label: 目標日
+      description: 任意（YYYY-MM-DD）
+      placeholder: 2026-06-15
+    validations:
+      required: false
