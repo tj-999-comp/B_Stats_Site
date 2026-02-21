@@ -1,0 +1,19 @@
+{
+  "name": "@bleague-stats/supabase-client",
+  "version": "0.0.1",
+  "private": true,
+  "main": "./src/client.ts",
+  "types": "./src/types.ts",
+  "exports": {
+    ".": "./src/client.ts",
+    "./auth": "./src/auth.ts",
+    "./queries": "./src/queries.ts",
+    "./types": "./src/types.ts"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  }
+}

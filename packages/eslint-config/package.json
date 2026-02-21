@@ -1,0 +1,9 @@
+{
+  "name": "@bleague-stats/eslint-config",
+  "version": "0.0.1",
+  "private": true,
+  "main": "index.js",
+  "peerDependencies": {
+    "eslint": ">=8.0.0"
+  }
+}
