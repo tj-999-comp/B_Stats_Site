@@ -23,5 +23,5 @@ jobs:
       - name: Run scraper
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-          SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
+          SUPABASE_SECRET_KEYS: ${{ secrets.SUPABASE_SECRET_KEYS }}
         run: python -m scraper.src.scraper

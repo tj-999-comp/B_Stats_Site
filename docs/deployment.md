@@ -6,8 +6,8 @@
 
 | Secret名 | 説明 |
 |---------|------|
-| `NEXT_PUBLIC_SUPABASE_URL` | SupabaseプロジェクトURL |
-| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase公開キー |
+| `SUPABASE_URL` | SupabaseプロジェクトURL |
+| `SUPABASE_PUBLISHABLE_KEYS` | Supabase Publishable key |
 
 ### デプロイ手順
 
@@ -29,8 +29,8 @@
 
 1. [Vercel](https://vercel.com) でプロジェクトを作成
 2. Vercel側で環境変数を設定
-   - `NEXT_PUBLIC_SUPABASE_URL`
-   - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+   - `NEXT_PUBLIC_SUPABASE_URL`（値は `SUPABASE_URL` と同じ）
+   - `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`（値は `SUPABASE_PUBLISHABLE_KEYS` と同じ）
 3. 上記GitHub Secretsを設定
 4. `main`ブランチへのプッシュで自動デプロイ（`apps/web-vercel/`変更時）
 
@@ -41,7 +41,7 @@
 | Secret名 | 説明 |
 |---------|------|
 | `SUPABASE_URL` | SupabaseプロジェクトURL |
-| `SUPABASE_SECRET_KEY` | Supabaseシークレットキー |
+| `SUPABASE_SECRET_KEYS` | Supabaseシークレットキー |
 
 毎日UTC 15:00（JST 深夜0時）に自動実行されます。
 手動実行はGitHub ActionsのWorkflow dispatchから可能です。

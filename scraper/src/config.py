@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 SUPABASE_URL: str = os.environ['SUPABASE_URL']
-SUPABASE_SECRET_KEY: str = os.environ['SUPABASE_SECRET_KEY']
+SUPABASE_SECRET_KEYS: str = os.environ['SUPABASE_SECRET_KEYS']
 
 BASE_URL = 'https://www.bleague.jp'
 

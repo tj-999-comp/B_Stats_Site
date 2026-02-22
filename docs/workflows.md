@@ -28,7 +28,7 @@
 | シークレット名 | 説明 |
 |---|---|
 | `SUPABASE_URL` | Supabase プロジェクトの URL |
-| `SUPABASE_SECRET_KEY` | Supabase の service_role キー |
+| `SUPABASE_SECRET_KEYS` | Supabase の service_role キー |
 
 ---
 
@@ -59,8 +59,10 @@
 
 | シークレット名 | 説明 |
 |---|---|
-| `NEXT_PUBLIC_SUPABASE_URL` | Supabase プロジェクトの URL（フロントエンド公開用） |
-| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase の anon キー（フロントエンド公開用） |
+| `SUPABASE_URL` | Supabase プロジェクトの URL |
+| `SUPABASE_PUBLISHABLE_KEYS` | Supabase の Publishable key |
+
+> `deploy-pages.yml` では上記シークレットを `NEXT_PUBLIC_SUPABASE_URL` / `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` にマッピングしてビルド時に利用します。
 
 ---
 

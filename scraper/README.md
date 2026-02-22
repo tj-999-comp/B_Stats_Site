@@ -30,4 +30,4 @@ python -m scraper.src.scraper
 Supabaseの接続情報はGitHub Secretsに設定してください：
 
 - `SUPABASE_URL`
-- `SUPABASE_SECRET_KEY`
+- `SUPABASE_SECRET_KEYS`

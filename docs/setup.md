@@ -33,16 +33,20 @@ pnpm install
 
 ```bash
 # apps/web-static/.env.local
+SUPABASE_URL=https://your-project.supabase.co
+SUPABASE_PUBLISHABLE_KEYS=your-publishable-key
 NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=your-publishable-key
 
 # apps/web-vercel/.env.local
+SUPABASE_URL=https://your-project.supabase.co
+SUPABASE_PUBLISHABLE_KEYS=your-publishable-key
 NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=your-publishable-key
 
 # scraper/.env
 SUPABASE_URL=https://your-project.supabase.co
-SUPABASE_SECRET_KEY=your-secret-key
+SUPABASE_SECRET_KEYS=your-secret-key
 ```
 
 ## 5. スクレイパーのセットアップ
