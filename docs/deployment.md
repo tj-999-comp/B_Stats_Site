@@ -41,7 +41,7 @@
 | Secret名 | 説明 |
 |---------|------|
 | `SUPABASE_URL` | SupabaseプロジェクトURL |
-| `SUPABASE_SERVICE_ROLE_KEY` | Supabaseサービスロールキー |
+| `SUPABASE_SECRET_KEY` | Supabaseシークレットキー |
 
 毎日UTC 15:00（JST 深夜0時）に自動実行されます。
 手動実行はGitHub ActionsのWorkflow dispatchから可能です。

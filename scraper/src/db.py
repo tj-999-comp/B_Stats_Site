@@ -2,11 +2,11 @@
 
 from typing import Any
 from supabase import create_client, Client
-from .config import SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY
+from .config import SUPABASE_URL, SUPABASE_SECRET_KEY
 
 
 def get_client() -> Client:
-    return create_client(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY)
+    return create_client(SUPABASE_URL, SUPABASE_SECRET_KEY)
 
 
 def upsert_player_stats(data: list[dict[str, Any]]) -> None:

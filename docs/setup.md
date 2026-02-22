@@ -42,7 +42,7 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
 
 # scraper/.env
 SUPABASE_URL=https://your-project.supabase.co
-SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
+SUPABASE_SECRET_KEY=your-secret-key
 ```
 
 ## 5. スクレイパーのセットアップ
