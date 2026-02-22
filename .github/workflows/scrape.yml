@@ -1,8 +1,6 @@
 name: Scrape B-League Stats
 
 on:
-  schedule:
-    - cron: '0 15 * * *'  # 毎日深夜0時 JST (UTC 15:00)
   workflow_dispatch:
 
 permissions:
