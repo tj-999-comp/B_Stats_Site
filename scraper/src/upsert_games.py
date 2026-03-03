@@ -4,10 +4,27 @@ from __future__ import annotations
 
 import argparse
 import json
+from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from typing import Any
 
 from .db import upsert_game_team_stats, upsert_games, upsert_play_by_play, upsert_players, upsert_player_game_stats, upsert_teams
+
+_JST = timezone(timedelta(hours=9))
+
+
+def _unix_to_jst_str(unix_ts: int | None) -> str | None:
+    """Unix秒タイムスタンプをJST の 'YYYY-MM-DD HH:MM' 文字列に変換する"""
+    if unix_ts is None:
+        return None
+    return datetime.fromtimestamp(unix_ts, tz=_JST).strftime('%Y-%m-%d %H:%M')
+
+
+def _unix_to_jst_date(unix_ts: int | None) -> str | None:
+    """Unix秒タイムスタンプをJST の 'YYYY-MM-DD' 文字列に変換する"""
+    if unix_ts is None:
+        return None
+    return datetime.fromtimestamp(unix_ts, tz=_JST).strftime('%Y-%m-%d')
 
 
 def _to_int(value: Any) -> int | None:
@@ -331,6 +348,8 @@ def _extract_games(payload: dict[str, Any]) -> list[dict[str, Any]]:
                 'max_period': _to_int(game.get('MaxPeriod')),
                 'game_current_period': _to_int(game.get('GameCurrentPeriod')),
                 'game_datetime_unix': _to_int(game.get('GameDateTime')),
+                'game_datetime': _unix_to_jst_str(_to_int(game.get('GameDateTime'))),
+                'game_date': _unix_to_jst_date(_to_int(game.get('GameDateTime'))),
                 'stadium_cd': game.get('StadiumCD'),
                 'stadium_name_j': game.get('StadiumNameJ'),
                 'stadium_name_e': game.get('StadiumNameE'),

@@ -23,6 +23,8 @@ CREATE TABLE IF NOT EXISTS games (
     max_period SMALLINT NOT NULL,
     game_current_period SMALLINT,
     game_datetime_unix BIGINT NOT NULL,
+    game_datetime      TEXT,
+    game_date          TEXT,
     stadium_cd TEXT,
     stadium_name_j TEXT,
     stadium_name_e TEXT,
