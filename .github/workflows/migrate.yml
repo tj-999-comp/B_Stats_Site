@@ -15,6 +15,10 @@ jobs:
       - name: Apply migrations
         env:
           PGPASSWORD: ${{ secrets.SUPABASE_DB_PASSSWORD }}
+          PGUSER: "postgres.mngqmfvsxcqjhsgkbyju"
+          PGHOST: "aws-0-ap-southeast-1.pooler.supabase.com"
+          PGPORT: "5432"
+          PGDATABASE: "postgres"
+          PGSSLMODE: "require"
         run: |
-          psql "postgresql://postgres.mngqmfvsxcqjhsgkbyju@aws-0-ap-southeast-1.pooler.supabase.com:5432/postgres?sslmode=require" \
-            -f supabase/migrations/20260303_add_game_datetime.sql
+          psql -f supabase/migrations/20260303_add_game_datetime.sql
