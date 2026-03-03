@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import json
 import re
-from dataclasses import dataclass
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
@@ -16,17 +15,6 @@ from .config import BASE_URL, HEADERS
 
 
 SCHEDULE_KEY_PATTERN = re.compile(r'ScheduleKey=(\d+)')
-
-
-@dataclass(frozen=True)
-class OpeningWeekRange:
-    opening_date: date
-    end_date: date
-
-
-def _season_start_year(season: str) -> int:
-    head = season.split('-')[0]
-    return int(head)
 
 
 def _fetch_schedule_topics(target_date: date) -> list[str]:
@@ -70,25 +58,6 @@ def _extract_schedule_keys_from_topics(topics: list[str]) -> list[int]:
         keys.append(schedule_key)
 
     return keys
-
-
-def find_opening_week_range(season: str) -> OpeningWeekRange:
-    start_year = _season_start_year(season)
-    start_day = date(start_year, 9, 1)
-    end_search_day = date(start_year, 12, 31)
-
-    current = start_day
-    while current <= end_search_day:
-        topics = _fetch_schedule_topics(current)
-        keys = _extract_schedule_keys_from_topics(topics)
-        if keys:
-            return OpeningWeekRange(
-                opening_date=current,
-                end_date=current + timedelta(days=6),
-            )
-        current += timedelta(days=1)
-
-    raise RuntimeError(f'Opening date not found for season {season}')
 
 
 def _extract_context_data(html: str) -> dict[str, Any]:
@@ -160,15 +129,19 @@ def fetch_game_context(schedule_key: int, include_play_by_play: bool = False) ->
     }
 
 
-def scrape_opening_week_games(season: str, include_play_by_play: bool = False) -> dict[str, Any]:
-    week_range = find_opening_week_range(season)
-
+def scrape_date_range_games(
+    start_date: date,
+    end_date: date,
+    season: str,
+    include_play_by_play: bool = False,
+) -> dict[str, Any]:
+    """指定期間の試合データをスクレイピングして返す"""
     day_to_keys: dict[str, list[int]] = {}
     all_keys: list[int] = []
     seen: set[int] = set()
 
-    current = week_range.opening_date
-    while current <= week_range.end_date:
+    current = start_date
+    while current <= end_date:
         topics = _fetch_schedule_topics(current)
         keys = _extract_schedule_keys_from_topics(topics)
         day_to_keys[current.isoformat()] = keys
@@ -191,8 +164,8 @@ def scrape_opening_week_games(season: str, include_play_by_play: bool = False) -
         'season': season,
         'generated_at': datetime.now(timezone.utc).isoformat(),
         'include_play_by_play': include_play_by_play,
-        'opening_date': week_range.opening_date.isoformat(),
-        'end_date': week_range.end_date.isoformat(),
+        'start_date': start_date.isoformat(),
+        'end_date': end_date.isoformat(),
         'date_to_schedule_keys': day_to_keys,
         'game_count': len(games),
         'failed_schedule_keys': failed_keys,
@@ -200,15 +173,22 @@ def scrape_opening_week_games(season: str, include_play_by_play: bool = False) -
     }
 
 
-def output_path_for_opening_week(season: str) -> Path:
+def output_path_for_date_range(season: str, start_date: date, end_date: date) -> Path:
     root = Path(__file__).resolve().parent.parent
     output_dir = root / 'data'
     output_dir.mkdir(parents=True, exist_ok=True)
-    return output_dir / f'games_{season}_opening_week.json'
+    if start_date == end_date:
+        return output_dir / f'games_{season}_{start_date.isoformat()}.json'
+    return output_dir / f'games_{season}_{start_date.isoformat()}_{end_date.isoformat()}.json'
 
 
-def save_opening_week_games(season: str, include_play_by_play: bool = False) -> Path:
-    payload = scrape_opening_week_games(season, include_play_by_play=include_play_by_play)
-    output_path = output_path_for_opening_week(season)
+def save_date_range_games(
+    start_date: date,
+    end_date: date,
+    season: str,
+    include_play_by_play: bool = False,
+) -> Path:
+    payload = scrape_date_range_games(start_date, end_date, season, include_play_by_play=include_play_by_play)
+    output_path = output_path_for_date_range(season, start_date, end_date)
     output_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding='utf-8')
     return output_path
