@@ -290,7 +290,7 @@ def _extract_game_team_stats(payload: dict[str, Any]) -> list[dict[str, Any]]:
 
 
 def _latest_games_json(base_dir: Path) -> Path:
-    candidates = sorted(base_dir.glob('games_*.json'))
+    candidates = sorted(base_dir.glob('games_*.json'), key=lambda p: p.stat().st_mtime)
     if not candidates:
         raise FileNotFoundError(f'No games JSON found in: {base_dir}')
     return candidates[-1]
