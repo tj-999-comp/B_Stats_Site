@@ -289,10 +289,10 @@ def _extract_game_team_stats(payload: dict[str, Any]) -> list[dict[str, Any]]:
     return rows
 
 
-def _latest_opening_week_json(base_dir: Path) -> Path:
-    candidates = sorted(base_dir.glob('games_*_opening_week.json'))
+def _latest_games_json(base_dir: Path) -> Path:
+    candidates = sorted(base_dir.glob('games_*.json'))
     if not candidates:
-        raise FileNotFoundError(f'No opening-week JSON found in: {base_dir}')
+        raise FileNotFoundError(f'No games JSON found in: {base_dir}')
     return candidates[-1]
 
 
@@ -600,7 +600,7 @@ def main() -> None:
     args = parser.parse_args()
 
     data_dir = Path(__file__).resolve().parent.parent / 'data'
-    input_path = Path(args.input) if args.input else _latest_opening_week_json(data_dir)
+    input_path = Path(args.input) if args.input else _latest_games_json(data_dir)
     run(
         input_path=input_path,
         dry_run=args.dry_run,
