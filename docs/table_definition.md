@@ -2,7 +2,7 @@
 
 このドキュメントは Supabase REST OpenAPI（`Accept: application/openapi+json`）から自動生成したスナップショットです。
 
-- 取得日時 (UTC): 2026-02-24T08:12:41.632Z
+- 取得日時 (UTC): 2026-03-03T05:16:24.510Z
 - 取得元: https://mngqmfvsxcqjhsgkbyju.supabase.co/rest/v1/
 
 ## テーブル一覧
@@ -154,6 +154,8 @@
 | `max_period` | 最大クォーター数 | `smallint` | Yes | `-` | - |
 | `game_current_period` | 現在クォーター | `smallint` | No | `-` | - |
 | `game_datetime_unix` | 試合日時UNIX | `bigint` | Yes | `-` | - |
+| `game_datetime` | 試合日時（JST, YYYY-MM-DD HH:MM） | `text` | No | `-` | - |
+| `game_date` | 試合日付（JST, YYYY-MM-DD） | `text` | No | `-` | - |
 | `stadium_cd` | 会場コード | `text` | No | `-` | - |
 | `stadium_name_j` | 会場名（日本語） | `text` | No | `-` | - |
 | `stadium_name_e` | 会場名（英語） | `text` | No | `-` | - |
