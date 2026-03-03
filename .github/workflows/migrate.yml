@@ -16,5 +16,5 @@ jobs:
         env:
           PGPASSWORD: ${{ secrets.SUPABASE_DB_PASSSWORD }}
         run: |
-          psql "postgresql://postgres.mngqmfvsxcqjhsgkbyju@aws-0-ap-northeast-1.pooler.supabase.com:5432/postgres?sslmode=require" \
+          psql "postgresql://postgres.mngqmfvsxcqjhsgkbyju@aws-0-ap-southeast-1.pooler.supabase.com:5432/postgres?sslmode=require" \
             -f supabase/migrations/20260303_add_game_datetime.sql
