@@ -16,7 +16,5 @@ jobs:
         env:
           PGPASSWORD: ${{ secrets.SUPABASE_DB_PASSSWORD }}
         run: |
-          DB_HOST=$(dig +short A db.mngqmfvsxcqjhsgkbyju.supabase.co | tail -1)
-          echo "Connecting to: $DB_HOST"
-          psql "postgresql://postgres@${DB_HOST}:5432/postgres?sslmode=require" \
+          psql "postgresql://postgres.mngqmfvsxcqjhsgkbyju@aws-0-ap-northeast-1.pooler.supabase.com:5432/postgres?sslmode=require" \
             -f supabase/migrations/20260303_add_game_datetime.sql
