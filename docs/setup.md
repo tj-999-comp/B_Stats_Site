@@ -69,13 +69,13 @@ GitHub Actions（スクレイピング・マイグレーション）が使用す
 | `SUPABASE_URL` | Supabase → Project Settings → API → Project URL | スクレイパーのDB接続先 |
 | `SUPABASE_SECRET_KEY` | Supabase → Project Settings → API → service_role key | スクレイパーのDB認証 |
 | `SUPABASE_PUBLISHABLE_KEYS` | Supabase → Project Settings → API → anon key | フロントエンドの公開キー |
-| `SUPABASE_DB_PASSWORD` | Supabase → Project Settings → Database → Database password | マイグレーション適用（psql接続） |
+| `SUPABASE_DB_PASSSWORD` | Supabase → Project Settings → Database → Database password | マイグレーション適用（psql接続） |
 
-> **`SUPABASE_DB_PASSWORD` の取得手順**
+> **`SUPABASE_DB_PASSSWORD` の取得手順**
 > 1. [Supabase ダッシュボード](https://supabase.com/dashboard) を開く
-> 2. 対象プロジェクト → **Project Settings** → **Database**
+> 2. 対象プロジェクト → **Database** → **Settings**
 > 3. **Database password** 欄の「Reset database password」またはコピーアイコンから取得
-> 4. 上記の GitHub Secrets 登録先に `SUPABASE_DB_PASSWORD` として登録
+> 4. 上記の GitHub Secrets 登録先に `SUPABASE_DB_PASSSWORD` として登録
 
 ## 7. 開発サーバーの起動
 

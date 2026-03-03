@@ -25,10 +25,10 @@ ALTER TABLE games ADD COLUMN IF NOT EXISTS game_datetime TEXT;
 
 ### 方法A: GitHub Actions（推奨）
 
-1. GitHub Secrets に `SUPABASE_DB_PASSWORD` を登録する（未登録の場合）
+1. GitHub Secrets に `SUPABASE_DB_PASSSWORD` を登録する（未登録の場合）
    - 取得先: [Supabase ダッシュボード → Project Settings → Database → Database password](https://supabase.com/dashboard/project/mngqmfvsxcqjhsgkbyju/settings/database)
    - 登録先: [GitHub Secrets](https://github.com/tj-999-comp/B_Stats_Site/settings/secrets/actions)
-   - Secret名: `SUPABASE_DB_PASSWORD`
+   - Secret名: `SUPABASE_DB_PASSSWORD`
 
 2. ワークフローを手動実行する
 

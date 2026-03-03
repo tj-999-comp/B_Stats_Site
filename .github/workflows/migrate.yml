@@ -10,11 +10,13 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Install psql
-        run: sudo apt-get install -y postgresql-client
+        run: sudo apt-get install -y postgresql-client dnsutils
 
       - name: Apply migrations
         env:
-          PGPASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
+          PGPASSWORD: ${{ secrets.SUPABASE_DB_PASSSWORD }}
         run: |
-          psql "postgresql://postgres@db.mngqmfvsxcqjhsgkbyju.supabase.co:5432/postgres" \
+          DB_HOST=$(dig +short A db.mngqmfvsxcqjhsgkbyju.supabase.co | tail -1)
+          echo "Connecting to: $DB_HOST"
+          psql "postgresql://postgres@${DB_HOST}:5432/postgres?sslmode=require" \
             -f supabase/migrations/20260303_add_game_datetime.sql
