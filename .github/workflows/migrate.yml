@@ -9,16 +9,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: supabase/setup-cli@v1
-        with:
-          version: latest
+      - name: Install psql
+        run: sudo apt-get install -y postgresql-client
 
-      - name: Link project
-        run: supabase link --project-ref mngqmfvsxcqjhsgkbyju
+      - name: Apply migrations
         env:
-          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_SECRET_KEY }}
-
-      - name: Push migrations
-        run: supabase db push
-        env:
-          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_SECRET_KEY }}
+          PGPASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
+        run: |
+          psql "postgresql://postgres@db.mngqmfvsxcqjhsgkbyju.supabase.co:5432/postgres" \
+            -f supabase/migrations/20260303_add_game_datetime.sql
