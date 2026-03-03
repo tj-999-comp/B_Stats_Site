@@ -22,6 +22,9 @@ cp .env.example .env
 # .envを編集してSupabaseの接続情報を設定
 ```
 
+> **注意**: 以下の実行コマンドはすべて **リポジトリルート**（`B_Stats_Site/`）から実行してください。
+> `scraper/` の中にいる場合は `cd ..` で一段上に移動してから実行してください。
+
 仮想環境を有効化した状態で以下のコマンドを実行してください。
 
 ## 実行
@@ -89,7 +92,7 @@ python -m scraper.src.upsert_games --dry-run
 python -m scraper.src.upsert_games
 
 # ファイルを明示する場合
-python -m scraper.src.upsert_games --input scraper/data/games_2024-25_opening_week.json
+python -m scraper.src.upsert_games --input scraper/data/games_2024-25_2024-10-05.json
 
 # play_by_play も含める場合（任意）
 python -m scraper.src.upsert_games --with-play-by-play
