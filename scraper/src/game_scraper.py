@@ -61,29 +61,40 @@ def _extract_schedule_keys_from_topics(topics: list[str]) -> list[int]:
 
 
 def _extract_context_data(html: str) -> dict[str, Any]:
-    needle = '_contexts_s3id.data = '
-    start = html.find(needle)
+    # Try several possible JavaScript patterns that hold the contexts JSON
+    needles = [
+        '_contexts_s3id.data = ',
+        'window._contexts_s3id = ',
+        '_contexts_s3id = ',
+    ]
+    start = -1
+    index = -1
+    for n in needles:
+        start = html.find(n)
+        if start >= 0:
+            index = start + len(n)
+            break
     if start < 0:
-        raise RuntimeError('Failed to find _contexts_s3id.data in game_detail HTML')
+        # Include a short head snippet to aid debugging when this occurs
+        snippet = html[:1000].replace('\n', ' ')
+        raise RuntimeError(f"Failed to find contexts JSON in game_detail HTML. html_head={snippet!r}")
 
-    index = start + len(needle)
+    # advance to the first '{'
     while index < len(html) and html[index] != '{':
         index += 1
 
     brace_depth = 0
-    end = index
     for cursor in range(index, len(html)):
-        char = html[cursor]
-        if char == '{':
+        c = html[cursor]
+        if c == '{':
             brace_depth += 1
-        elif char == '}':
+        elif c == '}':
             brace_depth -= 1
             if brace_depth == 0:
-                end = cursor + 1
-                break
+                raw_json = html[index:cursor+1]
+                return json.loads(raw_json)
 
-    raw_json = html[index:end]
-    return json.loads(raw_json)
+    raise RuntimeError('Unterminated JSON object when extracting contexts')
 
 
 def fetch_game_context(schedule_key: int, include_play_by_play: bool = False) -> dict[str, Any]:
@@ -98,7 +109,21 @@ def fetch_game_context(schedule_key: int, include_play_by_play: bool = False) ->
             continue
         response.raise_for_status()
 
-        context = _extract_context_data(response.text)
+        try:
+            context = _extract_context_data(response.text)
+        except Exception as e:
+            # Save a short HTML snippet for debugging and try next tab
+            try:
+                log_dir = Path(__file__).resolve().parent.parent / 'logs'
+                log_dir.mkdir(parents=True, exist_ok=True)
+                snippet = response.text[:2000]
+                path = log_dir / f'failed_context_{schedule_key}_tab{tab}.html'
+                path.write_text(snippet, encoding='utf-8')
+                print(f'Warning: failed to extract contexts for {schedule_key} tab={tab}, saved snippet to {path}')
+            except Exception:
+                pass
+            continue
+
         game = context.get('Game', {})
         summaries = context.get('Summaries', [])
         home_boxscores = context.get('HomeBoxscores', [])

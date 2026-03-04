@@ -46,8 +46,23 @@ def upsert_rows(
     if not rows:
         return
     client = get_client()
+
+    def _try_upsert(chunk: list[dict[str, Any]]):
+        try:
+            client.table(table_name).upsert(chunk, on_conflict=on_conflict).execute()
+            return
+        except Exception as e:
+            # If the chunk is a single row, re-raise with context so caller can inspect
+            if len(chunk) <= 1:
+                print(f'Upsert failed for single row in {table_name}: {chunk[0]!r} error={e}')
+                raise
+            # Otherwise, split the chunk and retry halves (binary search) to isolate bad rows
+            mid = len(chunk) // 2
+            _try_upsert(chunk[:mid])
+            _try_upsert(chunk[mid:])
+
     for chunk in _chunked(rows, chunk_size):
-        client.table(table_name).upsert(chunk, on_conflict=on_conflict).execute()
+        _try_upsert(chunk)
 
 
 def upsert_teams(rows: list[dict[str, Any]]) -> None:

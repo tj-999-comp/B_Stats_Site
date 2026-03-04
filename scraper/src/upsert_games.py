@@ -334,12 +334,25 @@ def _extract_games(payload: dict[str, Any]) -> list[dict[str, Any]]:
         schedule_key = game.get('ScheduleKey') or item.get('schedule_key')
         if schedule_key is None:
             continue
+        if (
+            game.get('ConventionKey') is None
+            or game.get('ConventionNameJ') is None
+            or _to_int(game.get('Year')) is None
+            or _to_int(game.get('MaxPeriod')) is None
+            or _to_int(game.get('GameDateTime')) is None
+            or game.get('HomeTeamID') is None
+            or game.get('AwayTeamID') is None
+        ):
+            continue
+        code = _to_int(game.get('Code'))
+        if code is None:
+            code = _to_int(schedule_key)
 
         rows.append(
             {
                 'schedule_key': _to_int(schedule_key),
                 'season': season,
-                'code': _to_int(game.get('Code')),
+                'code': code,
                 'convention_key': game.get('ConventionKey'),
                 'convention_name_j': game.get('ConventionNameJ'),
                 'convention_name_e': game.get('ConventionNameE'),
