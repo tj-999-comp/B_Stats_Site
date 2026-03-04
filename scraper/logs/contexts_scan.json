@@ -1,0 +1,1498 @@
+[
+  {
+    "schedule_key": 505092,
+    "mapped_date": "2025-01-03",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-03",
+    "contexts_ymd_str": "2026/01/03",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1767416700",
+    "GameDateTime_JST": "2026-01-03T14:05:00+09:00"
+  },
+  {
+    "schedule_key": 505093,
+    "mapped_date": "2025-01-04",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-04",
+    "contexts_ymd_str": "2026/01/04",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1767503100",
+    "GameDateTime_JST": "2026-01-04T14:05:00+09:00"
+  },
+  {
+    "schedule_key": 505094,
+    "mapped_date": "2025-01-03",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-03",
+    "contexts_ymd_str": "2026/01/03",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1767420300",
+    "GameDateTime_JST": "2026-01-03T15:05:00+09:00"
+  },
+  {
+    "schedule_key": 505095,
+    "mapped_date": "2025-01-04",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-04",
+    "contexts_ymd_str": "2026/01/04",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1767506700",
+    "GameDateTime_JST": "2026-01-04T15:05:00+09:00"
+  },
+  {
+    "schedule_key": 505096,
+    "mapped_date": "2025-01-03",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-03",
+    "contexts_ymd_str": "2026/01/03",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1767416700",
+    "GameDateTime_JST": "2026-01-03T14:05:00+09:00"
+  },
+  {
+    "schedule_key": 505097,
+    "mapped_date": "2025-01-04",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-04",
+    "contexts_ymd_str": "2026/01/04",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1767503100",
+    "GameDateTime_JST": "2026-01-04T14:05:00+09:00"
+  },
+  {
+    "schedule_key": 505098,
+    "mapped_date": "2025-01-03",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-03",
+    "contexts_ymd_str": "2026/01/03",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1767420300",
+    "GameDateTime_JST": "2026-01-03T15:05:00+09:00"
+  },
+  {
+    "schedule_key": 505099,
+    "mapped_date": "2025-01-04",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-04",
+    "contexts_ymd_str": "2026/01/04",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1767506700",
+    "GameDateTime_JST": "2026-01-04T15:05:00+09:00"
+  },
+  {
+    "schedule_key": 505100,
+    "mapped_date": "2025-01-03",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-03",
+    "contexts_ymd_str": "2026/01/03",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1767427500",
+    "GameDateTime_JST": "2026-01-03T17:05:00+09:00"
+  },
+  {
+    "schedule_key": 505101,
+    "mapped_date": "2025-01-04",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-04",
+    "contexts_ymd_str": "2026/01/04",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1767503100",
+    "GameDateTime_JST": "2026-01-04T14:05:00+09:00"
+  },
+  {
+    "schedule_key": 505102,
+    "mapped_date": "2025-01-03",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-03",
+    "contexts_ymd_str": "2026/01/03",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1767427500",
+    "GameDateTime_JST": "2026-01-03T17:05:00+09:00"
+  },
+  {
+    "schedule_key": 505103,
+    "mapped_date": "2025-01-04",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-04",
+    "contexts_ymd_str": "2026/01/04",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1767506700",
+    "GameDateTime_JST": "2026-01-04T15:05:00+09:00"
+  },
+  {
+    "schedule_key": 505104,
+    "mapped_date": "2025-01-03",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-03",
+    "contexts_ymd_str": "2026/01/03",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1767420300",
+    "GameDateTime_JST": "2026-01-03T15:05:00+09:00"
+  },
+  {
+    "schedule_key": 505105,
+    "mapped_date": "2025-01-04",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-04",
+    "contexts_ymd_str": "2026/01/04",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1767506700",
+    "GameDateTime_JST": "2026-01-04T15:05:00+09:00"
+  },
+  {
+    "schedule_key": 505106,
+    "mapped_date": "2025-01-03",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-03",
+    "contexts_ymd_str": "2026/01/03",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1767427500",
+    "GameDateTime_JST": "2026-01-03T17:05:00+09:00"
+  },
+  {
+    "schedule_key": 505107,
+    "mapped_date": "2025-01-04",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-04",
+    "contexts_ymd_str": "2026/01/04",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1767503100",
+    "GameDateTime_JST": "2026-01-04T14:05:00+09:00"
+  },
+  {
+    "schedule_key": 505108,
+    "mapped_date": "2025-01-03",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-03",
+    "contexts_ymd_str": "2026/01/03",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1767420300",
+    "GameDateTime_JST": "2026-01-03T15:05:00+09:00"
+  },
+  {
+    "schedule_key": 505109,
+    "mapped_date": "2025-01-04",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-04",
+    "contexts_ymd_str": "2026/01/04",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1767503100",
+    "GameDateTime_JST": "2026-01-04T14:05:00+09:00"
+  },
+  {
+    "schedule_key": 505110,
+    "mapped_date": "2025-01-03",
+    "status_tab_4": 500,
+    "status_tab_2": 200,
+    "contexts_ymd": "2026-01-03",
+    "contexts_ymd_str": "2026/01/03",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1767416700",
+    "GameDateTime_JST": "2026-01-03T14:05:00+09:00"
+  },
+  {
+    "schedule_key": 505111,
+    "mapped_date": "2025-01-04",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-04",
+    "contexts_ymd_str": "2026/01/04",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1767503100",
+    "GameDateTime_JST": "2026-01-04T14:05:00+09:00"
+  },
+  {
+    "schedule_key": 505112,
+    "mapped_date": "2025-01-03",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-03",
+    "contexts_ymd_str": "2026/01/03",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1767416700",
+    "GameDateTime_JST": "2026-01-03T14:05:00+09:00"
+  },
+  {
+    "schedule_key": 505113,
+    "mapped_date": "2025-01-04",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-04",
+    "contexts_ymd_str": "2026/01/04",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1767503100",
+    "GameDateTime_JST": "2026-01-04T14:05:00+09:00"
+  },
+  {
+    "schedule_key": 505114,
+    "mapped_date": "2025-01-03",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-03",
+    "contexts_ymd_str": "2026/01/03",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1767420300",
+    "GameDateTime_JST": "2026-01-03T15:05:00+09:00"
+  },
+  {
+    "schedule_key": 505115,
+    "mapped_date": "2025-01-04",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-04",
+    "contexts_ymd_str": "2026/01/04",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1767506700",
+    "GameDateTime_JST": "2026-01-04T15:05:00+09:00"
+  },
+  {
+    "schedule_key": 505116,
+    "mapped_date": "2025-01-03",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-03",
+    "contexts_ymd_str": "2026/01/03",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1767416400",
+    "GameDateTime_JST": "2026-01-03T14:00:00+09:00"
+  },
+  {
+    "schedule_key": 505117,
+    "mapped_date": "2025-01-04",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-04",
+    "contexts_ymd_str": "2026/01/04",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1767502800",
+    "GameDateTime_JST": "2026-01-04T14:00:00+09:00"
+  },
+  {
+    "schedule_key": 505118,
+    "mapped_date": "2025-01-24",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-24",
+    "contexts_ymd_str": "2026/01/24",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1769231100",
+    "GameDateTime_JST": "2026-01-24T14:05:00+09:00"
+  },
+  {
+    "schedule_key": 505119,
+    "mapped_date": "2025-01-25",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-25",
+    "contexts_ymd_str": "2026/01/25",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1769317500",
+    "GameDateTime_JST": "2026-01-25T14:05:00+09:00"
+  },
+  {
+    "schedule_key": 505120,
+    "mapped_date": "2025-01-24",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-24",
+    "contexts_ymd_str": "2026/01/24",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1769234700",
+    "GameDateTime_JST": "2026-01-24T15:05:00+09:00"
+  },
+  {
+    "schedule_key": 505121,
+    "mapped_date": "2025-01-25",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-25",
+    "contexts_ymd_str": "2026/01/25",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1769321100",
+    "GameDateTime_JST": "2026-01-25T15:05:00+09:00"
+  },
+  {
+    "schedule_key": 505122,
+    "mapped_date": "2025-01-24",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-24",
+    "contexts_ymd_str": "2026/01/24",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1769234700",
+    "GameDateTime_JST": "2026-01-24T15:05:00+09:00"
+  },
+  {
+    "schedule_key": 505123,
+    "mapped_date": "2025-01-25",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-25",
+    "contexts_ymd_str": "2026/01/25",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1769321100",
+    "GameDateTime_JST": "2026-01-25T15:05:00+09:00"
+  },
+  {
+    "schedule_key": 505124,
+    "mapped_date": "2025-01-24",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-24",
+    "contexts_ymd_str": "2026/01/24",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1769234700",
+    "GameDateTime_JST": "2026-01-24T15:05:00+09:00"
+  },
+  {
+    "schedule_key": 505125,
+    "mapped_date": "2025-01-25",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-25",
+    "contexts_ymd_str": "2026/01/25",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1769321100",
+    "GameDateTime_JST": "2026-01-25T15:05:00+09:00"
+  },
+  {
+    "schedule_key": 505126,
+    "mapped_date": "2025-01-24",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-24",
+    "contexts_ymd_str": "2026/01/24",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1769234700",
+    "GameDateTime_JST": "2026-01-24T15:05:00+09:00"
+  },
+  {
+    "schedule_key": 505127,
+    "mapped_date": "2025-01-25",
+    "status_tab_4": 500,
+    "status_tab_2": 200,
+    "contexts_ymd": "2026-01-25",
+    "contexts_ymd_str": "2026/01/25",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1769321100",
+    "GameDateTime_JST": "2026-01-25T15:05:00+09:00"
+  },
+  {
+    "schedule_key": 505128,
+    "mapped_date": "2025-01-24",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-24",
+    "contexts_ymd_str": "2026/01/24",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1769231100",
+    "GameDateTime_JST": "2026-01-24T14:05:00+09:00"
+  },
+  {
+    "schedule_key": 505129,
+    "mapped_date": "2025-01-25",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-25",
+    "contexts_ymd_str": "2026/01/25",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1769317500",
+    "GameDateTime_JST": "2026-01-25T14:05:00+09:00"
+  },
+  {
+    "schedule_key": 505130,
+    "mapped_date": "2025-01-24",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-24",
+    "contexts_ymd_str": "2026/01/24",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1769230500",
+    "GameDateTime_JST": "2026-01-24T13:55:00+09:00"
+  },
+  {
+    "schedule_key": 505131,
+    "mapped_date": "2025-01-25",
+    "status_tab_4": 500,
+    "status_tab_2": 200,
+    "contexts_ymd": "2026-01-25",
+    "contexts_ymd_str": "2026/01/25",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1769317500",
+    "GameDateTime_JST": "2026-01-25T14:05:00+09:00"
+  },
+  {
+    "schedule_key": 505132,
+    "mapped_date": "2025-01-24",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-24",
+    "contexts_ymd_str": "2026/01/24",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1769234700",
+    "GameDateTime_JST": "2026-01-24T15:05:00+09:00"
+  },
+  {
+    "schedule_key": 505133,
+    "mapped_date": "2025-01-25",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-25",
+    "contexts_ymd_str": "2026/01/25",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1769321100",
+    "GameDateTime_JST": "2026-01-25T15:05:00+09:00"
+  },
+  {
+    "schedule_key": 505134,
+    "mapped_date": "2025-01-24",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-24",
+    "contexts_ymd_str": "2026/01/24",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1769236500",
+    "GameDateTime_JST": "2026-01-24T15:35:00+09:00"
+  },
+  {
+    "schedule_key": 505135,
+    "mapped_date": "2025-01-25",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-25",
+    "contexts_ymd_str": "2026/01/25",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1769322900",
+    "GameDateTime_JST": "2026-01-25T15:35:00+09:00"
+  },
+  {
+    "schedule_key": 505136,
+    "mapped_date": "2025-01-24",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-24",
+    "contexts_ymd_str": "2026/01/24",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1769227500",
+    "GameDateTime_JST": "2026-01-24T13:05:00+09:00"
+  },
+  {
+    "schedule_key": 505137,
+    "mapped_date": "2025-01-25",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-25",
+    "contexts_ymd_str": "2026/01/25",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1769313900",
+    "GameDateTime_JST": "2026-01-25T13:05:00+09:00"
+  },
+  {
+    "schedule_key": 505138,
+    "mapped_date": "2025-01-24",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-24",
+    "contexts_ymd_str": "2026/01/24",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1769234700",
+    "GameDateTime_JST": "2026-01-24T15:05:00+09:00"
+  },
+  {
+    "schedule_key": 505139,
+    "mapped_date": "2025-01-25",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-25",
+    "contexts_ymd_str": "2026/01/25",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1769317500",
+    "GameDateTime_JST": "2026-01-25T14:05:00+09:00"
+  },
+  {
+    "schedule_key": 505140,
+    "mapped_date": "2025-01-24",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-24",
+    "contexts_ymd_str": "2026/01/24",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1769223900",
+    "GameDateTime_JST": "2026-01-24T12:05:00+09:00"
+  },
+  {
+    "schedule_key": 505141,
+    "mapped_date": "2025-01-25",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-25",
+    "contexts_ymd_str": "2026/01/25",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1769310300",
+    "GameDateTime_JST": "2026-01-25T12:05:00+09:00"
+  },
+  {
+    "schedule_key": 505142,
+    "mapped_date": "2025-01-24",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-24",
+    "contexts_ymd_str": "2026/01/24",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1769234700",
+    "GameDateTime_JST": "2026-01-24T15:05:00+09:00"
+  },
+  {
+    "schedule_key": 505143,
+    "mapped_date": "2025-01-25",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-25",
+    "contexts_ymd_str": "2026/01/25",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1769317500",
+    "GameDateTime_JST": "2026-01-25T14:05:00+09:00"
+  },
+  {
+    "schedule_key": 505144,
+    "mapped_date": "2025-01-28",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-28",
+    "contexts_ymd_str": "2026/01/28",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1769594700",
+    "GameDateTime_JST": "2026-01-28T19:05:00+09:00"
+  },
+  {
+    "schedule_key": 505145,
+    "mapped_date": "2025-01-28",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-28",
+    "contexts_ymd_str": "2026/01/28",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1769594700",
+    "GameDateTime_JST": "2026-01-28T19:05:00+09:00"
+  },
+  {
+    "schedule_key": 505146,
+    "mapped_date": "2025-01-28",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-28",
+    "contexts_ymd_str": "2026/01/28",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1769594700",
+    "GameDateTime_JST": "2026-01-28T19:05:00+09:00"
+  },
+  {
+    "schedule_key": 505147,
+    "mapped_date": "2025-01-28",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-28",
+    "contexts_ymd_str": "2026/01/28",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1769594700",
+    "GameDateTime_JST": "2026-01-28T19:05:00+09:00"
+  },
+  {
+    "schedule_key": 505148,
+    "mapped_date": "2025-01-28",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-28",
+    "contexts_ymd_str": "2026/01/28",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1769594700",
+    "GameDateTime_JST": "2026-01-28T19:05:00+09:00"
+  },
+  {
+    "schedule_key": 505149,
+    "mapped_date": "2025-01-28",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-28",
+    "contexts_ymd_str": "2026/01/28",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1769594700",
+    "GameDateTime_JST": "2026-01-28T19:05:00+09:00"
+  },
+  {
+    "schedule_key": 505150,
+    "mapped_date": "2025-01-28",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-28",
+    "contexts_ymd_str": "2026/01/28",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1769594700",
+    "GameDateTime_JST": "2026-01-28T19:05:00+09:00"
+  },
+  {
+    "schedule_key": 505151,
+    "mapped_date": "2025-01-28",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-28",
+    "contexts_ymd_str": "2026/01/28",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1769594700",
+    "GameDateTime_JST": "2026-01-28T19:05:00+09:00"
+  },
+  {
+    "schedule_key": 505152,
+    "mapped_date": "2025-01-28",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-28",
+    "contexts_ymd_str": "2026/01/28",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1769594700",
+    "GameDateTime_JST": "2026-01-28T19:05:00+09:00"
+  },
+  {
+    "schedule_key": 505153,
+    "mapped_date": "2025-01-28",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-28",
+    "contexts_ymd_str": "2026/01/28",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1769594700",
+    "GameDateTime_JST": "2026-01-28T19:05:00+09:00"
+  },
+  {
+    "schedule_key": 505154,
+    "mapped_date": "2025-01-28",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-28",
+    "contexts_ymd_str": "2026/01/28",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1769594700",
+    "GameDateTime_JST": "2026-01-28T19:05:00+09:00"
+  },
+  {
+    "schedule_key": 505155,
+    "mapped_date": "2025-01-28",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-28",
+    "contexts_ymd_str": "2026/01/28",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1769594700",
+    "GameDateTime_JST": "2026-01-28T19:05:00+09:00"
+  },
+  {
+    "schedule_key": 505156,
+    "mapped_date": "2025-01-28",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-28",
+    "contexts_ymd_str": "2026/01/28",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1769596500",
+    "GameDateTime_JST": "2026-01-28T19:35:00+09:00"
+  },
+  {
+    "schedule_key": 505157,
+    "mapped_date": "2025-01-31",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-31",
+    "contexts_ymd_str": "2026/01/31",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1769835900",
+    "GameDateTime_JST": "2026-01-31T14:05:00+09:00"
+  },
+  {
+    "schedule_key": 505158,
+    "mapped_date": "2025-02-01",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-02-01",
+    "contexts_ymd_str": "2026/02/01",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1769922300",
+    "GameDateTime_JST": "2026-02-01T14:05:00+09:00"
+  },
+  {
+    "schedule_key": 505159,
+    "mapped_date": "2025-01-31",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-31",
+    "contexts_ymd_str": "2026/01/31",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1769835300",
+    "GameDateTime_JST": "2026-01-31T13:55:00+09:00"
+  },
+  {
+    "schedule_key": 505160,
+    "mapped_date": "2025-02-01",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-02-01",
+    "contexts_ymd_str": "2026/02/01",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1769922300",
+    "GameDateTime_JST": "2026-02-01T14:05:00+09:00"
+  },
+  {
+    "schedule_key": 505161,
+    "mapped_date": "2025-01-31",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-31",
+    "contexts_ymd_str": "2026/01/31",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1769835900",
+    "GameDateTime_JST": "2026-01-31T14:05:00+09:00"
+  },
+  {
+    "schedule_key": 505162,
+    "mapped_date": "2025-02-01",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-02-01",
+    "contexts_ymd_str": "2026/02/01",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1769922300",
+    "GameDateTime_JST": "2026-02-01T14:05:00+09:00"
+  },
+  {
+    "schedule_key": 505163,
+    "mapped_date": "2025-01-31",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-31",
+    "contexts_ymd_str": "2026/01/31",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1769839500",
+    "GameDateTime_JST": "2026-01-31T15:05:00+09:00"
+  },
+  {
+    "schedule_key": 505164,
+    "mapped_date": "2025-02-01",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-02-01",
+    "contexts_ymd_str": "2026/02/01",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1769925900",
+    "GameDateTime_JST": "2026-02-01T15:05:00+09:00"
+  },
+  {
+    "schedule_key": 505165,
+    "mapped_date": "2025-01-31",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-31",
+    "contexts_ymd_str": "2026/01/31",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1769839500",
+    "GameDateTime_JST": "2026-01-31T15:05:00+09:00"
+  },
+  {
+    "schedule_key": 505166,
+    "mapped_date": "2025-02-01",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-02-01",
+    "contexts_ymd_str": "2026/02/01",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1769925900",
+    "GameDateTime_JST": "2026-02-01T15:05:00+09:00"
+  },
+  {
+    "schedule_key": 505167,
+    "mapped_date": "2025-01-31",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-31",
+    "contexts_ymd_str": "2026/01/31",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1769846700",
+    "GameDateTime_JST": "2026-01-31T17:05:00+09:00"
+  },
+  {
+    "schedule_key": 505168,
+    "mapped_date": "2025-02-01",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-02-01",
+    "contexts_ymd_str": "2026/02/01",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1769925900",
+    "GameDateTime_JST": "2026-02-01T15:05:00+09:00"
+  },
+  {
+    "schedule_key": 505169,
+    "mapped_date": "2025-01-31",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-31",
+    "contexts_ymd_str": "2026/01/31",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1769850300",
+    "GameDateTime_JST": "2026-01-31T18:05:00+09:00"
+  },
+  {
+    "schedule_key": 505170,
+    "mapped_date": "2025-02-01",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-02-01",
+    "contexts_ymd_str": "2026/02/01",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1769929500",
+    "GameDateTime_JST": "2026-02-01T16:05:00+09:00"
+  },
+  {
+    "schedule_key": 505171,
+    "mapped_date": "2025-01-31",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-31",
+    "contexts_ymd_str": "2026/01/31",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1769835900",
+    "GameDateTime_JST": "2026-01-31T14:05:00+09:00"
+  },
+  {
+    "schedule_key": 505172,
+    "mapped_date": "2025-02-01",
+    "status_tab_4": 500,
+    "status_tab_2": 200,
+    "contexts_ymd": "2026-02-01",
+    "contexts_ymd_str": "2026/02/01",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1769922300",
+    "GameDateTime_JST": "2026-02-01T14:05:00+09:00"
+  },
+  {
+    "schedule_key": 505173,
+    "mapped_date": "2025-01-31",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-31",
+    "contexts_ymd_str": "2026/01/31",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1769841300",
+    "GameDateTime_JST": "2026-01-31T15:35:00+09:00"
+  },
+  {
+    "schedule_key": 505174,
+    "mapped_date": "2025-02-01",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-02-01",
+    "contexts_ymd_str": "2026/02/01",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1769927700",
+    "GameDateTime_JST": "2026-02-01T15:35:00+09:00"
+  },
+  {
+    "schedule_key": 505175,
+    "mapped_date": "2025-01-31",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-31",
+    "contexts_ymd_str": "2026/01/31",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1769835900",
+    "GameDateTime_JST": "2026-01-31T14:05:00+09:00"
+  },
+  {
+    "schedule_key": 505176,
+    "mapped_date": "2025-02-01",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-02-01",
+    "contexts_ymd_str": "2026/02/01",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1769922300",
+    "GameDateTime_JST": "2026-02-01T14:05:00+09:00"
+  },
+  {
+    "schedule_key": 505177,
+    "mapped_date": "2025-01-31",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-31",
+    "contexts_ymd_str": "2026/01/31",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1769839500",
+    "GameDateTime_JST": "2026-01-31T15:05:00+09:00"
+  },
+  {
+    "schedule_key": 505178,
+    "mapped_date": "2025-02-01",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-02-01",
+    "contexts_ymd_str": "2026/02/01",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1769922300",
+    "GameDateTime_JST": "2026-02-01T14:05:00+09:00"
+  },
+  {
+    "schedule_key": 505179,
+    "mapped_date": "2025-01-31",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-31",
+    "contexts_ymd_str": "2026/01/31",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1769835900",
+    "GameDateTime_JST": "2026-01-31T14:05:00+09:00"
+  },
+  {
+    "schedule_key": 505180,
+    "mapped_date": "2025-02-01",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-02-01",
+    "contexts_ymd_str": "2026/02/01",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1769922300",
+    "GameDateTime_JST": "2026-02-01T14:05:00+09:00"
+  },
+  {
+    "schedule_key": 505181,
+    "mapped_date": "2025-01-31",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-31",
+    "contexts_ymd_str": "2026/01/31",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1769837700",
+    "GameDateTime_JST": "2026-01-31T14:35:00+09:00"
+  },
+  {
+    "schedule_key": 505182,
+    "mapped_date": "2025-02-01",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-02-01",
+    "contexts_ymd_str": "2026/02/01",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1769925900",
+    "GameDateTime_JST": "2026-02-01T15:05:00+09:00"
+  },
+  {
+    "schedule_key": 505183,
+    "mapped_date": "2025-02-07",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-02-07",
+    "contexts_ymd_str": "2026/02/07",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1770440700",
+    "GameDateTime_JST": "2026-02-07T14:05:00+09:00"
+  },
+  {
+    "schedule_key": 505184,
+    "mapped_date": "2025-02-08",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-02-08",
+    "contexts_ymd_str": "2026/02/08",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1770523500",
+    "GameDateTime_JST": "2026-02-08T13:05:00+09:00"
+  },
+  {
+    "schedule_key": 505185,
+    "mapped_date": "2025-02-07",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-02-07",
+    "contexts_ymd_str": "2026/02/07",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1770444300",
+    "GameDateTime_JST": "2026-02-07T15:05:00+09:00"
+  },
+  {
+    "schedule_key": 505186,
+    "mapped_date": "2025-02-08",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-02-08",
+    "contexts_ymd_str": "2026/02/08",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1770530700",
+    "GameDateTime_JST": "2026-02-08T15:05:00+09:00"
+  },
+  {
+    "schedule_key": 505187,
+    "mapped_date": "2025-02-07",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-02-07",
+    "contexts_ymd_str": "2026/02/07",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1770451500",
+    "GameDateTime_JST": "2026-02-07T17:05:00+09:00"
+  },
+  {
+    "schedule_key": 505188,
+    "mapped_date": "2025-02-06",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-02-06",
+    "contexts_ymd_str": "2026/02/06",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1770372300",
+    "GameDateTime_JST": "2026-02-06T19:05:00+09:00"
+  },
+  {
+    "schedule_key": 505189,
+    "mapped_date": "2025-02-07",
+    "status_tab_4": 500,
+    "status_tab_2": 200,
+    "contexts_ymd": "2026-02-07",
+    "contexts_ymd_str": "2026/02/07",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1770444300",
+    "GameDateTime_JST": "2026-02-07T15:05:00+09:00"
+  },
+  {
+    "schedule_key": 505190,
+    "mapped_date": "2025-02-08",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-02-08",
+    "contexts_ymd_str": "2026/02/08",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1770530700",
+    "GameDateTime_JST": "2026-02-08T15:05:00+09:00"
+  },
+  {
+    "schedule_key": 505191,
+    "mapped_date": "2025-02-07",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-02-07",
+    "contexts_ymd_str": "2026/02/07",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1770444300",
+    "GameDateTime_JST": "2026-02-07T15:05:00+09:00"
+  },
+  {
+    "schedule_key": 505192,
+    "mapped_date": "2025-02-08",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-02-08",
+    "contexts_ymd_str": "2026/02/08",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1770530700",
+    "GameDateTime_JST": "2026-02-08T15:05:00+09:00"
+  },
+  {
+    "schedule_key": 505193,
+    "mapped_date": "2025-02-07",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-02-07",
+    "contexts_ymd_str": "2026/02/07",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1770440700",
+    "GameDateTime_JST": "2026-02-07T14:05:00+09:00"
+  },
+  {
+    "schedule_key": 505194,
+    "mapped_date": "2025-02-08",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-02-08",
+    "contexts_ymd_str": "2026/02/08",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1770527100",
+    "GameDateTime_JST": "2026-02-08T14:05:00+09:00"
+  },
+  {
+    "schedule_key": 505195,
+    "mapped_date": "2025-02-07",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-02-07",
+    "contexts_ymd_str": "2026/02/07",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1770444300",
+    "GameDateTime_JST": "2026-02-07T15:05:00+09:00"
+  },
+  {
+    "schedule_key": 505196,
+    "mapped_date": "2025-02-08",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-02-08",
+    "contexts_ymd_str": "2026/02/08",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1770530700",
+    "GameDateTime_JST": "2026-02-08T15:05:00+09:00"
+  },
+  {
+    "schedule_key": 505197,
+    "mapped_date": "2025-02-07",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-02-07",
+    "contexts_ymd_str": "2026/02/07",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1770444300",
+    "GameDateTime_JST": "2026-02-07T15:05:00+09:00"
+  },
+  {
+    "schedule_key": 505198,
+    "mapped_date": "2025-02-08",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-02-08",
+    "contexts_ymd_str": "2026/02/08",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1770527100",
+    "GameDateTime_JST": "2026-02-08T14:05:00+09:00"
+  },
+  {
+    "schedule_key": 505199,
+    "mapped_date": "2025-02-07",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-02-07",
+    "contexts_ymd_str": "2026/02/07",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1770444300",
+    "GameDateTime_JST": "2026-02-07T15:05:00+09:00"
+  },
+  {
+    "schedule_key": 505200,
+    "mapped_date": "2025-02-08",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-02-08",
+    "contexts_ymd_str": "2026/02/08",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1770530700",
+    "GameDateTime_JST": "2026-02-08T15:05:00+09:00"
+  },
+  {
+    "schedule_key": 505201,
+    "mapped_date": "2025-02-07",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-02-07",
+    "contexts_ymd_str": "2026/02/07",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1770444300",
+    "GameDateTime_JST": "2026-02-07T15:05:00+09:00"
+  },
+  {
+    "schedule_key": 505202,
+    "mapped_date": "2025-02-08",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-02-08",
+    "contexts_ymd_str": "2026/02/08",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1770530700",
+    "GameDateTime_JST": "2026-02-08T15:05:00+09:00"
+  },
+  {
+    "schedule_key": 505203,
+    "mapped_date": "2025-02-07",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-02-07",
+    "contexts_ymd_str": "2026/02/07",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1770444300",
+    "GameDateTime_JST": "2026-02-07T15:05:00+09:00"
+  },
+  {
+    "schedule_key": 505204,
+    "mapped_date": "2025-02-08",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-02-08",
+    "contexts_ymd_str": "2026/02/08",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1770527100",
+    "GameDateTime_JST": "2026-02-08T14:05:00+09:00"
+  },
+  {
+    "schedule_key": 505205,
+    "mapped_date": "2025-02-07",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-02-07",
+    "contexts_ymd_str": "2026/02/07",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1770440700",
+    "GameDateTime_JST": "2026-02-07T14:05:00+09:00"
+  },
+  {
+    "schedule_key": 505206,
+    "mapped_date": "2025-02-08",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-02-08",
+    "contexts_ymd_str": "2026/02/08",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1770527100",
+    "GameDateTime_JST": "2026-02-08T14:05:00+09:00"
+  },
+  {
+    "schedule_key": 505207,
+    "mapped_date": "2025-02-07",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-02-07",
+    "contexts_ymd_str": "2026/02/07",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1770440700",
+    "GameDateTime_JST": "2026-02-07T14:05:00+09:00"
+  },
+  {
+    "schedule_key": 505208,
+    "mapped_date": "2025-02-08",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-02-08",
+    "contexts_ymd_str": "2026/02/08",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1770527100",
+    "GameDateTime_JST": "2026-02-08T14:05:00+09:00"
+  },
+  {
+    "schedule_key": 505209,
+    "mapped_date": "2025-02-14",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-02-14",
+    "contexts_ymd_str": "2026/02/14",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1771045500",
+    "GameDateTime_JST": "2026-02-14T14:05:00+09:00"
+  },
+  {
+    "schedule_key": 505210,
+    "mapped_date": "2025-02-28",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-02-15",
+    "contexts_ymd_str": "2026/02/15",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1771131900",
+    "GameDateTime_JST": "2026-02-15T14:05:00+09:00"
+  },
+  {
+    "schedule_key": 505211,
+    "mapped_date": "2025-02-14",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-02-14",
+    "contexts_ymd_str": "2026/02/14",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1771045500",
+    "GameDateTime_JST": "2026-02-14T14:05:00+09:00"
+  },
+  {
+    "schedule_key": 505212,
+    "mapped_date": "2025-02-28",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-02-15",
+    "contexts_ymd_str": "2026/02/15",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1771131900",
+    "GameDateTime_JST": "2026-02-15T14:05:00+09:00"
+  },
+  {
+    "schedule_key": 505213,
+    "mapped_date": "2025-02-14",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-02-14",
+    "contexts_ymd_str": "2026/02/14",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1771049100",
+    "GameDateTime_JST": "2026-02-14T15:05:00+09:00"
+  },
+  {
+    "schedule_key": 505214,
+    "mapped_date": "2025-02-28",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-02-15",
+    "contexts_ymd_str": "2026/02/15",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1771135500",
+    "GameDateTime_JST": "2026-02-15T15:05:00+09:00"
+  },
+  {
+    "schedule_key": 505215,
+    "mapped_date": "2025-02-14",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-02-14",
+    "contexts_ymd_str": "2026/02/14",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1771049100",
+    "GameDateTime_JST": "2026-02-14T15:05:00+09:00"
+  },
+  {
+    "schedule_key": 505216,
+    "mapped_date": "2025-02-28",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-02-15",
+    "contexts_ymd_str": "2026/02/15",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1771135500",
+    "GameDateTime_JST": "2026-02-15T15:05:00+09:00"
+  },
+  {
+    "schedule_key": 505217,
+    "mapped_date": "2025-02-14",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-02-14",
+    "contexts_ymd_str": "2026/02/14",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1771049100",
+    "GameDateTime_JST": "2026-02-14T15:05:00+09:00"
+  },
+  {
+    "schedule_key": 505218,
+    "mapped_date": "2025-02-28",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-02-15",
+    "contexts_ymd_str": "2026/02/15",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1771135500",
+    "GameDateTime_JST": "2026-02-15T15:05:00+09:00"
+  },
+  {
+    "schedule_key": 505219,
+    "mapped_date": "2025-02-14",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-02-14",
+    "contexts_ymd_str": "2026/02/14",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1771049100",
+    "GameDateTime_JST": "2026-02-14T15:05:00+09:00"
+  },
+  {
+    "schedule_key": 505220,
+    "mapped_date": "2025-02-28",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-02-15",
+    "contexts_ymd_str": "2026/02/15",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1771135500",
+    "GameDateTime_JST": "2026-02-15T15:05:00+09:00"
+  },
+  {
+    "schedule_key": 505221,
+    "mapped_date": "2025-02-14",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-02-14",
+    "contexts_ymd_str": "2026/02/14",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1771056300",
+    "GameDateTime_JST": "2026-02-14T17:05:00+09:00"
+  },
+  {
+    "schedule_key": 505222,
+    "mapped_date": "2025-02-28",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-02-15",
+    "contexts_ymd_str": "2026/02/15",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1771135500",
+    "GameDateTime_JST": "2026-02-15T15:05:00+09:00"
+  },
+  {
+    "schedule_key": 505223,
+    "mapped_date": "2025-02-14",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-02-14",
+    "contexts_ymd_str": "2026/02/14",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1771049100",
+    "GameDateTime_JST": "2026-02-14T15:05:00+09:00"
+  },
+  {
+    "schedule_key": 505224,
+    "mapped_date": "2025-02-28",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-02-15",
+    "contexts_ymd_str": "2026/02/15",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1771131900",
+    "GameDateTime_JST": "2026-02-15T14:05:00+09:00"
+  },
+  {
+    "schedule_key": 505225,
+    "mapped_date": "2025-02-14",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-02-14",
+    "contexts_ymd_str": "2026/02/14",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1771049100",
+    "GameDateTime_JST": "2026-02-14T15:05:00+09:00"
+  },
+  {
+    "schedule_key": 505226,
+    "mapped_date": "2025-02-28",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-02-15",
+    "contexts_ymd_str": "2026/02/15",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1771135500",
+    "GameDateTime_JST": "2026-02-15T15:05:00+09:00"
+  },
+  {
+    "schedule_key": 505227,
+    "mapped_date": "2025-02-14",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-02-14",
+    "contexts_ymd_str": "2026/02/14",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1771050900",
+    "GameDateTime_JST": "2026-02-14T15:35:00+09:00"
+  },
+  {
+    "schedule_key": 505228,
+    "mapped_date": "2025-02-28",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-02-15",
+    "contexts_ymd_str": "2026/02/15",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1771137300",
+    "GameDateTime_JST": "2026-02-15T15:35:00+09:00"
+  },
+  {
+    "schedule_key": 505229,
+    "mapped_date": "2025-02-14",
+    "status_tab_4": 500,
+    "status_tab_2": 200,
+    "contexts_ymd": "2026-02-14",
+    "contexts_ymd_str": "2026/02/14",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1771045500",
+    "GameDateTime_JST": "2026-02-14T14:05:00+09:00"
+  },
+  {
+    "schedule_key": 505230,
+    "mapped_date": "2025-02-28",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-02-15",
+    "contexts_ymd_str": "2026/02/15",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1771131900",
+    "GameDateTime_JST": "2026-02-15T14:05:00+09:00"
+  },
+  {
+    "schedule_key": 505231,
+    "mapped_date": "2025-02-14",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-02-14",
+    "contexts_ymd_str": "2026/02/14",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1771059900",
+    "GameDateTime_JST": "2026-02-14T18:05:00+09:00"
+  },
+  {
+    "schedule_key": 505232,
+    "mapped_date": "2025-02-28",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-02-15",
+    "contexts_ymd_str": "2026/02/15",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1771146300",
+    "GameDateTime_JST": "2026-02-15T18:05:00+09:00"
+  },
+  {
+    "schedule_key": 505233,
+    "mapped_date": "2025-02-14",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-02-14",
+    "contexts_ymd_str": "2026/02/14",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1771041900",
+    "GameDateTime_JST": "2026-02-14T13:05:00+09:00"
+  },
+  {
+    "schedule_key": 505234,
+    "mapped_date": "2025-02-28",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-02-15",
+    "contexts_ymd_str": "2026/02/15",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1771131900",
+    "GameDateTime_JST": "2026-02-15T14:05:00+09:00"
+  },
+  {
+    "schedule_key": 506010,
+    "mapped_date": "2025-01-18",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-18",
+    "contexts_ymd_str": "2026/01/18",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1768716000",
+    "GameDateTime_JST": "2026-01-18T15:00:00+09:00"
+  },
+  {
+    "schedule_key": 506011,
+    "mapped_date": "2025-01-18",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-18",
+    "contexts_ymd_str": "2026/01/18",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1768703400",
+    "GameDateTime_JST": "2026-01-18T11:30:00+09:00"
+  },
+  {
+    "schedule_key": 506052,
+    "mapped_date": "2025-01-16",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-16",
+    "contexts_ymd_str": "2026/01/16",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1768550100",
+    "GameDateTime_JST": "2026-01-16T16:55:00+09:00"
+  },
+  {
+    "schedule_key": 506053,
+    "mapped_date": "2025-01-16",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-16",
+    "contexts_ymd_str": "2026/01/16",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1768552800",
+    "GameDateTime_JST": "2026-01-16T17:40:00+09:00"
+  },
+  {
+    "schedule_key": 506054,
+    "mapped_date": "2025-01-16",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-16",
+    "contexts_ymd_str": "2026/01/16",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1768556100",
+    "GameDateTime_JST": "2026-01-16T18:35:00+09:00"
+  },
+  {
+    "schedule_key": 506055,
+    "mapped_date": "2025-01-16",
+    "status_tab_4": 200,
+    "contexts_ymd": "2026-01-16",
+    "contexts_ymd_str": "2026/01/16",
+    "Game_Year": 2025,
+    "GameDateTime_raw": "1768560300",
+    "GameDateTime_JST": "2026-01-16T19:45:00+09:00"
+  }
+]
