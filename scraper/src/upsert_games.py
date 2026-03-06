@@ -47,6 +47,13 @@ def _to_float(value: Any) -> float | None:
     return float(value)
 
 
+def _normalize_optional_text(value: Any) -> str | None:
+    if value is None:
+        return None
+    text = str(value).strip()
+    return text if text else None
+
+
 def _safe_div(numerator: float, denominator: float) -> float | None:
     if denominator == 0:
         return None
@@ -468,11 +475,18 @@ def _extract_players(payload: dict[str, Any]) -> list[dict[str, Any]]:
             jersey_number = str(boxscore.get('PlayerNo', ''))
             player_name_j = boxscore.get('PlayerNameJ', '')
             player_name_e = boxscore.get('PlayerNameE', '')
+            nationality = (
+                boxscore.get('Nationality')
+                or boxscore.get('PlayerNationality')
+                or boxscore.get('Country')
+                or boxscore.get('PlayerCountry')
+            )
 
             player_map[player_id] = {
                 'player_id': player_id,
                 'player_name_j': player_name_j,
                 'player_name_e': player_name_e,
+                'nationality': _normalize_optional_text(nationality),
                 'last_seen_team_id': team_id,
                 'last_seen_jersey_number': jersey_number,
             }

@@ -59,6 +59,19 @@ python -m scraper.src.scraper --start-date 2024-10-05 --end-date 2024-10-11 --se
 | `--season SEASON` | シーズン識別子（例: `2024-25`）。省略時は `config.py` の `SEASONS[0]` を使用 |
 | `--include-play-by-play` | `play_by_plays` データも取得する（デフォルト: 無効） |
 
+## players.json の nationality / player_slot_category 補完
+
+`scraper/data/players.json` の `player_id` を使って `roster_detail` を取得し、
+「リーグ登録国籍」「出身地」から `nationality` と `player_slot_category` を更新します。
+
+```bash
+# 入力をそのまま上書き
+python -m scraper.src.enrich_players_profile --input scraper/data/players.json
+
+# 出力先を分ける場合
+python -m scraper.src.enrich_players_profile --input scraper/data/players.json --output scraper/data/players_enriched.json
+```
+
 ### 出力ファイル
 
 取得結果は `scraper/data/` に JSON ファイルとして保存されます。
@@ -153,4 +166,3 @@ Supabaseの接続情報はGitHub Secretsに設定してください：
 
 - `SUPABASE_URL`
 - `SUPABASE_SECRET_KEYS`
-
