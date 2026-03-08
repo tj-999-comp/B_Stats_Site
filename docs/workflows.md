@@ -22,6 +22,7 @@
 2. Python 3.11 をセットアップ
 3. `scraper/requirements.txt` の依存パッケージをインストール
 4. `python -m scraper.src.scraper` を実行し、Bリーグ公式サイトからデータを取得して Supabase に保存
+   - `play_by_play` はデータ量が大きいため運用上インポートしない（`--with-play-by-play` フラグ未使用）
 
 ### 必要なシークレット
 

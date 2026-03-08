@@ -1,4 +1,6 @@
-"""開幕週ゲームJSONを teams / games / play_by_play へUPSERTする"""
+"""開幕週ゲームJSONを teams / games へUPSERTする。
+play_by_play はデータ量が大きく運用上使用しないため、デフォルト無効。
+"""
 
 from __future__ import annotations
 
@@ -8,7 +10,7 @@ from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from typing import Any
 
-from .db import upsert_game_team_stats, upsert_games, upsert_play_by_play, upsert_players, upsert_player_game_stats, upsert_teams
+from .db import upsert_game_team_stats, upsert_games, upsert_play_by_play, upsert_players, upsert_player_game_stats, upsert_teams, fetch_player_id_map
 
 _JST = timezone(timedelta(hours=9))
 
@@ -25,6 +27,39 @@ def _unix_to_jst_date(unix_ts: int | None) -> str | None:
     if unix_ts is None:
         return None
     return datetime.fromtimestamp(unix_ts, tz=_JST).strftime('%Y-%m-%d')
+
+
+def _season_year_from_date(game_date: str | None) -> int | None:
+    """game_date ('YYYY-MM-DD') からシーズン開始年（Season Year）を返す。
+
+    Bリーグのシーズンは10月〜翌年5月を1シーズンとし、
+    シーズン開始月（10月）時点の年を season year とする。
+
+    例: 2024-10-15 → 2024, 2025-01-10 → 2024, 2025-05-20 → 2024, 2025-10-05 → 2025
+    """
+    if game_date is None:
+        return None
+    try:
+        d = datetime.strptime(game_date, '%Y-%m-%d')
+    except ValueError:
+        return None
+    if d.month >= 10:
+        return d.year
+    elif d.month <= 5:
+        return d.year - 1
+    else:
+        # 6〜9月はオフシーズン。通常は試合なし。念のため当該年を返す（次シーズン開始年）
+        return d.year
+
+
+def _game_type(setu: int | None) -> str | None:
+    """節（Setu）からゲームタイプを返す。
+    RS: Regular Season (setu <= 100)
+    CS: Championship Series (setu >= 101)
+    """
+    if setu is None:
+        return None
+    return 'CS' if setu >= 101 else 'RS'
 
 
 def _to_int(value: Any) -> int | None:
@@ -344,7 +379,6 @@ def _extract_games(payload: dict[str, Any]) -> list[dict[str, Any]]:
         if (
             game.get('ConventionKey') is None
             or game.get('ConventionNameJ') is None
-            or _to_int(game.get('Year')) is None
             or _to_int(game.get('MaxPeriod')) is None
             or _to_int(game.get('GameDateTime')) is None
             or game.get('HomeTeamID') is None
@@ -363,8 +397,9 @@ def _extract_games(payload: dict[str, Any]) -> list[dict[str, Any]]:
                 'convention_key': game.get('ConventionKey'),
                 'convention_name_j': game.get('ConventionNameJ'),
                 'convention_name_e': game.get('ConventionNameE'),
-                'year': _to_int(game.get('Year')),
+                'year': _season_year_from_date(_unix_to_jst_date(_to_int(game.get('GameDateTime')))),
                 'setu': game.get('Setu'),
+                'game_type': _game_type(_to_int(game.get('Setu'))),
                 'max_period': _to_int(game.get('MaxPeriod')),
                 'game_current_period': _to_int(game.get('GameCurrentPeriod')),
                 'game_datetime_unix': _to_int(game.get('GameDateTime')),
@@ -454,8 +489,11 @@ def _extract_play_by_play(payload: dict[str, Any]) -> list[dict[str, Any]]:
     return rows
 
 
-def _extract_players(payload: dict[str, Any]) -> list[dict[str, Any]]:
-    """Extract unique players with their most recent team and jersey number"""
+def _extract_players(payload: dict[str, Any], player_id_map: dict[str, str] | None = None) -> list[dict[str, Any]]:
+    """Extract unique players with their most recent team and jersey number.
+
+    player_id_map: {old_player_id: player_id}。渡すと旧IDを新IDに読み替える。
+    """
     player_map: dict[str, dict[str, Any]] = {}
 
     for item in payload.get('games', []):
@@ -467,9 +505,13 @@ def _extract_players(payload: dict[str, Any]) -> list[dict[str, Any]]:
             if boxscore.get('PeriodCategory') != 18:
                 continue
 
-            player_id = str(boxscore.get('PlayerID'))
+            player_id = str(boxscore.get('PlayerID')) if boxscore.get('PlayerID') is not None else None
             if not player_id:
                 continue
+
+            # ID読み替え: 旧IDが来た場合は新IDへ変換する
+            if player_id_map:
+                player_id = player_id_map.get(player_id, player_id)
 
             team_id = str(boxscore.get('TeamID'))
             jersey_number = str(boxscore.get('PlayerNo', ''))
@@ -494,8 +536,11 @@ def _extract_players(payload: dict[str, Any]) -> list[dict[str, Any]]:
     return list(player_map.values())
 
 
-def _extract_player_game_stats(payload: dict[str, Any]) -> list[dict[str, Any]]:
-    """Extract player game statistics from BoxScores (PeriodCategory=18 only)"""
+def _extract_player_game_stats(payload: dict[str, Any], player_id_map: dict[str, str] | None = None) -> list[dict[str, Any]]:
+    """Extract player game statistics from BoxScores (PeriodCategory=18 only).
+
+    player_id_map: {old_player_id: player_id}。渡すと旧IDを新IDに読み替える。
+    """
     rows: list[dict[str, Any]] = []
 
     for item in payload.get('games', []):
@@ -514,9 +559,13 @@ def _extract_player_game_stats(payload: dict[str, Any]) -> list[dict[str, Any]]:
             if boxscore.get('PeriodCategory') != 18:
                 continue
 
-            player_id = str(boxscore.get('PlayerID'))
+            player_id = str(boxscore.get('PlayerID')) if boxscore.get('PlayerID') is not None else None
             if not player_id:
                 continue
+
+            # ID読み替え: 旧IDが来た場合は新IDへ変換する
+            if player_id_map:
+                player_id = player_id_map.get(player_id, player_id)
 
             team_id = str(boxscore.get('TeamID'))
             jersey_number = str(boxscore.get('PlayerNo', ''))
@@ -585,11 +634,15 @@ def _extract_player_game_stats(payload: dict[str, Any]) -> list[dict[str, Any]]:
 
 def run(input_path: Path, dry_run: bool = False, with_play_by_play: bool = False) -> None:
     payload = json.loads(input_path.read_text(encoding='utf-8'))
+    player_id_map = fetch_player_id_map() if not dry_run else {}
+    if player_id_map:
+        print(f'player_id_map: {len(player_id_map)} 件読み込み済み')
+
     teams = _extract_teams(payload)
     games = _extract_games(payload)
     game_team_stats = _extract_game_team_stats(payload)
-    players = _extract_players(payload)
-    player_game_stats = _extract_player_game_stats(payload)
+    players = _extract_players(payload, player_id_map=player_id_map or None)
+    player_game_stats = _extract_player_game_stats(payload, player_id_map=player_id_map or None)
     play_by_play = _extract_play_by_play(payload) if with_play_by_play else []
 
     print(f'input={input_path}')
@@ -622,7 +675,7 @@ def main() -> None:
     parser.add_argument(
         '--with-play-by-play',
         action='store_true',
-        help='Also upsert play_by_play table (default: disabled)',
+        help='play_by_play テーブルも upsert する（データ量大・運用上非推奨のためデフォルト無効）',
     )
     args = parser.parse_args()
 

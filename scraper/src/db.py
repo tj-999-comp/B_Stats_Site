@@ -87,3 +87,22 @@ def upsert_players(rows: list[dict[str, Any]]) -> None:
 
 def upsert_player_game_stats(rows: list[dict[str, Any]]) -> None:
     upsert_rows('player_game_stats', rows, on_conflict='schedule_key,player_id')
+
+
+def fetch_player_id_map() -> dict[str, str]:
+    """player_id_map テーブルから {old_player_id: player_id} のマップを返す。
+    テーブルが存在しない場合は空 dict を返す。
+    """
+    client = get_client()
+    try:
+        res = client.table('player_id_map').select('old_player_id,player_id').execute()
+        return {row['old_player_id']: row['player_id'] for row in (res.data or [])}
+    except Exception:
+        return {}
+
+
+def fetch_all_players() -> list[dict[str, Any]]:
+    """players テーブルの全レコードを返す。"""
+    client = get_client()
+    res = client.table('players').select('*').execute()
+    return res.data or []

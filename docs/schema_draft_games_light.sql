@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS games (
     convention_key TEXT NOT NULL,
     convention_name_j TEXT NOT NULL,
     convention_name_e TEXT,
-    year INTEGER NOT NULL,
+    year INTEGER NOT NULL,          -- シーズン開始年（Season Year）。game_date から算出: 10-12月→当該年, 1-5月→前年
     setu TEXT,
     max_period SMALLINT NOT NULL,
     game_current_period SMALLINT,

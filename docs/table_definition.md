@@ -149,7 +149,7 @@
 | `convention_key` | 大会ID | `text` | Yes | `-` | - |
 | `convention_name_j` | 大会名（日本語） | `text` | Yes | `-` | - |
 | `convention_name_e` | 大会名（英語） | `text` | No | `-` | - |
-| `year` | 年 | `integer` | Yes | `-` | - |
+| `year` | シーズン開始年 | `integer` | Yes | `-` | シーズン開始月（10月）時点の年。例: 2024-25シーズンは `2024`。`game_date` から算出（10〜12月 → 当該年、1〜5月 → 前年） |
 | `setu` | 節 | `text` | No | `-` | - |
 | `max_period` | 最大クォーター数 | `smallint` | Yes | `-` | - |
 | `game_current_period` | 現在クォーター | `smallint` | No | `-` | - |

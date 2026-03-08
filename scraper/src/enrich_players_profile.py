@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import csv
 import json
 import re
 import time
@@ -130,25 +131,63 @@ def map_profile_fields(league_nationality: str | None, birthplace: str | None) -
 def enrich_players(
     players: list[dict[str, Any]],
     *,
+    player_id_map: dict[str, str] | None = None,
+    force: bool = False,
     timeout: int = 30,
     delay: float = 0.2,
     limit: int | None = None,
 ) -> list[dict[str, Any]]:
+    """nationality / player_slot_category を補完する。
+
+    player_id_map: {old_player_id: player_id} を渡すと、旧IDの選手は
+    新IDでプロフィールページをフェッチする。
+    force: False（デフォルト）の場合、nationality が既に設定済みの選手はスキップする。
+    """
     session = requests.Session()
     target_players = players[:limit] if limit is not None else players
-    total = len(target_players)
 
-    for index, player in enumerate(target_players, start=1):
+    # force=False のときは nationality=null の選手のみ対象にする
+    if not force:
+        to_enrich = [p for p in target_players if p.get('nationality') is None]
+        skipped = len(target_players) - len(to_enrich)
+        if skipped:
+            print(f'nationality 設定済みをスキップ: {skipped} 人（--force で全件再取得）')
+    else:
+        to_enrich = target_players
+
+    total = len(to_enrich)
+    print(f'処理対象: {total} 人')
+
+    for index, player in enumerate(to_enrich, start=1):
         player_id = _norm_text(str(player.get('player_id') or ''))
         if not player_id:
             raise RuntimeError(f'player_id is missing: player={player!r}')
 
-        response = session.get(
-            ROSTER_DETAIL_URL,
-            params={'PlayerID': player_id},
-            headers=HEADERS,
-            timeout=timeout,
-        )
+        fetch_id = (player_id_map or {}).get(player_id, player_id)
+        if fetch_id != player_id:
+            print(f'[{index}/{total}] player_id={player_id} => 新IDでフェッチ: {fetch_id}')
+
+        # 503 はサーバー側の一時的なリジェクト。指数バックオフでリトライする
+        max_retries = 3
+        response = None
+        for attempt in range(max_retries):
+            response = session.get(
+                ROSTER_DETAIL_URL,
+                params={'PlayerID': fetch_id},
+                headers=HEADERS,
+                timeout=timeout,
+            )
+            if response.status_code != 503:
+                break
+            wait = 2 ** attempt * 3  # 3s, 6s, 12s
+            print(f'[{index}/{total}] player_id={player_id} => 503 リトライ ({attempt + 1}/{max_retries}) {wait}s 待機')
+            time.sleep(wait)
+
+        if response.status_code == 404:
+            print(f'[{index}/{total}] player_id={player_id} (fetch_id={fetch_id}) => SKIP (404 Not Found)')
+            if delay > 0 and index < total:
+                time.sleep(delay)
+            continue
         response.raise_for_status()
 
         soup = BeautifulSoup(response.text, 'html.parser')
@@ -181,6 +220,24 @@ def load_players(path: Path) -> list[dict[str, Any]]:
     return payload
 
 
+def load_player_id_map(path: Path) -> dict[str, str]:
+    """player_id_map CSV（build_player_id_map.py の出力）から {old_player_id: player_id} を返す。
+    status='ok' の行のみ読み込む。
+    """
+    id_map: dict[str, str] = {}
+    with path.open(encoding='utf-8', newline='') as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            if row.get('status', 'ok').strip() != 'ok':
+                continue
+            # 旧列名（alias_id / canonical_player_id）との後方互換対応
+            old_id = (row.get('old_player_id') or row.get('alias_id') or '').strip()
+            new_id = (row.get('player_id') or row.get('canonical_player_id') or '').strip()
+            if old_id and new_id:
+                id_map[old_id] = new_id
+    return id_map
+
+
 def write_players(path: Path, players: list[dict[str, Any]]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(players, ensure_ascii=False, indent=2), encoding='utf-8')
@@ -193,11 +250,26 @@ def run(
     timeout: int,
     delay: float,
     limit: int | None,
+    player_id_map: dict[str, str] | None = None,
+    force: bool = False,
+    upsert_to_db: bool = False,
 ) -> None:
     players = load_players(input_path)
-    enriched = enrich_players(players, timeout=timeout, delay=delay, limit=limit)
+    enriched = enrich_players(
+        players,
+        player_id_map=player_id_map,
+        force=force,
+        timeout=timeout,
+        delay=delay,
+        limit=limit,
+    )
     write_players(output_path, enriched)
     print(f'written={output_path} players={len(enriched)}')
+
+    if upsert_to_db:
+        from .db import upsert_players
+        upsert_players(enriched)
+        print(f'upserted {len(enriched)} players to DB')
 
 
 def main() -> None:
@@ -217,15 +289,39 @@ def main() -> None:
     parser.add_argument('--timeout', type=int, default=30, help='HTTP timeout seconds')
     parser.add_argument('--delay', type=float, default=0.2, help='Sleep seconds between requests')
     parser.add_argument('--limit', type=int, default=None, help='Process only first N players for test run')
+    parser.add_argument('--force', action='store_true',
+                        help='nationality 設定済みの選手も含めて全件再取得する（デフォルト: null のみ処理）')
+    parser.add_argument(
+        '--id-map',
+        type=Path,
+        default=None,
+        dest='id_map',
+        help='player_id_map CSVのパス（build_player_id_map.py の出力）。'
+             '旧IDの選手は新IDでプロフィールをフェッチする。',
+    )
+    parser.add_argument(
+        '--upsert',
+        action='store_true',
+        help='補完後に結果を DB（players テーブル）へ upsert する',
+    )
     args = parser.parse_args()
 
     output_path = args.output or args.input
+
+    player_id_map: dict[str, str] | None = None
+    if args.id_map:
+        player_id_map = load_player_id_map(args.id_map)
+        print(f'player_id_map loaded: {len(player_id_map)} 件 ({args.id_map})')
+
     run(
         input_path=args.input,
         output_path=output_path,
         timeout=args.timeout,
         delay=args.delay,
         limit=args.limit,
+        player_id_map=player_id_map,
+        force=args.force,
+        upsert_to_db=args.upsert,
     )
 
 
