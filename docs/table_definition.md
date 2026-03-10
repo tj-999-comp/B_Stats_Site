@@ -2,7 +2,7 @@
 
 このドキュメントは Supabase REST OpenAPI（`Accept: application/openapi+json`）から自動生成したスナップショットです。
 
-- 取得日時 (UTC): 2026-03-03T05:16:24.510Z
+- 取得日時 (UTC): 2026-03-10T00:00:00.000Z
 - 取得元: https://mngqmfvsxcqjhsgkbyju.supabase.co/rest/v1/
 
 ## テーブル一覧
@@ -151,6 +151,7 @@
 | `convention_name_e` | 大会名（英語） | `text` | No | `-` | - |
 | `year` | シーズン開始年 | `integer` | Yes | `-` | シーズン開始月（10月）時点の年。例: 2024-25シーズンは `2024`。`game_date` から算出（10〜12月 → 当該年、1〜5月 → 前年） |
 | `setu` | 節 | `text` | No | `-` | - |
+| `game_type` | 試合区分 | `text` | No | `-` | `setu` から判定。`setu::integer <= 100` は `RS`、`setu::integer >= 101` は `CS` |
 | `max_period` | 最大クォーター数 | `smallint` | Yes | `-` | - |
 | `game_current_period` | 現在クォーター | `smallint` | No | `-` | - |
 | `game_datetime_unix` | 試合日時UNIX | `bigint` | Yes | `-` | - |
@@ -212,7 +213,7 @@
 | `team_id` | チームID | `text` | Yes | `-` | FK -> teams.team_id |
 | `jersey_number` | 背番号 | `text` | No | `-` | - |
 | `is_starter` | 先発フラグ | `boolean` | Yes | `false` | - |
-| `is_playing` | 出場フラグ | `boolean` | Yes | `false` | - |
+| `is_playing` | 出場フラグ | `boolean` | Yes | `false` | 運用更新ルール: `play_time = 'DNP'` は `false`、それ以外は `true` |
 | `play_time` | 出場時間 | `text` | No | `-` | - |
 | `points` | 得点 | `integer` | No | `-` | - |
 | `fgm` | FG成功数 | `integer` | No | `-` | - |

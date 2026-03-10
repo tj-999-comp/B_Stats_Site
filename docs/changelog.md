@@ -1,5 +1,25 @@
 # Changelog
 
+## 2026-03-10
+
+### 概要
+Supabase 上で `games.game_type` の追加と全シーズン向け backfill を実施。テーブル定義ドキュメントに反映。
+
+### 実施内容
+- `games` テーブルに `game_type (text)` を追加
+- `setu` ベースで全シーズン一括更新
+  - `setu::integer <= 100` -> `RS`（Regular Season）
+  - `setu::integer >= 101` -> `CS`（Championship Series）
+- 必要時はシーズン指定 (`WHERE year = <season_start_year>`) で更新可能
+- `player_game_stats.is_playing` を `play_time` ベースで全件更新
+  - `play_time = 'DNP'` -> `false`
+  - それ以外 -> `true`
+
+### 反映ドキュメント
+- `docs/table_definition.md`（`games.game_type` を追加）
+- `docs/schema_draft_games_light.sql`（`games.game_type` を追加）
+- `docs/flow.md`（`is_playing` 補正ロジックを追記）
+
 ## 2026-03-08
 
 ### 概要

@@ -20,6 +20,7 @@ CREATE TABLE IF NOT EXISTS games (
     convention_name_e TEXT,
     year INTEGER NOT NULL,          -- シーズン開始年（Season Year）。game_date から算出: 10-12月→当該年, 1-5月→前年
     setu TEXT,
+    game_type TEXT,                 -- 試合区分: setu <= 100 は RS、setu >= 101 は CS
     max_period SMALLINT NOT NULL,
     game_current_period SMALLINT,
     game_datetime_unix BIGINT NOT NULL,

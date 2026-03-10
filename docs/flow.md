@@ -73,6 +73,10 @@ JSONを読み込み、各テーブル向けのデータに変換してDBにUpser
 - `setu <= 100` → `'RS'`（レギュラーシーズン）
 - `setu >= 101` → `'CS'`（チャンピオンシップシリーズ）
 
+**is_playing の補正ロジック（直接SQL更新時）:**
+- `play_time = 'DNP'` → `false`
+- それ以外 → `true`
+
 **高度スタッツの計算式:**
 - eFG% = (FGM + 0.5 × 3PM) / FGA
 - TS% = Points / (2 × (FGA + 0.44 × FTA))
