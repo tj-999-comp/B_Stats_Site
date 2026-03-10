@@ -148,16 +148,34 @@ upsert_games.py（別コマンドとして独立実行）
 
 ### 各ファイルの役割
 
+#### スクレイピング実行系
+
 | ファイル | 役割 |
 |---|---|
 | `src/scraper.py` | **エントリーポイント**。argparse で `--date` / `--start-date` / `--end-date` / `--season` / `--include-play-by-play` を受け取り、`game_scraper.py` の適切な関数を呼び出す |
+| `src/parser.py` | **HTMLパーサー（選手・順位スタッツ用）**。`/stats/player` や `/standings/` ページを解析して選手スタッツ・順位表を取得する。試合単位スクレイピングとは独立した処理 |
 | `src/game_scraper.py` | **スクレイピング本体**。日付→ScheduleKey の解決（スケジュールAPI）、ScheduleKey→試合詳細の取得（`/game_detail/` HTML内の `_contexts_s3id.data` を解析）、結果を JSON ファイルへ保存 |
 | `src/upsert_games.py` | **DB取り込みコマンド**。`game_scraper.py` が出力した JSON を読み込み、`teams` / `games` / `game_team_stats` / `players` / `player_game_stats` / `play_by_play` へ変換・UPSERT する |
-| `src/db.py` | **Supabase接続・UPSERT処理**。`supabase-py` クライアントの初期化と、テーブルごとの UPSERT 関数（1000件単位のチャンク処理）を提供する |
+| `src/enrich_players_profile.py` | **選手プロフィール補完**。選手プロフィールページをスクレイピングし、国籍・出身地から `nationality` と `player_slot_category` を補完・DB更新する |
+
+#### 設定・基盤系
+
+| ファイル | 役割 |
+|---|---|
 | `src/config.py` | **設定**。Supabaseの接続情報（環境変数から読み込み）、BASE_URL、リクエストヘッダ、対象シーズン（`SEASONS`）を定義する |
-| `src/parser.py` | **HTMLパーサー（選手・順位スタッツ用）**。`/stats/player` や `/standings/` ページを解析して選手スタッツ・順位表を取得する。試合単位スクレイピングとは独立した処理 |
-| `src/inspect_full_context.py` | **調査用スクリプト**。指定した ScheduleKey の `/game_detail/` HTML から `_contexts_s3id.data` の全構造を取得・表示・保存する開発時の確認用ツール |
-| `src/inspect_player_data.py` | **調査用スクリプト**。`game_scraper.fetch_game_context()` を呼び出し、返却されるデータ構造（Game・Summaries・Boxscoresなど）を確認する開発時の確認用ツール |
+| `src/db.py` | **Supabase接続・UPSERT処理**。`supabase-py` クライアントの初期化と、テーブルごとの UPSERT 関数（1000件単位のチャンク処理）を提供する |
+
+#### 開発・検証・デバッグ用
+
+| ファイル | 役割 |
+|---|---|
+| `src/inspect_full_context.py` | 指定した ScheduleKey の `/game_detail/` HTML から `_contexts_s3id.data` の全構造を取得・表示・保存する開発時の確認用ツール |
+| `src/inspect_player_data.py` | `game_scraper.fetch_game_context()` を呼び出し、返却されるデータ構造（Game・Summaries・Boxscoresなど）を確認する開発時の確認用ツール |
+| `scripts/build_player_id_map.py` | `players.json` とゲームJSONを照合し、旧PlayerID → 新PlayerID のマッピング候補CSVを生成する。同名選手による曖昧性も検出する |
+| `scripts/merge_player_ids.py` | `build_player_id_map.py` の出力CSVを使い、確認済みの旧IDを新IDへ統合する（`players.json` 更新 & Supabase更新、ドライラン対応） |
+| `scripts/delete_games_by_date.py` | 指定した日付範囲または schedule_key リストで Supabase から試合データを削除する（`games` / `game_team_stats` / `player_game_stats` / `play_by_play`、ドライラン対応） |
+| `scripts/fix_game_datetimes.py` | エクスポートされたJSONの `GameDateTime` を `mapped_date`（スケジュール実際日付）で補正する。時刻は保持し、元値を `_original_GameDateTime` に記録する |
+| `scripts/players_csv.py` | `players.json` ↔ CSV の相互変換ユーティリティ。編集用にJSONをエクスポートし、編集後にJSONへインポートする |
 
 ## GitHub Actionsでの自動実行
 
