@@ -1,7 +1,7 @@
 # 日付解決ルール（スクレイパー挙動の補足）
 
 スクレイパーで取得するゲーム日はサイト側の表示と内部コンテキストの不整合が起きる場合があります。
-このリポジトリでは以下のルールで日付の解決を行います（実装: `scraper/src/game_scraper.py`, 補正スクリプト: `scraper/scripts/fix_game_datetimes.py`）。
+このリポジトリでは以下のルールで日付の解決を行います（実装: `scripts/scraping/game_scraper.py`, 補正スクリプト: `scripts/dev/fix_game_datetimes.py`）。
 
 - `date_to_schedule_keys` は `YYYY-MM-DD` -> schedule_key のマップで、1つの `schedule_key` が複数日（例: 公開カレンダーと内部コンテキスト差）に現れることがあります。
 - スクレイパーは各 `schedule_key` ごとに「候補日リスト（candidate dates）」を保持します。
@@ -22,16 +22,16 @@ cp scraper/data/games_YYYY-mm_DDRANGE.json scraper/data/games_YYYY-mm_DDRANGE.js
 2. 補正スクリプトを実行して修正済 JSON を作る:
 
 ```bash
-python3 scraper/scripts/fix_game_datetimes.py \
+python3 scripts/dev/fix_game_datetimes.py \
   scraper/data/games_YYYY-mm_DDRANGE.json \
   scraper/data/games_YYYY-mm_DDRANGE_fixed.json
 ```
 
-3. （必要なら）再スクレイプして最終 JSON を得る場合は `scraper/src/game_scraper.py` の `save_date_range_games` を使います。例:
+3. （必要なら）再スクレイプして最終 JSON を得る場合は `scripts/scraping/game_scraper.py` の `save_date_range_games` を使います。例:
 
 ```bash
 python3 - <<'PY'
-from scraper.src.game_scraper import save_date_range_games
+from scripts.scraping.game_scraper import save_date_range_games
 from datetime import date
 save_date_range_games(date(2025,5,1), date(2025,6,30), '2024-25')
 PY

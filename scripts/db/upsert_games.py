@@ -11,6 +11,7 @@ from pathlib import Path
 from typing import Any
 
 from .db import upsert_game_team_stats, upsert_games, upsert_play_by_play, upsert_players, upsert_player_game_stats, upsert_teams, fetch_player_id_map
+from .config import SCRAPER_ROOT
 
 _JST = timezone(timedelta(hours=9))
 
@@ -679,7 +680,7 @@ def main() -> None:
     )
     args = parser.parse_args()
 
-    data_dir = Path(__file__).resolve().parent.parent / 'data'
+    data_dir = SCRAPER_ROOT / 'data'
     input_path = Path(args.input) if args.input else _latest_games_json(data_dir)
     run(
         input_path=input_path,

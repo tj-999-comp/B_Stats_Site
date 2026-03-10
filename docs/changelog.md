@@ -32,24 +32,24 @@
 
 ### スクレイパー変更
 
-#### `scraper/src/upsert_games.py`
+#### `scripts/db/upsert_games.py`
 - `_season_year_from_date()` 関数を追加：`game_date` からシーズン開始年を算出
 - `_game_type()` 関数を追加：`setu` から `RS`/`CS` を判定
 - `player_id_map` を参照して旧IDを新IDに読み替える処理を追加
 - `PlayerID=None` のボックススコアレコードをスキップするよう修正（`str(None)='None'` バグ修正）
 - `play_by_play` はデフォルト無効（データ量大・運用上非推奨）
 
-#### `scraper/src/enrich_players_profile.py`
+#### `scripts/dev/enrich_players_profile.py`
 - 404エラー時にクラッシュせずスキップするよう修正
 - 503エラー時の指数バックオフリトライ追加（3s→6s→12s）
 - `--force` オプション追加（デフォルトは `nationality=null` のみ処理）
 - `--upsert` オプション追加（補完後にSupabaseへupsert）
 - `--id-map` オプション追加（旧IDで取得）
 
-#### `scraper/src/config.py`
+#### `scripts/db/config.py`
 - User-AgentをブラウザUAに変更（Botと判定されていた問題を修正）
 
-#### `scraper/src/db.py`
+#### `scripts/db/db.py`
 - `fetch_player_id_map()` 追加：`player_id_map` テーブルから旧→新IDマップを取得
 - `fetch_all_players()` 追加
 

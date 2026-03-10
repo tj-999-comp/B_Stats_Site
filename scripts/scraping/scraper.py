@@ -4,8 +4,8 @@ import argparse
 import logging
 from datetime import date
 
-from .config import SEASONS
-from .game_scraper import save_date_range_games
+from scripts.db.config import SEASONS
+from scripts.scraping.game_scraper import save_date_range_games
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)

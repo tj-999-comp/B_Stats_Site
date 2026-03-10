@@ -11,7 +11,7 @@ from typing import Any
 import requests
 from bs4 import BeautifulSoup
 
-from .config import BASE_URL, HEADERS
+from scripts.db.config import BASE_URL, HEADERS, SCRAPER_ROOT
 
 
 SCHEDULE_KEY_PATTERN = re.compile(r'ScheduleKey=(\d+)')
@@ -232,7 +232,7 @@ def fetch_game_context(
         except Exception:
             # Save a short HTML snippet for debugging and try next tab
             try:
-                log_dir = Path(__file__).resolve().parent.parent / 'logs'
+                log_dir = SCRAPER_ROOT / 'logs'
                 log_dir.mkdir(parents=True, exist_ok=True)
                 snippet = response.text[:2000]
                 path = log_dir / f'failed_context_{schedule_key}_tab{tab}.html'
@@ -364,7 +364,7 @@ def scrape_date_range_games(
 
 
 def output_path_for_date_range(season: str, start_date: date, end_date: date) -> Path:
-    root = Path(__file__).resolve().parent.parent
+    root = SCRAPER_ROOT
     output_dir = root / 'data'
     output_dir.mkdir(parents=True, exist_ok=True)
     if start_date == end_date:

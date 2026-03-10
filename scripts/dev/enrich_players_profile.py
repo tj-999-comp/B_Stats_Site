@@ -13,7 +13,7 @@ from typing import Any
 import requests
 from bs4 import BeautifulSoup
 
-from .config import BASE_URL, HEADERS
+from scripts.db.config import BASE_URL, HEADERS
 
 
 ROSTER_DETAIL_URL = f'{BASE_URL}/roster_detail/'
@@ -267,7 +267,7 @@ def run(
     print(f'written={output_path} players={len(enriched)}')
 
     if upsert_to_db:
-        from .db import upsert_players
+        from scripts.db.db import upsert_players
         upsert_players(enriched)
         print(f'upserted {len(enriched)} players to DB')
 

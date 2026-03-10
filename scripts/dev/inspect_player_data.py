@@ -1,7 +1,7 @@
 """選手データ構造の調査スクリプト"""
 
 import json
-from src.game_scraper import fetch_game_context
+from scripts.scraping.game_scraper import fetch_game_context
 
 # 既存のゲームから1つ選んでデータ構造を確認
 schedule_key = 502714

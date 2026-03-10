@@ -45,7 +45,7 @@ import json
 import sys
 from pathlib import Path
 
-from scraper.src.db import get_client
+from scripts.db.db import get_client
 
 
 def _fetch_existing_player_ids(client, ids: list[str]) -> set[str]:

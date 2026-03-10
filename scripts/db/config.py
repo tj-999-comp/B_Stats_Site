@@ -4,8 +4,9 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 
-# scraper/.env を明示的に読み込む（実行ディレクトリに依存しない）
-load_dotenv(Path(__file__).resolve().parent.parent / '.env')
+# scripts/db/config.py → parent.parent.parent = B_Stats_Site/
+SCRAPER_ROOT: Path = Path(__file__).resolve().parent.parent.parent / 'scraper'
+load_dotenv(SCRAPER_ROOT / '.env')
 
 SUPABASE_URL: str = os.getenv('SUPABASE_URL', '')
 SUPABASE_SECRET_KEYS: str = os.getenv('SUPABASE_SECRET_KEYS', '')

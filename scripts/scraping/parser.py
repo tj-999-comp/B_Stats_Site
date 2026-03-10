@@ -7,7 +7,7 @@ import requests
 from bs4 import BeautifulSoup
 from bs4.element import Tag
 
-from .config import BASE_URL, HEADERS
+from scripts.db.config import BASE_URL, HEADERS
 
 
 def _fetch_html(url: str) -> BeautifulSoup:

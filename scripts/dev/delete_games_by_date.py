@@ -23,7 +23,7 @@ from typing import Iterable, List
 
 from supabase import create_client
 
-from scraper.src.config import SUPABASE_URL, SUPABASE_SECRET_KEYS
+from scripts.db.config import SUPABASE_URL, SUPABASE_SECRET_KEYS
 
 
 def get_client():

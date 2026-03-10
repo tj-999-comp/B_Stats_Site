@@ -2,7 +2,7 @@
 
 import json
 import requests
-from src.config import BASE_URL, HEADERS
+from scripts.db.config import BASE_URL, HEADERS
 
 schedule_key = 502714
 

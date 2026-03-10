@@ -24,10 +24,10 @@ jobs:
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SECRET_KEYS: ${{ secrets.SUPABASE_SECRET_KEYS }}
-        run: python -m scraper.src.scraper
+        run: python -m scripts.scraping.scraper
 
       - name: Upsert games and teams to Supabase
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SECRET_KEYS: ${{ secrets.SUPABASE_SECRET_KEYS }}
-        run: python -m scraper.src.upsert_games
+        run: python -m scripts.db.upsert_games
