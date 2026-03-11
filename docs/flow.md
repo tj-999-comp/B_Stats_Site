@@ -37,11 +37,37 @@ psql $DATABASE_URL -f supabase/migrations/20260221_init.sql
 
 - `/schedule/` API からスケジュール一覧（ScheduleKey）を取得
 - 各ScheduleKeyに対して `/game_detail/` HTMLを取得・パース
+- リクエスト間に 1〜3 秒のランダム待機（スロットリング）を挿入し、レートリミットを回避
+- 5xx / 接続エラー時は Exponential Backoff（2秒 → 4秒）で最大3回リトライ
+- 取得失敗 schedule_key のサマリーは `scraper/logs/game_detail_fetch_log.json` に記録される
 
 ```bash
 python -m scripts.scraping.scraper --date YYYY-MM-DD
-# または --season 2024-25 で全シーズン指定
+# または期間指定
+python -m scripts.scraping.scraper --start-date YYYY-MM-DD --end-date YYYY-MM-DD --season 2024-25
 ```
+
+#### 失敗分のみ再取得して月次JSONへマージ
+
+スクレイピング後に失敗が残った場合、対象の月次JSONを指定して失敗分だけ再取得・上書きできる。
+
+```bash
+# ログから失敗キーを自動取得してマージ
+python -m scripts.scraping.scraper \
+  --retry-failed \
+  --merge-into scraper/data/games_2024-25_2024-10-01_2024-10-31.json
+
+# 失敗キーを手動指定してマージ
+python -m scripts.scraping.scraper \
+  --retry-failed \
+  --merge-into scraper/data/games_2024-25_2024-10-01_2024-10-31.json \
+  --failed-keys 502794,502813
+```
+
+- `--merge-into` のJSONに含まれる `season` / `start_date` / `end_date` を参照し、ログの最新 run から `failed_schedule_keys` を自動取得
+- ログに該当 run がない場合は JSON 内の `failed_schedule_keys` をフォールバック利用
+- 再取得した game は schedule_key 単位で既存データを置換（存在しないキーは末尾に追記）
+- 再取得の失敗サマリーも `game_detail_fetch_log.json` に追記される
 
 ### ステップ 2: 年・日付の正規化（`game_scraper.py` 内で自動処理）
 
@@ -132,8 +158,10 @@ python -m scripts.dev.enrich_players_profile --input players.json --upsert
 
 | ファイル | 役割 |
 |---------|------|
-| `scripts/scraping/scraper.py` | CLIエントリポイント |
-| `scripts/scraping/game_scraper.py` | スクレイピング・日付正規化 |
+| `scripts/scraping/scraper.py` | CLIエントリポイント（通常・再取得モード） |
+| `scripts/scraping/game_scraper.py` | スクレイピング・日付正規化・失敗分再取得マージ |
+| `scraper/logs/game_detail_fetch_log.json` | 取得失敗サマリーログ（run単位） |
+| `scraper/logs/schedule_fetch_log.json` | schedule API 失敗ログ |
 | `scripts/db/upsert_games.py` | JSON変換・Upsert |
 | `scripts/db/db.py` | Supabaseクライアント・チャンク処理 |
 | `scripts/db/config.py` | 定数（SUPABASE_URL, SEASONS等） |

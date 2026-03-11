@@ -698,3 +698,162 @@ def save_date_range_games(
     output_path = output_path_for_date_range(season, start_date, end_date)
     output_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding='utf-8')
     return output_path
+
+
+def load_latest_failed_schedule_keys(
+    *,
+    season: str,
+    start_date: date,
+    end_date: date,
+) -> list[int]:
+    """指定 run (season/start/end) の最新ログから failed_schedule_keys を返す。"""
+    path = _game_detail_fetch_log_path()
+    if not path.exists():
+        return []
+
+    try:
+        loaded = json.loads(path.read_text(encoding='utf-8'))
+    except Exception:
+        return []
+
+    if not isinstance(loaded, list):
+        return []
+
+    start_iso = start_date.isoformat()
+    end_iso = end_date.isoformat()
+
+    for entry in reversed(loaded):
+        if not isinstance(entry, dict):
+            continue
+        if entry.get('season') != season:
+            continue
+        if entry.get('start_date') != start_iso or entry.get('end_date') != end_iso:
+            continue
+        keys = entry.get('failed_schedule_keys', [])
+        if not isinstance(keys, list):
+            return []
+        result: list[int] = []
+        for key in keys:
+            try:
+                result.append(int(key))
+            except Exception:
+                continue
+        return result
+
+    return []
+
+
+def _extract_item_schedule_key(item: dict[str, Any]) -> int | None:
+    value = item.get('schedule_key')
+    if value is None:
+        game = item.get('game', {})
+        if isinstance(game, dict):
+            value = game.get('ScheduleKey')
+    if value is None:
+        return None
+    try:
+        return int(value)
+    except Exception:
+        return None
+
+
+def retry_failed_games_into_json(
+    *,
+    target_json_path: Path,
+    failed_schedule_keys: list[int],
+    include_play_by_play: bool = False,
+) -> dict[str, Any]:
+    """失敗した schedule_key のみ再取得し、対象JSONへマージして保存する。"""
+    payload = json.loads(target_json_path.read_text(encoding='utf-8'))
+    if not isinstance(payload, dict):
+        raise RuntimeError('target_json の形式が不正です: object ではありません')
+
+    games = payload.get('games', [])
+    if not isinstance(games, list):
+        raise RuntimeError('target_json の形式が不正です: games が list ではありません')
+
+    date_to_keys = payload.get('date_to_schedule_keys', {})
+    if not isinstance(date_to_keys, dict):
+        date_to_keys = {}
+    schedule_key_to_dates = _build_schedule_key_to_mapped_date(date_to_keys)
+
+    fetch_audit: dict[int, dict[str, Any]] = {}
+    merged: dict[int, dict[str, Any]] = {}
+    order: list[int] = []
+
+    for item in games:
+        if not isinstance(item, dict):
+            continue
+        schedule_key = _extract_item_schedule_key(item)
+        if schedule_key is None:
+            continue
+        if schedule_key not in merged:
+            order.append(schedule_key)
+        merged[schedule_key] = item
+
+    normalized_keys: list[int] = []
+    seen: set[int] = set()
+    for key in failed_schedule_keys:
+        try:
+            sk = int(key)
+        except Exception:
+            continue
+        if sk in seen:
+            continue
+        seen.add(sk)
+        normalized_keys.append(sk)
+
+    for i, schedule_key in enumerate(normalized_keys):
+        if i > 0:
+            time.sleep(random.uniform(1.0, 3.0))
+        fetched = fetch_game_context(
+            schedule_key,
+            include_play_by_play=include_play_by_play,
+            candidate_dates=schedule_key_to_dates.get(schedule_key),
+            fetch_audit=fetch_audit,
+        )
+        merged[schedule_key] = fetched
+        if schedule_key not in order:
+            order.append(schedule_key)
+
+    merged_games = [merged[schedule_key] for schedule_key in order]
+    _apply_mapped_date_to_game_datetimes(merged_games, schedule_key_to_dates)
+
+    failed_after = []
+    for item in merged_games:
+        if not isinstance(item, dict):
+            continue
+        if not item.get('error'):
+            continue
+        schedule_key = _extract_item_schedule_key(item)
+        if schedule_key is not None:
+            failed_after.append(schedule_key)
+
+    start_date = date.fromisoformat(str(payload.get('start_date')))
+    end_date = date.fromisoformat(str(payload.get('end_date')))
+    season = str(payload.get('season'))
+    _write_game_detail_fetch_run_log(
+        season=season,
+        start_date=start_date,
+        end_date=end_date,
+        game_count=len(normalized_keys),
+        fetch_audit=fetch_audit,
+    )
+
+    payload['generated_at'] = datetime.now(timezone.utc).isoformat()
+    payload['include_play_by_play'] = include_play_by_play
+    payload['game_count'] = len(merged_games)
+    payload['failed_schedule_keys'] = failed_after
+    payload['games'] = merged_games
+
+    target_json_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding='utf-8')
+
+    return {
+        'season': season,
+        'start_date': start_date.isoformat(),
+        'end_date': end_date.isoformat(),
+        'target_json': str(target_json_path),
+        'retried_count': len(normalized_keys),
+        'failed_after_count': len(failed_after),
+        'failed_after_schedule_keys': failed_after,
+    }

@@ -150,12 +150,23 @@ Vercel Hobby Plan (Next.js App Router: SSR/ISR)
 
 ## ドキュメント
 
+### アーキテクチャ・設計
 - [アーキテクチャ図](docs/architecture.md)
+- [DB設計ブラッシュアップ（改名・移籍対応）](docs/db_design_brushup_identity_history.md)
+- [テーブル定義書（Supabase 現在値）](docs/table_definition.md)
+
+### セットアップ・デプロイ
 - [セットアップガイド](docs/setup.md)
 - [デプロイガイド](docs/deployment.md)
-- [テーブル定義書（Supabase 現在値）](docs/table_definition.md)
-- [DB設計ブラッシュアップ（改名・移籍対応）](docs/db_design_brushup_identity_history.md)
-- [Migration適用ガイド（20260224）](docs/migration_20260224_apply_guide.md)
-- [Migration適用ガイド（20260303）](docs/migration_20260303_game_datetime.md)
-- [スクレイパーREADME](scraper/README.md)
- - [日付解決ルール](docs/date_resolution.md)
+- [GitHub Actions ワークフロー解説](docs/workflows.md)
+
+### スクレイピング・データ投入
+- [スクレイピング〜DB Upsert〜正規化 フロー](docs/flow.md)
+- [日付解決ルール](docs/date_resolution.md)
+
+### マイグレーション
+- [Migration適用ガイド（20260224: identity_history）](docs/migration_20260224_apply_guide.md)
+- [Migration適用ガイド（20260303: game_datetime）](docs/migration_20260303_game_datetime.md)
+
+### 変更履歴
+- [Changelog](docs/changelog.md)
