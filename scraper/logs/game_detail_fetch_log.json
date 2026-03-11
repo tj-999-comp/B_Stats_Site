@@ -113,5 +113,43 @@
     "failed_count": 0,
     "failed_schedule_keys": [],
     "failed_games": []
+  },
+  {
+    "run_at": "2026-03-11T03:22:08.059128+00:00",
+    "season": "2022-23",
+    "start_date": "2023-01-01",
+    "end_date": "2023-01-31",
+    "game_count": 104,
+    "failed_count": 1,
+    "failed_schedule_keys": [
+      500392
+    ],
+    "failed_games": [
+      {
+        "schedule_key": 500392,
+        "candidate_dates": [
+          "2023-01-29",
+          "2023-01-30",
+          "2023-01-31"
+        ],
+        "final_reason": "no_successful_tab",
+        "attempts": [
+          {
+            "tab": "4",
+            "status_code": null,
+            "outcome": "http_5xx",
+            "url": "https://www.bleague.jp/game_detail/?ScheduleKey=500392&tab=4",
+            "retried": 2
+          },
+          {
+            "tab": "2",
+            "status_code": null,
+            "outcome": "http_5xx",
+            "url": "https://www.bleague.jp/game_detail/?ScheduleKey=500392&tab=2",
+            "retried": 2
+          }
+        ]
+      }
+    ]
   }
 ]
