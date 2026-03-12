@@ -91,7 +91,7 @@ def _record_game_detail_attempt(
     *,
     fetch_audit: dict[int, dict[str, Any]] | None,
     schedule_key: int,
-    tab: str,
+    tab: str | None,
     url: str,
     outcome: str,
     status_code: int | None = None,
@@ -115,8 +115,9 @@ def _record_game_detail_attempt(
     if candidate_dates and not game_log.get('candidate_dates'):
         game_log['candidate_dates'] = candidate_dates
 
+    tab_label = tab if tab is not None else 'default'
     attempt = {
-        'tab': tab,
+        'tab': tab_label,
         'status_code': status_code,
         'outcome': outcome,
         'url': url,
@@ -356,6 +357,106 @@ def _extract_schedule_keys_from_topics(topics: list[str]) -> list[int]:
     return keys
 
 
+def _extract_schedule_score_map_from_topics(topics: list[str]) -> dict[int, dict[str, Any]]:
+    """schedule topics HTML から ScheduleKey ごとの最小スコア情報を抽出する。"""
+    html = ''.join(topics)
+    soup = BeautifulSoup(html, 'html.parser')
+
+    score_map: dict[int, dict[str, Any]] = {}
+    for item in soup.find_all('li', class_='list-item'):
+        schedule_key: int | None = None
+
+        raw_id = item.get('id')
+        if raw_id is not None:
+            try:
+                schedule_key = int(raw_id)
+            except Exception:
+                schedule_key = None
+
+        if schedule_key is None:
+            anchor = item.find('a', href=True)
+            if anchor is not None:
+                match = SCHEDULE_KEY_PATTERN.search(anchor['href'])
+                if match:
+                    schedule_key = int(match.group(1))
+        if schedule_key is None:
+            continue
+
+        home_score_node = item.select_one('.number.home-score span')
+        away_score_node = item.select_one('.number.away-score span')
+        home_name_node = item.select_one('.team.home .team-name')
+        away_name_node = item.select_one('.team.away .team-name')
+
+        def _to_int_or_none(text: str | None) -> int | None:
+            if not text:
+                return None
+            cleaned = re.sub(r'[^0-9]', '', text)
+            if not cleaned:
+                return None
+            try:
+                return int(cleaned)
+            except Exception:
+                return None
+
+        home_score = _to_int_or_none(home_score_node.get_text(strip=True) if home_score_node else None)
+        away_score = _to_int_or_none(away_score_node.get_text(strip=True) if away_score_node else None)
+        home_name = home_name_node.get_text(strip=True) if home_name_node else None
+        away_name = away_name_node.get_text(strip=True) if away_name_node else None
+
+        score_map[schedule_key] = {
+            'HomeTeamScore': home_score,
+            'AwayTeamScore': away_score,
+            'HomeTeamNameJ': home_name,
+            'AwayTeamNameJ': away_name,
+        }
+
+    return score_map
+
+
+def _apply_schedule_score_fallback(
+    games: list[dict[str, Any]],
+    score_map: dict[int, dict[str, Any]],
+) -> None:
+    """html_fallback で取得したゲームに schedule topics 由来スコアを補完する。"""
+    if not score_map:
+        return
+
+    for item in games:
+        if not isinstance(item, dict):
+            continue
+        if item.get('source_tab') != 'fallback_html':
+            continue
+
+        schedule_key = _extract_item_schedule_key(item)
+        if schedule_key is None:
+            continue
+
+        score_info = score_map.get(schedule_key)
+        if not score_info:
+            continue
+
+        game = item.get('game')
+        if not isinstance(game, dict):
+            continue
+
+        home_score = score_info.get('HomeTeamScore')
+        away_score = score_info.get('AwayTeamScore')
+        home_name = score_info.get('HomeTeamNameJ')
+        away_name = score_info.get('AwayTeamNameJ')
+
+        if game.get('HomeTeamScore') is None and home_score is not None:
+            game['HomeTeamScore'] = home_score
+        if game.get('AwayTeamScore') is None and away_score is not None:
+            game['AwayTeamScore'] = away_score
+
+        if not game.get('HomeTeamNameJ') and home_name:
+            game['HomeTeamNameJ'] = home_name
+        if not game.get('AwayTeamNameJ') and away_name:
+            game['AwayTeamNameJ'] = away_name
+
+        game['ScoreDataSource'] = 'schedule_topics_fallback'
+
+
 def _extract_context_data(html: str) -> dict[str, Any]:
     # Try several possible JavaScript patterns that hold the contexts JSON
     needles = [
@@ -393,6 +494,69 @@ def _extract_context_data(html: str) -> dict[str, Any]:
     raise RuntimeError('Unterminated JSON object when extracting contexts')
 
 
+def _extract_minimal_game_from_html(
+    html: str,
+    *,
+    schedule_key: int,
+    candidate_dates: list[str] | None = None,
+) -> dict[str, Any] | None:
+    """game_detail HTML から最小限の Game 情報を抽出するフォールバック。"""
+    soup = BeautifulSoup(html, 'html.parser')
+    title = soup.title.get_text(' ', strip=True) if soup.title else ''
+    if not title:
+        return None
+
+    # 例: "2017-18 B1リーグ 2018/01/01 A東京 VS 千葉 | B.LEAGUE（Bリーグ）公式サイト"
+    match = re.search(
+        r'^(?P<convention>.+?)\s+(?P<date>\d{4}/\d{2}/\d{2})\s+(?P<home>.+?)\s+VS\s+(?P<away>.+?)\s+\|',
+        title,
+    )
+
+    convention = None
+    game_date_iso: str | None = None
+    home_name = None
+    away_name = None
+    if match:
+        convention = match.group('convention').strip() or None
+        home_name = match.group('home').strip() or None
+        away_name = match.group('away').strip() or None
+        game_date_iso = match.group('date').replace('/', '-')
+
+    if game_date_iso is None and candidate_dates:
+        game_date_iso = candidate_dates[0]
+
+    game_datetime: str | None = None
+    if game_date_iso is not None:
+        try:
+            jst = timezone(timedelta(hours=9))
+            dt = datetime.fromisoformat(game_date_iso).replace(tzinfo=jst)
+            game_datetime = str(int(dt.timestamp()))
+        except Exception:
+            game_datetime = None
+
+    fallback_game: dict[str, Any] = {
+        'ScheduleKey': schedule_key,
+        'DataSource': 'html_fallback',
+        'FallbackFieldsOnly': True,
+    }
+    if convention is not None:
+        fallback_game['ConventionTitleJ'] = convention
+    if game_datetime is not None:
+        fallback_game['GameDateTime'] = game_datetime
+    if home_name is not None:
+        fallback_game['HomeTeamNameJ'] = home_name
+        fallback_game['HomeTeamShortNameJ'] = home_name
+    if away_name is not None:
+        fallback_game['AwayTeamNameJ'] = away_name
+        fallback_game['AwayTeamShortNameJ'] = away_name
+
+    # ScheduleKey 以外が取れなければフォールバック失敗扱い
+    if len(fallback_game) <= 3:
+        return None
+
+    return fallback_game
+
+
 def _fetch_game_detail_with_retry(
     url: str,
     params: dict[str, str],
@@ -406,13 +570,15 @@ def _fetch_game_detail_with_retry(
     """
     last_exc: Exception | None = None
     last_response: requests.Response | None = None
+    request_headers = dict(HEADERS)
+    request_headers['Accept-Encoding'] = 'gzip, deflate'
 
     for attempt in range(max_retries):
         if attempt > 0:
             time.sleep(2.0 ** attempt)  # 2秒 → 4秒
         last_exc = None
         try:
-            response = requests.get(url, params=params, headers=HEADERS, timeout=60)
+            response = requests.get(url, params=params, headers=request_headers, timeout=60)
             last_response = response
         except requests.RequestException as exc:
             last_exc = exc
@@ -427,6 +593,7 @@ def _fetch_game_detail_with_retry(
 def fetch_game_context(
     schedule_key: int,
     include_play_by_play: bool = False,
+    max_retries: int = 3,
     candidate_dates: list[str] | None = None,
     fetch_audit: dict[int, dict[str, Any]] | None = None,
 ) -> dict[str, Any]:
@@ -438,16 +605,21 @@ def fetch_game_context(
     """
     url = f'{BASE_URL}/game_detail/'
     first_success: dict[str, Any] | None = None
+    fallback_candidates: list[tuple[str | None, str, str]] = []
     jst = timezone(timedelta(hours=9))
 
-    for tab in ('4', '2'):
-        params = {
-            'ScheduleKey': str(schedule_key),
-            'tab': tab,
-        }
+    tab_candidates: list[str | None] = ['4', '2', None]
+    for tab in tab_candidates:
+        params = {'ScheduleKey': str(schedule_key)}
+        if tab is not None:
+            params['tab'] = tab
         request_url = requests.Request('GET', url, params=params).prepare().url or url
 
-        response, retried, conn_exc = _fetch_game_detail_with_retry(url, params)
+        response, retried, conn_exc = _fetch_game_detail_with_retry(
+            url,
+            params,
+            max_retries=max_retries,
+        )
 
         if conn_exc is not None:
             _record_game_detail_attempt(
@@ -490,6 +662,8 @@ def fetch_game_context(
             )
             continue
 
+        fallback_candidates.append((tab, response.url, response.text))
+
         try:
             context = _extract_context_data(response.text)
         except Exception as exc:
@@ -509,7 +683,8 @@ def fetch_game_context(
                 log_dir = SCRAPER_ROOT / 'logs'
                 log_dir.mkdir(parents=True, exist_ok=True)
                 snippet = response.text[:2000]
-                path = log_dir / f'failed_context_{schedule_key}_tab{tab}.html'
+                tab_label = tab if tab is not None else 'default'
+                path = log_dir / f'failed_context_{schedule_key}_tab{tab_label}.html'
                 path.write_text(snippet, encoding='utf-8')
                 snippet_path = str(path.relative_to(SCRAPER_ROOT.parent))
             except Exception:
@@ -524,9 +699,24 @@ def fetch_game_context(
         away_boxscores = context.get('AwayBoxscores', [])
         play_by_plays = context.get('PlayByPlays', []) if include_play_by_play else []
 
+        # context 抽出に成功しても、Game 本体が空のケースは取得失敗として扱う。
+        # （このケースを成功扱いにすると、failed_schedule_keys に残らず再取得対象から漏れる）
+        if not isinstance(game, dict) or not game:
+            _record_game_detail_attempt(
+                fetch_audit=fetch_audit,
+                schedule_key=schedule_key,
+                tab=tab,
+                url=response.url,
+                outcome='empty_game_payload',
+                status_code=response.status_code,
+                candidate_dates=candidate_dates,
+                error='Game payload is empty',
+            )
+            continue
+
         result = {
             'schedule_key': schedule_key,
-            'source_tab': tab,
+            'source_tab': tab if tab is not None else 'default',
             'game': game,
             'summaries': summaries,
             'home_boxscores': home_boxscores,
@@ -550,7 +740,7 @@ def fetch_game_context(
                             schedule_key,
                             result='success',
                             final_reason='selected_candidate_match',
-                            selected_tab=tab,
+                            selected_tab=tab if tab is not None else 'default',
                         )
                         return result
                 except Exception:
@@ -589,6 +779,42 @@ def fetch_game_context(
             )
         return first_success
 
+    for tab, source_url, raw_html in fallback_candidates:
+        fallback_game = _extract_minimal_game_from_html(
+            raw_html,
+            schedule_key=schedule_key,
+            candidate_dates=candidate_dates,
+        )
+        if not fallback_game:
+            continue
+
+        _record_game_detail_attempt(
+            fetch_audit=fetch_audit,
+            schedule_key=schedule_key,
+            tab=tab,
+            url=source_url,
+            outcome='minimal_html_fallback',
+            status_code=200,
+            candidate_dates=candidate_dates,
+        )
+        _mark_game_detail_result(
+            fetch_audit,
+            schedule_key,
+            result='success',
+            final_reason='minimal_html_fallback',
+            selected_tab='fallback_html',
+        )
+        return {
+            'schedule_key': schedule_key,
+            'source_tab': 'fallback_html',
+            'game': fallback_game,
+            'summaries': [],
+            'home_boxscores': [],
+            'away_boxscores': [],
+            'play_by_play_count': 0,
+            'play_by_plays': [],
+        }
+
     _mark_game_detail_result(
         fetch_audit,
         schedule_key,
@@ -604,7 +830,7 @@ def fetch_game_context(
         'away_boxscores': [],
         'play_by_play_count': 0,
         'play_by_plays': [],
-        'error': 'Failed to fetch game_detail (HTTP 5xx)',
+        'error': 'Failed to fetch game_detail (HTTP 5xx or empty payload)',
     }
 
 
@@ -613,9 +839,11 @@ def scrape_date_range_games(
     end_date: date,
     season: str,
     include_play_by_play: bool = False,
+    max_retries: int = 3,
 ) -> dict[str, Any]:
     """指定期間の試合データをスクレイピングして返す"""
     day_to_keys: dict[str, list[int]] = {}
+    schedule_score_map: dict[int, dict[str, Any]] = {}
     all_keys: list[int] = []
     seen: set[int] = set()
 
@@ -626,6 +854,7 @@ def scrape_date_range_games(
             time.sleep(1.0)  # スロットリング: schedule API リクエスト間の待機
         topics = _fetch_schedule_topics(current, schedule_api_year)
         keys = _extract_schedule_keys_from_topics(topics)
+        schedule_score_map.update(_extract_schedule_score_map_from_topics(topics))
         day_to_keys[current.isoformat()] = keys
 
         for key in keys:
@@ -650,12 +879,14 @@ def scrape_date_range_games(
             fetch_game_context(
                 schedule_key,
                 include_play_by_play=include_play_by_play,
+                max_retries=max_retries,
                 candidate_dates=schedule_key_to_dates.get(schedule_key),
                 fetch_audit=fetch_audit,
             )
         )
 
     _apply_mapped_date_to_game_datetimes(games, schedule_key_to_dates)
+    _apply_schedule_score_fallback(games, schedule_score_map)
 
     failed_keys = [game['schedule_key'] for game in games if game.get('error')]
     _write_game_detail_fetch_run_log(
@@ -693,8 +924,15 @@ def save_date_range_games(
     end_date: date,
     season: str,
     include_play_by_play: bool = False,
+    max_retries: int = 3,
 ) -> Path:
-    payload = scrape_date_range_games(start_date, end_date, season, include_play_by_play=include_play_by_play)
+    payload = scrape_date_range_games(
+        start_date,
+        end_date,
+        season,
+        include_play_by_play=include_play_by_play,
+        max_retries=max_retries,
+    )
     output_path = output_path_for_date_range(season, start_date, end_date)
     output_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding='utf-8')
     return output_path
@@ -762,6 +1000,7 @@ def retry_failed_games_into_json(
     target_json_path: Path,
     failed_schedule_keys: list[int],
     include_play_by_play: bool = False,
+    max_retries: int = 3,
 ) -> dict[str, Any]:
     """失敗した schedule_key のみ再取得し、対象JSONへマージして保存する。"""
     payload = json.loads(target_json_path.read_text(encoding='utf-8'))
@@ -776,6 +1015,7 @@ def retry_failed_games_into_json(
     if not isinstance(date_to_keys, dict):
         date_to_keys = {}
     schedule_key_to_dates = _build_schedule_key_to_mapped_date(date_to_keys)
+    schedule_score_map: dict[int, dict[str, Any]] = {}
 
     fetch_audit: dict[int, dict[str, Any]] = {}
     merged: dict[int, dict[str, Any]] = {}
@@ -803,12 +1043,28 @@ def retry_failed_games_into_json(
         seen.add(sk)
         normalized_keys.append(sk)
 
+    season = str(payload.get('season'))
+    fetched_score_dates: set[str] = set()
+    for schedule_key in normalized_keys:
+        for iso in schedule_key_to_dates.get(schedule_key, []):
+            if iso in fetched_score_dates:
+                continue
+            try:
+                target = date.fromisoformat(iso)
+            except Exception:
+                continue
+            api_year = _resolve_schedule_api_year(season, target)
+            topics = _fetch_schedule_topics(target, api_year)
+            schedule_score_map.update(_extract_schedule_score_map_from_topics(topics))
+            fetched_score_dates.add(iso)
+
     for i, schedule_key in enumerate(normalized_keys):
         if i > 0:
             time.sleep(random.uniform(1.0, 3.0))
         fetched = fetch_game_context(
             schedule_key,
             include_play_by_play=include_play_by_play,
+            max_retries=max_retries,
             candidate_dates=schedule_key_to_dates.get(schedule_key),
             fetch_audit=fetch_audit,
         )
@@ -818,6 +1074,7 @@ def retry_failed_games_into_json(
 
     merged_games = [merged[schedule_key] for schedule_key in order]
     _apply_mapped_date_to_game_datetimes(merged_games, schedule_key_to_dates)
+    _apply_schedule_score_fallback(merged_games, schedule_score_map)
 
     failed_after = []
     for item in merged_games:
@@ -831,7 +1088,6 @@ def retry_failed_games_into_json(
 
     start_date = date.fromisoformat(str(payload.get('start_date')))
     end_date = date.fromisoformat(str(payload.get('end_date')))
-    season = str(payload.get('season'))
     _write_game_detail_fetch_run_log(
         season=season,
         start_date=start_date,

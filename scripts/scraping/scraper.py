@@ -68,10 +68,21 @@ def main() -> None:
         metavar='K1,K2,...',
         help='再取得対象 schedule_key を手動指定（省略時はログから自動取得）',
     )
+    parser.add_argument(
+        '--max-retries',
+        type=int,
+        default=3,
+        metavar='N',
+        help='game_detail 取得時の最大リトライ回数（デフォルト: 3）',
+    )
     args = parser.parse_args()
 
     include_pbp: bool = args.include_play_by_play
     season = args.season or SEASONS[0]
+    max_retries = args.max_retries
+
+    if max_retries < 1:
+        parser.error('--max-retries は 1 以上を指定してください')
 
     if args.retry_failed:
         if not args.merge_into:
@@ -123,6 +134,7 @@ def main() -> None:
             target_json_path=target,
             failed_schedule_keys=failed_keys,
             include_play_by_play=include_pbp,
+            max_retries=max_retries,
         )
         logger.info(
             'Merged retry result: retried=%s failed_after=%s target=%s',
@@ -135,7 +147,13 @@ def main() -> None:
     if args.date:
         target = date.fromisoformat(args.date)
         logger.info(f'Scraping date={target} season={season}')
-        output_path = save_date_range_games(target, target, season, include_play_by_play=include_pbp)
+        output_path = save_date_range_games(
+            target,
+            target,
+            season,
+            include_play_by_play=include_pbp,
+            max_retries=max_retries,
+        )
         logger.info(f'Saved: {output_path}')
 
     elif args.start_date and args.end_date:
@@ -144,7 +162,13 @@ def main() -> None:
         if start > end:
             parser.error('--start-date は --end-date 以前の日付を指定してください')
         logger.info(f'Scraping {start} ~ {end} season={season}')
-        output_path = save_date_range_games(start, end, season, include_play_by_play=include_pbp)
+        output_path = save_date_range_games(
+            start,
+            end,
+            season,
+            include_play_by_play=include_pbp,
+            max_retries=max_retries,
+        )
         logger.info(f'Saved: {output_path}')
 
     elif args.start_date or args.end_date:

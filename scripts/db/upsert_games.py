@@ -14,6 +14,7 @@ from .db import upsert_game_team_stats, upsert_games, upsert_play_by_play, upser
 from .config import SCRAPER_ROOT
 
 _JST = timezone(timedelta(hours=9))
+_TEAM_NAME_TO_ID_CACHE: dict[str, str] | None = None
 
 
 def _unix_to_jst_str(unix_ts: int | None) -> str | None:
@@ -73,6 +74,13 @@ def _to_int(value: Any) -> int | None:
     return int(value)
 
 
+def _to_int_or_none(value: Any) -> int | None:
+    try:
+        return _to_int(value)
+    except Exception:
+        return None
+
+
 def _to_float(value: Any) -> float | None:
     if value is None:
         return None
@@ -88,6 +96,72 @@ def _normalize_optional_text(value: Any) -> str | None:
         return None
     text = str(value).strip()
     return text if text else None
+
+
+def _normalize_team_name_key(value: Any) -> str | None:
+    text = _normalize_optional_text(value)
+    if text is None:
+        return None
+    return text.replace(' ', '').replace('　', '').lower()
+
+
+def _build_team_name_to_id_index_from_local_games() -> dict[str, str]:
+    """scraper/data 配下の games_*.json から team_name/short_name -> team_id を構築する。"""
+    global _TEAM_NAME_TO_ID_CACHE
+    if _TEAM_NAME_TO_ID_CACHE is not None:
+        return _TEAM_NAME_TO_ID_CACHE
+
+    index: dict[str, str] = {}
+    data_dir = SCRAPER_ROOT / 'data'
+    for path in sorted(data_dir.glob('games_*.json')):
+        try:
+            payload = json.loads(path.read_text(encoding='utf-8'))
+        except Exception:
+            continue
+        if not isinstance(payload, dict):
+            continue
+
+        for item in payload.get('games', []):
+            if not isinstance(item, dict):
+                continue
+            game = item.get('game', {})
+            if not isinstance(game, dict):
+                continue
+
+            for side in ('Home', 'Away'):
+                team_id = game.get(f'{side}TeamID')
+                if team_id is None:
+                    continue
+                team_id_str = str(team_id)
+                for field in (f'{side}TeamNameJ', f'{side}TeamShortNameJ', f'{side}TeamNameE', f'{side}TeamShortNameE'):
+                    key = _normalize_team_name_key(game.get(field))
+                    if key:
+                        index.setdefault(key, team_id_str)
+
+    _TEAM_NAME_TO_ID_CACHE = index
+    return index
+
+
+def _resolve_team_id_from_game(game: dict[str, Any], side: str) -> str | None:
+    direct = game.get(f'{side}TeamID')
+    if direct is not None:
+        return str(direct)
+
+    index = _build_team_name_to_id_index_from_local_games()
+    for field in (f'{side}TeamNameJ', f'{side}TeamShortNameJ', f'{side}TeamNameE', f'{side}TeamShortNameE'):
+        key = _normalize_team_name_key(game.get(field))
+        if key and key in index:
+            return index[key]
+    return None
+
+
+def _normalize_source_tab(value: Any) -> int | None:
+    text = _normalize_optional_text(value)
+    if text is None:
+        return None
+    if text == 'fallback_html':
+        return 0
+    return _to_int_or_none(text)
 
 
 def _safe_div(numerator: float, denominator: float) -> float | None:
@@ -377,15 +451,26 @@ def _extract_games(payload: dict[str, Any]) -> list[dict[str, Any]]:
         schedule_key = game.get('ScheduleKey') or item.get('schedule_key')
         if schedule_key is None:
             continue
-        if (
-            game.get('ConventionKey') is None
-            or game.get('ConventionNameJ') is None
-            or _to_int(game.get('MaxPeriod')) is None
-            or _to_int(game.get('GameDateTime')) is None
-            or game.get('HomeTeamID') is None
-            or game.get('AwayTeamID') is None
-        ):
+
+        game_datetime_unix = _to_int_or_none(game.get('GameDateTime'))
+        if game_datetime_unix is None:
             continue
+
+        home_team_id = _resolve_team_id_from_game(game, 'Home')
+        away_team_id = _resolve_team_id_from_game(game, 'Away')
+        if home_team_id is None or away_team_id is None:
+            continue
+
+        convention_name_j = (
+            _normalize_optional_text(game.get('ConventionNameJ'))
+            or _normalize_optional_text(game.get('ConventionTitleJ'))
+            or season
+        )
+        convention_key = _normalize_optional_text(game.get('ConventionKey')) or f'fallback_{season}'
+        max_period = _to_int_or_none(game.get('MaxPeriod'))
+        if max_period is None:
+            max_period = _to_int_or_none(game.get('GameCurrentPeriod')) or 4
+
         code = _to_int(game.get('Code'))
         if code is None:
             code = _to_int(schedule_key)
@@ -395,17 +480,17 @@ def _extract_games(payload: dict[str, Any]) -> list[dict[str, Any]]:
                 'schedule_key': _to_int(schedule_key),
                 'season': season,
                 'code': code,
-                'convention_key': game.get('ConventionKey'),
-                'convention_name_j': game.get('ConventionNameJ'),
+                'convention_key': convention_key,
+                'convention_name_j': convention_name_j,
                 'convention_name_e': game.get('ConventionNameE'),
-                'year': _season_year_from_date(_unix_to_jst_date(_to_int(game.get('GameDateTime')))),
+                'year': _season_year_from_date(_unix_to_jst_date(game_datetime_unix)),
                 'setu': game.get('Setu'),
                 'game_type': _game_type(_to_int(game.get('Setu'))),
-                'max_period': _to_int(game.get('MaxPeriod')),
+                'max_period': max_period,
                 'game_current_period': _to_int(game.get('GameCurrentPeriod')),
-                'game_datetime_unix': _to_int(game.get('GameDateTime')),
-                'game_datetime': _unix_to_jst_str(_to_int(game.get('GameDateTime'))),
-                'game_date': _unix_to_jst_date(_to_int(game.get('GameDateTime'))),
+                'game_datetime_unix': game_datetime_unix,
+                'game_datetime': _unix_to_jst_str(game_datetime_unix),
+                'game_date': _unix_to_jst_date(game_datetime_unix),
                 'stadium_cd': game.get('StadiumCD'),
                 'stadium_name_j': game.get('StadiumNameJ'),
                 'stadium_name_e': game.get('StadiumNameE'),
@@ -414,8 +499,8 @@ def _extract_games(payload: dict[str, Any]) -> list[dict[str, Any]]:
                 'record_fixed_flg': bool(game.get('RecordFixedFlg')),
                 'boxscore_exists_flg': bool(game.get('BoxscoreExistsFlg')),
                 'play_by_play_exists_flg': bool(game.get('PlayByPlayExistsFlg')),
-                'home_team_id': str(game.get('HomeTeamID')) if game.get('HomeTeamID') is not None else None,
-                'away_team_id': str(game.get('AwayTeamID')) if game.get('AwayTeamID') is not None else None,
+                'home_team_id': home_team_id,
+                'away_team_id': away_team_id,
                 'home_team_score_q1': _to_int(game.get('HomeTeamScore01')),
                 'home_team_score_q2': _to_int(game.get('HomeTeamScore02')),
                 'home_team_score_q3': _to_int(game.get('HomeTeamScore03')),
@@ -434,7 +519,7 @@ def _extract_games(payload: dict[str, Any]) -> list[dict[str, Any]]:
                 'sub_referee_name_j_1': game.get('SubRefereeNameJ1'),
                 'sub_referee_id_2': _to_int(game.get('SubRefereeID2')),
                 'sub_referee_name_j_2': game.get('SubRefereeNameJ2'),
-                'source_tab': _to_int(item.get('source_tab')),
+                'source_tab': _normalize_source_tab(item.get('source_tab')),
             }
         )
 

@@ -1,6 +1,6 @@
 {
   "season": "2017-18",
-  "generated_at": "2026-03-12T08:24:19.307919+00:00",
+  "generated_at": "2026-03-12T08:59:37.730179+00:00",
   "include_play_by_play": false,
   "start_date": "2018-01-01",
   "end_date": "2018-01-01",
@@ -11,20 +11,30 @@
     ]
   },
   "game_count": 2,
-  "failed_schedule_keys": [
-    1810
-  ],
+  "failed_schedule_keys": [],
   "games": [
     {
       "schedule_key": 1810,
-      "source_tab": null,
-      "game": {},
+      "source_tab": "fallback_html",
+      "game": {
+        "ScheduleKey": 1810,
+        "DataSource": "html_fallback",
+        "FallbackFieldsOnly": true,
+        "ConventionTitleJ": "2017-18 B1リーグ",
+        "GameDateTime": "1514732400",
+        "HomeTeamNameJ": "A東京",
+        "HomeTeamShortNameJ": "A東京",
+        "AwayTeamNameJ": "千葉",
+        "AwayTeamShortNameJ": "千葉",
+        "HomeTeamScore": 67,
+        "AwayTeamScore": 49,
+        "ScoreDataSource": "schedule_topics_fallback"
+      },
       "summaries": [],
       "home_boxscores": [],
       "away_boxscores": [],
       "play_by_play_count": 0,
-      "play_by_plays": [],
-      "error": "Failed to fetch game_detail (HTTP 5xx or empty payload)"
+      "play_by_plays": []
     },
     {
       "schedule_key": 1823,

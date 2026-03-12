@@ -58,6 +58,28 @@ python -m scripts.scraping.scraper --start-date 2024-10-05 --end-date 2024-10-11
 | `--end-date YYYY-MM-DD` | 期間指定の終了日（`--start-date` と併用） |
 | `--season SEASON` | シーズン識別子（例: `2024-25`）。省略時は `config.py` の `SEASONS[0]` を使用 |
 | `--include-play-by-play` | `play_by_plays` データも取得する（デフォルト: 無効） |
+| `--max-retries N` | `game_detail` 取得時の最大リトライ回数（デフォルト: `3`） |
+
+補足:
+- `game_detail` の contexts は取得できるが `Game` が空のケースでは、最後に `game_detail` HTML のタイトルから `ScheduleKey / GameDateTime(日付のみ) / チーム名 / 大会名` を最小フォールバック抽出します。
+- この場合、出力JSONの `games[].source_tab` は `fallback_html`、`games[].game.DataSource` は `html_fallback` になります。
+- さらに日程トピックHTMLにスコアがあれば、`games[].game.HomeTeamScore / AwayTeamScore` を補完し、`games[].game.ScoreDataSource` に `schedule_topics_fallback` を設定します。
+
+### `--retry-failed` 実行例（2018-01-01）
+
+```bash
+# 1810のみ再取得して既存JSONへマージ（この日付の実運用例）
+python -m scripts.scraping.scraper \
+  --retry-failed \
+  --merge-into scraper/data/games_2017-18_2018-01-01.json \
+  --failed-keys 1810 \
+  --max-retries 8
+```
+
+期待される結果:
+- `failed_after=0`
+- `games[].source_tab` は `fallback_html`
+- `games[].game.ScoreDataSource` は `schedule_topics_fallback`
 
 ## players.json の nationality / player_slot_category 補完
 

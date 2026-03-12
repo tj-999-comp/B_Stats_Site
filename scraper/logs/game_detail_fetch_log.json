@@ -503,5 +503,15 @@
     "failed_count": 0,
     "failed_schedule_keys": [],
     "failed_games": []
+  },
+  {
+    "run_at": "2026-03-12T09:16:44.114188+00:00",
+    "season": "2017-18",
+    "start_date": "2017-12-29",
+    "end_date": "2017-12-29",
+    "game_count": 5,
+    "failed_count": 0,
+    "failed_schedule_keys": [],
+    "failed_games": []
   }
 ]
