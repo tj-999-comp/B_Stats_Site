@@ -6,25 +6,23 @@
 
 ## PHASE 1: DBセットアップ（初回のみ）
 
-マイグレーションを以下の順番で適用する。
+初回セットアップは、まずベースDDLを適用し、その後に差分SQLを順番に適用する。
 
 | ファイル | 内容 |
 |---------|------|
-| `20260221_init.sql` | テーブル作成（teams, games, players, game_team_stats, player_game_stats） |
+| `docs/schema_draft_games_light.sql` | ベーステーブル作成（teams, games, players, game_team_stats, player_game_stats） |
 | `20260224_identity_history.sql` | player_name_history, player_affiliations, トリガー設定 |
-| `20260303_add_game_datetime.sql` | games に game_datetime カラム追加 |
-| `20260303_add_game_date.sql` | games に game_date カラム追加 |
-| `20260306_add_players_nationality.sql` | players に nationality, player_slot_category カラム追加 |
-| `20260308_player_id_aliases.sql` | player_id_map テーブル作成 |
-| `20260308b_rename_player_id_map.sql` | FK カスケード設定 |
-| `20260308c_add_game_type.sql` | games に game_type カラム追加（RS / CS） |
+| `supabase/sql/rebuild/20260309_batch_game_and_players_columns.sql` | games / players 追加カラムを一括適用（game_datetime, game_date, game_type, nationality） |
+| `supabase/sql/rebuild/20260309_batch_player_identity.sql` | player_id_map / old_player_id / FK ON UPDATE CASCADE を一括適用 |
 | `20260308d_fix_affiliation_trigger.sql` | affiliationトリガー修正 |
-| `20260308e_add_old_player_id_to_players.sql` | players に old_player_id カラム追加 |
 
 ```bash
-# 適用コマンド例（migrate.yml ワークフロー、または手動実行）
-psql $DATABASE_URL -f supabase/migrations/20260221_init.sql
-# ...以降も同様に順番通りに適用
+# 代表例: 手動実行（順番に実行）
+psql $DATABASE_URL -f docs/schema_draft_games_light.sql
+psql $DATABASE_URL -f supabase/migrations/20260224_identity_history.sql
+psql $DATABASE_URL -f supabase/sql/rebuild/20260309_batch_game_and_players_columns.sql
+psql $DATABASE_URL -f supabase/sql/rebuild/20260309_batch_player_identity.sql
+psql $DATABASE_URL -f supabase/migrations/20260308d_fix_affiliation_trigger.sql
 ```
 
 ---

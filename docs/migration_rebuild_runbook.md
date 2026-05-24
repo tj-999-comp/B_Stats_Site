@@ -22,6 +22,11 @@
 > 現在の投入フロー（`teams`, `games`, `game_team_stats`, `players`, `player_game_stats`）と整合しないため、
 > 完成系スキーマ再構築のベースには使用しない。
 
+> 実行ファイル削減ポリシー（2026-05-24 反映）:
+> - Step4/5/6/9 は `supabase/sql/rebuild/20260309_batch_game_and_players_columns.sql` に統合
+> - Step7/8/11 は `supabase/sql/rebuild/20260309_batch_player_identity.sql` に統合
+> - `supabase/migrations/20260308b_rename_player_id_map.sql` は不要化したため削除
+
 ---
 
 ## 実行ステップ一覧（順番固定）
@@ -77,62 +82,37 @@
 
 ### Step 4: 試合日時カラム追加
 
-- 実行ファイル: `supabase/migrations/20260303_add_game_datetime.sql`
+- 実行ファイル: `supabase/sql/rebuild/20260309_batch_game_and_players_columns.sql`
 - 意味/目的:
-  - `games.game_datetime`（JST 文字列）を追加
-  - 表示やデバッグで日時を直接扱いやすくする
+  - Step4/5/6/9 を統合して一括適用する
+  - 追加対象:
+    - `games.game_datetime`
+    - `games.game_date`
+    - `games.game_type`（`setu` から `RS/CS` をバックフィル）
+    - `players.nationality`
+  - ファイル分散を減らし、実行漏れを防ぐ
 
 ---
 
-### Step 5: 試合日カラム追加
+### Step 5: player_id 変更追跡を統合導入
 
-- 実行ファイル: `supabase/migrations/20260303_add_game_date.sql`
+- 実行ファイル: `supabase/sql/rebuild/20260309_batch_player_identity.sql`
 - 意味/目的:
-  - `games.game_date`（JST 日付文字列）を追加
-  - 日次集計、日付フィルタ、運用補正処理を簡単にする
+  - Step7/8/11 を統合して一括適用する
+  - 実施内容:
+    - `players.old_player_id` 追加
+    - `player_id_map` 作成（旧名 `player_id_aliases` がある場合は自動吸収）
+    - `player_game_stats` / `player_name_history` / `player_affiliations` の FK を `ON UPDATE CASCADE` 対応
+  - Step8 の「テーブルが存在しない」系エラーを設計上防止する
+
+補足（Step5内で統合した理由）:
+
+- Step7 と Step8 は本来同じ論点（`player_id_map` の定義統一）であり、分割する必要が薄い
+- Step11（`players.old_player_id`）は `player_id_map` の運用補助情報なので、同時に入れる方が一貫する
 
 ---
 
-### Step 6: 選手国籍カラム追加
-
-- 実行ファイル: `supabase/migrations/20260306_add_players_nationality.sql`
-- 意味/目的:
-  - `players.nationality` を追加
-  - プロフィール補完処理（国籍/カテゴリ）の受け皿を作る
-
----
-
-### Step 7: 旧ID→新IDマッピング導入
-
-- 実行ファイル: `supabase/migrations/20260308_player_id_aliases.sql`
-- 意味/目的:
-  - 選手 ID 変更に追従するためのマップテーブルを導入
-  - 当初名は `player_id_aliases`（後続 migration でリネーム）
-  - 関連 FK を `ON UPDATE CASCADE` 対応にし、ID 統合時の整合性を担保
-
----
-
-### Step 8: マップテーブルを完成系命名へ変更
-
-- 実行ファイル: `supabase/migrations/20260308b_rename_player_id_map.sql`
-- 意味/目的:
-  - `player_id_aliases` を `player_id_map` にリネーム
-  - 列名も `old_player_id`, `player_id` に統一
-  - 投入コード側の参照名と一致させる
-
----
-
-### Step 9: 試合区分カラム追加と初期値投入
-
-- 実行ファイル: `supabase/migrations/20260308c_add_game_type.sql`
-- 意味/目的:
-  - `games.game_type` を追加
-  - `setu` から `RS` / `CS` を判定して更新
-  - レギュラーシーズン/チャンピオンシップの切り分けを DB 側で保持
-
----
-
-### Step 10: 所属履歴トリガーの不整合防止修正
+### Step 6: 所属履歴トリガーの不整合防止修正
 
 - 実行ファイル: `supabase/migrations/20260308d_fix_affiliation_trigger.sql`
 - 意味/目的:
@@ -141,12 +121,10 @@
 
 ---
 
-### Step 11: players に旧ID列を追加
+### Step 7: 最終確認
 
-- 実行ファイル: `supabase/migrations/20260308e_add_old_player_id_to_players.sql`
-- 意味/目的:
-  - `players.old_player_id` を追加
-  - 選手ID移行時の参照性・追跡性を上げる
+- この runbook の「実行後に確認すべき最低限チェック」「完了判定基準」を実行する
+- 合格後に JSON 再投入へ進む
 
 ---
 

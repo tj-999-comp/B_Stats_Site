@@ -1,9 +1,8 @@
 """ID統合スクリプト: 確認済みCSVを元に旧PlayerIDを新PlayerIDへ統合する。
 
 ## 前提
-- supabase/migrations/20260308_player_id_aliases.sql 適用済みであること
-- supabase/migrations/20260308b_rename_player_id_map.sql 適用済みであること
-  （player_id_map テーブル・ON UPDATE CASCADE FKが存在する状態）
+- supabase/sql/rebuild/20260309_batch_player_identity.sql 適用済みであること
+    （player_id_map テーブル・ON UPDATE CASCADE FK・players.old_player_id が存在する状態）
 
 ## 実行手順
 1. build_player_id_map.py で候補CSVを生成・確認（status=ok の行のみ残す）
