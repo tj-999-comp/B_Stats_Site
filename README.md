@@ -172,7 +172,7 @@ Vercel Hobby Plan (Next.js App Router: SSR/ISR)
 |---|---|---|
 | [docs/table_definition.md](docs/table_definition.md) | 現在の Supabase スキーマ（テーブル/カラム/制約） | クエリ実装・不整合調査時 |
 | [docs/db_design_brushup_identity_history.md](docs/db_design_brushup_identity_history.md) | 改名・移籍履歴を保持する設計意図 | 履歴系の仕様確認時 |
-| [docs/schema_draft_games_light.sql](docs/schema_draft_games_light.sql) | 完成系再構築で使うベースDDL | 新規DBを作り直す時 |
+| [supabase/rebuild/01_base_schema.sql](supabase/rebuild/01_base_schema.sql) | 完成系再構築で使うベースDDL | 新規DBを作り直す時 |
 
 ### データ投入・運用を行う
 
@@ -186,9 +186,7 @@ Vercel Hobby Plan (Next.js App Router: SSR/ISR)
 
 | ドキュメント | 何が分かるか | いつ読むか |
 |---|---|---|
-| [docs/migration_rebuild_runbook.md](docs/migration_rebuild_runbook.md) | 完成系スキーマ前提の再構築手順（なぜこの順で流すか） | 新規 Supabase 再構築時 |
-| [docs/migration_20260224_apply_guide.md](docs/migration_20260224_apply_guide.md) | identity_history migration の個別適用手順 | 履歴系 migration 単体適用時 |
-| [docs/migration_20260303_game_datetime.md](docs/migration_20260303_game_datetime.md) | game_datetime 追加 migration の個別適用手順 | 日時カラム migration 単体適用時 |
+| [supabase/rebuild/README.md](supabase/rebuild/README.md) | 完成系スキーマ前提の再構築手順（実行順・完了判定つき） | 新規 Supabase 再構築時 |
 
 ### 変更履歴を追う
 

@@ -15,7 +15,7 @@
 
 - 実行場所: Supabase SQL Editor
 - 対象: 新規に作り直した Supabase プロジェクト
-- 本手順は `docs/schema_draft_games_light.sql` をベースにする
+- 本手順は `supabase/rebuild/01_base_schema.sql` をベースにする
 
 > 注意:
 > `supabase/migrations/20260221_init.sql` は旧来の `player_stats` / `team_stats` / `rankings` 中心の初期構成で、
@@ -23,9 +23,9 @@
 > 完成系スキーマ再構築のベースには使用しない。
 
 > 実行ファイル削減ポリシー（2026-05-24 反映）:
-> - Step4/5/6/9 は `supabase/sql/rebuild/20260309_batch_game_and_players_columns.sql` に統合
-> - Step7/8/11 は `supabase/sql/rebuild/20260309_batch_player_identity.sql` に統合
-> - `supabase/migrations/20260308b_rename_player_id_map.sql` は不要化したため削除
+> - Step4/5/6/9 は `supabase/rebuild/05_batch_game_and_players_columns.sql` に統合
+> - Step7/8/11 は `supabase/rebuild/06_batch_player_identity.sql` に統合
+> - 旧分割 migration は不要化したため削除
 
 ---
 
@@ -33,7 +33,7 @@
 
 ### Step 0: ベーススキーマ作成
 
-- 実行ファイル: `docs/schema_draft_games_light.sql`
+- 実行ファイル: `supabase/rebuild/01_base_schema.sql`
 - 意味/目的:
   - 現行投入コードが前提にしている主テーブル群を一度に作る
   - 具体的には `teams`, `games`, `game_team_stats`, `players`, `player_game_stats` を作成
@@ -45,7 +45,7 @@
 
 ### Step 1: 事前チェック（履歴系 migration 前）
 
-- 実行ファイル: `supabase/sql/20260224_precheck.sql`
+- 実行ファイル: `supabase/rebuild/02_precheck_identity_history.sql`
 - 意味/目的:
   - 履歴 migration に必要な依存テーブルが揃っているか確認
   - 重複作成や想定外状態（既に同名オブジェクトがあるなど）を事前検知
@@ -56,7 +56,7 @@
 
 ### Step 2: 履歴管理の導入
 
-- 実行ファイル: `supabase/migrations/20260224_identity_history.sql`
+- 実行ファイル: `supabase/rebuild/03_identity_history.sql`
 - 意味/目的:
   - 改名・移籍履歴を保持する仕組みを追加
   - 追加される主な要素:
@@ -73,7 +73,7 @@
 
 ### Step 3: 事後チェック（履歴系 migration 後）
 
-- 実行ファイル: `supabase/sql/20260224_postcheck.sql`
+- 実行ファイル: `supabase/rebuild/04_postcheck_identity_history.sql`
 - 意味/目的:
   - 履歴テーブル/トリガー/ビューが正しく作成されたか検証
   - 「作れたつもり」を防ぎ、次の migration に進んで良いか判断する
@@ -82,7 +82,7 @@
 
 ### Step 4: 試合日時カラム追加
 
-- 実行ファイル: `supabase/sql/rebuild/20260309_batch_game_and_players_columns.sql`
+- 実行ファイル: `supabase/rebuild/05_batch_game_and_players_columns.sql`
 - 意味/目的:
   - Step4/5/6/9 を統合して一括適用する
   - 追加対象:
@@ -96,7 +96,7 @@
 
 ### Step 5: player_id 変更追跡を統合導入
 
-- 実行ファイル: `supabase/sql/rebuild/20260309_batch_player_identity.sql`
+- 実行ファイル: `supabase/rebuild/06_batch_player_identity.sql`
 - 意味/目的:
   - Step7/8/11 を統合して一括適用する
   - 実施内容:
@@ -114,7 +114,7 @@
 
 ### Step 6: 所属履歴トリガーの不整合防止修正
 
-- 実行ファイル: `supabase/migrations/20260308d_fix_affiliation_trigger.sql`
+- 実行ファイル: `supabase/rebuild/07_fix_affiliation_trigger.sql`
 - 意味/目的:
   - 時系列逆順の UPSERT で `valid_to < valid_from` が起きる問題を回避
   - 過去イベントが後から来た時に、現在オープン行を壊さないガードを追加

@@ -1,7 +1,7 @@
 """ID統合スクリプト: 確認済みCSVを元に旧PlayerIDを新PlayerIDへ統合する。
 
 ## 前提
-- supabase/sql/rebuild/20260309_batch_player_identity.sql 適用済みであること
+- supabase/rebuild/06_batch_player_identity.sql 適用済みであること
     （player_id_map テーブル・ON UPDATE CASCADE FK・players.old_player_id が存在する状態）
 
 ## 実行手順

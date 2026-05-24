@@ -46,7 +46,7 @@
 
 ## 実装ファイル
 
-- マイグレーション: `supabase/migrations/20260224_identity_history.sql`
+- マイグレーション: `supabase/rebuild/03_identity_history.sql`
 
 このマイグレーションで以下を実施する。
 

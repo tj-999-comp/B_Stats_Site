@@ -17,7 +17,7 @@ Supabase 上で `games.game_type` の追加と全シーズン向け backfill を
 
 ### 反映ドキュメント
 - `docs/table_definition.md`（`games.game_type` を追加）
-- `docs/schema_draft_games_light.sql`（`games.game_type` を追加）
+- `supabase/rebuild/01_base_schema.sql`（`games.game_type` を追加）
 - `docs/flow.md`（`is_playing` 補正ロジックを追記）
 
 ## 2026-03-08
@@ -102,5 +102,5 @@ Supabase 上で `games.game_type` の追加と全シーズン向け backfill を
 ### ドキュメント更新
 
 - `docs/table_definition.md`：`year` カラムの説明をシーズン開始年に更新
-- `docs/schema_draft_games_light.sql`：`year` カラムにコメント追加
+- `supabase/rebuild/01_base_schema.sql`：`year` カラムにコメント追加
 - `docs/workflows.md`：`play_by_play` は運用上使用しない旨を追記

@@ -21,4 +21,4 @@ jobs:
           PGDATABASE: "postgres"
           PGSSLMODE: "require"
         run: |
-          psql -f supabase/migrations/20260303_add_game_datetime.sql
+          psql -f supabase/rebuild/05_batch_game_and_players_columns.sql

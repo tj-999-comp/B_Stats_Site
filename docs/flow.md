@@ -10,19 +10,19 @@
 
 | ファイル | 内容 |
 |---------|------|
-| `docs/schema_draft_games_light.sql` | ベーステーブル作成（teams, games, players, game_team_stats, player_game_stats） |
-| `20260224_identity_history.sql` | player_name_history, player_affiliations, トリガー設定 |
-| `supabase/sql/rebuild/20260309_batch_game_and_players_columns.sql` | games / players 追加カラムを一括適用（game_datetime, game_date, game_type, nationality） |
-| `supabase/sql/rebuild/20260309_batch_player_identity.sql` | player_id_map / old_player_id / FK ON UPDATE CASCADE を一括適用 |
-| `20260308d_fix_affiliation_trigger.sql` | affiliationトリガー修正 |
+| `supabase/rebuild/01_base_schema.sql` | ベーステーブル作成（teams, games, players, game_team_stats, player_game_stats） |
+| `supabase/rebuild/03_identity_history.sql` | player_name_history, player_affiliations, トリガー設定 |
+| `supabase/rebuild/05_batch_game_and_players_columns.sql` | games / players 追加カラムを一括適用（game_datetime, game_date, game_type, nationality） |
+| `supabase/rebuild/06_batch_player_identity.sql` | player_id_map / old_player_id / FK ON UPDATE CASCADE を一括適用 |
+| `supabase/rebuild/07_fix_affiliation_trigger.sql` | affiliationトリガー修正 |
 
 ```bash
 # 代表例: 手動実行（順番に実行）
-psql $DATABASE_URL -f docs/schema_draft_games_light.sql
-psql $DATABASE_URL -f supabase/migrations/20260224_identity_history.sql
-psql $DATABASE_URL -f supabase/sql/rebuild/20260309_batch_game_and_players_columns.sql
-psql $DATABASE_URL -f supabase/sql/rebuild/20260309_batch_player_identity.sql
-psql $DATABASE_URL -f supabase/migrations/20260308d_fix_affiliation_trigger.sql
+psql $DATABASE_URL -f supabase/rebuild/01_base_schema.sql
+psql $DATABASE_URL -f supabase/rebuild/03_identity_history.sql
+psql $DATABASE_URL -f supabase/rebuild/05_batch_game_and_players_columns.sql
+psql $DATABASE_URL -f supabase/rebuild/06_batch_player_identity.sql
+psql $DATABASE_URL -f supabase/rebuild/07_fix_affiliation_trigger.sql
 ```
 
 ---

@@ -111,8 +111,8 @@ python -m scripts.dev.enrich_players_profile --input scraper/data/players.json -
 
 ## SupabaseへのUPSERT
 
-DDLは軽量版 `docs/schema_draft_games_light.sql` を適用してください。
-（`play_by_play` も含める場合のみ `docs/schema_draft_game_events.sql` を使用）
+DDLは軽量版 `supabase/rebuild/01_base_schema.sql` を適用してください。
+（`play_by_play` も含める場合のみ `supabase/rebuild/08_full_schema_with_events.sql` を使用）
 
 `game_team_stats` テーブルには、B.League Analytics のスタッツ用語集（1,2ページ）に対応した列を追加済みです。
 取り込みスクリプトは `teams` / `games` / `game_team_stats` をデフォルトでUPSERTします。
