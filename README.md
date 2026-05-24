@@ -1,5 +1,11 @@
 # Bリーグスタッツサイト 2構成比較アーキテクチャ
 
+作成日: 2026-05-24
+
+## ドキュメント運用ルール
+
+- 新規作成するドキュメントは、先頭（タイトル直下）に `作成日: YYYY-MM-DD` を記載する。
+
 ## 構成概要
 
 スクレイピングしたBリーグのスタッツデータを2つの異なる構成でWebサイト化し、静的サイトとサーバーサイドレンダリングの違いを検証する。個人利用のため、認証機能を実装してアクセス制限をかける。
@@ -150,23 +156,43 @@ Vercel Hobby Plan (Next.js App Router: SSR/ISR)
 
 ## ドキュメント
 
-### アーキテクチャ・設計
-- [アーキテクチャ図](docs/architecture.md)
-- [DB設計ブラッシュアップ（改名・移籍対応）](docs/db_design_brushup_identity_history.md)
-- [テーブル定義書（Supabase 現在値）](docs/table_definition.md)
+ドキュメントが増えてきたため、以下の「目的」と「読むタイミング」で参照すると迷いにくいです。
 
-### セットアップ・デプロイ
-- [セットアップガイド](docs/setup.md)
-- [デプロイガイド](docs/deployment.md)
-- [GitHub Actions ワークフロー解説](docs/workflows.md)
+### 最初に読む（全体像を掴む）
 
-### スクレイピング・データ投入
-- [スクレイピング〜DB Upsert〜正規化 フロー](docs/flow.md)
-- [日付解決ルール](docs/date_resolution.md)
+| ドキュメント | 何が分かるか | いつ読むか |
+|---|---|---|
+| [docs/architecture.md](docs/architecture.md) | システム全体の構成（スクレイピング→DB→フロント） | 新規参加時、構成を思い出したい時 |
+| [docs/setup.md](docs/setup.md) | ローカル開発や Supabase 接続の初期セットアップ | 環境構築の開始時 |
+| [docs/deployment.md](docs/deployment.md) | GitHub Pages / Vercel へのデプロイ前提と必要Secrets | デプロイ前 |
 
-### マイグレーション
-- [Migration適用ガイド（20260224: identity_history）](docs/migration_20260224_apply_guide.md)
-- [Migration適用ガイド（20260303: game_datetime）](docs/migration_20260303_game_datetime.md)
+### DB設計を確認する
 
-### 変更履歴
-- [Changelog](docs/changelog.md)
+| ドキュメント | 何が分かるか | いつ読むか |
+|---|---|---|
+| [docs/table_definition.md](docs/table_definition.md) | 現在の Supabase スキーマ（テーブル/カラム/制約） | クエリ実装・不整合調査時 |
+| [docs/db_design_brushup_identity_history.md](docs/db_design_brushup_identity_history.md) | 改名・移籍履歴を保持する設計意図 | 履歴系の仕様確認時 |
+| [docs/schema_draft_games_light.sql](docs/schema_draft_games_light.sql) | 完成系再構築で使うベースDDL | 新規DBを作り直す時 |
+
+### データ投入・運用を行う
+
+| ドキュメント | 何が分かるか | いつ読むか |
+|---|---|---|
+| [docs/flow.md](docs/flow.md) | スクレイピング〜Upsert〜正規化の実行順序と全体フロー | 日次運用・再投入前 |
+| [docs/date_resolution.md](docs/date_resolution.md) | GameDateTime と日付不整合の解決ルール | 日付ズレ調査時 |
+| [docs/workflows.md](docs/workflows.md) | GitHub Actions 各workflowの役割 | CI/CD挙動確認時 |
+
+### Migrationを適用する
+
+| ドキュメント | 何が分かるか | いつ読むか |
+|---|---|---|
+| [docs/migration_rebuild_runbook.md](docs/migration_rebuild_runbook.md) | 完成系スキーマ前提の再構築手順（なぜこの順で流すか） | 新規 Supabase 再構築時 |
+| [docs/migration_20260224_apply_guide.md](docs/migration_20260224_apply_guide.md) | identity_history migration の個別適用手順 | 履歴系 migration 単体適用時 |
+| [docs/migration_20260303_game_datetime.md](docs/migration_20260303_game_datetime.md) | game_datetime 追加 migration の個別適用手順 | 日時カラム migration 単体適用時 |
+
+### 変更履歴を追う
+
+| ドキュメント | 何が分かるか | いつ読むか |
+|---|---|---|
+| [docs/changelog.md](docs/changelog.md) | スキーマ/スクリプト/運用の変更履歴 | 仕様差分の確認時 |
+
