@@ -185,6 +185,93 @@ order by table_name;
 
 ---
 
+## 完了判定基準（これを満たせば次工程へ進んでOK）
+
+以下は「migration が正しく完了したか」を判断するための基準。
+
+### 判定A: 必須テーブルが全て存在する
+
+- 合格条件: 結果件数が **9件**（不足0件）
+- 対象:
+  - `teams`
+  - `games`
+  - `game_team_stats`
+  - `players`
+  - `player_game_stats`
+  - `team_name_history`
+  - `player_name_history`
+  - `player_affiliations`
+  - `player_id_map`
+
+```sql
+select count(*) as table_count
+from information_schema.tables
+where table_schema = 'public'
+  and table_name in (
+    'teams','games','game_team_stats','players','player_game_stats',
+    'team_name_history','player_name_history','player_affiliations','player_id_map'
+  );
+```
+
+### 判定B: 追加カラムが全て存在する
+
+- 合格条件: 結果件数が **5件**（不足0件）
+- 対象:
+  - `games.game_datetime`
+  - `games.game_date`
+  - `games.game_type`
+  - `players.nationality`
+  - `players.old_player_id`
+
+```sql
+select count(*) as column_count
+from information_schema.columns
+where table_schema = 'public'
+  and (
+    (table_name = 'games' and column_name in ('game_datetime','game_date','game_type'))
+    or (table_name = 'players' and column_name in ('nationality','old_player_id'))
+  );
+```
+
+### 判定C: 参照ビューが存在する
+
+- 合格条件: 結果件数が **3件**
+- 対象:
+  - `v_teams_current`
+  - `v_players_current`
+  - `v_player_transfer_events`
+
+```sql
+select count(*) as view_count
+from information_schema.views
+where table_schema = 'public'
+  and table_name in ('v_teams_current','v_players_current','v_player_transfer_events');
+```
+
+### 判定D: 所属履歴トリガー修正が反映されている
+
+- 合格条件: クエリ結果に `event_at <= current_open.valid_from` が含まれる
+- 目的: `20260308d_fix_affiliation_trigger.sql` が有効化されていることを確認
+
+```sql
+select pg_get_functiondef('track_player_affiliation_from_game_stats()'::regprocedure) as fn;
+```
+
+### 判定E: players 参照エラーが解消している
+
+- 合格条件: 下記がエラーなく `0` 以上の件数を返す
+
+```sql
+select count(*) as players_count from players;
+```
+
+### 総合判定
+
+- A〜E がすべて合格: migration 完了。JSON 再投入へ進んでよい。
+- 1つでも不合格: 不足している migration を再実行してから再判定する。
+
+---
+
 ## ここまで終わったら
 
 この時点で「完成系スキーマの土台」は準備完了。
