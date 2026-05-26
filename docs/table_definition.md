@@ -270,8 +270,10 @@
 | `player_id` | 選手ID | `text` | Yes | `-` | PK |
 | `player_name_j` | 選手名（日本語） | `text` | Yes | `-` | - |
 | `player_name_e` | 選手名（英語） | `text` | No | `-` | - |
+| `nationality` | 国籍 | `text` | No | `-` | - |
 | `last_seen_team_id` | 最終所属チームID | `text` | No | `-` | FK -> teams.team_id |
 | `last_seen_jersey_number` | 最終背番号 | `text` | No | `-` | - |
+| `old_player_id` | 旧選手ID | `text` | No | `-` | - |
 | `created_at` | 作成日時 | `timestamp with time zone` | Yes | `now()` | - |
 | `updated_at` | 更新日時 | `timestamp with time zone` | Yes | `now()` | - |
 

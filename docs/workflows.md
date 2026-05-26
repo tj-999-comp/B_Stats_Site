@@ -33,6 +33,28 @@
 
 ---
 
+## validate-issue-filenames.yml — Issue作業ログの命名規則チェック
+
+**ファイル:** `.github/workflows/validate-issue-filenames.yml`
+
+### トリガー
+
+| トリガー | 説明 |
+|---|---|
+| `push` | `issues/*.md` の変更時に自動実行 |
+| `pull_request` | `issues/*.md` を含むPRで実行 |
+| `workflow_dispatch` | 手動実行 |
+
+### 処理概要
+
+1. リポジトリをチェックアウト
+2. Python 3.11 をセットアップ
+3. `scripts/dev/validate_issue_filenames.py` を実行
+   - `Issue` で始まる md ファイル名を検査
+   - 許可パターンは `Issue_ex_###.md` のみ
+
+---
+
 ## deploy-pages.yml — GitHub Pages へのデプロイ
 
 **ファイル:** `.github/workflows/deploy-pages.yml`

@@ -213,7 +213,8 @@ WHERE NOT EXISTS (
       AND a.first_schedule_key = s.first_schedule_key
       AND a.team_id = s.team_id
       AND a.jersey_number IS NOT DISTINCT FROM s.jersey_number
-);
+)
+ON CONFLICT DO NOTHING;
 
 
 -- =========================

@@ -23,7 +23,7 @@ pnpm install
 ## 3. Supabaseのセットアップ
 
 1. [Supabase](https://supabase.com) でプロジェクトを作成
-2. `supabase/migrations/20260221_init.sql` を実行してテーブルを作成
+2. `supabase/rebuild/00_rebuild_all.sql` を実行して現行テーブル群を作成
 3. Supabase AuthenticationでEmail+Password認証を有効化
 4. 新規登録を無効化（Settings > Authentication > Disable signups）
 5. 自分用のアカウントを作成

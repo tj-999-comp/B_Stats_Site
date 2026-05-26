@@ -17,6 +17,16 @@
 - 対象: 新規に作り直した Supabase プロジェクト
 - 本手順は `supabase/rebuild/01_base_schema.sql` をベースにする
 
+## 最短実行（推奨）
+
+- 実行ファイル: `supabase/rebuild/00_rebuild_all.sql`
+- 目的: 再構築に必要な SQL（01〜07）を 1 ファイルに統合し、実行漏れを防ぐ
+- 実行方法: Supabase SQL Editor に `00_rebuild_all.sql` の内容を貼り付けて実行
+
+> 補足:
+> - 既存の `01` 〜 `07` は保守・差分確認用に保持
+> - 通常運用は `00_rebuild_all.sql` のみ実行すればよい
+
 > 注意:
 > `supabase/migrations/20260221_init.sql` は旧来の `player_stats` / `team_stats` / `rankings` 中心の初期構成で、
 > 現在の投入フロー（`teams`, `games`, `game_team_stats`, `players`, `player_game_stats`）と整合しないため、
@@ -30,6 +40,9 @@
 ---
 
 ## 実行ステップ一覧（順番固定）
+
+通常は `supabase/rebuild/00_rebuild_all.sql` の一括実行で完了する。
+以下は内容確認・個別再実行が必要な場合の内訳。
 
 ### Step 0: ベーススキーマ作成
 
