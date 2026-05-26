@@ -57,3 +57,22 @@ ALTER TABLE players
 ```bash
 python3 -m scripts.dev.upsert_players_json --input scraper/data/players.json
 ```
+
+## 追記（2026-05-26: Upsert完了）
+- カラム追加後に Upsert を再実行。
+- 初回は以下で失敗:
+    - `players_last_seen_team_id_fkey`（`teams` に存在しない `last_seen_team_id`）
+    - `ON CONFLICT DO UPDATE command cannot affect row a second time`（同一 `player_id` 重複）
+- `scripts/dev/upsert_players_json.py` を修正:
+    - `player_id` 単位で後勝ちの重複排除
+    - `teams` 未存在の `last_seen_team_id` を `NULL` に正規化
+- 再実行結果:
+    - `upserted 693 players from scraper/data/players.json`
+    - `normalized invalid last_seen_team_id rows: 8`
+
+## DB反映確認（players）
+- `players_total`: 1100
+- `league_registered_nationality_non_null`: 653
+- `birthplace_non_null`: 626
+- `player_slot_category_non_null`: 693
+- `nationality_non_null`: 693

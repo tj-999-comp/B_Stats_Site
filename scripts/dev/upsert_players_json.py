@@ -7,6 +7,7 @@ import json
 from pathlib import Path
 from typing import Any
 
+from scripts.db.db import get_client
 from scripts.db.db import upsert_players
 
 
@@ -40,16 +41,35 @@ def main() -> None:
     if not isinstance(payload, list):
         raise RuntimeError(f"Expected list JSON: path={args.input}")
 
-    rows: list[dict[str, Any]] = []
+    client = get_client()
+    team_rows = client.table("teams").select("team_id").execute().data or []
+    valid_team_ids = {str(r.get("team_id")) for r in team_rows if r.get("team_id") is not None}
+
+    # ON CONFLICT エラー回避のため player_id で一意化する（後勝ち）
+    deduped: dict[str, dict[str, Any]] = {}
+    invalid_team_id_count = 0
+
     for row in payload:
         if not isinstance(row, dict):
             continue
         filtered = {k: row.get(k) for k in ALLOWED_KEYS if k in row}
-        if filtered.get("player_id"):
-            rows.append(filtered)
+        player_id = str(filtered.get("player_id") or "").strip()
+        if not player_id:
+            continue
+
+        team_id = filtered.get("last_seen_team_id")
+        if team_id is not None and str(team_id) not in valid_team_ids:
+            filtered["last_seen_team_id"] = None
+            invalid_team_id_count += 1
+
+        deduped[player_id] = filtered
+
+    rows = list(deduped.values())
 
     upsert_players(rows)
     print(f"upserted {len(rows)} players from {args.input}")
+    if invalid_team_id_count:
+        print(f"normalized invalid last_seen_team_id rows: {invalid_team_id_count}")
 
 
 if __name__ == "__main__":
