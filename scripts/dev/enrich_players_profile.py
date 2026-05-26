@@ -1,4 +1,4 @@
-"""players.json の nationality / player_slot_category を補完する。"""
+"""players.json のプロフィール情報を補完する。"""
 
 from __future__ import annotations
 
@@ -17,6 +17,7 @@ from scripts.db.config import BASE_URL, HEADERS
 
 
 ROSTER_DETAIL_URL = f'{BASE_URL}/roster_detail/'
+PROFILE_HEADERS = {**HEADERS, 'Accept-Encoding': 'gzip, deflate'}
 
 JAPAN_PREFECTURES = (
     '北海道', '青森県', '岩手県', '宮城県', '秋田県', '山形県', '福島県',
@@ -38,6 +39,10 @@ def _norm_text(value: str | None) -> str:
     if value is None:
         return ''
     return ' '.join(value.replace('\u3000', ' ').split())
+
+
+def _has_text(value: Any) -> bool:
+    return bool(_norm_text(str(value)) if value is not None else '')
 
 
 def _is_index_like(value: str) -> bool:
@@ -137,21 +142,27 @@ def enrich_players(
     delay: float = 0.2,
     limit: int | None = None,
 ) -> list[dict[str, Any]]:
-    """nationality / player_slot_category を補完する。
+    """league_registered_nationality / birthplace / nationality / player_slot_category を補完する。
 
     player_id_map: {old_player_id: player_id} を渡すと、旧IDの選手は
     新IDでプロフィールページをフェッチする。
-    force: False（デフォルト）の場合、nationality が既に設定済みの選手はスキップする。
+    force: False（デフォルト）の場合、必要項目が埋まっている選手はスキップする。
     """
     session = requests.Session()
     target_players = players[:limit] if limit is not None else players
 
-    # force=False のときは nationality=null の選手のみ対象にする
+    # force=False のときは未補完項目がある選手のみ対象にする
     if not force:
-        to_enrich = [p for p in target_players if p.get('nationality') is None]
+        to_enrich = [
+            p for p in target_players
+            if not _has_text(p.get('league_registered_nationality'))
+            or not _has_text(p.get('birthplace'))
+            or not _has_text(p.get('nationality'))
+            or not _has_text(p.get('player_slot_category'))
+        ]
         skipped = len(target_players) - len(to_enrich)
         if skipped:
-            print(f'nationality 設定済みをスキップ: {skipped} 人（--force で全件再取得）')
+            print(f'プロフィール設定済みをスキップ: {skipped} 人（--force で全件再取得）')
     else:
         to_enrich = target_players
 
@@ -170,18 +181,30 @@ def enrich_players(
         # 503 はサーバー側の一時的なリジェクト。指数バックオフでリトライする
         max_retries = 3
         response = None
-        for attempt in range(max_retries):
-            response = session.get(
-                ROSTER_DETAIL_URL,
-                params={'PlayerID': fetch_id},
-                headers=HEADERS,
-                timeout=timeout,
-            )
-            if response.status_code != 503:
-                break
-            wait = 2 ** attempt * 3  # 3s, 6s, 12s
-            print(f'[{index}/{total}] player_id={player_id} => 503 リトライ ({attempt + 1}/{max_retries}) {wait}s 待機')
-            time.sleep(wait)
+        try:
+            for attempt in range(max_retries):
+                response = session.get(
+                    ROSTER_DETAIL_URL,
+                    params={'PlayerID': fetch_id},
+                    headers=PROFILE_HEADERS,
+                    timeout=timeout,
+                )
+                if response.status_code != 503:
+                    break
+                wait = 2 ** attempt * 3  # 3s, 6s, 12s
+                print(f'[{index}/{total}] player_id={player_id} => 503 リトライ ({attempt + 1}/{max_retries}) {wait}s 待機')
+                time.sleep(wait)
+        except requests.RequestException as e:
+            print(f'[{index}/{total}] player_id={player_id} (fetch_id={fetch_id}) => SKIP (request error: {e})')
+            if delay > 0 and index < total:
+                time.sleep(delay)
+            continue
+
+        if response is None:
+            print(f'[{index}/{total}] player_id={player_id} (fetch_id={fetch_id}) => SKIP (empty response)')
+            if delay > 0 and index < total:
+                time.sleep(delay)
+            continue
 
         if response.status_code == 404:
             print(f'[{index}/{total}] player_id={player_id} (fetch_id={fetch_id}) => SKIP (404 Not Found)')
@@ -195,8 +218,12 @@ def enrich_players(
         birthplace = extract_profile_value(soup, '出身地')
         nationality, player_slot_category = map_profile_fields(league_nationality, birthplace)
 
-        player['nationality'] = nationality
-        player['player_slot_category'] = player_slot_category
+        player['league_registered_nationality'] = league_nationality
+        player['birthplace'] = birthplace
+        if nationality is not None:
+            player['nationality'] = nationality
+        if player_slot_category is not None:
+            player['player_slot_category'] = player_slot_category
 
         print(
             f'[{index}/{total}] player_id={player_id} '
@@ -273,7 +300,9 @@ def run(
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description='players.json の nationality / player_slot_category を補完する')
+    parser = argparse.ArgumentParser(
+        description='players.json の league_registered_nationality / birthplace / nationality / player_slot_category を補完する'
+    )
     parser.add_argument(
         '--input',
         type=Path,
@@ -290,7 +319,7 @@ def main() -> None:
     parser.add_argument('--delay', type=float, default=0.2, help='Sleep seconds between requests')
     parser.add_argument('--limit', type=int, default=None, help='Process only first N players for test run')
     parser.add_argument('--force', action='store_true',
-                        help='nationality 設定済みの選手も含めて全件再取得する（デフォルト: null のみ処理）')
+                        help='プロフィール設定済みの選手も含めて全件再取得する（デフォルト: 未補完のみ処理）')
     parser.add_argument(
         '--id-map',
         type=Path,

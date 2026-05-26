@@ -136,10 +136,17 @@ python -m scraper.scripts.merge_player_ids \
 **スクリプト:** `scripts/dev/enrich_players_profile.py`
 
 - `roster_detail` ページから国籍・出身地を取得
-- `nationality`（日本 or 外国）、`player_slot_category`（日本人選手 / 外国籍選手）を更新
+- `league_registered_nationality`（リーグ登録国籍）と `birthplace`（出身地）を保存
+- あわせて `nationality`（日本 or 外国）、`player_slot_category`（日本人選手 / 外国籍選手）を更新
 
 ```bash
-python -m scripts.dev.enrich_players_profile --input players.json --upsert
+python -m scripts.dev.enrich_players_profile --input scraper/data/players.json --upsert
+```
+
+取得済み `players.json` を再フェッチせずにそのままDBへ反映する場合:
+
+```bash
+python -m scripts.dev.upsert_players_json --input scraper/data/players.json
 ```
 
 ---

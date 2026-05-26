@@ -271,6 +271,9 @@
 | `player_name_j` | 選手名（日本語） | `text` | Yes | `-` | - |
 | `player_name_e` | 選手名（英語） | `text` | No | `-` | - |
 | `nationality` | 国籍 | `text` | No | `-` | - |
+| `player_slot_category` | 選手区分 | `text` | No | `-` | - |
+| `league_registered_nationality` | リーグ登録国籍 | `text` | No | `-` | - |
+| `birthplace` | 出身地 | `text` | No | `-` | - |
 | `last_seen_team_id` | 最終所属チームID | `text` | No | `-` | FK -> teams.team_id |
 | `last_seen_jersey_number` | 最終背番号 | `text` | No | `-` | - |
 | `old_player_id` | 旧選手ID | `text` | No | `-` | - |

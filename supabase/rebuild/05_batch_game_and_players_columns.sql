@@ -11,9 +11,18 @@ ALTER TABLE games
 ALTER TABLE games
     ADD COLUMN IF NOT EXISTS game_type TEXT;
 
--- players: 国籍
+-- players: プロフィール項目
 ALTER TABLE players
     ADD COLUMN IF NOT EXISTS nationality TEXT;
+
+ALTER TABLE players
+    ADD COLUMN IF NOT EXISTS player_slot_category TEXT;
+
+ALTER TABLE players
+    ADD COLUMN IF NOT EXISTS league_registered_nationality TEXT;
+
+ALTER TABLE players
+    ADD COLUMN IF NOT EXISTS birthplace TEXT;
 
 -- 既存データがある場合のみ game_type をバックフィル
 UPDATE games
