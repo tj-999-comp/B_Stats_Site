@@ -1,7 +1,6 @@
 {
   "season": "2020-21",
   "generated_at": "2026-03-11T09:57:47.398099+00:00",
-  "include_play_by_play": false,
   "start_date": "2021-03-01",
   "end_date": "2021-03-31",
   "date_to_schedule_keys": {
@@ -263,7 +262,6 @@
     ]
   },
   "game_count": 79,
-  "failed_schedule_keys": [],
   "games": [
     {
       "schedule_key": 6255,
@@ -7824,9 +7822,7 @@
           "PT2ND": 6,
           "EFF": 91
         }
-      ],
-      "play_by_play_count": 707,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 6257,
@@ -17866,9 +17862,7 @@
           "PT2ND": 16,
           "EFF": 91
         }
-      ],
-      "play_by_play_count": 906,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 6259,
@@ -25688,9 +25682,7 @@
           "PT2ND": 13,
           "EFF": 109
         }
-      ],
-      "play_by_play_count": 665,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 6256,
@@ -33251,9 +33243,7 @@
           "PT2ND": 5,
           "EFF": 63
         }
-      ],
-      "play_by_play_count": 683,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 6260,
@@ -43293,9 +43283,7 @@
           "PT2ND": 3,
           "EFF": 100
         }
-      ],
-      "play_by_play_count": 758,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 6258,
@@ -51115,9 +51103,7 @@
           "PT2ND": 6,
           "EFF": 56
         }
-      ],
-      "play_by_play_count": 733,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 6262,
@@ -58937,9 +58923,7 @@
           "PT2ND": 5,
           "EFF": 86
         }
-      ],
-      "play_by_play_count": 629,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 6261,
@@ -66500,9 +66484,7 @@
           "PT2ND": 4,
           "EFF": 130
         }
-      ],
-      "play_by_play_count": 666,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 6263,
@@ -74322,9 +74304,7 @@
           "PT2ND": 0,
           "EFF": 81
         }
-      ],
-      "play_by_play_count": 609,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 6264,
@@ -82144,9 +82124,7 @@
           "PT2ND": 2,
           "EFF": 85
         }
-      ],
-      "play_by_play_count": 649,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 6266,
@@ -89707,9 +89685,7 @@
           "PT2ND": 8,
           "EFF": 82
         }
-      ],
-      "play_by_play_count": 733,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 6274,
@@ -97529,9 +97505,7 @@
           "PT2ND": 0,
           "EFF": 94
         }
-      ],
-      "play_by_play_count": 624,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 6276,
@@ -105351,9 +105325,7 @@
           "PT2ND": 5,
           "EFF": 97
         }
-      ],
-      "play_by_play_count": 732,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 6278,
@@ -113173,9 +113145,7 @@
           "PT2ND": 2,
           "EFF": 90
         }
-      ],
-      "play_by_play_count": 637,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 6270,
@@ -120736,9 +120706,7 @@
           "PT2ND": 3,
           "EFF": 83
         }
-      ],
-      "play_by_play_count": 644,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 6272,
@@ -128558,9 +128526,7 @@
           "PT2ND": 6,
           "EFF": 80
         }
-      ],
-      "play_by_play_count": 737,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 6280,
@@ -136380,9 +136346,7 @@
           "PT2ND": 7,
           "EFF": 86
         }
-      ],
-      "play_by_play_count": 635,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 6282,
@@ -144202,9 +144166,7 @@
           "PT2ND": 8,
           "EFF": 63
         }
-      ],
-      "play_by_play_count": 631,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 6273,
@@ -152024,9 +151986,7 @@
           "PT2ND": 9,
           "EFF": 101
         }
-      ],
-      "play_by_play_count": 637,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 6281,
@@ -159846,9 +159806,7 @@
           "PT2ND": 4,
           "EFF": 81
         }
-      ],
-      "play_by_play_count": 690,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 6265,
@@ -167668,9 +167626,7 @@
           "PT2ND": 2,
           "EFF": 78
         }
-      ],
-      "play_by_play_count": 607,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 6267,
@@ -175231,9 +175187,7 @@
           "PT2ND": 6,
           "EFF": 89
         }
-      ],
-      "play_by_play_count": 712,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 6275,
@@ -183053,9 +183007,7 @@
           "PT2ND": 4,
           "EFF": 97
         }
-      ],
-      "play_by_play_count": 555,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 6277,
@@ -190875,9 +190827,7 @@
           "PT2ND": 3,
           "EFF": 75
         }
-      ],
-      "play_by_play_count": 705,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 6283,
@@ -198697,9 +198647,7 @@
           "PT2ND": 2,
           "EFF": 63
         }
-      ],
-      "play_by_play_count": 713,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 6279,
@@ -206519,9 +206467,7 @@
           "PT2ND": 5,
           "EFF": 98
         }
-      ],
-      "play_by_play_count": 626,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 6271,
@@ -214082,9 +214028,7 @@
           "PT2ND": 2,
           "EFF": 84
         }
-      ],
-      "play_by_play_count": 594,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 6268,
@@ -221904,9 +221848,7 @@
           "PT2ND": 4,
           "EFF": 101
         }
-      ],
-      "play_by_play_count": 779,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 6269,
@@ -229726,9 +229668,7 @@
           "PT2ND": 6,
           "EFF": 94
         }
-      ],
-      "play_by_play_count": 765,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 6226,
@@ -237548,9 +237488,7 @@
           "PT2ND": 6,
           "EFF": 93
         }
-      ],
-      "play_by_play_count": 787,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 6230,
@@ -245370,9 +245308,7 @@
           "PT2ND": 3,
           "EFF": 103
         }
-      ],
-      "play_by_play_count": 742,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 6231,
@@ -253192,9 +253128,7 @@
           "PT2ND": 7,
           "EFF": 156
         }
-      ],
-      "play_by_play_count": 647,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 6300,
@@ -263234,9 +263168,7 @@
           "PT2ND": 9,
           "EFF": 113
         }
-      ],
-      "play_by_play_count": 738,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 6284,
@@ -271056,9 +270988,7 @@
           "PT2ND": 6,
           "EFF": 59
         }
-      ],
-      "play_by_play_count": 758,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 6286,
@@ -278878,9 +278808,7 @@
           "PT2ND": 1,
           "EFF": 75
         }
-      ],
-      "play_by_play_count": 652,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 6288,
@@ -286700,9 +286628,7 @@
           "PT2ND": 3,
           "EFF": 80
         }
-      ],
-      "play_by_play_count": 688,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 6294,
@@ -294004,9 +293930,7 @@
           "PT2ND": 8,
           "EFF": 93
         }
-      ],
-      "play_by_play_count": 709,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 6290,
@@ -301826,9 +301750,7 @@
           "PT2ND": 10,
           "EFF": 117
         }
-      ],
-      "play_by_play_count": 685,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 6292,
@@ -309648,9 +309570,7 @@
           "PT2ND": 6,
           "EFF": 112
         }
-      ],
-      "play_by_play_count": 732,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 6296,
@@ -317211,9 +317131,7 @@
           "PT2ND": 7,
           "EFF": 128
         }
-      ],
-      "play_by_play_count": 632,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 6298,
@@ -325033,9 +324951,7 @@
           "PT2ND": 3,
           "EFF": 96
         }
-      ],
-      "play_by_play_count": 648,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 6302,
@@ -332596,9 +332512,7 @@
           "PT2ND": 5,
           "EFF": 75
         }
-      ],
-      "play_by_play_count": 634,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 6291,
@@ -340418,9 +340332,7 @@
           "PT2ND": 9,
           "EFF": 116
         }
-      ],
-      "play_by_play_count": 784,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 6301,
@@ -348240,9 +348152,7 @@
           "PT2ND": 2,
           "EFF": 60
         }
-      ],
-      "play_by_play_count": 709,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 6293,
@@ -356062,9 +355972,7 @@
           "PT2ND": 7,
           "EFF": 71
         }
-      ],
-      "play_by_play_count": 784,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 6297,
@@ -363625,9 +363533,7 @@
           "PT2ND": 6,
           "EFF": 115
         }
-      ],
-      "play_by_play_count": 626,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 6303,
@@ -371188,9 +371094,7 @@
           "PT2ND": 7,
           "EFF": 81
         }
-      ],
-      "play_by_play_count": 760,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 6285,
@@ -379010,9 +378914,7 @@
           "PT2ND": 8,
           "EFF": 82
         }
-      ],
-      "play_by_play_count": 693,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 6287,
@@ -386832,9 +386734,7 @@
           "PT2ND": 8,
           "EFF": 99
         }
-      ],
-      "play_by_play_count": 790,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 6289,
@@ -394654,9 +394554,7 @@
           "PT2ND": 5,
           "EFF": 112
         }
-      ],
-      "play_by_play_count": 670,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 6295,
@@ -401958,9 +401856,7 @@
           "PT2ND": 5,
           "EFF": 100
         }
-      ],
-      "play_by_play_count": 651,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 6299,
@@ -409780,9 +409676,7 @@
           "PT2ND": 6,
           "EFF": 90
         }
-      ],
-      "play_by_play_count": 648,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 6310,
@@ -417602,9 +417496,7 @@
           "PT2ND": 3,
           "EFF": 133
         }
-      ],
-      "play_by_play_count": 692,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 6304,
@@ -425424,9 +425316,7 @@
           "PT2ND": 8,
           "EFF": 97
         }
-      ],
-      "play_by_play_count": 707,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 6305,
@@ -433246,9 +433136,7 @@
           "PT2ND": 1,
           "EFF": 59
         }
-      ],
-      "play_by_play_count": 723,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 6306,
@@ -440809,9 +440697,7 @@
           "PT2ND": 6,
           "EFF": 78
         }
-      ],
-      "play_by_play_count": 685,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 6307,
@@ -448113,9 +447999,7 @@
           "PT2ND": 6,
           "EFF": 137
         }
-      ],
-      "play_by_play_count": 590,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 6308,
@@ -455935,9 +455819,7 @@
           "PT2ND": 9,
           "EFF": 95
         }
-      ],
-      "play_by_play_count": 665,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 6309,
@@ -463239,9 +463121,7 @@
           "PT2ND": 7,
           "EFF": 106
         }
-      ],
-      "play_by_play_count": 684,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 6312,
@@ -471061,9 +470941,7 @@
           "PT2ND": 11,
           "EFF": 107
         }
-      ],
-      "play_by_play_count": 751,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 6313,
@@ -478883,9 +478761,7 @@
           "PT2ND": 5,
           "EFF": 111
         }
-      ],
-      "play_by_play_count": 577,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 6311,
@@ -486446,9 +486322,7 @@
           "PT2ND": 3,
           "EFF": 122
         }
-      ],
-      "play_by_play_count": 676,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 6314,
@@ -494268,9 +494142,7 @@
           "PT2ND": 6,
           "EFF": 30
         }
-      ],
-      "play_by_play_count": 693,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 6316,
@@ -504310,9 +504182,7 @@
           "PT2ND": 9,
           "EFF": 96
         }
-      ],
-      "play_by_play_count": 705,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 6322,
@@ -511873,9 +511743,7 @@
           "PT2ND": 7,
           "EFF": 108
         }
-      ],
-      "play_by_play_count": 752,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 6328,
@@ -519695,9 +519563,7 @@
           "PT2ND": 7,
           "EFF": 85
         }
-      ],
-      "play_by_play_count": 627,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 6320,
@@ -526999,9 +526865,7 @@
           "PT2ND": 5,
           "EFF": 60
         }
-      ],
-      "play_by_play_count": 617,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 6323,
@@ -534562,9 +534426,7 @@
           "PT2ND": 7,
           "EFF": 120
         }
-      ],
-      "play_by_play_count": 691,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 6315,
@@ -542384,9 +542246,7 @@
           "PT2ND": 8,
           "EFF": 51
         }
-      ],
-      "play_by_play_count": 646,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 6317,
@@ -550206,9 +550066,7 @@
           "PT2ND": 4,
           "EFF": 110
         }
-      ],
-      "play_by_play_count": 683,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 6329,
@@ -558028,9 +557886,7 @@
           "PT2ND": 3,
           "EFF": 109
         }
-      ],
-      "play_by_play_count": 682,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 6321,
@@ -565332,9 +565188,7 @@
           "PT2ND": 7,
           "EFF": 73
         }
-      ],
-      "play_by_play_count": 631,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 6318,
@@ -573154,9 +573008,7 @@
           "PT2ND": 6,
           "EFF": 110
         }
-      ],
-      "play_by_play_count": 812,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 6319,
@@ -580976,9 +580828,7 @@
           "PT2ND": 6,
           "EFF": 85
         }
-      ],
-      "play_by_play_count": 871,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 6337,
@@ -588539,9 +588389,7 @@
           "PT2ND": 12,
           "EFF": 89
         }
-      ],
-      "play_by_play_count": 664,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 6338,
@@ -596361,9 +596209,7 @@
           "PT2ND": 5,
           "EFF": 80
         }
-      ],
-      "play_by_play_count": 721,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 6339,
@@ -604183,9 +604029,7 @@
           "PT2ND": 10,
           "EFF": 63
         }
-      ],
-      "play_by_play_count": 701,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 6341,
@@ -612005,9 +611849,7 @@
           "PT2ND": 4,
           "EFF": 122
         }
-      ],
-      "play_by_play_count": 649,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 6343,
@@ -619050,9 +618892,7 @@
           "PT2ND": 3,
           "EFF": 61
         }
-      ],
-      "play_by_play_count": 784,
-      "play_by_plays": []
+      ]
     }
   ]
 }
