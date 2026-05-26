@@ -1,7 +1,6 @@
 {
   "season": "2017-18",
   "generated_at": "2026-03-12T08:46:28.105770+00:00",
-  "include_play_by_play": false,
   "start_date": "2017-09-01",
   "end_date": "2017-09-30",
   "date_to_schedule_keys": {
@@ -192,7 +191,6 @@
     ]
   },
   "game_count": 13,
-  "failed_schedule_keys": [],
   "games": [
     {
       "schedule_key": 1573,
@@ -8656,9 +8654,7 @@
           "TeamNameE": "SEAHORSES MIKAWA",
           "TeamNameJ": "シーホース三河"
         }
-      ],
-      "play_by_play_count": 460,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 1575,
@@ -17122,9 +17118,7 @@
           "TeamNameE": "NAGOYA DIAMOND DOLPHINS",
           "TeamNameJ": "名古屋ダイヤモンドドルフィンズ"
         }
-      ],
-      "play_by_play_count": 475,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 1577,
@@ -25588,9 +25582,7 @@
           "TeamNameE": "SHIGA LAKESTARS",
           "TeamNameJ": "滋賀レイクスターズ"
         }
-      ],
-      "play_by_play_count": 492,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 1589,
@@ -33494,9 +33486,7 @@
           "TeamNameE": "Sunrockers-Shibuya",
           "TeamNameJ": "サンロッカーズ渋谷"
         }
-      ],
-      "play_by_play_count": 385,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 1578,
@@ -41960,9 +41950,7 @@
           "TeamNameE": "SHIGA LAKESTARS",
           "TeamNameJ": "滋賀レイクスターズ"
         }
-      ],
-      "play_by_play_count": 501,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 1579,
@@ -50146,9 +50134,7 @@
           "TeamNameE": "SHIMANE SUSANOO MAGIC",
           "TeamNameJ": "島根スサノオマジック"
         }
-      ],
-      "play_by_play_count": 447,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 1590,
@@ -58052,9 +58038,7 @@
           "TeamNameE": "Sunrockers-Shibuya",
           "TeamNameJ": "サンロッカーズ渋谷"
         }
-      ],
-      "play_by_play_count": 468,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 1581,
@@ -66518,9 +66502,7 @@
           "TeamNameE": "LEVANGA HOKKAIDO",
           "TeamNameJ": "レバンガ北海道"
         }
-      ],
-      "play_by_play_count": 520,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 1576,
@@ -77370,9 +77352,7 @@
           "TeamNameE": "NAGOYA DIAMOND DOLPHINS",
           "TeamNameJ": "名古屋ダイヤモンドドルフィンズ"
         }
-      ],
-      "play_by_play_count": 478,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 1585,
@@ -85556,9 +85536,7 @@
           "TeamNameE": "ALVARK TOKYO",
           "TeamNameJ": "アルバルク東京"
         }
-      ],
-      "play_by_play_count": 458,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 1574,
@@ -94022,9 +94000,7 @@
           "TeamNameE": "SEAHORSES MIKAWA",
           "TeamNameJ": "シーホース三河"
         }
-      ],
-      "play_by_play_count": 465,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 1583,
@@ -102208,9 +102184,7 @@
           "TeamNameE": "SAN-EN NEOPHOENIX",
           "TeamNameJ": "三遠ネオフェニックス"
         }
-      ],
-      "play_by_play_count": 430,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 1587,
@@ -110674,9 +110648,7 @@
           "TeamNameE": "CHIBA JETS",
           "TeamNameJ": "千葉ジェッツ"
         }
-      ],
-      "play_by_play_count": 495,
-      "play_by_plays": []
+      ]
     }
   ]
 }

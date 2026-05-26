@@ -1,7 +1,6 @@
 {
   "season": "2016-17",
   "generated_at": "2026-03-12T07:06:51.266504+00:00",
-  "include_play_by_play": false,
   "start_date": "2017-01-01",
   "end_date": "2017-01-31",
   "date_to_schedule_keys": {
@@ -160,7 +159,6 @@
     ]
   },
   "game_count": 51,
-  "failed_schedule_keys": [],
   "games": [
     {
       "schedule_key": 254,
@@ -8344,9 +8342,7 @@
           "TeamNameE": "NIIGATA ALBIREX BB",
           "TeamNameJ": "新潟アルビレックスBB"
         }
-      ],
-      "play_by_play_count": 436,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 255,
@@ -16530,9 +16526,7 @@
           "TeamNameE": "NIIGATA ALBIREX BB",
           "TeamNameJ": "新潟アルビレックスBB"
         }
-      ],
-      "play_by_play_count": 472,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 256,
@@ -24716,9 +24710,7 @@
           "TeamNameE": "KYOTO HANNARYZ",
           "TeamNameJ": "京都ハンナリーズ"
         }
-      ],
-      "play_by_play_count": 426,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 257,
@@ -32902,9 +32894,7 @@
           "TeamNameE": "KYOTO HANNARYZ",
           "TeamNameJ": "京都ハンナリーズ"
         }
-      ],
-      "play_by_play_count": 469,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 1303,
@@ -41368,9 +41358,7 @@
           "TeamNameE": "ANYANG KGC",
           "TeamNameJ": "安養KGC"
         }
-      ],
-      "play_by_play_count": 456,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 1302,
@@ -49834,9 +49822,7 @@
           "TeamNameE": "",
           "TeamNameJ": "B.WHITE"
         }
-      ],
-      "play_by_play_count": 510,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 258,
@@ -58020,9 +58006,7 @@
           "TeamNameE": "ALVARK TOKYO",
           "TeamNameJ": "アルバルク東京"
         }
-      ],
-      "play_by_play_count": 488,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 259,
@@ -66206,9 +66190,7 @@
           "TeamNameE": "LEVANGA HOKKAIDO",
           "TeamNameJ": "レバンガ北海道"
         }
-      ],
-      "play_by_play_count": 473,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 260,
@@ -74392,9 +74374,7 @@
           "TeamNameE": "CHIBA JETS",
           "TeamNameJ": "千葉ジェッツ"
         }
-      ],
-      "play_by_play_count": 464,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 261,
@@ -82578,9 +82558,7 @@
           "TeamNameE": "Sunrockers-Shibuya",
           "TeamNameJ": "サンロッカーズ渋谷"
         }
-      ],
-      "play_by_play_count": 457,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 262,
@@ -90764,9 +90742,7 @@
           "TeamNameE": "YOKOHAMA B-CORSAIRS",
           "TeamNameJ": "横浜ビー・コルセアーズ"
         }
-      ],
-      "play_by_play_count": 431,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 263,
@@ -98950,9 +98926,7 @@
           "TeamNameE": "TOYAMA GROUSES",
           "TeamNameJ": "富山グラウジーズ"
         }
-      ],
-      "play_by_play_count": 473,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 264,
@@ -107416,9 +107390,7 @@
           "TeamNameE": "NAGOYA DIAMOND DOLPHINS",
           "TeamNameJ": "名古屋ダイヤモンドドルフィンズ"
         }
-      ],
-      "play_by_play_count": 478,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 265,
@@ -115602,9 +115574,7 @@
           "TeamNameE": "KYOTO HANNARYZ",
           "TeamNameJ": "京都ハンナリーズ"
         }
-      ],
-      "play_by_play_count": 483,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 266,
@@ -126094,9 +126064,7 @@
           "TeamNameE": "OSAKA EVESSA",
           "TeamNameJ": "大阪エヴェッサ"
         }
-      ],
-      "play_by_play_count": 483,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 268,
@@ -134560,9 +134528,7 @@
           "TeamNameE": "KAWASAKI BRAVE THUNDERS",
           "TeamNameJ": "川崎ブレイブサンダース"
         }
-      ],
-      "play_by_play_count": 455,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 269,
@@ -143026,9 +142992,7 @@
           "TeamNameE": "SEAHORSES MIKAWA",
           "TeamNameJ": "シーホース三河"
         }
-      ],
-      "play_by_play_count": 445,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 270,
@@ -151492,9 +151456,7 @@
           "TeamNameE": "YOKOHAMA B-CORSAIRS",
           "TeamNameJ": "横浜ビー・コルセアーズ"
         }
-      ],
-      "play_by_play_count": 410,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 275,
@@ -161624,9 +161586,7 @@
           "TeamNameE": "AKITA NORTHERN HAPPINETS",
           "TeamNameJ": "秋田ノーザンハピネッツ"
         }
-      ],
-      "play_by_play_count": 513,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 267,
@@ -170090,9 +170050,7 @@
           "TeamNameE": "SHIGA LAKESTARS",
           "TeamNameJ": "滋賀レイクスターズ"
         }
-      ],
-      "play_by_play_count": 449,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 271,
@@ -177996,9 +177954,7 @@
           "TeamNameE": "SENDAI 89ERS",
           "TeamNameJ": "仙台89ERS"
         }
-      ],
-      "play_by_play_count": 468,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 272,
@@ -185902,9 +185858,7 @@
           "TeamNameE": "NAGOYA DIAMOND DOLPHINS",
           "TeamNameJ": "名古屋ダイヤモンドドルフィンズ"
         }
-      ],
-      "play_by_play_count": 449,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 273,
@@ -194368,9 +194322,7 @@
           "TeamNameE": "RYUKYU GOLDEN KINGS",
           "TeamNameJ": "琉球ゴールデンキングス"
         }
-      ],
-      "play_by_play_count": 524,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 274,
@@ -202834,9 +202786,7 @@
           "TeamNameE": "SAN-EN NEOPHOENIX",
           "TeamNameJ": "三遠ネオフェニックス"
         }
-      ],
-      "play_by_play_count": 461,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 277,
@@ -211300,9 +211250,7 @@
           "TeamNameE": "KAWASAKI BRAVE THUNDERS",
           "TeamNameJ": "川崎ブレイブサンダース"
         }
-      ],
-      "play_by_play_count": 453,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 281,
@@ -219206,9 +219154,7 @@
           "TeamNameE": "NAGOYA DIAMOND DOLPHINS",
           "TeamNameJ": "名古屋ダイヤモンドドルフィンズ"
         }
-      ],
-      "play_by_play_count": 433,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 282,
@@ -227672,9 +227618,7 @@
           "TeamNameE": "RYUKYU GOLDEN KINGS",
           "TeamNameJ": "琉球ゴールデンキングス"
         }
-      ],
-      "play_by_play_count": 493,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 276,
@@ -236138,9 +236082,7 @@
           "TeamNameE": "SHIGA LAKESTARS",
           "TeamNameJ": "滋賀レイクスターズ"
         }
-      ],
-      "play_by_play_count": 458,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 280,
@@ -244044,9 +243986,7 @@
           "TeamNameE": "SENDAI 89ERS",
           "TeamNameJ": "仙台89ERS"
         }
-      ],
-      "play_by_play_count": 464,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 283,
@@ -252510,9 +252450,7 @@
           "TeamNameE": "SAN-EN NEOPHOENIX",
           "TeamNameJ": "三遠ネオフェニックス"
         }
-      ],
-      "play_by_play_count": 466,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 284,
@@ -260416,9 +260354,7 @@
           "TeamNameE": "AKITA NORTHERN HAPPINETS",
           "TeamNameJ": "秋田ノーザンハピネッツ"
         }
-      ],
-      "play_by_play_count": 451,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 278,
@@ -268882,9 +268818,7 @@
           "TeamNameE": "SEAHORSES MIKAWA",
           "TeamNameJ": "シーホース三河"
         }
-      ],
-      "play_by_play_count": 442,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 279,
@@ -277348,9 +277282,7 @@
           "TeamNameE": "YOKOHAMA B-CORSAIRS",
           "TeamNameJ": "横浜ビー・コルセアーズ"
         }
-      ],
-      "play_by_play_count": 443,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 285,
@@ -284974,9 +284906,7 @@
           "TeamNameE": "KYOTO HANNARYZ",
           "TeamNameJ": "京都ハンナリーズ"
         }
-      ],
-      "play_by_play_count": 493,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 286,
@@ -292600,9 +292530,7 @@
           "TeamNameE": "KYOTO HANNARYZ",
           "TeamNameJ": "京都ハンナリーズ"
         }
-      ],
-      "play_by_play_count": 481,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 292,
@@ -301066,9 +300994,7 @@
           "TeamNameE": "ALVARK TOKYO",
           "TeamNameJ": "アルバルク東京"
         }
-      ],
-      "play_by_play_count": 429,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 293,
@@ -309252,9 +309178,7 @@
           "TeamNameE": "KAWASAKI BRAVE THUNDERS",
           "TeamNameJ": "川崎ブレイブサンダース"
         }
-      ],
-      "play_by_play_count": 434,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 288,
@@ -317718,9 +317642,7 @@
           "TeamNameE": "OSAKA EVESSA",
           "TeamNameJ": "大阪エヴェッサ"
         }
-      ],
-      "play_by_play_count": 409,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 287,
@@ -325904,9 +325826,7 @@
           "TeamNameE": "SAN-EN NEOPHOENIX",
           "TeamNameJ": "三遠ネオフェニックス"
         }
-      ],
-      "play_by_play_count": 450,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 289,
@@ -334090,9 +334010,7 @@
           "TeamNameE": "TOCHIGI BREX",
           "TeamNameJ": "栃木ブレックス"
         }
-      ],
-      "play_by_play_count": 444,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 290,
@@ -342276,9 +342194,7 @@
           "TeamNameE": "SHIGA LAKESTARS",
           "TeamNameJ": "滋賀レイクスターズ"
         }
-      ],
-      "play_by_play_count": 469,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 291,
@@ -350742,9 +350658,7 @@
           "TeamNameE": "LEVANGA HOKKAIDO",
           "TeamNameJ": "レバンガ北海道"
         }
-      ],
-      "play_by_play_count": 533,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 294,
@@ -358648,9 +358562,7 @@
           "TeamNameE": "NIIGATA ALBIREX BB",
           "TeamNameJ": "新潟アルビレックスBB"
         }
-      ],
-      "play_by_play_count": 489,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 299,
@@ -366834,9 +366746,7 @@
           "TeamNameE": "LEVANGA HOKKAIDO",
           "TeamNameJ": "レバンガ北海道"
         }
-      ],
-      "play_by_play_count": 536,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 295,
@@ -375020,9 +374930,7 @@
           "TeamNameE": "SAN-EN NEOPHOENIX",
           "TeamNameJ": "三遠ネオフェニックス"
         }
-      ],
-      "play_by_play_count": 433,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 298,
@@ -383206,9 +383114,7 @@
           "TeamNameE": "SHIGA LAKESTARS",
           "TeamNameJ": "滋賀レイクスターズ"
         }
-      ],
-      "play_by_play_count": 429,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 300,
@@ -391672,9 +391578,7 @@
           "TeamNameE": "ALVARK TOKYO",
           "TeamNameJ": "アルバルク東京"
         }
-      ],
-      "play_by_play_count": 424,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 301,
@@ -399858,9 +399762,7 @@
           "TeamNameE": "KAWASAKI BRAVE THUNDERS",
           "TeamNameJ": "川崎ブレイブサンダース"
         }
-      ],
-      "play_by_play_count": 473,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 302,
@@ -407764,9 +407666,7 @@
           "TeamNameE": "NIIGATA ALBIREX BB",
           "TeamNameJ": "新潟アルビレックスBB"
         }
-      ],
-      "play_by_play_count": 417,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 297,
@@ -419409,9 +419309,7 @@
           "TeamNameE": "TOCHIGI BREX",
           "TeamNameJ": "栃木ブレックス"
         }
-      ],
-      "play_by_play_count": 539,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 296,
@@ -427875,9 +427773,7 @@
           "TeamNameE": "OSAKA EVESSA",
           "TeamNameJ": "大阪エヴェッサ"
         }
-      ],
-      "play_by_play_count": 425,
-      "play_by_plays": []
+      ]
     }
   ]
 }

@@ -1,7 +1,6 @@
 {
   "season": "2018-19",
   "generated_at": "2026-03-12T01:16:27.860820+00:00",
-  "include_play_by_play": false,
   "start_date": "2019-05-01",
   "end_date": "2019-05-31",
   "date_to_schedule_keys": {
@@ -105,7 +104,6 @@
     ]
   },
   "game_count": 7,
-  "failed_schedule_keys": [],
   "games": [
     {
       "schedule_key": 4147,
@@ -8569,9 +8567,7 @@
           "TeamNameE": "ALVARK TOKYO",
           "TeamNameJ": "アルバルク東京"
         }
-      ],
-      "play_by_play_count": 446,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 4144,
@@ -17035,9 +17031,7 @@
           "TeamNameE": "TOCHIGI BREX",
           "TeamNameJ": "栃木ブレックス"
         }
-      ],
-      "play_by_play_count": 483,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 4148,
@@ -25501,9 +25495,7 @@
           "TeamNameE": "ALVARK TOKYO",
           "TeamNameJ": "アルバルク東京"
         }
-      ],
-      "play_by_play_count": 449,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 4145,
@@ -33967,9 +33959,7 @@
           "TeamNameE": "TOCHIGI BREX",
           "TeamNameJ": "栃木ブレックス"
         }
-      ],
-      "play_by_play_count": 527,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 4146,
@@ -33977,9 +33967,7 @@
       "game": {},
       "summaries": [],
       "home_boxscores": [],
-      "away_boxscores": [],
-      "play_by_play_count": 0,
-      "play_by_plays": []
+      "away_boxscores": []
     },
     {
       "schedule_key": 4149,
@@ -42443,9 +42431,7 @@
           "TeamNameE": "ALVARK TOKYO",
           "TeamNameJ": "アルバルク東京"
         }
-      ],
-      "play_by_play_count": 437,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 4150,
@@ -50909,9 +50895,7 @@
           "TeamNameE": "ALVARK TOKYO",
           "TeamNameJ": "アルバルク東京"
         }
-      ],
-      "play_by_play_count": 448,
-      "play_by_plays": []
+      ]
     }
   ]
 }
