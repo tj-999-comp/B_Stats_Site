@@ -1,7 +1,6 @@
 {
   "season": "2023-24",
   "generated_at": "2026-03-05T13:33:07.731083+00:00",
-  "include_play_by_play": false,
   "start_date": "2024-05-01",
   "end_date": "2024-05-31",
   "date_to_schedule_keys": {
@@ -135,7 +134,6 @@
     ]
   },
   "game_count": 43,
-  "failed_schedule_keys": [],
   "games": [
     {
       "schedule_key": 501987,
@@ -9313,9 +9311,7 @@
           "TS": 0.5745433117265764,
           "POSS": 68.62349999999999
         }
-      ],
-      "play_by_play_count": 746,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 501988,
@@ -18493,9 +18489,7 @@
           "TS": 0.5841121495327103,
           "POSS": 70.06871428571428
         }
-      ],
-      "play_by_play_count": 710,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 501989,
@@ -27379,9 +27373,7 @@
           "TS": 0.591715976331361,
           "POSS": 68.88561166429588
         }
-      ],
-      "play_by_play_count": 792,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 502005,
@@ -35971,9 +35963,7 @@
           "TS": 0.45039486673247775,
           "POSS": 74.58570535714287
         }
-      ],
-      "play_by_play_count": 675,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 502007,
@@ -44857,9 +44847,7 @@
           "TS": 0.4434756464221287,
           "POSS": 66.40658914728682
         }
-      ],
-      "play_by_play_count": 757,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 501991,
@@ -53743,9 +53731,7 @@
           "TS": 0.6948304613674264,
           "POSS": 72.19081632653061
         }
-      ],
-      "play_by_play_count": 680,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 501993,
@@ -62629,9 +62615,7 @@
           "TS": 0.5633616118769883,
           "POSS": 79.1887163029525
         }
-      ],
-      "play_by_play_count": 830,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 502001,
@@ -71221,9 +71205,7 @@
           "TS": 0.5071271929824562,
           "POSS": 72.54513157894736
         }
-      ],
-      "play_by_play_count": 680,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 501997,
@@ -82631,9 +82613,7 @@
           "TS": 0.5668671911152244,
           "POSS": 78.0547098646035
         }
-      ],
-      "play_by_play_count": 740,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 501995,
@@ -91517,9 +91497,7 @@
           "TS": 0.6202889447236181,
           "POSS": 68.86840934371523
         }
-      ],
-      "play_by_play_count": 787,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 501999,
@@ -99815,9 +99793,7 @@
           "TS": 0.555715935334873,
           "POSS": 78.03781954887218
         }
-      ],
-      "play_by_play_count": 678,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 502000,
@@ -108113,9 +108089,7 @@
           "TS": 0.5509641873278237,
           "POSS": 69.70914860681114
         }
-      ],
-      "play_by_play_count": 618,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 502008,
@@ -116705,9 +116679,7 @@
           "TS": 0.6502045587375804,
           "POSS": 68.49150793650793
         }
-      ],
-      "play_by_play_count": 642,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 501990,
@@ -129378,9 +129350,7 @@
           "TS": 0.43842168194499803,
           "POSS": 85.28575393848462
         }
-      ],
-      "play_by_play_count": 971,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 501996,
@@ -138264,9 +138234,7 @@
           "TS": 0.4910119840213049,
           "POSS": 67.05514705882354
         }
-      ],
-      "play_by_play_count": 604,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 501998,
@@ -146856,9 +146824,7 @@
           "TS": 0.5222104706504495,
           "POSS": 75.57862527716188
         }
-      ],
-      "play_by_play_count": 656,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 502006,
@@ -155448,9 +155414,7 @@
           "TS": 0.46398891966759,
           "POSS": 68.37426470588235
         }
-      ],
-      "play_by_play_count": 611,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 502009,
@@ -164334,9 +164298,7 @@
           "TS": 0.5517711171662125,
           "POSS": 75.749
         }
-      ],
-      "play_by_play_count": 720,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 501992,
@@ -173220,9 +173182,7 @@
           "TS": 0.641025641025641,
           "POSS": 72.09691611842106
         }
-      ],
-      "play_by_play_count": 660,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 501994,
@@ -182106,9 +182066,7 @@
           "TS": 0.6330749354005167,
           "POSS": 80.9462044817927
         }
-      ],
-      "play_by_play_count": 747,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 502002,
@@ -190404,9 +190362,7 @@
           "TS": 0.46082949308755755,
           "POSS": 70.77077651515151
         }
-      ],
-      "play_by_play_count": 706,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 502003,
@@ -198702,9 +198658,7 @@
           "TS": 0.5163727959697733,
           "POSS": 73.24798463356974
         }
-      ],
-      "play_by_play_count": 711,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 502010,
@@ -207588,9 +207542,7 @@
           "TS": 0.5871990604815032,
           "POSS": 77.48814583333333
         }
-      ],
-      "play_by_play_count": 749,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 502004,
@@ -219421,9 +219373,7 @@
           "TS": 0.5542652027027027,
           "POSS": 93.29434782608696
         }
-      ],
-      "play_by_play_count": 833,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 502526,
@@ -232094,9 +232044,7 @@
           "TS": 0.49901429275505177,
           "POSS": 78.88998769483183
         }
-      ],
-      "play_by_play_count": 885,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 502520,
@@ -240980,9 +240928,7 @@
           "TS": 0.5495978552278821,
           "POSS": 66.39375000000001
         }
-      ],
-      "play_by_play_count": 738,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 502523,
@@ -249572,9 +249518,7 @@
           "TS": 0.47909407665505227,
           "POSS": 69.25309617918313
         }
-      ],
-      "play_by_play_count": 703,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 502529,
@@ -259046,9 +258990,7 @@
           "TS": 0.512782401902497,
           "POSS": 72.37899999999999
         }
-      ],
-      "play_by_play_count": 722,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 502527,
@@ -267932,9 +267874,7 @@
           "TS": 0.5259146341463415,
           "POSS": 65.84583333333333
         }
-      ],
-      "play_by_play_count": 729,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 502521,
@@ -276818,9 +276758,7 @@
           "TS": 0.42950236966824645,
           "POSS": 66.63895604395604
         }
-      ],
-      "play_by_play_count": 825,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 502524,
@@ -285410,9 +285348,7 @@
           "TS": 0.5407523510971787,
           "POSS": 63.05808823529412
         }
-      ],
-      "play_by_play_count": 698,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 502530,
@@ -294884,9 +294820,7 @@
           "TS": 0.5369415807560137,
           "POSS": 73.01546875
         }
-      ],
-      "play_by_play_count": 682,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 502528,
@@ -303770,9 +303704,7 @@
           "TS": 0.45059042883778744,
           "POSS": 66.66082539682539
         }
-      ],
-      "play_by_play_count": 702,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 502522,
@@ -316443,9 +316375,7 @@
           "TS": 0.5313660751134957,
           "POSS": 81.68118636363636
         }
-      ],
-      "play_by_play_count": 890,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 502532,
@@ -325917,9 +325847,7 @@
           "TS": 0.573794305636258,
           "POSS": 68.13236111111112
         }
-      ],
-      "play_by_play_count": 685,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 502535,
@@ -334803,9 +334731,7 @@
           "TS": 0.6184895833333334,
           "POSS": 70.025
         }
-      ],
-      "play_by_play_count": 709,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 502533,
@@ -344277,9 +344203,7 @@
           "TS": 0.5262438490978677,
           "POSS": 69.47797297297296
         }
-      ],
-      "play_by_play_count": 719,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 502536,
@@ -353163,9 +353087,7 @@
           "TS": 0.4177718832891246,
           "POSS": 66.03051282051283
         }
-      ],
-      "play_by_play_count": 753,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 502534,
@@ -362637,9 +362559,7 @@
           "TS": 0.5930930930930931,
           "POSS": 66.3735135135135
         }
-      ],
-      "play_by_play_count": 670,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 502537,
@@ -371523,9 +371443,7 @@
           "TS": 0.4509962304792676,
           "POSS": 75.40344594594595
         }
-      ],
-      "play_by_play_count": 742,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 502538,
@@ -380409,9 +380327,7 @@
           "TS": 0.45242265032107415,
           "POSS": 61.250829268292684
         }
-      ],
-      "play_by_play_count": 666,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 502539,
@@ -389295,9 +389211,7 @@
           "TS": 0.5750798722044729,
           "POSS": 64.26455100261552
         }
-      ],
-      "play_by_play_count": 680,
-      "play_by_plays": []
+      ]
     },
     {
       "schedule_key": 502540,
@@ -398181,9 +398095,7 @@
           "TS": 0.5065461346633416,
           "POSS": 64.28756756756756
         }
-      ],
-      "play_by_play_count": 696,
-      "play_by_plays": []
+      ]
     }
   ]
 }
