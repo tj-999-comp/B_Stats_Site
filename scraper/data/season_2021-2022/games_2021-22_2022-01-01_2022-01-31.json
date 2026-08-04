@@ -1,15 +1,16 @@
 {
   "season": "2021-22",
-  "generated_at": "2026-03-11T09:22:17.986265+00:00",
-  "start_date": "2021-01-01",
-  "end_date": "2021-01-31",
+  "generated_at": "2026-08-04T05:36:46.690740+00:00",
+  "include_play_by_play": false,
+  "start_date": "2022-01-01",
+  "end_date": "2022-01-31",
   "date_to_schedule_keys": {
-    "2021-01-01": [
+    "2022-01-01": [
       7702,
       7686,
       7688
     ],
-    "2021-01-02": [
+    "2022-01-02": [
       7700,
       7684,
       7698,
@@ -22,7 +23,7 @@
       7696,
       7704
     ],
-    "2021-01-03": [
+    "2022-01-03": [
       7701,
       7685,
       7693,
@@ -32,42 +33,42 @@
       7691,
       7705
     ],
-    "2021-01-04": [
+    "2022-01-04": [
       7710,
       7712,
       7716
     ],
-    "2021-01-05": [
+    "2022-01-05": [
       7710,
       7712,
       7716
     ],
-    "2021-01-06": [
+    "2022-01-06": [
       7710,
       7712,
       7716
     ],
-    "2021-01-07": [
+    "2022-01-07": [
       7710,
       7712,
       7716
     ],
-    "2021-01-08": [
+    "2022-01-08": [
       7710,
       7712,
       7716
     ],
-    "2021-01-09": [
+    "2022-01-09": [
       7717,
       7713
     ],
-    "2021-01-10": [],
-    "2021-01-11": [],
-    "2021-01-12": [],
-    "2021-01-13": [],
-    "2021-01-14": [],
-    "2021-01-15": [],
-    "2021-01-16": [
+    "2022-01-10": [],
+    "2022-01-11": [],
+    "2022-01-12": [],
+    "2022-01-13": [],
+    "2022-01-14": [],
+    "2022-01-15": [],
+    "2022-01-16": [
       7730,
       7734,
       7742,
@@ -75,7 +76,7 @@
       7738,
       7728
     ],
-    "2021-01-17": [
+    "2022-01-17": [
       7730,
       7734,
       7742,
@@ -83,7 +84,7 @@
       7738,
       7728
     ],
-    "2021-01-18": [
+    "2022-01-18": [
       7730,
       7734,
       7742,
@@ -91,7 +92,7 @@
       7738,
       7728
     ],
-    "2021-01-19": [
+    "2022-01-19": [
       7730,
       7734,
       7742,
@@ -99,7 +100,7 @@
       7738,
       7728
     ],
-    "2021-01-20": [
+    "2022-01-20": [
       7730,
       7734,
       7742,
@@ -107,7 +108,7 @@
       7738,
       7728
     ],
-    "2021-01-21": [
+    "2022-01-21": [
       7730,
       7734,
       7742,
@@ -115,7 +116,7 @@
       7738,
       7728
     ],
-    "2021-01-22": [
+    "2022-01-22": [
       7730,
       7734,
       7742,
@@ -123,7 +124,7 @@
       7738,
       7728
     ],
-    "2021-01-23": [
+    "2022-01-23": [
       7729,
       7731,
       7735,
@@ -131,7 +132,7 @@
       7745,
       7739
     ],
-    "2021-01-24": [
+    "2022-01-24": [
       7750,
       7751,
       7752,
@@ -141,7 +142,7 @@
       7759,
       7760
     ],
-    "2021-01-25": [
+    "2022-01-25": [
       7750,
       7751,
       7752,
@@ -151,7 +152,7 @@
       7759,
       7760
     ],
-    "2021-01-26": [
+    "2022-01-26": [
       7750,
       7751,
       7752,
@@ -161,7 +162,7 @@
       7759,
       7760
     ],
-    "2021-01-27": [
+    "2022-01-27": [
       7781,
       7761,
       7773,
@@ -170,7 +171,7 @@
       7771,
       7779
     ],
-    "2021-01-28": [
+    "2022-01-28": [
       7781,
       7761,
       7773,
@@ -179,7 +180,7 @@
       7771,
       7779
     ],
-    "2021-01-29": [
+    "2022-01-29": [
       7781,
       7761,
       7773,
@@ -188,7 +189,7 @@
       7771,
       7779
     ],
-    "2021-01-30": [
+    "2022-01-30": [
       7772,
       7782,
       7762,
@@ -196,7 +197,7 @@
       7780,
       7770
     ],
-    "2021-01-31": [
+    "2022-01-31": [
       7772,
       7782,
       7762,
@@ -206,6 +207,7 @@
     ]
   },
   "game_count": 60,
+  "failed_schedule_keys": [],
   "games": [
     {
       "schedule_key": 7702,
@@ -237,7 +239,7 @@
         "GameEndedFlg": true,
         "RecordFixedFlg": true,
         "ConventionClass": 1,
-        "GameDateTime": "1609475700",
+        "GameDateTime": "1641011700",
         "HomeTeamID": "721",
         "HomeTeamNameJ": "広島ドラゴンフライズ",
         "HomeTeamNameE": "HIROSHIMA DRAGONFLIES",
@@ -8025,7 +8027,9 @@
           "PT2ND": 9,
           "EFF": 86
         }
-      ]
+      ],
+      "play_by_play_count": 774,
+      "play_by_plays": []
     },
     {
       "schedule_key": 7686,
@@ -8057,7 +8061,7 @@
         "GameEndedFlg": true,
         "RecordFixedFlg": true,
         "ConventionClass": 1,
-        "GameDateTime": "1609481100",
+        "GameDateTime": "1641017100",
         "HomeTeamID": "713",
         "HomeTeamNameJ": "群馬クレインサンダーズ",
         "HomeTeamNameE": "GUNMA CRANE THUNDERS",
@@ -15327,7 +15331,9 @@
           "PT2ND": 6,
           "EFF": 130
         }
-      ]
+      ],
+      "play_by_play_count": 701,
+      "play_by_plays": []
     },
     {
       "schedule_key": 7688,
@@ -15359,7 +15365,7 @@
         "GameEndedFlg": true,
         "RecordFixedFlg": true,
         "ConventionClass": 1,
-        "GameDateTime": "1609481100",
+        "GameDateTime": "1641017100",
         "HomeTeamID": "704",
         "HomeTeamNameJ": "千葉ジェッツ",
         "HomeTeamNameE": "CHIBA JETS",
@@ -23147,7 +23153,9 @@
           "PT2ND": 2,
           "EFF": 78
         }
-      ]
+      ],
+      "play_by_play_count": 643,
+      "play_by_plays": []
     },
     {
       "schedule_key": 7700,
@@ -23179,7 +23187,7 @@
         "GameEndedFlg": true,
         "RecordFixedFlg": true,
         "ConventionClass": 1,
-        "GameDateTime": "1609562100",
+        "GameDateTime": "1641098100",
         "HomeTeamID": "720",
         "HomeTeamNameJ": "島根スサノオマジック",
         "HomeTeamNameE": "SHIMANE SUSANOO MAGIC",
@@ -30967,7 +30975,9 @@
           "PT2ND": 8,
           "EFF": 117
         }
-      ]
+      ],
+      "play_by_play_count": 632,
+      "play_by_plays": []
     },
     {
       "schedule_key": 7684,
@@ -30999,7 +31009,7 @@
         "GameEndedFlg": true,
         "RecordFixedFlg": true,
         "ConventionClass": 1,
-        "GameDateTime": "1609563900",
+        "GameDateTime": "1641099900",
         "HomeTeamID": "712",
         "HomeTeamNameJ": "茨城ロボッツ",
         "HomeTeamNameE": "IBARAKI ROBOTS",
@@ -38528,7 +38538,9 @@
           "PT2ND": 11,
           "EFF": 106
         }
-      ]
+      ],
+      "play_by_play_count": 655,
+      "play_by_plays": []
     },
     {
       "schedule_key": 7698,
@@ -38560,7 +38572,7 @@
         "GameEndedFlg": true,
         "RecordFixedFlg": true,
         "ConventionClass": 1,
-        "GameDateTime": "1609563900",
+        "GameDateTime": "1641099900",
         "HomeTeamID": "699",
         "HomeTeamNameJ": "京都ハンナリーズ",
         "HomeTeamNameE": "KYOTO HANNARYZ",
@@ -45830,7 +45842,9 @@
           "PT2ND": 6,
           "EFF": 97
         }
-      ]
+      ],
+      "play_by_play_count": 628,
+      "play_by_plays": []
     },
     {
       "schedule_key": 7703,
@@ -45862,7 +45876,7 @@
         "GameEndedFlg": true,
         "RecordFixedFlg": true,
         "ConventionClass": 1,
-        "GameDateTime": "1609563900",
+        "GameDateTime": "1641099900",
         "HomeTeamID": "721",
         "HomeTeamNameJ": "広島ドラゴンフライズ",
         "HomeTeamNameE": "HIROSHIMA DRAGONFLIES",
@@ -53650,7 +53664,9 @@
           "PT2ND": 6,
           "EFF": 112
         }
-      ]
+      ],
+      "play_by_play_count": 692,
+      "play_by_plays": []
     },
     {
       "schedule_key": 7687,
@@ -53682,7 +53698,7 @@
         "GameEndedFlg": true,
         "RecordFixedFlg": true,
         "ConventionClass": 1,
-        "GameDateTime": "1609567500",
+        "GameDateTime": "1641103500",
         "HomeTeamID": "713",
         "HomeTeamNameJ": "群馬クレインサンダーズ",
         "HomeTeamNameE": "GUNMA CRANE THUNDERS",
@@ -60952,7 +60968,9 @@
           "PT2ND": 9,
           "EFF": 131
         }
-      ]
+      ],
+      "play_by_play_count": 653,
+      "play_by_plays": []
     },
     {
       "schedule_key": 7689,
@@ -60984,7 +61002,7 @@
         "GameEndedFlg": true,
         "RecordFixedFlg": true,
         "ConventionClass": 1,
-        "GameDateTime": "1609567500",
+        "GameDateTime": "1641103500",
         "HomeTeamID": "704",
         "HomeTeamNameJ": "千葉ジェッツ",
         "HomeTeamNameE": "CHIBA JETS",
@@ -68772,7 +68790,9 @@
           "PT2ND": 8,
           "EFF": 70
         }
-      ]
+      ],
+      "play_by_play_count": 756,
+      "play_by_plays": []
     },
     {
       "schedule_key": 7692,
@@ -68804,7 +68824,7 @@
         "GameEndedFlg": true,
         "RecordFixedFlg": true,
         "ConventionClass": 1,
-        "GameDateTime": "1609567500",
+        "GameDateTime": "1641103500",
         "HomeTeamID": "694",
         "HomeTeamNameJ": "横浜ビー・コルセアーズ",
         "HomeTeamNameE": "YOKOHAMA B-CORSAIRS",
@@ -76592,7 +76612,9 @@
           "PT2ND": 7,
           "EFF": 73
         }
-      ]
+      ],
+      "play_by_play_count": 649,
+      "play_by_plays": []
     },
     {
       "schedule_key": 7694,
@@ -76624,7 +76646,7 @@
         "GameEndedFlg": true,
         "RecordFixedFlg": true,
         "ConventionClass": 1,
-        "GameDateTime": "1609574700",
+        "GameDateTime": "1641110700",
         "HomeTeamID": "695",
         "HomeTeamNameJ": "新潟アルビレックスBB",
         "HomeTeamNameE": "NIIGATA ALBIREX BB",
@@ -84412,7 +84434,9 @@
           "PT2ND": 7,
           "EFF": 111
         }
-      ]
+      ],
+      "play_by_play_count": 721,
+      "play_by_plays": []
     },
     {
       "schedule_key": 7690,
@@ -84444,7 +84468,7 @@
         "GameEndedFlg": true,
         "RecordFixedFlg": true,
         "ConventionClass": 1,
-        "GameDateTime": "1609578300",
+        "GameDateTime": "1641114300",
         "HomeTeamID": "727",
         "HomeTeamNameJ": "川崎ブレイブサンダース",
         "HomeTeamNameE": "KAWASAKI BRAVE THUNDERS",
@@ -91973,7 +91997,9 @@
           "PT2ND": 1,
           "EFF": 68
         }
-      ]
+      ],
+      "play_by_play_count": 571,
+      "play_by_plays": []
     },
     {
       "schedule_key": 7696,
@@ -92005,7 +92031,7 @@
         "GameEndedFlg": true,
         "RecordFixedFlg": true,
         "ConventionClass": 1,
-        "GameDateTime": "1609578300",
+        "GameDateTime": "1641114300",
         "HomeTeamID": "698",
         "HomeTeamNameJ": "滋賀レイクスターズ",
         "HomeTeamNameE": "SHIGA LAKESTARS",
@@ -99793,7 +99819,9 @@
           "PT2ND": 1,
           "EFF": 114
         }
-      ]
+      ],
+      "play_by_play_count": 763,
+      "play_by_plays": []
     },
     {
       "schedule_key": 7704,
@@ -99825,7 +99853,7 @@
         "GameEndedFlg": true,
         "RecordFixedFlg": true,
         "ConventionClass": 1,
-        "GameDateTime": "1609578300",
+        "GameDateTime": "1641114300",
         "HomeTeamID": "701",
         "HomeTeamNameJ": "琉球ゴールデンキングス",
         "HomeTeamNameE": "RYUKYU GOLDEN KINGS",
@@ -107613,7 +107641,9 @@
           "PT2ND": 1,
           "EFF": 81
         }
-      ]
+      ],
+      "play_by_play_count": 711,
+      "play_by_plays": []
     },
     {
       "schedule_key": 7701,
@@ -107645,7 +107675,7 @@
         "GameEndedFlg": true,
         "RecordFixedFlg": true,
         "ConventionClass": 1,
-        "GameDateTime": "1609648500",
+        "GameDateTime": "1641184500",
         "HomeTeamID": "720",
         "HomeTeamNameJ": "島根スサノオマジック",
         "HomeTeamNameE": "SHIMANE SUSANOO MAGIC",
@@ -115433,7 +115463,9 @@
           "PT2ND": 5,
           "EFF": 92
         }
-      ]
+      ],
+      "play_by_play_count": 706,
+      "play_by_plays": []
     },
     {
       "schedule_key": 7685,
@@ -115465,7 +115497,7 @@
         "GameEndedFlg": true,
         "RecordFixedFlg": true,
         "ConventionClass": 1,
-        "GameDateTime": "1609650300",
+        "GameDateTime": "1641186300",
         "HomeTeamID": "712",
         "HomeTeamNameJ": "茨城ロボッツ",
         "HomeTeamNameE": "IBARAKI ROBOTS",
@@ -123253,7 +123285,9 @@
           "PT2ND": 9,
           "EFF": 128
         }
-      ]
+      ],
+      "play_by_play_count": 662,
+      "play_by_plays": []
     },
     {
       "schedule_key": 7693,
@@ -123285,7 +123319,7 @@
         "GameEndedFlg": true,
         "RecordFixedFlg": true,
         "ConventionClass": 1,
-        "GameDateTime": "1609650300",
+        "GameDateTime": "1641186300",
         "HomeTeamID": "694",
         "HomeTeamNameJ": "横浜ビー・コルセアーズ",
         "HomeTeamNameE": "YOKOHAMA B-CORSAIRS",
@@ -131073,7 +131107,9 @@
           "PT2ND": 10,
           "EFF": 142
         }
-      ]
+      ],
+      "play_by_play_count": 692,
+      "play_by_plays": []
     },
     {
       "schedule_key": 7699,
@@ -131105,7 +131141,7 @@
         "GameEndedFlg": true,
         "RecordFixedFlg": true,
         "ConventionClass": 1,
-        "GameDateTime": "1609650300",
+        "GameDateTime": "1641186300",
         "HomeTeamID": "699",
         "HomeTeamNameJ": "京都ハンナリーズ",
         "HomeTeamNameE": "KYOTO HANNARYZ",
@@ -140447,7 +140483,9 @@
           "PT2ND": 7,
           "EFF": 81
         }
-      ]
+      ],
+      "play_by_play_count": 627,
+      "play_by_plays": []
     },
     {
       "schedule_key": 7697,
@@ -140479,7 +140517,7 @@
         "GameEndedFlg": true,
         "RecordFixedFlg": true,
         "ConventionClass": 1,
-        "GameDateTime": "1609652100",
+        "GameDateTime": "1641188100",
         "HomeTeamID": "698",
         "HomeTeamNameJ": "滋賀レイクスターズ",
         "HomeTeamNameE": "SHIGA LAKESTARS",
@@ -148267,7 +148305,9 @@
           "PT2ND": 7,
           "EFF": 120
         }
-      ]
+      ],
+      "play_by_play_count": 728,
+      "play_by_plays": []
     },
     {
       "schedule_key": 7695,
@@ -148299,7 +148339,7 @@
         "GameEndedFlg": true,
         "RecordFixedFlg": true,
         "ConventionClass": 1,
-        "GameDateTime": "1609653900",
+        "GameDateTime": "1641189900",
         "HomeTeamID": "695",
         "HomeTeamNameJ": "新潟アルビレックスBB",
         "HomeTeamNameE": "NIIGATA ALBIREX BB",
@@ -155828,7 +155868,9 @@
           "PT2ND": 8,
           "EFF": 96
         }
-      ]
+      ],
+      "play_by_play_count": 721,
+      "play_by_plays": []
     },
     {
       "schedule_key": 7691,
@@ -155860,7 +155902,7 @@
         "GameEndedFlg": true,
         "RecordFixedFlg": true,
         "ConventionClass": 1,
-        "GameDateTime": "1609657500",
+        "GameDateTime": "1641193500",
         "HomeTeamID": "727",
         "HomeTeamNameJ": "川崎ブレイブサンダース",
         "HomeTeamNameE": "KAWASAKI BRAVE THUNDERS",
@@ -163389,7 +163431,9 @@
           "PT2ND": 0,
           "EFF": 69
         }
-      ]
+      ],
+      "play_by_play_count": 680,
+      "play_by_plays": []
     },
     {
       "schedule_key": 7705,
@@ -163421,7 +163465,7 @@
         "GameEndedFlg": true,
         "RecordFixedFlg": true,
         "ConventionClass": 1,
-        "GameDateTime": "1609664700",
+        "GameDateTime": "1641200700",
         "HomeTeamID": "701",
         "HomeTeamNameJ": "琉球ゴールデンキングス",
         "HomeTeamNameE": "RYUKYU GOLDEN KINGS",
@@ -171209,7 +171253,9 @@
           "PT2ND": 6,
           "EFF": 56
         }
-      ]
+      ],
+      "play_by_play_count": 684,
+      "play_by_plays": []
     },
     {
       "schedule_key": 7710,
@@ -171241,7 +171287,7 @@
         "GameEndedFlg": true,
         "RecordFixedFlg": true,
         "ConventionClass": 1,
-        "GameDateTime": "1609740300",
+        "GameDateTime": "1641621900",
         "HomeTeamID": "713",
         "HomeTeamNameJ": "群馬クレインサンダーズ",
         "HomeTeamNameE": "GUNMA CRANE THUNDERS",
@@ -178511,7 +178557,9 @@
           "PT2ND": 12,
           "EFF": 138
         }
-      ]
+      ],
+      "play_by_play_count": 686,
+      "play_by_plays": []
     },
     {
       "schedule_key": 7712,
@@ -178543,7 +178591,7 @@
         "GameEndedFlg": true,
         "RecordFixedFlg": true,
         "ConventionClass": 1,
-        "GameDateTime": "1609747500",
+        "GameDateTime": "1641629100",
         "HomeTeamID": "726",
         "HomeTeamNameJ": "サンロッカーズ渋谷",
         "HomeTeamNameE": "Sunrockers Shibuya",
@@ -186331,7 +186379,9 @@
           "PT2ND": 7,
           "EFF": 65
         }
-      ]
+      ],
+      "play_by_play_count": 672,
+      "play_by_plays": []
     },
     {
       "schedule_key": 7716,
@@ -186363,7 +186413,7 @@
         "GameEndedFlg": true,
         "RecordFixedFlg": true,
         "ConventionClass": 1,
-        "GameDateTime": "1609751100",
+        "GameDateTime": "1641632700",
         "HomeTeamID": "696",
         "HomeTeamNameJ": "富山グラウジーズ",
         "HomeTeamNameE": "TOYAMA GROUSES",
@@ -194151,7 +194201,9 @@
           "PT2ND": 5,
           "EFF": 98
         }
-      ]
+      ],
+      "play_by_play_count": 710,
+      "play_by_plays": []
     },
     {
       "schedule_key": 7717,
@@ -194183,7 +194235,7 @@
         "GameEndedFlg": true,
         "RecordFixedFlg": true,
         "ConventionClass": 1,
-        "GameDateTime": "1610165100",
+        "GameDateTime": "1641701100",
         "HomeTeamID": "696",
         "HomeTeamNameJ": "富山グラウジーズ",
         "HomeTeamNameE": "TOYAMA GROUSES",
@@ -201712,7 +201764,9 @@
           "PT2ND": 12,
           "EFF": 96
         }
-      ]
+      ],
+      "play_by_play_count": 648,
+      "play_by_plays": []
     },
     {
       "schedule_key": 7713,
@@ -201744,7 +201798,7 @@
         "GameEndedFlg": true,
         "RecordFixedFlg": true,
         "ConventionClass": 1,
-        "GameDateTime": "1610172300",
+        "GameDateTime": "1641708300",
         "HomeTeamID": "726",
         "HomeTeamNameJ": "サンロッカーズ渋谷",
         "HomeTeamNameE": "Sunrockers Shibuya",
@@ -209532,7 +209586,9 @@
           "PT2ND": 5,
           "EFF": 108
         }
-      ]
+      ],
+      "play_by_play_count": 734,
+      "play_by_plays": []
     },
     {
       "schedule_key": 7730,
@@ -209564,7 +209620,7 @@
         "GameEndedFlg": true,
         "RecordFixedFlg": true,
         "ConventionClass": 1,
-        "GameDateTime": "1610773500",
+        "GameDateTime": "1642827900",
         "HomeTeamID": "712",
         "HomeTeamNameJ": "茨城ロボッツ",
         "HomeTeamNameE": "IBARAKI ROBOTS",
@@ -217352,7 +217408,9 @@
           "PT2ND": 6,
           "EFF": 92
         }
-      ]
+      ],
+      "play_by_play_count": 699,
+      "play_by_plays": []
     },
     {
       "schedule_key": 7734,
@@ -217384,7 +217442,7 @@
         "GameEndedFlg": true,
         "RecordFixedFlg": true,
         "ConventionClass": 1,
-        "GameDateTime": "1610777100",
+        "GameDateTime": "1642831500",
         "HomeTeamID": "706",
         "HomeTeamNameJ": "アルバルク東京",
         "HomeTeamNameE": "ALVARK TOKYO",
@@ -225172,7 +225230,9 @@
           "PT2ND": 5,
           "EFF": 75
         }
-      ]
+      ],
+      "play_by_play_count": 666,
+      "play_by_plays": []
     },
     {
       "schedule_key": 7742,
@@ -225204,7 +225264,7 @@
         "GameEndedFlg": true,
         "RecordFixedFlg": true,
         "ConventionClass": 1,
-        "GameDateTime": "1610777100",
+        "GameDateTime": "1642831500",
         "HomeTeamID": "728",
         "HomeTeamNameJ": "シーホース三河",
         "HomeTeamNameE": "SEAHORSES MIKAWA",
@@ -232733,7 +232793,9 @@
           "PT2ND": 8,
           "EFF": 110
         }
-      ]
+      ],
+      "play_by_play_count": 622,
+      "play_by_plays": []
     },
     {
       "schedule_key": 7744,
@@ -232765,7 +232827,7 @@
         "GameEndedFlg": true,
         "RecordFixedFlg": true,
         "ConventionClass": 1,
-        "GameDateTime": "1610777100",
+        "GameDateTime": "1642831500",
         "HomeTeamID": "729",
         "HomeTeamNameJ": "名古屋ダイヤモンドドルフィンズ",
         "HomeTeamNameE": "NAGOYA DIAMOND DOLPHINS",
@@ -240294,7 +240356,9 @@
           "PT2ND": 2,
           "EFF": 56
         }
-      ]
+      ],
+      "play_by_play_count": 708,
+      "play_by_plays": []
     },
     {
       "schedule_key": 7738,
@@ -240326,7 +240390,7 @@
         "GameEndedFlg": true,
         "RecordFixedFlg": true,
         "ConventionClass": 1,
-        "GameDateTime": "1610784300",
+        "GameDateTime": "1642838700",
         "HomeTeamID": "695",
         "HomeTeamNameJ": "新潟アルビレックスBB",
         "HomeTeamNameE": "NIIGATA ALBIREX BB",
@@ -247596,7 +247660,9 @@
           "PT2ND": 5,
           "EFF": 91
         }
-      ]
+      ],
+      "play_by_play_count": 677,
+      "play_by_plays": []
     },
     {
       "schedule_key": 7728,
@@ -247628,7 +247694,7 @@
         "GameEndedFlg": true,
         "RecordFixedFlg": true,
         "ConventionClass": 1,
-        "GameDateTime": "1610787900",
+        "GameDateTime": "1642842300",
         "HomeTeamID": "693",
         "HomeTeamNameJ": "秋田ノーザンハピネッツ",
         "HomeTeamNameE": "AKITA NORTHERN HAPPINETS",
@@ -255416,7 +255482,9 @@
           "PT2ND": 10,
           "EFF": 78
         }
-      ]
+      ],
+      "play_by_play_count": 751,
+      "play_by_plays": []
     },
     {
       "schedule_key": 7729,
@@ -255448,7 +255516,7 @@
         "GameEndedFlg": true,
         "RecordFixedFlg": true,
         "ConventionClass": 1,
-        "GameDateTime": "1611378300",
+        "GameDateTime": "1642914300",
         "HomeTeamID": "693",
         "HomeTeamNameJ": "秋田ノーザンハピネッツ",
         "HomeTeamNameE": "AKITA NORTHERN HAPPINETS",
@@ -265456,7 +265524,9 @@
           "PT2ND": 5,
           "EFF": 113
         }
-      ]
+      ],
+      "play_by_play_count": 821,
+      "play_by_plays": []
     },
     {
       "schedule_key": 7731,
@@ -265488,7 +265558,7 @@
         "GameEndedFlg": true,
         "RecordFixedFlg": true,
         "ConventionClass": 1,
-        "GameDateTime": "1611378300",
+        "GameDateTime": "1642914300",
         "HomeTeamID": "712",
         "HomeTeamNameJ": "茨城ロボッツ",
         "HomeTeamNameE": "IBARAKI ROBOTS",
@@ -273276,7 +273346,9 @@
           "PT2ND": 7,
           "EFF": 128
         }
-      ]
+      ],
+      "play_by_play_count": 652,
+      "play_by_plays": []
     },
     {
       "schedule_key": 7735,
@@ -273308,7 +273380,7 @@
         "GameEndedFlg": true,
         "RecordFixedFlg": true,
         "ConventionClass": 1,
-        "GameDateTime": "1611381900",
+        "GameDateTime": "1642917900",
         "HomeTeamID": "706",
         "HomeTeamNameJ": "アルバルク東京",
         "HomeTeamNameE": "ALVARK TOKYO",
@@ -281096,7 +281168,9 @@
           "PT2ND": 1,
           "EFF": 56
         }
-      ]
+      ],
+      "play_by_play_count": 651,
+      "play_by_plays": []
     },
     {
       "schedule_key": 7743,
@@ -281128,7 +281202,7 @@
         "GameEndedFlg": true,
         "RecordFixedFlg": true,
         "ConventionClass": 1,
-        "GameDateTime": "1611381900",
+        "GameDateTime": "1642917900",
         "HomeTeamID": "728",
         "HomeTeamNameJ": "シーホース三河",
         "HomeTeamNameE": "SEAHORSES MIKAWA",
@@ -288398,7 +288472,9 @@
           "PT2ND": 9,
           "EFF": 67
         }
-      ]
+      ],
+      "play_by_play_count": 663,
+      "play_by_plays": []
     },
     {
       "schedule_key": 7745,
@@ -288430,7 +288506,7 @@
         "GameEndedFlg": true,
         "RecordFixedFlg": true,
         "ConventionClass": 1,
-        "GameDateTime": "1611381900",
+        "GameDateTime": "1642917900",
         "HomeTeamID": "729",
         "HomeTeamNameJ": "名古屋ダイヤモンドドルフィンズ",
         "HomeTeamNameE": "NAGOYA DIAMOND DOLPHINS",
@@ -295959,7 +296035,9 @@
           "PT2ND": 5,
           "EFF": 80
         }
-      ]
+      ],
+      "play_by_play_count": 715,
+      "play_by_plays": []
     },
     {
       "schedule_key": 7739,
@@ -295991,7 +296069,7 @@
         "GameEndedFlg": true,
         "RecordFixedFlg": true,
         "ConventionClass": 1,
-        "GameDateTime": "1611389100",
+        "GameDateTime": "1642925100",
         "HomeTeamID": "695",
         "HomeTeamNameJ": "新潟アルビレックスBB",
         "HomeTeamNameE": "NIIGATA ALBIREX BB",
@@ -302743,7 +302821,9 @@
           "PT2ND": 7,
           "EFF": 126
         }
-      ]
+      ],
+      "play_by_play_count": 622,
+      "play_by_plays": []
     },
     {
       "schedule_key": 7750,
@@ -302775,7 +302855,7 @@
         "GameEndedFlg": true,
         "RecordFixedFlg": true,
         "ConventionClass": 1,
-        "GameDateTime": "1611482700",
+        "GameDateTime": "1643191500",
         "HomeTeamID": "702",
         "HomeTeamNameJ": "レバンガ北海道",
         "HomeTeamNameE": "LEVANGA HOKKAIDO",
@@ -310304,7 +310384,9 @@
           "PT2ND": 5,
           "EFF": 88
         }
-      ]
+      ],
+      "play_by_play_count": 756,
+      "play_by_plays": []
     },
     {
       "schedule_key": 7751,
@@ -310336,7 +310418,7 @@
         "GameEndedFlg": true,
         "RecordFixedFlg": true,
         "ConventionClass": 1,
-        "GameDateTime": "1611482700",
+        "GameDateTime": "1643191500",
         "HomeTeamID": "713",
         "HomeTeamNameJ": "群馬クレインサンダーズ",
         "HomeTeamNameE": "GUNMA CRANE THUNDERS",
@@ -318124,7 +318206,9 @@
           "PT2ND": 2,
           "EFF": 113
         }
-      ]
+      ],
+      "play_by_play_count": 703,
+      "play_by_plays": []
     },
     {
       "schedule_key": 7752,
@@ -318156,7 +318240,7 @@
         "GameEndedFlg": true,
         "RecordFixedFlg": true,
         "ConventionClass": 1,
-        "GameDateTime": "1611482700",
+        "GameDateTime": "1643191500",
         "HomeTeamID": "704",
         "HomeTeamNameJ": "千葉ジェッツ",
         "HomeTeamNameE": "CHIBA JETS",
@@ -325944,7 +326028,9 @@
           "PT2ND": 3,
           "EFF": 69
         }
-      ]
+      ],
+      "play_by_play_count": 721,
+      "play_by_plays": []
     },
     {
       "schedule_key": 7753,
@@ -325976,7 +326062,7 @@
         "GameEndedFlg": true,
         "RecordFixedFlg": true,
         "ConventionClass": 1,
-        "GameDateTime": "1611482700",
+        "GameDateTime": "1643191500",
         "HomeTeamID": "706",
         "HomeTeamNameJ": "アルバルク東京",
         "HomeTeamNameE": "ALVARK TOKYO",
@@ -333764,7 +333850,9 @@
           "PT2ND": 6,
           "EFF": 97
         }
-      ]
+      ],
+      "play_by_play_count": 697,
+      "play_by_plays": []
     },
     {
       "schedule_key": 7754,
@@ -333796,7 +333884,7 @@
         "GameEndedFlg": true,
         "RecordFixedFlg": true,
         "ConventionClass": 1,
-        "GameDateTime": "1611482700",
+        "GameDateTime": "1643191500",
         "HomeTeamID": "726",
         "HomeTeamNameJ": "サンロッカーズ渋谷",
         "HomeTeamNameE": "Sunrockers Shibuya",
@@ -343471,7 +343559,9 @@
           "PT2ND": 8,
           "EFF": 99
         }
-      ]
+      ],
+      "play_by_play_count": 736,
+      "play_by_plays": []
     },
     {
       "schedule_key": 7756,
@@ -343503,7 +343593,7 @@
         "GameEndedFlg": true,
         "RecordFixedFlg": true,
         "ConventionClass": 1,
-        "GameDateTime": "1611482700",
+        "GameDateTime": "1643191500",
         "HomeTeamID": "716",
         "HomeTeamNameJ": "信州ブレイブウォリアーズ",
         "HomeTeamNameE": "SHINSHU BRAVE WARRIORS",
@@ -350514,7 +350604,9 @@
           "PT2ND": 11,
           "EFF": 84
         }
-      ]
+      ],
+      "play_by_play_count": 728,
+      "play_by_plays": []
     },
     {
       "schedule_key": 7759,
@@ -350546,7 +350638,7 @@
         "GameEndedFlg": true,
         "RecordFixedFlg": true,
         "ConventionClass": 1,
-        "GameDateTime": "1611482700",
+        "GameDateTime": "1643191500",
         "HomeTeamID": "700",
         "HomeTeamNameJ": "大阪エヴェッサ",
         "HomeTeamNameE": "OSAKA EVESSA",
@@ -357816,7 +357908,9 @@
           "PT2ND": 3,
           "EFF": 103
         }
-      ]
+      ],
+      "play_by_play_count": 616,
+      "play_by_plays": []
     },
     {
       "schedule_key": 7760,
@@ -357848,7 +357942,7 @@
         "GameEndedFlg": true,
         "RecordFixedFlg": true,
         "ConventionClass": 1,
-        "GameDateTime": "1611482700",
+        "GameDateTime": "1643191500",
         "HomeTeamID": "721",
         "HomeTeamNameJ": "広島ドラゴンフライズ",
         "HomeTeamNameE": "HIROSHIMA DRAGONFLIES",
@@ -365636,7 +365730,9 @@
           "PT2ND": 3,
           "EFF": 88
         }
-      ]
+      ],
+      "play_by_play_count": 663,
+      "play_by_plays": []
     },
     {
       "schedule_key": 7781,
@@ -365668,7 +365764,7 @@
         "GameEndedFlg": true,
         "RecordFixedFlg": true,
         "ConventionClass": 1,
-        "GameDateTime": "1611722100",
+        "GameDateTime": "1643430900",
         "HomeTeamID": "720",
         "HomeTeamNameJ": "島根スサノオマジック",
         "HomeTeamNameE": "SHIMANE SUSANOO MAGIC",
@@ -373456,7 +373552,9 @@
           "PT2ND": 3,
           "EFF": 67
         }
-      ]
+      ],
+      "play_by_play_count": 762,
+      "play_by_plays": []
     },
     {
       "schedule_key": 7761,
@@ -373488,7 +373586,7 @@
         "GameEndedFlg": true,
         "RecordFixedFlg": true,
         "ConventionClass": 1,
-        "GameDateTime": "1611723900",
+        "GameDateTime": "1643432700",
         "HomeTeamID": "702",
         "HomeTeamNameJ": "レバンガ北海道",
         "HomeTeamNameE": "LEVANGA HOKKAIDO",
@@ -381276,7 +381374,9 @@
           "PT2ND": 1,
           "EFF": 143
         }
-      ]
+      ],
+      "play_by_play_count": 664,
+      "play_by_plays": []
     },
     {
       "schedule_key": 7773,
@@ -381308,7 +381408,7 @@
         "GameEndedFlg": true,
         "RecordFixedFlg": true,
         "ConventionClass": 1,
-        "GameDateTime": "1611727500",
+        "GameDateTime": "1643436300",
         "HomeTeamID": "716",
         "HomeTeamNameJ": "信州ブレイブウォリアーズ",
         "HomeTeamNameE": "SHINSHU BRAVE WARRIORS",
@@ -388837,7 +388937,9 @@
           "PT2ND": 6,
           "EFF": 70
         }
-      ]
+      ],
+      "play_by_play_count": 708,
+      "play_by_plays": []
     },
     {
       "schedule_key": 7777,
@@ -388869,7 +388971,7 @@
         "GameEndedFlg": true,
         "RecordFixedFlg": true,
         "ConventionClass": 1,
-        "GameDateTime": "1611727500",
+        "GameDateTime": "1643436300",
         "HomeTeamID": "729",
         "HomeTeamNameJ": "名古屋ダイヤモンドドルフィンズ",
         "HomeTeamNameE": "NAGOYA DIAMOND DOLPHINS",
@@ -396398,7 +396500,9 @@
           "PT2ND": 12,
           "EFF": 123
         }
-      ]
+      ],
+      "play_by_play_count": 734,
+      "play_by_plays": []
     },
     {
       "schedule_key": 7769,
@@ -396430,7 +396534,7 @@
         "GameEndedFlg": true,
         "RecordFixedFlg": true,
         "ConventionClass": 1,
-        "GameDateTime": "1611734700",
+        "GameDateTime": "1643443500",
         "HomeTeamID": "695",
         "HomeTeamNameJ": "新潟アルビレックスBB",
         "HomeTeamNameE": "NIIGATA ALBIREX BB",
@@ -404218,7 +404322,9 @@
           "PT2ND": 3,
           "EFF": 77
         }
-      ]
+      ],
+      "play_by_play_count": 681,
+      "play_by_plays": []
     },
     {
       "schedule_key": 7771,
@@ -404250,7 +404356,7 @@
         "GameEndedFlg": true,
         "RecordFixedFlg": true,
         "ConventionClass": 1,
-        "GameDateTime": "1611738300",
+        "GameDateTime": "1643447100",
         "HomeTeamID": "696",
         "HomeTeamNameJ": "富山グラウジーズ",
         "HomeTeamNameE": "TOYAMA GROUSES",
@@ -412038,7 +412144,9 @@
           "PT2ND": 2,
           "EFF": 61
         }
-      ]
+      ],
+      "play_by_play_count": 742,
+      "play_by_plays": []
     },
     {
       "schedule_key": 7779,
@@ -412070,7 +412178,7 @@
         "GameEndedFlg": true,
         "RecordFixedFlg": true,
         "ConventionClass": 1,
-        "GameDateTime": "1611738300",
+        "GameDateTime": "1643447100",
         "HomeTeamID": "699",
         "HomeTeamNameJ": "京都ハンナリーズ",
         "HomeTeamNameE": "KYOTO HANNARYZ",
@@ -419858,7 +419966,9 @@
           "PT2ND": 10,
           "EFF": 90
         }
-      ]
+      ],
+      "play_by_play_count": 664,
+      "play_by_plays": []
     },
     {
       "schedule_key": 7772,
@@ -419890,7 +420000,7 @@
         "GameEndedFlg": true,
         "RecordFixedFlg": true,
         "ConventionClass": 1,
-        "GameDateTime": "1611979500",
+        "GameDateTime": "1643515500",
         "HomeTeamID": "696",
         "HomeTeamNameJ": "富山グラウジーズ",
         "HomeTeamNameE": "TOYAMA GROUSES",
@@ -427678,7 +427788,9 @@
           "PT2ND": 7,
           "EFF": 80
         }
-      ]
+      ],
+      "play_by_play_count": 707,
+      "play_by_plays": []
     },
     {
       "schedule_key": 7782,
@@ -427710,7 +427822,7 @@
         "GameEndedFlg": true,
         "RecordFixedFlg": true,
         "ConventionClass": 1,
-        "GameDateTime": "1611981300",
+        "GameDateTime": "1643517300",
         "HomeTeamID": "720",
         "HomeTeamNameJ": "島根スサノオマジック",
         "HomeTeamNameE": "SHIMANE SUSANOO MAGIC",
@@ -435498,7 +435610,9 @@
           "PT2ND": 6,
           "EFF": 76
         }
-      ]
+      ],
+      "play_by_play_count": 721,
+      "play_by_plays": []
     },
     {
       "schedule_key": 7762,
@@ -435530,7 +435644,7 @@
         "GameEndedFlg": true,
         "RecordFixedFlg": true,
         "ConventionClass": 1,
-        "GameDateTime": "1611983100",
+        "GameDateTime": "1643519100",
         "HomeTeamID": "702",
         "HomeTeamNameJ": "レバンガ北海道",
         "HomeTeamNameE": "LEVANGA HOKKAIDO",
@@ -443318,7 +443432,9 @@
           "PT2ND": 5,
           "EFF": 130
         }
-      ]
+      ],
+      "play_by_play_count": 709,
+      "play_by_plays": []
     },
     {
       "schedule_key": 7774,
@@ -443350,7 +443466,7 @@
         "GameEndedFlg": true,
         "RecordFixedFlg": true,
         "ConventionClass": 1,
-        "GameDateTime": "1611983100",
+        "GameDateTime": "1643519100",
         "HomeTeamID": "716",
         "HomeTeamNameJ": "信州ブレイブウォリアーズ",
         "HomeTeamNameE": "SHINSHU BRAVE WARRIORS",
@@ -450879,7 +450995,9 @@
           "PT2ND": 3,
           "EFF": 91
         }
-      ]
+      ],
+      "play_by_play_count": 694,
+      "play_by_plays": []
     },
     {
       "schedule_key": 7780,
@@ -450911,7 +451029,7 @@
         "GameEndedFlg": true,
         "RecordFixedFlg": true,
         "ConventionClass": 1,
-        "GameDateTime": "1611983100",
+        "GameDateTime": "1643519100",
         "HomeTeamID": "699",
         "HomeTeamNameJ": "京都ハンナリーズ",
         "HomeTeamNameE": "KYOTO HANNARYZ",
@@ -458699,7 +458817,9 @@
           "PT2ND": 7,
           "EFF": 59
         }
-      ]
+      ],
+      "play_by_play_count": 585,
+      "play_by_plays": []
     },
     {
       "schedule_key": 7770,
@@ -458731,7 +458851,7 @@
         "GameEndedFlg": true,
         "RecordFixedFlg": true,
         "ConventionClass": 1,
-        "GameDateTime": "1611986700",
+        "GameDateTime": "1643522700",
         "HomeTeamID": "695",
         "HomeTeamNameJ": "新潟アルビレックスBB",
         "HomeTeamNameE": "NIIGATA ALBIREX BB",
@@ -466519,7 +466639,9 @@
           "PT2ND": 8,
           "EFF": 81
         }
-      ]
+      ],
+      "play_by_play_count": 731,
+      "play_by_plays": []
     }
   ]
 }
