@@ -182,6 +182,7 @@ Vercel Hobby Plan (Next.js App Router: SSR/ISR)
 | [docs/flow.md](docs/flow.md) | スクレイピング〜Upsert〜正規化の実行順序と全体フロー | 日次運用・再投入前 |
 | [docs/date_resolution.md](docs/date_resolution.md) | GameDateTime と日付不整合の解決ルール | 日付ズレ調査時 |
 | [docs/workflows.md](docs/workflows.md) | GitHub Actions 各workflowの役割 | CI/CD挙動確認時 |
+| [supabase/sql/README.md](supabase/sql/README.md) | 一回限りのデータパッチSQLの命名・実行・復旧ルール | live DBの個別補正前 |
 
 ### Migrationを適用する
 
@@ -194,4 +195,3 @@ Vercel Hobby Plan (Next.js App Router: SSR/ISR)
 | ドキュメント | 何が分かるか | いつ読むか |
 |---|---|---|
 | [docs/changelog.md](docs/changelog.md) | スキーマ/スクリプト/運用の変更履歴 | 仕様差分の確認時 |
-
