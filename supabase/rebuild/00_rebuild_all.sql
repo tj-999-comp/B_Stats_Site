@@ -85,6 +85,8 @@ CREATE TABLE IF NOT EXISTS game_team_stats (
     is_home BOOLEAN NOT NULL,
 
     -- basic box-like stats
+    -- HomeTeamScore / AwayTeamScoreを正本とし、欠損時だけ2P・3P・FT成功数から算出する。
+    -- TeamPTRはフィールドゴール成功率のためpointsには使用しない。
     points INTEGER,
     fgm INTEGER,
     fga INTEGER,
@@ -1115,4 +1117,3 @@ END;
 $$ LANGUAGE plpgsql;
 
 -- END: 07_fix_affiliation_trigger.sql
-

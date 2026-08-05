@@ -182,18 +182,36 @@ def _select_full_game_summary(item: dict[str, Any]) -> dict[str, Any] | None:
     return max(summaries, key=lambda summary: _to_int(summary.get('PeriodCategory')) or 0)
 
 
-def _summary_side(summary: dict[str, Any], prefix: str) -> dict[str, Any]:
+def _summary_side(
+    summary: dict[str, Any],
+    prefix: str,
+    *,
+    score_total: Any,
+    schedule_key: int,
+) -> dict[str, Any]:
+    fg2m = _to_int(summary.get(f'{prefix}TeamPT2M')) or 0
+    fg3m = _to_int(summary.get(f'{prefix}TeamPT3M')) or 0
+    ftm = _to_int(summary.get(f'{prefix}TeamFTM')) or 0
+    points_from_shots = 2 * fg2m + 3 * fg3m + ftm
+    points_from_score = _to_int(score_total)
+
+    if points_from_score is not None and points_from_score != points_from_shots:
+        raise ValueError(
+            f'schedule_key={schedule_key}: {prefix.lower()} team points mismatch '
+            f'(score={points_from_score}, shots={points_from_shots})'
+        )
+
     return {
         'team_id': str(summary.get(f'{prefix}TeamID')) if summary.get(f'{prefix}TeamID') is not None else None,
         'team_name_j': summary.get(f'{prefix}TeamNameJ'),
-        'points': _to_int(summary.get(f'{prefix}TeamPTR')) or 0,
+        'points': points_from_score if points_from_score is not None else points_from_shots,
         'fgm': _to_int(summary.get(f'{prefix}TeamPTM')) or 0,
         'fga': _to_int(summary.get(f'{prefix}TeamPTA')) or 0,
-        'fg2m': _to_int(summary.get(f'{prefix}TeamPT2M')) or 0,
+        'fg2m': fg2m,
         'fg2a': _to_int(summary.get(f'{prefix}TeamPT2A')) or 0,
-        'fg3m': _to_int(summary.get(f'{prefix}TeamPT3M')) or 0,
+        'fg3m': fg3m,
         'fg3a': _to_int(summary.get(f'{prefix}TeamPT3A')) or 0,
-        'ftm': _to_int(summary.get(f'{prefix}TeamFTM')) or 0,
+        'ftm': ftm,
         'fta': _to_int(summary.get(f'{prefix}TeamFTA')) or 0,
         'off_rebounds': _to_int(summary.get(f'{prefix}TeamRB_OFF')) or 0,
         'def_rebounds': _to_int(summary.get(f'{prefix}TeamRB_DEF')) or 0,
@@ -379,8 +397,18 @@ def _extract_game_team_stats(payload: dict[str, Any]) -> list[dict[str, Any]]:
         if schedule_key is None:
             continue
 
-        home = _summary_side(summary, 'Home')
-        away = _summary_side(summary, 'Away')
+        home = _summary_side(
+            summary,
+            'Home',
+            score_total=game.get('HomeTeamScore'),
+            schedule_key=schedule_key,
+        )
+        away = _summary_side(
+            summary,
+            'Away',
+            score_total=game.get('AwayTeamScore'),
+            schedule_key=schedule_key,
+        )
         if home['team_id'] is None or away['team_id'] is None:
             continue
 
@@ -404,6 +432,99 @@ def _extract_game_team_stats(payload: dict[str, Any]) -> list[dict[str, Any]]:
         )
 
     return rows
+
+
+def _validate_game_team_points(
+    payload: dict[str, Any],
+    rows: list[dict[str, Any]],
+) -> dict[str, int]:
+    """入力スコア・シュート式・変換後 points の一致を検証する。"""
+    row_by_key: dict[tuple[int, bool], dict[str, Any]] = {}
+    duplicate_transformed_rows = 0
+    for row in rows:
+        key = (int(row['schedule_key']), bool(row['is_home']))
+        if key in row_by_key:
+            duplicate_transformed_rows += 1
+        row_by_key[key] = row
+
+    audited_team_rows = 0
+    score_available_rows = 0
+    score_missing_rows = 0
+    score_shot_mismatch_rows = 0
+    transformed_score_mismatch_rows = 0
+    transformed_shot_mismatch_rows = 0
+    missing_transformed_rows = 0
+    expected_keys: set[tuple[int, bool]] = set()
+
+    for item in payload.get('games', []):
+        summary = _select_full_game_summary(item)
+        if not summary:
+            continue
+
+        game = item.get('game', {})
+        schedule_key = _to_int(game.get('ScheduleKey') or item.get('schedule_key'))
+        if schedule_key is None:
+            continue
+
+        for prefix, is_home in (('Home', True), ('Away', False)):
+            if summary.get(f'{prefix}TeamID') is None:
+                continue
+
+            audited_team_rows += 1
+            key = (schedule_key, is_home)
+            expected_keys.add(key)
+            score_points = _to_int(game.get(f'{prefix}TeamScore'))
+            shot_points = (
+                2 * (_to_int(summary.get(f'{prefix}TeamPT2M')) or 0)
+                + 3 * (_to_int(summary.get(f'{prefix}TeamPT3M')) or 0)
+                + (_to_int(summary.get(f'{prefix}TeamFTM')) or 0)
+            )
+
+            if score_points is None:
+                score_missing_rows += 1
+            else:
+                score_available_rows += 1
+                if score_points != shot_points:
+                    score_shot_mismatch_rows += 1
+
+            transformed = row_by_key.get(key)
+            if transformed is None:
+                missing_transformed_rows += 1
+                continue
+
+            transformed_points = _to_int(transformed.get('points'))
+            if score_points is not None:
+                if transformed_points != score_points:
+                    transformed_score_mismatch_rows += 1
+
+            if transformed_points != shot_points:
+                transformed_shot_mismatch_rows += 1
+
+    unexpected_transformed_rows = len(set(row_by_key) - expected_keys)
+    result = {
+        'audited_team_rows': audited_team_rows,
+        'score_available_rows': score_available_rows,
+        'score_missing_rows': score_missing_rows,
+        'score_shot_mismatch_rows': score_shot_mismatch_rows,
+        'transformed_score_mismatch_rows': transformed_score_mismatch_rows,
+        'transformed_shot_mismatch_rows': transformed_shot_mismatch_rows,
+        'missing_transformed_rows': missing_transformed_rows,
+        'unexpected_transformed_rows': unexpected_transformed_rows,
+        'duplicate_transformed_rows': duplicate_transformed_rows,
+    }
+    invalid_keys = (
+        'score_shot_mismatch_rows',
+        'transformed_score_mismatch_rows',
+        'transformed_shot_mismatch_rows',
+        'missing_transformed_rows',
+        'unexpected_transformed_rows',
+        'duplicate_transformed_rows',
+    )
+    failures = {key: result[key] for key in invalid_keys if result[key] != 0}
+    if failures:
+        details = ' '.join(f'{key}={value}' for key, value in failures.items())
+        raise ValueError(f'game_team_stats points validation failed: {details}')
+    return result
 
 
 def _latest_games_json(base_dir: Path) -> Path:
@@ -727,6 +848,7 @@ def run(input_path: Path, dry_run: bool = False, with_play_by_play: bool = False
     teams = _extract_teams(payload)
     games = _extract_games(payload)
     game_team_stats = _extract_game_team_stats(payload)
+    points_validation = _validate_game_team_points(payload, game_team_stats)
     players = _extract_players(payload, player_id_map=player_id_map or None)
     player_game_stats = _extract_player_game_stats(payload, player_id_map=player_id_map or None)
     play_by_play = _extract_play_by_play(payload) if with_play_by_play else []
@@ -739,6 +861,10 @@ def run(input_path: Path, dry_run: bool = False, with_play_by_play: bool = False
         f'play_by_play={len(play_by_play)}'
     )
     print(f'with_play_by_play={with_play_by_play}')
+    print(
+        'points_validation: '
+        + ' '.join(f'{key}={value}' for key, value in points_validation.items())
+    )
 
     if dry_run:
         print('dry-run mode: skip upsert')

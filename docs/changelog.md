@@ -1,5 +1,18 @@
 # Changelog
 
+## 2026-08-05
+
+### Issue #11: game_team_statsの得点誤マッピング補正完了
+
+- `scripts/db/upsert_games.py` が `TeamPTR` を `game_team_stats.points` に保存していた誤マッピングを修正
+- `HomeTeamScore` / `AwayTeamScore` を得点の正本とし、欠損時だけ `2 × fg2m + 3 × fg3m + ftm` へフォールバックするよう変更
+- 試合スコアとシュート式が不一致の場合、および変換後pointsの不一致・欠落・余剰・重複を検出した場合はUpsert前に停止する監査を追加
+- 追跡済み全74月次JSONをdry-runし、サマリーを持つ5,423試合・10,846チーム行で得点関連の不一致0件を確認
+- live DBの10,846行について、`points` と得点依存22列の計23列をバックアップ付きデータパッチで補正
+- live DB適用後、試合・チームペア、基礎値、試合スコア、シュート式、PFT復元値、得点依存22列を全件監査し、すべて不整合0件を確認
+- canonical rebuild SQL、投入フロー、SQL運用READMEを同期し、詳細を `issues/Issue_ex_006.md` に記録
+- JSON、DBカラム、`games`、`player_game_stats.points` は変更対象外
+
 ## 2026-08-04
 
 ### Issue #10: 2021-22シーズンの試合日時補正完了
