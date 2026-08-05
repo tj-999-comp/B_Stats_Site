@@ -89,6 +89,20 @@ JSONを読み込み、各テーブル向けのデータに変換してDBにUpser
 - `setu <= 100` → `'RS'`（レギュラーシーズン）
 - `setu >= 101` → `'CS'`（チャンピオンシップシリーズ）
 
+**game_team_stats.points の変換・検証:**
+
+- `HomeTeamScore` / `AwayTeamScore` を各チームの最終得点として採用する
+- 最終得点が欠損している場合だけ `2 × fg2m + 3 × fg3m + ftm` を使用する
+- 最終得点とシュート式が不一致なら、いずれのテーブルもUpsertする前に処理を停止する
+- `TeamPTR` はフィールドゴール成功率に相当し、`points` への変換や別カラムへの保存には使用しない
+- 変換後の `points` を使ってTS%、ORtg、DRtg、得点比率、相手指標、接戦フラグなどを計算する
+
+**points監査:**
+
+- dry-runと通常実行のどちらでも、Upsert前に入力スコア・シュート式・変換後 `points` を照合する
+- 変換行の欠落、余剰、重複も検出し、1件でも不整合があれば処理を停止する
+- `points_validation` に監査行数、スコア欠損数、各不一致件数を表示する
+
 **is_playing の補正ロジック（直接SQL更新時）:**
 - `play_time = 'DNP'` → `false`
 - それ以外 → `true`
@@ -100,7 +114,13 @@ JSONを読み込み、各テーブル向けのデータに変換してDBにUpser
 - Pace = 40 × (Poss + OppPoss) / (2 × GameMinutes)
 
 ```bash
-python -m scripts.db.upsert_games
+python -m scripts.db.upsert_games \
+  --input scraper/data/season_YYYY-YYYY/games_SEASON_START_END.json \
+  --dry-run
+
+# points_validationの不一致件数がすべて0であることを確認してからUpsert
+python -m scripts.db.upsert_games \
+  --input scraper/data/season_YYYY-YYYY/games_SEASON_START_END.json
 ```
 
 ---

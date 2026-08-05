@@ -78,6 +78,8 @@ CREATE TABLE IF NOT EXISTS game_team_stats (
     is_home BOOLEAN NOT NULL,
 
     -- basic box-like stats
+    -- HomeTeamScore / AwayTeamScoreを正本とし、欠損時だけ2P・3P・FT成功数から算出する。
+    -- TeamPTRはフィールドゴール成功率のためpointsには使用しない。
     points INTEGER,
     fgm INTEGER,
     fga INTEGER,
@@ -270,4 +272,3 @@ CREATE TABLE IF NOT EXISTS player_game_stats (
 
 CREATE INDEX IF NOT EXISTS idx_player_game_stats_player_id ON player_game_stats(player_id);
 CREATE INDEX IF NOT EXISTS idx_player_game_stats_team_id ON player_game_stats(team_id);
-
