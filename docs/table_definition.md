@@ -4,6 +4,7 @@
 
 - 取得日時 (UTC): 2026-03-10T00:00:00.000Z
 - 取得元: https://mngqmfvsxcqjhsgkbyju.supabase.co/rest/v1/
+- 部分確認: 2026-08-05にlive `players` の列を読み取り専用で再確認し、廃止済みの `nationality` を同テーブルの定義から除外。その他は上記取得日時のスナップショットのまま。
 
 ## テーブル一覧
 
@@ -270,7 +271,6 @@
 | `player_id` | 選手ID | `text` | Yes | `-` | PK |
 | `player_name_j` | 選手名（日本語） | `text` | Yes | `-` | - |
 | `player_name_e` | 選手名（英語） | `text` | No | `-` | - |
-| `nationality` | 国籍 | `text` | No | `-` | - |
 | `player_slot_category` | 選手区分 | `text` | No | `-` | - |
 | `league_registered_nationality` | リーグ登録国籍 | `text` | No | `-` | - |
 | `birthplace` | 出身地 | `text` | No | `-` | - |

@@ -11,12 +11,12 @@
 
 Usage:
     # ドライラン（ファイル・DBを変更しない）
-    python -m scraper.scripts.merge_player_ids \\
-        --csv scraper/data/player_id_map.csv
+    python -m scripts.dev.merge_player_ids \\
+        --csv /tmp/player_id_map.csv
 
     # 本番実行
-    python -m scraper.scripts.merge_player_ids \\
-        --csv scraper/data/player_id_map.csv \\
+    python -m scripts.dev.merge_player_ids \\
+        --csv /tmp/player_id_map.csv \\
         --players scraper/data/players.json \\
         --yes
 

@@ -25,8 +25,9 @@ CSV_FIELDS = [
     'old_player_id',
     'player_name_j',
     'player_name_e',
-    'nationality',
     'player_slot_category',
+    'league_registered_nationality',
+    'birthplace',
     'last_seen_team_id',
     'last_seen_jersey_number',
     'created_at',
@@ -34,8 +35,10 @@ CSV_FIELDS = [
 ]
 
 # JSON に戻すとき null として扱う空文字フィールド
-NULLABLE_FIELDS = {'nationality', 'player_slot_category', 'old_player_id',
-                   'player_name_e', 'last_seen_team_id', 'last_seen_jersey_number'}
+NULLABLE_FIELDS = {'player_slot_category', 'league_registered_nationality', 'birthplace',
+                   'old_player_id', 'player_name_e', 'last_seen_team_id',
+                   'last_seen_jersey_number'}
+RETIRED_FIELDS = {'nationality'}
 
 
 def export_to_csv(json_path: Path, csv_path: Path) -> None:
@@ -46,7 +49,7 @@ def export_to_csv(json_path: Path, csv_path: Path) -> None:
     extra = []
     for p in players:
         for k in p:
-            if k not in CSV_FIELDS and k not in extra:
+            if k not in CSV_FIELDS and k not in RETIRED_FIELDS and k not in extra:
                 extra.append(k)
     fields = CSV_FIELDS + extra
 
@@ -67,6 +70,8 @@ def import_from_csv(csv_path: Path, json_path: Path) -> None:
         for row in reader:
             player: dict = {}
             for k, v in row.items():
+                if k in RETIRED_FIELDS:
+                    continue
                 v = v.strip()
                 # 空文字 → null に戻す（nullable フィールドのみ）
                 if v == '' and k in NULLABLE_FIELDS:

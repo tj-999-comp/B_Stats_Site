@@ -102,7 +102,9 @@
     - `games.game_datetime`
     - `games.game_date`
     - `games.game_type`（`setu` から `RS/CS` をバックフィル）
-    - `players.nationality`
+    - `players.player_slot_category`
+    - `players.league_registered_nationality`
+    - `players.birthplace`
   - ファイル分散を減らし、実行漏れを防ぐ
 
 ---
@@ -163,7 +165,7 @@ where table_schema = 'public'
   and (
     (table_name = 'games' and column_name in ('game_datetime','game_date','game_type'))
     or (table_name = 'players' and column_name in (
-      'nationality','player_slot_category','league_registered_nationality','birthplace','old_player_id'
+      'player_slot_category','league_registered_nationality','birthplace','old_player_id'
     ))
   )
 order by table_name, column_name;
@@ -208,12 +210,11 @@ where table_schema = 'public'
 
 ### 判定B: 追加カラムが全て存在する
 
-- 合格条件: 結果件数が **8件**（不足0件）
+- 合格条件: 結果件数が **7件**（不足0件）
 - 対象:
   - `games.game_datetime`
   - `games.game_date`
   - `games.game_type`
-  - `players.nationality`
   - `players.player_slot_category`
   - `players.league_registered_nationality`
   - `players.birthplace`
@@ -226,7 +227,7 @@ where table_schema = 'public'
   and (
     (table_name = 'games' and column_name in ('game_datetime','game_date','game_type'))
     or (table_name = 'players' and column_name in (
-      'nationality','player_slot_category','league_registered_nationality','birthplace','old_player_id'
+      'player_slot_category','league_registered_nationality','birthplace','old_player_id'
     ))
   );
 ```

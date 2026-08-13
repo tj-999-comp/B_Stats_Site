@@ -81,17 +81,37 @@ python -m scripts.scraping.scraper \
 - `games[].source_tab` は `fallback_html`
 - `games[].game.ScoreDataSource` は `schedule_topics_fallback`
 
-## players.json の nationality / player_slot_category 補完
+## players の監査とプロフィール差分補完
 
-`scraper/data/players.json` の `player_id` を使って `roster_detail` を取得し、
-「リーグ登録国籍」「出身地」から `nationality` と `player_slot_category` を更新します。
+live DB と正本 `scraper/data/players.json` を直接同期する前に、全件スナップショットと
+選手別差分を別ファイルへ出力します。
 
 ```bash
-# 入力をそのまま上書き
-python -m scripts.dev.enrich_players_profile --input scraper/data/players.json
+python -m scripts.dev.audit_players_snapshot \
+  --local-input scraper/data/players.json \
+  --snapshot-output /tmp/players_live_snapshot.json \
+  --report /tmp/players_snapshot_audit.json
+```
 
-# 出力先を分ける場合
-python -m scripts.dev.enrich_players_profile --input scraper/data/players.json --output scraper/data/players_enriched.json
+追跡済みゲームJSONから選手・スタッフ候補を分類し、分類レポートを補完監査へ渡します。
+追跡済み試合に存在しないIDは自動除外しません。
+
+```bash
+python -m scripts.dev.classify_player_entities \
+  --live-snapshot /tmp/players_live_snapshot.json \
+  --report /tmp/player_entity_classification.json
+```
+
+公式 `roster_detail` の取得は、小さい対象と別レポートで先に確認します。
+`--apply` を指定しない限りlive DBは更新されません。
+
+```bash
+python -m scripts.dev.fill_missing_player_profile_fields \
+  --players-input /tmp/players_live_snapshot.json \
+  --classification-report /tmp/player_entity_classification.json \
+  --limit 5 \
+  --workers 1 \
+  --report /tmp/fill_player_profiles_preview.json
 ```
 
 ### 出力ファイル
@@ -178,7 +198,11 @@ upsert_games.py（別コマンドとして独立実行）
 | `scripts/scraping/parser.py` | **HTMLパーサー（選手・順位スタッツ用）**。`/stats/player` や `/standings/` ページを解析して選手スタッツ・順位表を取得する。試合単位スクレイピングとは独立した処理 |
 | `scripts/scraping/game_scraper.py` | **スクレイピング本体**。日付→ScheduleKey の解決（スケジュールAPI）、ScheduleKey→試合詳細の取得（`/game_detail/` HTML内の `_contexts_s3id.data` を解析）、結果を JSON ファイルへ保存 |
 | `scripts/db/upsert_games.py` | **DB取り込みコマンド**。`game_scraper.py` が出力した JSON を読み込み、`teams` / `games` / `game_team_stats` / `players` / `player_game_stats` / `play_by_play` へ変換・UPSERT する |
-| `scripts/dev/enrich_players_profile.py` | **選手プロフィール補完**。選手プロフィールページをスクレイピングし、国籍・出身地から `nationality` と `player_slot_category` を補完・DB更新する |
+| `scripts/dev/audit_players_snapshot.py` | **players差分監査**。live全件を別出力し、正本とのID・欠損・値差分を選手単位で記録する |
+| `scripts/dev/classify_player_entities.py` | **選手分類**。全月次JSONの試合通算行を根拠にスタッフ候補とダミーIDを分離する |
+| `scripts/dev/fill_missing_player_profile_fields.py` | **差分プロフィール補完**。取得結果と提案差分を選手単位で記録し、`--apply` 指定時だけ欠損列をDB更新する |
+| `scripts/dev/build_players_canonical_candidate.py` | **正本候補生成**。監査済みlive、分類、補完提案を統合し、既存正本を上書きせず別JSONへ出力する |
+| `scripts/dev/enrich_players_profile.py` | **正本JSONのプロフィール補完**。検証時は小さい `--limit` と別 `--output` を使用する |
 
 #### 設定・基盤系
 
@@ -193,8 +217,8 @@ upsert_games.py（別コマンドとして独立実行）
 |---|---|
 | `scripts/dev/inspect_full_context.py` | 指定した ScheduleKey の `/game_detail/` HTML から `_contexts_s3id.data` の全構造を取得・表示・保存する開発時の確認用ツール |
 | `scripts/dev/inspect_player_data.py` | `game_scraper.fetch_game_context()` を呼び出し、返却されるデータ構造（Game・Summaries・Boxscoresなど）を確認する開発時の確認用ツール |
-| `scripts/build_player_id_map.py` | `players.json` とゲームJSONを照合し、旧PlayerID → 新PlayerID のマッピング候補CSVを生成する。同名選手による曖昧性も検出する |
-| `scripts/merge_player_ids.py` | `build_player_id_map.py` の出力CSVを使い、確認済みの旧IDを新IDへ統合する（`players.json` 更新 & Supabase更新、ドライラン対応） |
+| `scripts/dev/build_player_id_map.py` | 明示した旧PlayerIDとゲームJSONを照合し、新PlayerIDの候補CSVを生成する。同名選手による曖昧性も検出する |
+| `scripts/dev/merge_player_ids.py` | `build_player_id_map.py` の確認済みCSVを使い、旧IDを新IDへ統合する（`players.json` 更新 & Supabase更新、ドライラン対応） |
 | `scripts/delete_games_by_date.py` | 指定した日付範囲または schedule_key リストで Supabase から試合データを削除する（`games` / `game_team_stats` / `player_game_stats` / `play_by_play`、ドライラン対応） |
 | `scripts/fix_game_datetimes.py` | エクスポートされたJSONの `GameDateTime` を `mapped_date`（スケジュール実際日付）で補正する。時刻は保持し、元値を `_original_GameDateTime` に記録する |
 | `scripts/players_csv.py` | `players.json` ↔ CSV の相互変換ユーティリティ。編集用にJSONをエクスポートし、編集後にJSONへインポートする |

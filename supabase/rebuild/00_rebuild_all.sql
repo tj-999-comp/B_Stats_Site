@@ -907,9 +907,6 @@ ALTER TABLE games
 
 -- players: プロフィール項目
 ALTER TABLE players
-    ADD COLUMN IF NOT EXISTS nationality TEXT;
-
-ALTER TABLE players
     ADD COLUMN IF NOT EXISTS player_slot_category TEXT;
 
 ALTER TABLE players

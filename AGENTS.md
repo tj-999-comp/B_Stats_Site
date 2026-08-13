@@ -65,7 +65,7 @@ python -m pip install -r scraper/requirements.txt
 
 - 既存の型注釈、`pathlib.Path`、snake_case、内部 helper の `_` 接頭辞、`argparse` CLI に合わせる。JSON は UTF-8、必要な場合は既存どおり `ensure_ascii=False, indent=2` を使う。
 - 外部レスポンスの PascalCase キーを取得層で安易に改名しない。DB への snake_case 変換は `scripts/db/upsert_games.py` に集約する。
-- `schedule_key` は整数／`BIGINT`、`team_id` と `player_id` は文字列／`TEXT` という契約を保つ。選手の試合通算行は `PeriodCategory == 18` を採用する既存仕様を守る。
+- `schedule_key` は整数／`BIGINT`、`team_id` と `player_id` は文字列／`TEXT` という契約を保つ。選手の試合通算行は `PeriodCategory == 18` に加え、背番号、出場フラグ、先発フラグ、正の出場時間のいずれかを持つ行だけを採用し、同カテゴリに混入するスタッフ行を除外する。
 - HTTP timeout、各処理の既存 pacing、5xx・接続エラー時のリトライとログ記録を削らない。通常版の game-detail ループは1〜3秒待機するが、schedule API、プロフィール補完、Colab 版には別の間隔・並列度がある。アクセス量を増やす変更は小さい対象で確認する。
 - 日付は JST で解決する。`games.year` は暦年ではなくシーズン開始年で、10〜12月は当年、1〜5月は前年とする。同じ `schedule_key` の候補日と contexts 日時の解決規則は `docs/date_resolution.md` を守り、単純な先勝ちに戻さない。
 - `player_id_map` による旧 ID から現 ID への名寄せと、履歴トリガーの時系列を壊さない。複数月を投入するときは古い試合から順に扱う。
@@ -86,7 +86,9 @@ python -m pip install -r scraper/requirements.txt
 - 再構築 SQL を変更するときは、該当する分割版 `01`〜`07` と統合版 `00_rebuild_all.sql` を同期する。`08_full_schema_with_events.sql` は `play_by_play` を含む旧・未同期案で、現行の players、履歴、games 追加列を欠く。単独で現行構成として使わず、必要なら `00` との差分を解消してから利用する。
 - スキーマ、トリガー、投入仕様を変えたら、必要に応じて `supabase/rebuild/README.md`、`docs/table_definition.md`、`docs/flow.md`、`docs/changelog.md` を同じ変更で整合させる。
 - `scripts/generate_table_definition_live.mjs` は live Supabase、秘密鍵、ネットワークを使い `docs/table_definition.md` を上書きする。明示依頼と接続先確認なしに実行しない。
+- `supabase/patches/` はDB補正用のCSV・JSONなど、目視確認・パッチ入力ファイルの置き場である。スクレイピング取得物や正本JSONを置かない。配置・命名は `supabase/patches/README.md` に従う。
 - `supabase/sql/` は一回限りまたは破壊的なデータパッチ・運用 SQL の集約先であり、現行スキーマの正本とはみなさない。新規ファイルは `supabase/sql/README.md` の `YYYYMMDD_<action>_<target>.sql` 命名に従う。
+- live DBのデータパッチは、原則として `backup`、`verify`、`fix`、`rollback` の4ファイルを同じIssue・対象名で作成する。実行順は `backup → verify（前）→ fix → verify（後）`、問題時は `rollback → verify（後）` とし、例外はSQL先頭コメントと `supabase/sql/README.md` に理由を残す。
 
 ### データ、ログ、文書
 
@@ -126,7 +128,7 @@ python -m scripts.db.upsert_games \
 - `docs/setup.md` の `SUPABASE_SECRET_KEY`（単数）は実装と不一致で、Python と Workflow は `SUPABASE_SECRET_KEYS`（複数）を使う。
 - `SUPABASE_DB_PASSSWORD` は誤字に見えるが、現行 `migrate.yml` が実際に参照する Secret 名である。変更するときは Workflow と登録済み Secret を同時に移行する。
 - `docs/table_definition.md` と live DB、canonical rebuild SQL は同一とは限らない。live 接続をせずに DB の現在状態を断定しない。
-- canonical SQL と `docs/table_definition.md` は `players.nationality` を持つ一方、`supabase/sql/20260527_drop_players_nationality_and_backfill_slot_category.sql` は同列を削除する。補助 SQL を canonical へ自動統合せず、live DB を確認するまで列の有無を断定しない。
+- 2026-08-05 の live DB 確認で `players.nationality` が存在しないことを確認済み。選手プロフィールは `player_slot_category`、`league_registered_nationality`、`birthplace` を使い、`nationality` を再導入しない。
 
 ## 検証
 

@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
@@ -15,29 +16,48 @@ from scripts.dev.enrich_players_profile import (
     ROSTER_DETAIL_URL,
     _has_text,
     extract_profile_value,
-    map_profile_fields,
+    infer_player_slot_category,
 )
 
 
-def fetch_profile(player_id: str, timeout: int) -> tuple[str, str | None, str | None, str]:
-    try:
-        response = requests.get(
-            ROSTER_DETAIL_URL,
-            params={"PlayerID": player_id},
-            headers=PROFILE_HEADERS,
-            timeout=timeout,
-        )
-        if response.status_code == 404:
-            return player_id, None, None, "404"
-        if response.status_code >= 400:
-            return player_id, None, None, f"http_{response.status_code}"
+def fetch_profile(
+    player_id: str,
+    timeout: int,
+    *,
+    max_retries: int = 3,
+    backoff_seconds: float = 3.0,
+) -> tuple[str, str | None, str | None, str]:
+    """5xx・429・接続例外を待機付きで再試行し、取得結果を返す。"""
+    if max_retries < 1:
+        raise ValueError(f"max_retries must be at least 1: {max_retries}")
 
-        soup = BeautifulSoup(response.text, "html.parser")
-        league_nationality = extract_profile_value(soup, "リーグ登録国籍")
-        birthplace = extract_profile_value(soup, "出身地")
-        return player_id, league_nationality, birthplace, "ok"
-    except requests.RequestException as e:
-        return player_id, None, None, f"error:{type(e).__name__}"
+    last_status = "error:unknown"
+    for attempt in range(max_retries):
+        try:
+            response = requests.get(
+                ROSTER_DETAIL_URL,
+                params={"PlayerID": player_id},
+                headers=PROFILE_HEADERS,
+                timeout=timeout,
+            )
+            if response.status_code == 404:
+                return player_id, None, None, "404"
+            if response.status_code == 429 or response.status_code >= 500:
+                last_status = f"http_{response.status_code}"
+            elif response.status_code >= 400:
+                return player_id, None, None, f"http_{response.status_code}"
+            else:
+                soup = BeautifulSoup(response.text, "html.parser")
+                league_nationality = extract_profile_value(soup, "リーグ登録国籍")
+                birthplace = extract_profile_value(soup, "出身地")
+                return player_id, league_nationality, birthplace, "ok"
+        except requests.RequestException as exc:
+            last_status = f"error:{type(exc).__name__}"
+
+        if attempt + 1 < max_retries:
+            time.sleep(backoff_seconds * (2 ** attempt))
+
+    return player_id, None, None, last_status
 
 
 def main() -> None:
@@ -59,7 +79,6 @@ def main() -> None:
             i for i, p in enumerate(players)
             if not _has_text(p.get("league_registered_nationality"))
             or not _has_text(p.get("birthplace"))
-            or not _has_text(p.get("nationality"))
             or not _has_text(p.get("player_slot_category"))
         ]
 
@@ -81,13 +100,16 @@ def main() -> None:
             player_id, league_nationality, birthplace, status = future.result()
             player = players[i]
 
-            player["league_registered_nationality"] = league_nationality
-            player["birthplace"] = birthplace
+            if not _has_text(player.get("league_registered_nationality")) and _has_text(league_nationality):
+                player["league_registered_nationality"] = league_nationality
+            if not _has_text(player.get("birthplace")) and _has_text(birthplace):
+                player["birthplace"] = birthplace
 
-            nationality, slot = map_profile_fields(league_nationality, birthplace)
-            if nationality is not None:
-                player["nationality"] = nationality
-            if slot is not None:
+            slot = infer_player_slot_category(
+                player.get("league_registered_nationality"),
+                player.get("birthplace"),
+            )
+            if not _has_text(player.get("player_slot_category")) and slot is not None:
                 player["player_slot_category"] = slot
 
             if status == "ok":

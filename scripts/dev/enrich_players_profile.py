@@ -123,14 +123,27 @@ def is_japanese_place(value: str | None) -> bool:
     return False
 
 
-def map_profile_fields(league_nationality: str | None, birthplace: str | None) -> tuple[str | None, str | None]:
-    if birthplace and is_japanese_place(birthplace):
-        return '日本', '日本人選手'
+def infer_player_slot_category(
+    league_nationality: str | None,
+    birthplace: str | None,
+) -> str | None:
+    """公式の登録国籍と出身地から、安全に確定できる選手区分だけを返す。"""
+    # 帰化選手は出身地が海外でも外国籍選手ではない。
+    # 公式の選手区分を直接取得できないため自動判定しない。
+    if league_nationality and '帰化' in _norm_text(league_nationality):
+        return None
+
+    domestic_registration = is_japan_nationality(league_nationality) or (
+        league_nationality is not None
+        and 'ユース育成特別枠' in _norm_text(league_nationality)
+    )
+    if birthplace and is_japanese_place(birthplace) and domestic_registration:
+        return '日本人選手'
 
     if birthplace and not is_japanese_place(birthplace) and league_nationality and not is_japan_nationality(league_nationality):
-        return birthplace, '外国籍選手'
+        return '外国籍選手'
 
-    return None, None
+    return None
 
 
 def enrich_players(
@@ -142,7 +155,7 @@ def enrich_players(
     delay: float = 0.2,
     limit: int | None = None,
 ) -> list[dict[str, Any]]:
-    """league_registered_nationality / birthplace / nationality / player_slot_category を補完する。
+    """league_registered_nationality / birthplace / player_slot_category を補完する。
 
     player_id_map: {old_player_id: player_id} を渡すと、旧IDの選手は
     新IDでプロフィールページをフェッチする。
@@ -157,7 +170,6 @@ def enrich_players(
             p for p in target_players
             if not _has_text(p.get('league_registered_nationality'))
             or not _has_text(p.get('birthplace'))
-            or not _has_text(p.get('nationality'))
             or not _has_text(p.get('player_slot_category'))
         ]
         skipped = len(target_players) - len(to_enrich)
@@ -216,19 +228,22 @@ def enrich_players(
         soup = BeautifulSoup(response.text, 'html.parser')
         league_nationality = extract_profile_value(soup, 'リーグ登録国籍')
         birthplace = extract_profile_value(soup, '出身地')
-        nationality, player_slot_category = map_profile_fields(league_nationality, birthplace)
 
-        player['league_registered_nationality'] = league_nationality
-        player['birthplace'] = birthplace
-        if nationality is not None:
-            player['nationality'] = nationality
-        if player_slot_category is not None:
+        if not _has_text(player.get('league_registered_nationality')) and _has_text(league_nationality):
+            player['league_registered_nationality'] = league_nationality
+        if not _has_text(player.get('birthplace')) and _has_text(birthplace):
+            player['birthplace'] = birthplace
+        player_slot_category = infer_player_slot_category(
+            player.get('league_registered_nationality'),
+            player.get('birthplace'),
+        )
+        if not _has_text(player.get('player_slot_category')) and player_slot_category is not None:
             player['player_slot_category'] = player_slot_category
 
         print(
             f'[{index}/{total}] player_id={player_id} '
             f'league_nationality={league_nationality!r} birthplace={birthplace!r} '
-            f'=> nationality={nationality!r} player_slot_category={player_slot_category!r}'
+            f'=> player_slot_category={player_slot_category!r}'
         )
 
         if delay > 0 and index < total:
@@ -301,7 +316,7 @@ def run(
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description='players.json の league_registered_nationality / birthplace / nationality / player_slot_category を補完する'
+        description='players.json の league_registered_nationality / birthplace / player_slot_category を補完する'
     )
     parser.add_argument(
         '--input',

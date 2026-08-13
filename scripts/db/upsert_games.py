@@ -12,6 +12,7 @@ from typing import Any
 
 from .db import upsert_game_team_stats, upsert_games, upsert_play_by_play, upsert_players, upsert_player_game_stats, upsert_teams, fetch_player_id_map
 from .config import SCRAPER_ROOT
+from .player_boxscore import is_player_total_boxscore
 
 _JST = timezone(timedelta(hours=9))
 _TEAM_NAME_TO_ID_CACHE: dict[str, str] | None = None
@@ -708,8 +709,8 @@ def _extract_players(payload: dict[str, Any], player_id_map: dict[str, str] | No
         away_boxscores = item.get('away_boxscores', [])
 
         for boxscore in home_boxscores + away_boxscores:
-            # Filter for full game totals only (PeriodCategory=18)
-            if boxscore.get('PeriodCategory') != 18:
+            # PeriodCategory=18 に混入するコーチ等の非選手行も除外する
+            if not is_player_total_boxscore(boxscore):
                 continue
 
             player_id = str(boxscore.get('PlayerID')) if boxscore.get('PlayerID') is not None else None
@@ -724,18 +725,10 @@ def _extract_players(payload: dict[str, Any], player_id_map: dict[str, str] | No
             jersey_number = str(boxscore.get('PlayerNo', ''))
             player_name_j = boxscore.get('PlayerNameJ', '')
             player_name_e = boxscore.get('PlayerNameE', '')
-            nationality = (
-                boxscore.get('Nationality')
-                or boxscore.get('PlayerNationality')
-                or boxscore.get('Country')
-                or boxscore.get('PlayerCountry')
-            )
-
             player_map[player_id] = {
                 'player_id': player_id,
                 'player_name_j': player_name_j,
                 'player_name_e': player_name_e,
-                'nationality': _normalize_optional_text(nationality),
                 'last_seen_team_id': team_id,
                 'last_seen_jersey_number': jersey_number,
             }
@@ -744,7 +737,7 @@ def _extract_players(payload: dict[str, Any], player_id_map: dict[str, str] | No
 
 
 def _extract_player_game_stats(payload: dict[str, Any], player_id_map: dict[str, str] | None = None) -> list[dict[str, Any]]:
-    """Extract player game statistics from BoxScores (PeriodCategory=18 only).
+    """Extract real-player game totals from PeriodCategory=18 BoxScores.
 
     player_id_map: {old_player_id: player_id}。渡すと旧IDを新IDに読み替える。
     """
@@ -762,8 +755,8 @@ def _extract_player_game_stats(payload: dict[str, Any], player_id_map: dict[str,
         away_boxscores = item.get('away_boxscores', [])
 
         for boxscore in home_boxscores + away_boxscores:
-            # Filter for full game totals only (PeriodCategory=18)
-            if boxscore.get('PeriodCategory') != 18:
+            # PeriodCategory=18 に混入するコーチ等の非選手行も除外する
+            if not is_player_total_boxscore(boxscore):
                 continue
 
             player_id = str(boxscore.get('PlayerID')) if boxscore.get('PlayerID') is not None else None

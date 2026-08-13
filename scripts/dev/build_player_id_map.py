@@ -1,14 +1,14 @@
-"""名前照合スクリプト: 旧PlayerID（nationality=null）と再スクレイプ済みゲームJSONを突き合わせ、
-alias候補CSVを生成する。
+"""明示した旧PlayerIDと再スクレイプ済みゲームJSONを名前で照合し、候補CSVを生成する。
 
 Usage:
-    python -m scraper.scripts.build_player_id_map \\
+    python -m scripts.dev.build_player_id_map \\
         --players scraper/data/players.json \\
-        --games   scraper/data/games_*.json \\
-        --output  scraper/data/player_alias_candidates.csv
+        --candidate-ids OLD_ID_1 OLD_ID_2 \\
+        --games scraper/data/season_*/games_*.json \\
+        --output /tmp/player_alias_candidates.csv
 
 出力CSV列:
-    old_player_id            ... 旧PlayerID（nationality=null）
+    old_player_id            ... 明示した旧PlayerID
     player_id ... ゲームJSONで見つかった新PlayerID
     player_name_j       ... 照合に使った日本語名
     old_team_id         ... 旧IDの最終所属チーム
@@ -24,13 +24,27 @@ import json
 import sys
 from pathlib import Path
 
+from scripts.db.player_boxscore import is_player_total_boxscore
 
-def _load_null_nationality_players(players_path: Path) -> list[dict]:
-    """players.json から nationality=null の選手を返す"""
+
+def _load_candidate_players(players_path: Path, candidate_ids: list[str]) -> list[dict]:
+    """players.json から明示された旧IDだけを返す。"""
     players = json.loads(players_path.read_text(encoding='utf-8'))
     if not isinstance(players, list):
         raise RuntimeError(f'Expected list JSON: {players_path}')
-    return [p for p in players if p.get('nationality') is None and p.get('player_id')]
+    requested = {str(player_id).strip() for player_id in candidate_ids if str(player_id).strip()}
+    if not requested:
+        raise RuntimeError('--candidate-ids must contain at least one player_id')
+
+    by_id = {
+        str(player.get('player_id')).strip(): player
+        for player in players
+        if str(player.get('player_id') or '').strip()
+    }
+    missing = sorted(requested - set(by_id))
+    if missing:
+        raise RuntimeError(f'candidate player_id not found in players JSON: {missing}')
+    return [by_id[player_id] for player_id in sorted(requested)]
 
 
 def _collect_game_players(game_paths: list[Path]) -> dict[str, list[dict]]:
@@ -47,7 +61,7 @@ def _collect_game_players(game_paths: list[Path]) -> dict[str, list[dict]]:
             home_bs = item.get('home_boxscores', [])
             away_bs = item.get('away_boxscores', [])
             for bs in home_bs + away_bs:
-                if bs.get('PeriodCategory') != 18:
+                if not is_player_total_boxscore(bs):
                     continue
                 pid = str(bs.get('PlayerID', '')).strip()
                 name_j = str(bs.get('PlayerNameJ', '')).strip()
@@ -64,12 +78,12 @@ def _collect_game_players(game_paths: list[Path]) -> dict[str, list[dict]]:
 
 
 def build_candidates(
-    null_players: list[dict],
+    candidate_players: list[dict],
     game_name_map: dict[str, list[dict]],
 ) -> list[dict]:
     """旧IDと新IDの照合候補リストを生成する"""
     rows = []
-    for player in null_players:
+    for player in candidate_players:
         old_id = player['player_id']
         name_j = player.get('player_name_j', '').strip()
         old_team = player.get('last_seen_team_id', '')
@@ -122,12 +136,16 @@ def write_csv(rows: list[dict], output_path: Path) -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description='旧PlayerID（nationality=null）と再スクレイプ済みゲームJSONを照合しエイリアス候補CSVを生成する'
+        description='明示した旧PlayerIDと再スクレイプ済みゲームJSONを照合しエイリアス候補CSVを生成する'
     )
     parser.add_argument('--players', required=True, help='players.json のパス')
+    parser.add_argument(
+        '--candidate-ids', required=True, nargs='+',
+        help='照合対象とする旧player_id。プロフィール列からは推測しない',
+    )
     parser.add_argument('--games',   required=True, nargs='+', help='ゲームJSONのパス（glob可・複数指定可）')
-    parser.add_argument('--output',  default='scraper/data/player_alias_candidates.csv',
-                        help='出力CSVパス (default: scraper/data/player_alias_candidates.csv)')
+    parser.add_argument('--output', default='/tmp/player_alias_candidates.csv',
+                        help='出力CSVパス (default: /tmp/player_alias_candidates.csv)')
     args = parser.parse_args()
 
     players_path = Path(args.players)
@@ -146,13 +164,13 @@ def main() -> None:
     print(f'players.json: {players_path}')
     print(f'game files:   {len(game_paths)} ファイル')
 
-    null_players = _load_null_nationality_players(players_path)
-    print(f'nationality=null の選手: {len(null_players)} 人')
+    candidate_players = _load_candidate_players(players_path, args.candidate_ids)
+    print(f'明示された旧ID候補: {len(candidate_players)} 人')
 
     game_name_map = _collect_game_players(game_paths)
     print(f'ゲームJSON から収集した選手名: {len(game_name_map)} 件')
 
-    candidates = build_candidates(null_players, game_name_map)
+    candidates = build_candidates(candidate_players, game_name_map)
 
     ok        = sum(1 for r in candidates if r['status'] == 'ok')
     ambiguous = sum(1 for r in candidates if r['status'] == 'ambiguous')

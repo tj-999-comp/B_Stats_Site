@@ -3,6 +3,8 @@
 
 このディレクトリには、live DBへ一回限りで適用するデータ補正・バックフィル・削除などの運用SQLを置く。現行スキーマの正本ではなく、新規DBの再構築には `supabase/rebuild/00_rebuild_all.sql` を使う。
 
+CSVやJSONなどSQLの入力・目視確認用ファイルは `supabase/patches/` に置く。スクレイピング取得物・正本JSONは `scraper/data/` に置き、DB補正用ファイルと混在させない。配置規則は [`supabase/patches/README.md`](../patches/README.md) を参照する。
+
 ## ファイル名
 
 基本形は `YYYYMMDD_<action>_<target>.sql` とする。
@@ -12,6 +14,21 @@
 - `target`: 対象テーブルやデータ範囲を短く表す小文字snake_case
 - ロールバックSQLは `YYYYMMDD_rollback_<action>_<target>.sql` とする
 - 同日に実行順が必要な場合だけ、日付直後に `_01_`、`_02_` を付ける
+
+## 標準の4ファイル構成
+
+live DBのデータを更新するパッチは、原則として同じ日付・Issue・対象名で次の4ファイルを作成する。
+
+| ファイル | 役割 |
+|---|---|
+| `YYYYMMDD_backup_issueNN_<target>.sql` | 対象行を永続バックアップへ保存する。対象件数と再実行をガードする |
+| `YYYYMMDD_fix_issueNN_<target>.sql` | 実際のINSERT/UPDATE/DELETEを行う。backup表、対象件数、反映前状態を検証してから実行する |
+| `YYYYMMDD_rollback_fix_issueNN_<target>.sql` | backup表から変更前へ戻す。適用後の状態を検証し、想定外の変更があれば停止する |
+| `YYYYMMDD_verify_issueNN_<target>.sql` | liveテーブルを変更せず、backupを基準に実行前・実行後・ロールバック後の状態を判定する |
+
+標準の実行順は `backup → verify（実行前）→ fix → verify（実行後）` とする。問題が見つかった場合だけ `rollback → verify（ロールバック後）` を実行する。`verify` はSELECTとセッション内一時表の作成・投入だけを許可し、永続テーブルの更新・削除を行わない。
+
+4ファイル構成を採用しない読み取り専用調査や再構築SQLは例外とし、対象ファイルの先頭コメントに理由を記載する。バックアップ表は適用後の検証とロールバックが完了するまで削除しない。
 
 例:
 
@@ -51,3 +68,11 @@ DBeaverの `Cmd + Enter` は通常、カーソル位置にある1文だけを実
 | `20260804_rollback_fix_2021_22_game_datetimes.sql` | Issue #10補正の復旧 | 上記SQLが作成したバックアップを単一DO文で復元 |
 | `20260804_fix_game_team_points.sql` | Issue #11の全10,846チーム行の得点系23列を補正 | スコア・シュート式・PFT復元値を検証し、永続バックアップ後に単一DO文で更新 |
 | `20260804_rollback_fix_game_team_points.sql` | Issue #11補正の復旧 | 上記SQLが保存した23列と`updated_at`を単一DO文で復元 |
+| `20260811_backup_issue_12_players.sql` | Issue #12のプロフィール対象166行と削除対象48選手・関連行の永続バックアップ | 想定件数を検証してから5つのバックアップ表を作成。反映SQLより先に実行 |
+| `20260811_verify_issue_12_players.sql` | Issue #12の反映前・反映後検証 | 変更予定の項目別件数と現在状態（反映前／反映後／想定外）を読み取り確認。バックアップSQL後に実行 |
+| `20260811_fix_issue_12_players.sql` | Issue #12のプロフィール166件補完とスタッフ相当48選手・関連行の削除 | backup表、`updated_at`、対象件数、`player_id_map`参照を検証して単一DO文で更新 |
+| `20260811_rollback_fix_issue_12_players.sql` | Issue #12反映の復旧 | backup表からプロフィール、players、stats、名前履歴、所属履歴を件数検証付きで復元 |
+| `20260813_backup_issue_21_player_profiles.sql` | Issue #21の目視確認済みCSV117行に対応するplayers行の永続バックアップ | 対象117行と#12除外ID不在を検証してからバックアップ表を作成 |
+| `20260813_verify_issue_21_player_profiles.sql` | Issue #21の反映前・反映後・ロールバック後検証 | backup表を基準に変更予定件数と現在状態をSELECTのみで判定 |
+| `20260813_fix_issue_21_player_profiles.sql` | Issue #21のプロフィール欠損補完 | backup表、対象件数、反映前状態を検証し、CSVの非空値で空欄だけを更新 |
+| `20260813_rollback_fix_issue_21_player_profiles.sql` | Issue #21のプロフィール補完の復旧 | 期待する適用後状態を確認してからbackup表の値へ復元 |

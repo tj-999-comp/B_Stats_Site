@@ -183,6 +183,7 @@ Vercel Hobby Plan (Next.js App Router: SSR/ISR)
 | [docs/date_resolution.md](docs/date_resolution.md) | GameDateTime と日付不整合の解決ルール | 日付ズレ調査時 |
 | [docs/workflows.md](docs/workflows.md) | GitHub Actions 各workflowの役割 | CI/CD挙動確認時 |
 | [supabase/sql/README.md](supabase/sql/README.md) | 一回限りのデータパッチSQLの命名・実行・復旧ルール | live DBの個別補正前 |
+| [supabase/patches/README.md](supabase/patches/README.md) | DB補正用CSV・JSONの配置、命名、スクレイピングデータとの区別 | 目視確認用データやパッチ入力を作る時 |
 
 ### Migrationを適用する
 

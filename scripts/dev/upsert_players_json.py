@@ -16,7 +16,6 @@ ALLOWED_KEYS = {
     "old_player_id",
     "player_name_j",
     "player_name_e",
-    "nationality",
     "player_slot_category",
     "league_registered_nationality",
     "birthplace",

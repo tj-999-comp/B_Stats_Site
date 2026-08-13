@@ -89,20 +89,68 @@ def upsert_player_game_stats(rows: list[dict[str, Any]]) -> None:
     upsert_rows('player_game_stats', rows, on_conflict='schedule_key,player_id')
 
 
-def fetch_player_id_map() -> dict[str, str]:
+def _fetch_all_rows(
+    table_name: str,
+    *,
+    columns: str = '*',
+    order_by: str,
+    page_size: int = 1000,
+    client: Client | None = None,
+) -> list[dict[str, Any]]:
+    """PostgRESTの上限を超えるテーブルを安定順で全件取得する。"""
+    if not 1 <= page_size <= 1000:
+        raise ValueError(f'page_size must be between 1 and 1000: {page_size}')
+
+    db = client or get_client()
+    rows: list[dict[str, Any]] = []
+    offset = 0
+
+    while True:
+        page = (
+            db.table(table_name)
+            .select(columns)
+            .order(order_by)
+            .range(offset, offset + page_size - 1)
+            .execute()
+            .data
+            or []
+        )
+        rows.extend(page)
+        if len(page) < page_size:
+            break
+        offset += page_size
+
+    return rows
+
+
+def fetch_player_id_map(*, page_size: int = 1000, client: Client | None = None) -> dict[str, str]:
     """player_id_map テーブルから {old_player_id: player_id} のマップを返す。
     テーブルが存在しない場合は空 dict を返す。
     """
-    client = get_client()
     try:
-        res = client.table('player_id_map').select('old_player_id,player_id').execute()
-        return {row['old_player_id']: row['player_id'] for row in (res.data or [])}
+        rows = _fetch_all_rows(
+            'player_id_map',
+            columns='old_player_id,player_id',
+            order_by='old_player_id',
+            page_size=page_size,
+            client=client,
+        )
+        return {row['old_player_id']: row['player_id'] for row in rows}
     except Exception:
         return {}
 
 
-def fetch_all_players() -> list[dict[str, Any]]:
+def fetch_all_players(
+    *,
+    columns: str = '*',
+    page_size: int = 1000,
+    client: Client | None = None,
+) -> list[dict[str, Any]]:
     """players テーブルの全レコードを返す。"""
-    client = get_client()
-    res = client.table('players').select('*').execute()
-    return res.data or []
+    return _fetch_all_rows(
+        'players',
+        columns=columns,
+        order_by='player_id',
+        page_size=page_size,
+        client=client,
+    )
