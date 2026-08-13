@@ -115,6 +115,7 @@ Supabase の UPSERT、削除、ID統合は複数リクエストで進み、処�
 - `scripts/dev/delete_games_by_date.py`、`scripts/dev/merge_player_ids.py --yes`、`supabase/sql/20260308_delete_all_games.sql`。
 - rebuild/migration SQL の live DB 適用、`migrate.yml`・`scrape.yml` の dispatch、Pages/Vercel の本番デプロイ。
 - `main` への push。`apps/web-static/**` または `packages/**` は Pages、`apps/web-vercel/**` または `packages/**` は Vercel の本番デプロイを起動し、`packages/**` は両方を起動する。
+- `main` へのPushが成功したら、作業終了前にローカルのブランチを `main` へ戻し、`git merge --ff-only origin/main` で同期する。Push失敗、未コミット変更、リモートの分岐などで安全に戻せない場合は、無理に切り替えず状態と理由を報告する。
 
 変換だけを確認する場合は入力を必ず明示する。入力省略時の探索先と現在の月次ファイル配置が一致しないため、既定入力に依存しない。なお `--dry-run` は DB の `player_id_map` を取得しないため、ローカル変換と件数の確認用であり、本番時の旧IDから現IDへの読み替えまでは再現しない。
 
