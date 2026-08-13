@@ -31,10 +31,10 @@ B.LEAGUE 公式サイトから試合情報を取得し、JSON に保存して Su
 | 現行 DB 再構築 | `supabase/rebuild/README.md`, `supabase/rebuild/00_rebuild_all.sql`, 分割版 `01`〜`07` |
 | DB 定義のスナップショット | `docs/table_definition.md` |
 | CI・デプロイの実挙動 | `.github/workflows/*.yml` |
-| 変更経緯 | `docs/changelog.md`, `issues/Issue_ex_*.md` |
+| 変更経緯 | `docs/changelog.md`, `work-records/md/work_record_*.md` |
 | Colab 版 | `Colab/README.md`, `Colab/bleague_parallel_scraper.py` |
 
-説明と実装が食い違う場合、実行時の挙動は現在のコードと Workflow、再構築の意図は `supabase/rebuild/README.md` と現行 SQL を優先する。`docs/table_definition.md` は 2026-03-10 時点の live DB スナップショット、`docs/changelog.md` と `issues/` は履歴資料であり、現在値を保証しない。食い違いを発見したら推測で埋めず、変更対象に関係する文書も合わせて更新するか、未解消の差異として報告する。
+説明と実装が食い違う場合、実行時の挙動は現在のコードと Workflow、再構築の意図は `supabase/rebuild/README.md` と現行 SQL を優先する。`docs/table_definition.md` は 2026-03-10 時点の live DB スナップショット、`docs/changelog.md` と `work-records/` は履歴資料であり、現在値を保証しない。食い違いを発見したら推測で埋めず、変更対象に関係する文書も合わせて更新するか、未解消の差異として報告する。
 
 ## ツールチェーンと初期セットアップ
 
@@ -96,7 +96,10 @@ python -m pip install -r scraper/requirements.txt
 - 選手マスタの正本は `scraper/data/players.json` で、`players.csv` は編集・確認用の派生物である。CSV からの import やプロフィール補完は正本 JSON を上書きする点に注意する。
 - スクレイパーは既存の同名 JSON と追跡済みログを上書きし得る。検証用出力は可能なら `/tmp` または別名を使い、意図したデータ差分だけを残す。
 - 新規 Markdown はタイトル直下に `作成日: YYYY-MM-DD` を入れる。
-- `issues/` に新しい作業ログを作る場合は `Issue_ex_###.md` の3桁ゼロ埋めとする。既存最大番号を確認して採番する。
+- `Issue` はGitHub Issueだけを指す。リポジトリ内の調査、実行結果、判断経緯は「作業記録」と呼び、`ローカルIssue` や `Issueログ` という呼称は使わない。
+- 作業記録は `work-records/md/work_record_###.md` の3桁ゼロ埋めとし、既存最大番号を確認して採番する。`work-records/` 直下のMarkdownは `README.md` と `design.md` だけにする。
+- GitHub Issueの状況、優先順位、親子関係は独立した一覧ファイルにせず、関連する番号付き作業記録へ保存する。HTMLがある場合は、その作業記録HTMLの末尾へ追加する。
+- 作業記録のHTMLは `work-records/` 直下へ `work_record_###.html` として置き、作成・編集時は `work-records/design.md` を原則として守る。
 
 ## 副作用のある操作
 
@@ -142,8 +145,8 @@ git status --short
 # Python の構文確認
 PYTHONPYCACHEPREFIX=/tmp/b_stats_pycache python -m compileall -q scripts Colab
 
-# Issue ログ名を触った場合
-python scripts/dev/validate_issue_filenames.py
+# 作業記録の配置・ファイル名を触った場合
+python scripts/dev/validate_work_record_filenames.py
 
 # Web を触った場合（依存導入後）
 pnpm --filter web-static build

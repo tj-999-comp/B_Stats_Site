@@ -2,12 +2,20 @@
 
 ## 2026-08-13
 
+### 作業記録運用とGitHub Issue一覧の再編
+
+- `Issue` をGitHub Issueだけの呼称とし、リポジトリ内の調査・実行記録を「作業記録」へ統一
+- `issues/` を `work-records/` へ変更し、Markdownを `work-records/md/`、HTMLを `work-records/` 直下へ整理
+- open GitHub Issue 12件を親子関係・関連・優先順位順にまとめ、今回追加した#24・#25へNEW表示を追加
+- GitHub Issue状況を関連する番号付き作業記録へ保存し、HTMLがある場合はその末尾へ追加するルールを追加。HTMLは `work-records/design.md` を原則として作成する
+- 作業記録の配置・命名・見出しを確認するスクリプトとWorkflowへ更新
+
 ### Issue #24 / #25: 未投入試合データ投入後の選手情報整備フロー
 
 - 2026年5月末までの未投入試合データをスクレイピング・DB投入する親Issue #24を起票
 - 試合データ投入後にplayer_idの重複整理とプロフィール欠損補完を行う子Issue #25をIssue #24へ紐付け
-- 実施順、欠損の扱い、Issue #23の分割ID調査との関係を `docs/flow.md` と `issues/Issue_ex_009.md` に記録
-- Issue #21のSQL実行結果（対象117行、追加更新0件、差分0件）を `issues/Issue_ex_008.md` に追記
+- 実施順、欠損の扱い、Issue #23の分割ID調査との関係を `docs/flow.md` と `work-records/md/work_record_009.md` に記録
+- Issue #21のSQL実行結果（対象117行、追加更新0件、差分0件）を `work-records/md/work_record_008.md` に追記
 
 ## 2026-08-05
 
@@ -36,7 +44,7 @@
 - 追跡済み全74月次JSONをdry-runし、サマリーを持つ5,423試合・10,846チーム行で得点関連の不一致0件を確認
 - live DBの10,846行について、`points` と得点依存22列の計23列をバックアップ付きデータパッチで補正
 - live DB適用後、試合・チームペア、基礎値、試合スコア、シュート式、PFT復元値、得点依存22列を全件監査し、すべて不整合0件を確認
-- canonical rebuild SQL、投入フロー、SQL運用READMEを同期し、詳細を `issues/Issue_ex_006.md` に記録
+- canonical rebuild SQL、投入フロー、SQL運用READMEを同期し、詳細を `work-records/md/work_record_006.md` に記録
 - JSON、DBカラム、`games`、`player_game_stats.points` は変更対象外
 
 ## 2026-08-04
@@ -49,7 +57,7 @@
 - トランザクションプーラー経由でも一時テーブルのセッション切替に依存しないよう、更新・復旧本体をそれぞれ単一の `DO` 文として実装
 - live DBへパッチを適用し、`year = 2020 AND season = '2021-22'` の303件が解消されたことを確認
 - 適用後の `year = 2021 AND season = '2021-22'` は618件（既存315件 + 補正303件）
-- 調査、再取得、比較、SQL適用、最終確認の詳細を `issues/Issue_ex_005.md` に記録
+- 調査、再取得、比較、SQL適用、最終確認の詳細を `work-records/md/work_record_005.md` に記録
 - 一回限りの運用SQLを `supabase/sql/` に集約し、`YYYYMMDD_<action>_<target>.sql` の命名規則を追加
 
 ## 2026-03-10

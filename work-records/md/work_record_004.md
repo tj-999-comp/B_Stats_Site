@@ -1,4 +1,4 @@
-# Issue_ex_004: playersのbirthplace欠損調査ログ（スレッド分割前サマリ）
+# 作業記録 004: playersのbirthplace欠損調査ログ（スレッド分割前サマリ）
 作成日: 2026-06-02
 
 ## 背景

@@ -1,4 +1,4 @@
-# Issue_ex_007: GitHub Issue #12 players監査・差分補完基盤
+# 作業記録 007: GitHub Issue #12 players監査・差分補完基盤
 作成日: 2026-08-05
 
 ## 対象

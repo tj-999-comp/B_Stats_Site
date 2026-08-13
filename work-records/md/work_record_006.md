@@ -1,4 +1,4 @@
-# Issue_ex_006: game_team_statsの得点誤マッピング補正
+# 作業記録 006: game_team_statsの得点誤マッピング補正
 作成日: 2026-08-05
 
 ## 対象

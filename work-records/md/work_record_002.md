@@ -1,4 +1,4 @@
-# Issue_ex_002: players.nationality 追加手順整理とrebuild SQL一本化
+# 作業記録 002: players.nationality 追加手順整理とrebuild SQL一本化
 作成日: 2026-05-26
 
 ## 背景
@@ -49,6 +49,6 @@ WHERE table_schema = 'public'
   - `supabase/rebuild/00_rebuild_all.sql`
 
 ## 完了報告（2026-05-26）
-- ユーザー側で SQL 実行が完了した前提で、本Issueを完了扱いに更新。
+- ユーザー側で SQL 実行が完了した前提で、本記録を完了扱いに更新。
 - `players.nationality` 追加、および再実行時の重複衝突回避修正を反映済み。
-- あわせて、`issues/` 配下の命名規則（`Issue_ex_###.md`）を明文化し、CIでの自動検証を追加。
+- あわせて、当時の作業記録ディレクトリの命名規則を明文化し、CIでの自動検証を追加。

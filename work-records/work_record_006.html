@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light">
+    <title>game_team_statsの得点誤マッピング補正 — 作業記録</title>
+    <link rel="stylesheet" href="work_record.css">
+  </head>
+  <body>
+    <div class="shell">
+      <header class="topbar">
+        <a class="wordmark" href="../README.md">B.LEAGUE STATS</a>
+        <nav class="toplinks" aria-label="関連文書">
+          <a href="README.md">運用ルール</a>
+          <a href="design.md">デザイン原則</a>
+          <a href="md/work_record_006.md">Markdownを読む</a>
+        </nav>
+      </header>
+      <main>
+        <header class="record-header">
+          <p class="kicker">作業記録 006 ・ 2026-08-05</p>
+          <h1>game_team_statsの得点誤マッピング補正</h1>
+          <dl class="record-meta">
+            <div><dt>原本</dt><dd><code>md/work_record_006.md</code></dd></div>
+            <div><dt>状態</dt><dd>記録本文をHTML化</dd></div>
+          </dl>
+        </header>
+        <section class="record-section"><div class="section-intro"><p class="section-label">01　対象</p><h2>対象</h2></div><div class="section-content"><ul><li>GitHub Issue: <a href="https://github.com/tj-999-comp/B_Stats_Site/issues/11">#11 game_team_stats.points の誤マッピングを修正する</a></li><li>対象テーブル: <code>public.game_team_stats</code></li><li>対象件数: 5,423試合、10,846チーム行</li><li>対象コード: <code>scripts/db/upsert_games.py</code></li></ul></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">02　原因</p><h2>原因</h2></div><div class="section-content"><p>B.LEAGUE公式JSONの <code>HomeTeamPTR</code> / <code>AwayTeamPTR</code> を得点として <code>game_team_stats.points</code> へ変換していた。<code>TeamPTR</code> はフィールドゴール成功率に相当し、試合の最終得点ではない。最終得点の正本は <code>HomeTeamScore</code> / <code>AwayTeamScore</code> である。</p>
+<p>追跡済み全74月次JSONを調査した結果、サマリーを持つ5,423試合・10,846チーム行すべてで、旧変換値と試合スコアが不一致だった。一方、<code>2 × fg2m + 3 × fg3m + ftm</code> は全10,846行で試合スコアと一致した。</p></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">03　修正</p><h2>変換スクリプトの修正</h2></div><div class="section-content"><p><code>scripts/db/upsert_games.py</code> を次の仕様へ変更した。</p>
+<ol><li><code>HomeTeamScore</code> / <code>AwayTeamScore</code> を各チームの <code>points</code> に採用する。</li><li>試合スコアが欠損している場合だけ、<code>2 × fg2m + 3 × fg3m + ftm</code> を採用する。</li><li>試合スコアとシュート式が不一致なら、いずれのテーブルもUpsertする前に停止する。</li><li>dry-runと通常実行の両方で、入力スコア、シュート式、変換後 <code>points</code> を照合する。</li><li>変換後チーム行の欠落、余剰、重複も監査し、不整合があれば停止する。</li><li><code>TeamPTR</code> は <code>points</code> に使用せず、別カラムも追加しない。既存の <code>fg_pct</code> はFGM/FGAから計算する。<p>スコア欠損時のフォールバックと、スコア・シュート式および変換後pointsの不一致時に停止することは合成データでも確認した。</p></li></ol></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">04　検証</p><h2>全月次JSONの検証</h2></div><div class="section-content"><p>追跡済み全74月次JSONを明示して <code>python -m scripts.db.upsert_games --input &lt;path&gt; --dry-run</code> を実行した。</p>
+<pre><code class="language-text">files=74
+audited_team_rows=10846
+score_available_rows=10846
+score_missing_rows=0
+score_shot_mismatch_rows=0
+transformed_score_mismatch_rows=0
+transformed_shot_mismatch_rows=0
+missing_transformed_rows=0
+unexpected_transformed_rows=0
+duplicate_transformed_rows=0</code></pre></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">05　パッチ</p><h2>live DBデータパッチ</h2></div><div class="section-content"><p>次の運用SQLを作成し、使い捨てローカルPostgreSQLで適用、再実行防止、ロールバック、ロールバック再実行防止を確認した後、live DBへ適用した。</p>
+<ul><li><code>supabase/sql/20260804_fix_game_team_points.sql</code></li><li><code>supabase/sql/20260804_rollback_fix_game_team_points.sql</code></li></ul>
+<p>更新前の23列と <code>updated_at</code> は <code>public.data_patch_backup_20260804_issue_11_game_team_stats</code> に10,846行保存した。バックアップテーブルはRLSを有効にし、<code>anon</code> と <code>authenticated</code> の権限を取り消している。</p>
+<p>補正対象は <code>points</code> と、これに依存する次の22列である。</p>
+<ul><li><code>ts_pct</code>, <code>off_rtg</code>, <code>def_rtg</code>, <code>net_rtg</code></li><li><code>pft_pct</code>, <code>fbp_pct</code>, <code>scp_pct</code>, <code>pitp_pct</code></li><li><code>pt2_points_share</code>, <code>pt3_points_share</code>, <code>ft_points_share</code>, <code>eff</code></li><li><code>close_win_3pts_or_less</code>, <code>close_loss_3pts_or_less</code></li><li><code>opp_ts_pct</code>, <code>opp_pt2_points_share</code>, <code>opp_pt3_points_share</code>, <code>opp_ft_points_share</code></li><li><code>opp_fbp_pct</code>, <code>opp_scp_pct</code>, <code>opp_pitp_pct</code>, <code>opp_pft_pct</code></li></ul>
+<p>PFTの元値はDBに直接保存されていないため、補正前の <code>pft_pct × points</code> から整数として復元した。更新前に <code>pft_rtg × 相手turnovers</code> からの独立した復元値と全件一致することを確認した。</p></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">06　監査</p><h2>live DB適用後の全件監査</h2></div><div class="section-content"><p>live Supabaseから <code>games</code> と <code>game_team_stats</code> を読み取り専用で全件取得し、試合単位のペアと補正対象23列を再計算して照合した。</p>
+<pre><code class="language-text">games_rows=5423
+game_team_stats_rows=10846
+game_team_stats_games=5423
+backup_rows=10846
+invalid_game_pair_games=0
+invalid_pair_rows=0
+orphan_stat_rows=0
+invalid_base_rows=0
+points_score_mismatch_rows=0
+shot_formula_score_mismatch_rows=0
+pft_recovery_mismatch_rows=0
+derived_mismatch_rows=0
+derived_field_mismatches={}</code></pre>
+<p>これにより、各試合にhome/awayの2行が存在し、次の完了条件をすべて満たすことを確認した。</p>
+<ul><li><code>points</code> と試合スコアの不一致が0件</li><li>シュート式と試合スコアの不一致が0件</li><li>得点依存22列の計算不一致が0件</li><li>欠損試合、片側チーム行、孤立チーム行が0件</li></ul></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">07　対象外</p><h2>変更しない項目</h2></div><div class="section-content"><ul><li>追跡済みJSONの書き換え</li><li>DBカラムの追加・削除</li><li><code>games</code> の更新</li><li><code>player_game_stats.points</code> の更新</li><li><code>TeamPTR</code> の新規保存</li></ul></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">08　判定</p><h2>完了判定</h2></div><div class="section-content"><p>変換元の修正、Upsert前監査、全74月次JSONのdry-run、バックアップ・ロールバック付きlive DB補正、得点依存22列を含む全件監査、canonical SQLと関連文書の同期が完了した。以上によりIssue #11の修正作業を完了とする。</p></div></section>
+        <aside class="history-note"><h2>GitHub Issueの状態（省略）</h2><p>当時のGitHub Issueの未完了・完了、親子関係、優先順位などは、現在の状態から正確に再現できないため、このHTMLでは省略しています。本文中のIssue番号・リンクは、作業記録上の参照情報として残しています。</p></aside>
+      </main>
+      <footer>
+        <span>B.LEAGUE Stats · 作業記録 006</span>
+        <span><a href="md/work_record_006.md">Markdown原本</a></span>
+      </footer>
+    </div>
+  </body>
+</html>

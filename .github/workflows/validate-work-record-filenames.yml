@@ -1,0 +1,31 @@
+name: Validate Work Record Filenames
+
+on:
+  push:
+    paths:
+      - 'work-records/**'
+      - 'scripts/dev/validate_work_record_filenames.py'
+      - '.github/workflows/validate-work-record-filenames.yml'
+  pull_request:
+    paths:
+      - 'work-records/**'
+      - 'scripts/dev/validate_work_record_filenames.py'
+      - '.github/workflows/validate-work-record-filenames.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Validate work record filenames and placement
+        run: python scripts/dev/validate_work_record_filenames.py

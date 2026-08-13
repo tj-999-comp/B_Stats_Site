@@ -5,7 +5,8 @@
 ## ドキュメント運用ルール
 
 - 新規作成するドキュメントは、先頭（タイトル直下）に `作成日: YYYY-MM-DD` を記載する。
-- `issues/` 配下に作業ログを追加する場合、ファイル名は `Issue_ex_###.md`（3桁ゼロ埋め）に統一する。
+- `Issue` はGitHub Issueだけを指し、リポジトリ内の調査・実行結果は「作業記録」と呼ぶ。
+- 作業記録は `work-records/md/work_record_###.md`（3桁ゼロ埋め）に置く。詳しいルールとGitHub Issue一覧は `work-records/README.md` を参照する。閲覧用HTMLは `work-records/` 直下に置き、`work-records/design.md` に従う。
 
 ## 構成概要
 
@@ -196,3 +197,7 @@ Vercel Hobby Plan (Next.js App Router: SSR/ISR)
 | ドキュメント | 何が分かるか | いつ読むか |
 |---|---|---|
 | [docs/changelog.md](docs/changelog.md) | スキーマ/スクリプト/運用の変更履歴 | 仕様差分の確認時 |
+| [work-records/README.md](work-records/README.md) | 作業記録の呼称・配置・命名ルール | 作業記録の追加・整理時 |
+| [work-records/md/work_record_008.md](work-records/md/work_record_008.md) | Issue #21の実施結果とopen GitHub Issueの親子関係・優先順位 | 次に着手する作業を選ぶ時 |
+| [work-records/work_record_008.html](work-records/work_record_008.html) | 作業記録008とGitHub Issue状況のブラウザ閲覧版 | 実施結果とバックログを俯瞰したい時 |
+| [work-records/design.md](work-records/design.md) | 作業記録HTMLのデザイン原則 | HTMLを作成・編集する時 |

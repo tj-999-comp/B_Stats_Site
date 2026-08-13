@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light">
+    <title>GitHub Issue #12 players監査・差分補完基盤 — 作業記録</title>
+    <link rel="stylesheet" href="work_record.css">
+  </head>
+  <body>
+    <div class="shell">
+      <header class="topbar">
+        <a class="wordmark" href="../README.md">B.LEAGUE STATS</a>
+        <nav class="toplinks" aria-label="関連文書">
+          <a href="README.md">運用ルール</a>
+          <a href="design.md">デザイン原則</a>
+          <a href="md/work_record_007.md">Markdownを読む</a>
+        </nav>
+      </header>
+      <main>
+        <header class="record-header">
+          <p class="kicker">作業記録 007 ・ 2026-08-05</p>
+          <h1>GitHub Issue #12 players監査・差分補完基盤</h1>
+          <dl class="record-meta">
+            <div><dt>原本</dt><dd><code>md/work_record_007.md</code></dd></div>
+            <div><dt>状態</dt><dd>記録本文をHTML化</dd></div>
+          </dl>
+        </header>
+        <section class="record-section"><div class="section-intro"><p class="section-label">01　対象</p><h2>対象</h2></div><div class="section-content"><p>GitHub Issue #12「[DB] 選手プロフィールの欠損を補完する」のうち、 次の2点を対象とした。</p>
+<ol><li>live DBの全件取得、差分のみの更新、選手別監査レポートを安全に実行できる基盤を作る。</li><li>live <code>players</code> を別ファイルへ出力し、正本 <code>scraper/data/players.json</code> との差分をレビューする。<p>live DBへの更新と正本JSONの更新はこの段階では行わない。</p></li></ol></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">02　実装</p><h2>実装</h2></div><div class="section-content"><ul><li><code>scripts/db/db.py</code><ul><li><code>player_id</code> の安定順と <code>range</code> ページングで、PostgRESTの1,000件上限を超えて全件取得するようにした。</li></ul></li><li><code>scripts/dev/audit_players_snapshot.py</code><ul><li>live全件を別JSONへ保存する。</li><li>liveのみ、localのみ、重複ID、項目別欠損、共通IDの値差分、localから補完可能なlive欠損を選手単位で出力する。</li></ul></li><li><code>scripts/dev/fill_missing_player_profile_fields.py</code><ul><li>指定なしではlive DBを更新しない。</li><li><code>--apply</code> 指定時だけ、取得できた欠損列の差分を更新する。</li><li>監査後の同時更新を検出できるよう <code>updated_at</code> を更新条件に含める。</li><li>選手別に公式取得成功、公式空欄、404、通信失敗、提案差分、反映結果を記録する。</li></ul></li><li><code>scripts/dev/fetch_profile_fields_parallel.py</code><ul><li>429、5xx、接続例外に指数バックオフ付きの再試行を追加した。</li></ul></li></ul></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">03　監査</p><h2>live差分監査結果</h2></div><div class="section-content"><p>2026-08-05に次の読み取り専用コマンドを実行した。</p>
+<pre><code class="language-bash">python -m scripts.dev.audit_players_snapshot \
+  --local-input scraper/data/players.json \
+  --snapshot-output /tmp/b_stats_issue12_players_live_20260805.json \
+  --report /tmp/b_stats_issue12_players_audit_20260805.json</code></pre>
+<h3>IDと重複</h3>
+<table><thead><tr><th>項目</th><th>件数</th></tr></thead><tbody><tr><td>live行数 / ユニークID</td><td>1,100</td></tr><tr><td>local行数</td><td>713</td></tr><tr><td>localユニークID</td><td>693</td></tr><tr><td>共通ID</td><td>693</td></tr><tr><td>liveのみ</td><td>407</td></tr><tr><td>localのみ</td><td>0</td></tr><tr><td>local重複ID / 余分行</td><td>20 / 20</td></tr></tbody></table>
+<h3>live欠損の内訳</h3>
+<table><thead><tr><th>項目</th><th>live欠損</th><th>liveのみ407 ID内の欠損</th></tr></thead><tbody><tr><td><code>player_name_e</code></td><td>30</td><td>30</td></tr><tr><td><code>birthplace</code></td><td>156</td><td>89</td></tr><tr><td><code>league_registered_nationality</code></td><td>34</td><td>28</td></tr><tr><td><code>player_slot_category</code></td><td>216</td><td>216</td></tr><tr><td><code>last_seen_team_id</code></td><td>8</td><td>0</td></tr><tr><td><code>last_seen_jersey_number</code></td><td>49</td><td>46</td></tr></tbody></table>
+<h3>共通693 IDの値差分</h3>
+<ul><li><code>player_name_j</code>、<code>player_name_e</code>、<code>birthplace</code>、<code>player_slot_category</code>、<code>last_seen_jersey_number</code> は、</li></ul>
+<p>現行UPSERTと同じlocal配列の後勝ちで比較すると差分なし。</p>
+<ul><li><code>league_registered_nationality</code> は34件で差分があり、すべてliveに値がありlocalが欠損している。</li><li><code>last_seen_team_id</code> は8件で、localがすべて <code>2486</code>、liveがNULL。</li></ul>
+<p>過去のUPSERTで <code>teams</code> にないIDをNULLへ正規化した結果と一致する。</p>
+<ul><li>liveの <code>last_seen_jersey_number</code> 欠損のうち、localの重複行から値を得られるのは</li></ul>
+<p><code>player_id=8651</code>の <code>55</code> 1件だけである。</p>
+<ul><li><code>player_name_e</code> と <code>last_seen_jersey_number</code> がともに欠損する行は30件。</li></ul>
+<p>削除条件には使わず、選手外行のレビュー候補としてのみ報告する。</p>
+<p>liveスナップショットの列に <code>nationality</code> は存在しなかった。 そのため、現行 <code>players.json</code> 全列の無条件UPSERTは実行しない。</p></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">04　プレビュー</p><h2>3件プレビュー</h2></div><div class="section-content"><p><code>--apply</code> なし、<code>--limit 3 --workers 1</code> で取得・差分生成を確認した。</p>
+<table><thead><tr><th>player_id</th><th>結果</th><th>提案</th></tr></thead><tbody><tr><td><code>10256</code></td><td>公式取得成功、出身地は公式空欄</td><td>なし</td></tr><tr><td><code>10265</code></td><td>既存の登録国籍・出身地から導出可能</td><td><code>player_slot_category=外国籍選手</code></td></tr><tr><td><code>10267</code></td><td>公式プロフィール404</td><td>なし</td></tr></tbody></table>
+<p>集計は <code>proposed_rows=1</code>、<code>applied_rows=0</code>、<code>apply_errors=0</code> で、 live DBの更新は発生していない。</p></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">05　次の判断</p><h2>未実施と次の判断</h2></div><div class="section-content"><ul><li>live DBの更新、正本JSONの上書き、削除は未実施。</li><li><code>last_seen_team_id</code> はプロフィール値ではなく、対象大会と最新試合の定義を確定してから再計算する。</li></ul></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">06　分類</p><h2>選手・スタッフ分類</h2></div><div class="section-content"><p>追跡済みの月次ゲームJSON 74ファイルに含まれる <code>PeriodCategory == 18</code> の 130,342行を走査した。次のいずれかを満たす行だけを実選手行とした。</p>
+<ul><li>背番号がある</li><li><code>PlayingFlg</code> がtrue</li><li><code>StartingFlg</code> がtrue</li><li><code>PlayTime</code> が正の <code>MM:SS</code></li></ul>
+<p>この条件で126,282行を選手として採用し、4,060行をスタッフ相当として除外した。 同じIDが採用側と除外側の両方に出るケースは0件だった。</p>
+<p>live 1,100 IDの分類は次のとおり。</p>
+<table><thead><tr><th>分類</th><th>件数</th><th>方針</th></tr></thead><tbody><tr><td>選手</td><td>968</td><td>保持</td></tr><tr><td>スタッフ相当</td><td>47</td><td>補完・今後の投入から除外</td></tr><tr><td>ダミーID</td><td>1</td><td><code>999999999</code>。除外</td></tr><tr><td>追跡済み試合に未出現</td><td>84</td><td>自動除外せず保持</td></tr></tbody></table>
+<p>未出現84 IDのうち83 IDは現行正本にも存在し、比較的新しいシーズンの選手を含む。 したがって「追跡済み月次ファイルにない」こと自体は削除根拠にしなかった。 除外48 IDのうち現行正本にあるのはスタッフ相当 <code>45873</code> とダミー <code>999999999</code> の2 IDだった。</p>
+<p>live DBも読み取り専用で依存行数を確認した。</p>
+<table><thead><tr><th>テーブル・参照</th><th>対象行数</th></tr></thead><tbody><tr><td><code>players</code></td><td>48</td></tr><tr><td><code>player_game_stats</code></td><td>4,060</td></tr><tr><td><code>player_name_history</code></td><td>59</td></tr><tr><td><code>player_affiliations</code></td><td>70</td></tr><tr><td><code>player_id_map.player_id</code></td><td>0</td></tr><tr><td><code>player_id_map.old_player_id</code></td><td>0</td></tr></tbody></table>
+<p><code>player_game_stats</code> の4,060行は月次JSONでスタッフ相当と判定した4,060行と一致する。 canonical FKは同テーブルから <code>players</code> への削除を制限するため、反映時は子行を先に バックアップ・削除し、その後に48 master行を削除する必要がある。</p>
+<p>投入時の再混入を防ぐため、<code>scripts/db/player_boxscore.py</code> に同じ判定を共通化し、 <code>players</code> と <code>player_game_stats</code> の両抽出、およびID名寄せ候補収集で使用するようにした。</p></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">07　監査</p><h2>全対象プロフィール監査</h2></div><div class="section-content"><p>分類後の1,052 IDを対象とし、liveスナップショットと初回取得結果のキャッシュを使って <code>--apply</code> なしで全件監査した。</p>
+<table><thead><tr><th>結果</th><th>件数</th></tr></thead><tbody><tr><td>監査対象</td><td>280</td></tr><tr><td>既存プロフィールから安全に区分導出</td><td>165</td></tr><tr><td>公式プロフィールから差分提案</td><td>1</td></tr><tr><td>公式404</td><td>75</td></tr><tr><td>公式項目が空欄</td><td>33</td></tr><tr><td>導出可能な変更なし</td><td>6</td></tr><tr><td>提案行合計</td><td>166</td></tr><tr><td>DB反映</td><td>0</td></tr></tbody></table>
+<p>公式プロフィールから値を提案できた1件は <code>player_id=43470</code> で、 <code>league_registered_nationality=ユース育成特別枠</code>、<code>birthplace=鹿児島県</code>、 <code>player_slot_category=日本人選手</code> だった。</p>
+<p><code>リーグ登録国籍=帰化</code> の3件は、日本人選手・外国籍選手のどちらにも自動分類しないよう 判定を修正した。提案反映後も <code>player_slot_category</code> は35件、<code>birthplace</code> は108件、 <code>league_registered_nationality</code> は29件が未解消であり、推測による補完は行わない。</p></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">08　整合</p><h2>正本候補とスキーマ整合</h2></div><div class="section-content"><p>liveスキーマには <code>players.nationality</code> がなく、2026-05-27の運用SQLでも同列を削除していた。 このlive実態を現行仕様と判断し、投入コード、補助スクリプト、canonical rebuild SQL、 テーブル定義から同列を除外した。<code>league_registered_nationality</code>、<code>birthplace</code>、 <code>player_slot_category</code> は引き続き保持する。liveへのDDL適用は行っていない。</p>
+<p>監査済みliveを基準に、除外48 IDを外し、提案166件だけを重ねたレビュー用正本候補を 次へ生成した。現行 <code>scraper/data/players.json</code> は上書きしていない。</p>
+<pre><code class="language-text">/tmp/b_stats_issue12_players_canonical_candidate_20260805.json
+/tmp/b_stats_issue12_players_canonical_candidate_report_20260805.json</code></pre>
+<p>候補は1,052行・重複0 IDで、現行正本に対して候補のみ361 ID、正本のみ2 ID （除外対象の <code>45873</code>、<code>999999999</code>）だった。候補の残存欠損は、英名0、出身地108、 リーグ登録国籍29、選手区分35、最終所属8、最終背番号1である。</p></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">09　残作業</p><h2>残作業</h2></div><div class="section-content"><ul><li>正本候補1,052行と除外48 IDをレビューし、<code>scraper/data/players.json</code> の置換可否を決める。</li><li>live DBへは、<code>player_game_stats</code> 4,060行と <code>players</code> 48行の除外、および補完166件を別操作として、バックアップ・件数ガード・復旧方法を用意してから反映する。</li><li><code>last_seen_team_id</code> 8件と <code>last_seen_jersey_number</code> 1件はプロフィール補完から分離して扱う。</li><li>帰化3件を含む未確定区分35件は、公式の選手区分を確認できる別根拠が得られるまで保留する。</li></ul></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">10　SQL</p><h2>反映SQL・ロールバックSQL</h2></div><div class="section-content"><p>2026-08-11に、liveへ適用するSQL一式を作成した。その後、バックアップ、事前検証、本番反映、反映後検証まで完了した。</p>
+<ul><li><code>supabase/sql/20260811_backup_issue_12_players.sql</code><ul><li>プロフィール166行、削除対象players48行、<code>player_game_stats</code> 4,060行、名前履歴59行、所属履歴70行を永続バックアップする。</li></ul></li><li><code>supabase/sql/20260811_verify_issue_12_players.sql</code><ul><li>変更予定の項目別件数と、現在状態が反映前・反映後・想定外のいずれかを読み取り確認する。</li></ul></li><li><code>supabase/sql/20260811_fix_issue_12_players.sql</code><ul><li><code>updated_at</code> の楽観的ガード付きでプロフィール166件を補完し、関連行を先に削除してからplayers48行を削除する。</li></ul></li><li><code>supabase/sql/20260811_rollback_fix_issue_12_players.sql</code><ul><li>上記バックアップ表から対象行を復元し、トリガーが生成する履歴・所属行もバックアップ状態へ戻す。</li></ul></li></ul>
+<p>実行順はバックアップSQL → 検証SQL（変更内訳と反映前状態） → 反映SQL → 検証SQL（反映後状態）。問題があればロールバックSQLを実行し、検証SQLで復元状態を確認する。</p>
+<p>安全に確定できなかった残存欠損は、GitHub Issue <a href="https://github.com/tj-999-comp/B_Stats_Site/issues/21">#21</a> を Issue #12 の子Issueとして作成し、対応を保留・移管した。</p></div></section>
+        <aside class="history-note"><h2>GitHub Issueの状態（省略）</h2><p>当時のGitHub Issueの未完了・完了、親子関係、優先順位などは、現在の状態から正確に再現できないため、このHTMLでは省略しています。本文中のIssue番号・リンクは、作業記録上の参照情報として残しています。</p></aside>
+      </main>
+      <footer>
+        <span>B.LEAGUE Stats · 作業記録 007</span>
+        <span><a href="md/work_record_007.md">Markdown原本</a></span>
+      </footer>
+    </div>
+  </body>
+</html>

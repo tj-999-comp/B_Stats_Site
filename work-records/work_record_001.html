@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light">
+    <title>2016-2017 シーズン投入（初回失敗→再チャレンジ成功） — 作業記録</title>
+    <link rel="stylesheet" href="work_record.css">
+  </head>
+  <body>
+    <div class="shell">
+      <header class="topbar">
+        <a class="wordmark" href="../README.md">B.LEAGUE STATS</a>
+        <nav class="toplinks" aria-label="関連文書">
+          <a href="README.md">運用ルール</a>
+          <a href="design.md">デザイン原則</a>
+          <a href="md/work_record_001.md">Markdownを読む</a>
+        </nav>
+      </header>
+      <main>
+        <header class="record-header">
+          <p class="kicker">作業記録 001 ・ 2026-05-26</p>
+          <h1>2016-2017 シーズン投入（初回失敗→再チャレンジ成功）</h1>
+          <dl class="record-meta">
+            <div><dt>原本</dt><dd><code>md/work_record_001.md</code></dd></div>
+            <div><dt>状態</dt><dd>記録本文をHTML化</dd></div>
+          </dl>
+        </header>
+        <section class="record-section"><div class="section-intro"><p class="section-label">01　概要</p><h2>概要</h2></div><div class="section-content"><p>最古シーズン（2016-2017）の投入を実行したが、<code>teams</code> テーブルへの upsert で Row Level Security (RLS) に拒否され、投入が停止した。</p></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">02　実行</p><h2>実行内容</h2></div><div class="section-content"><ul><li>対象シーズン: <code>scraper/data/season_2016-2017/</code></li><li>実行コマンド:</li></ul>
+<pre><code class="language-bash">/Users/ryosuketajima/git-tj999/B_Stats_Site/.venv/bin/python -m scripts.db.upsert_games --input scraper/data/season_2016-2017/games_2016-17_2016-10-01_2016-10-31.json</code></pre></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">03　初回</p><h2>初回結果</h2></div><div class="section-content"><ul><li>エラー: <code>new row violates row-level security policy for table "teams"</code> (code: <code>42501</code>)</li><li>停止箇所: <code>upsert_teams()</code> 実行時</li></ul></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">04　件数</p><h2>件数増分確認</h2></div><div class="section-content"><p>投入前後で件数に変化なし。</p>
+<table><thead><tr><th>テーブル</th><th>投入前</th><th>投入後</th><th>増分</th></tr></thead><tbody><tr><td>teams</td><td>0</td><td>0</td><td>0</td></tr><tr><td>games</td><td>0</td><td>0</td><td>0</td></tr><tr><td>game_team_stats</td><td>0</td><td>0</td><td>0</td></tr><tr><td>players</td><td>0</td><td>0</td><td>0</td></tr><tr><td>player_game_stats</td><td>0</td><td>0</td><td>0</td></tr></tbody></table></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">05　補足</p><h2>補足</h2></div><div class="section-content"><ul><li>dry-run では抽出件数を確認できる（例: teams=18, games=89, game_team_stats=178, players=228, player_game_stats=2185）。</li><li>データ形式の問題ではなく、DB書き込み権限（キー種別またはRLSポリシー）起因の可能性が高い。</li></ul></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">06　次の作業</p><h2>次アクション案</h2></div><div class="section-content"><ol><li><code>scraper/.env</code> の <code>SUPABASE_SECRET_KEYS</code> が service_role キーか再確認する。</li><li>Supabase 側で <code>teams</code> テーブルの RLS 設定と書き込みポリシーを確認する。</li><li>書き込み権限確認後、同コマンドで再実行して件数増分を再計測する。</li></ol></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">07　再実行</p><h2>再チャレンジ結果</h2></div><div class="section-content"><h3>実施内容</h3>
+<ul><li><code>SUPABASE_SECRET_KEYS</code> を publishable ではなく secret キーへ変更後に再実行。</li><li>2016-2017 シーズンの月次9ファイルを順次 <code>upsert_games</code> で投入。</li></ul>
+<h3>再チャレンジ後の件数増分</h3>
+<table><thead><tr><th>テーブル</th><th>投入前</th><th>投入後</th><th>増分</th></tr></thead><tbody><tr><td>teams</td><td>0</td><td>21</td><td>+21</td></tr><tr><td>games</td><td>0</td><td>557</td><td>+557</td></tr><tr><td>game_team_stats</td><td>0</td><td>1114</td><td>+1114</td></tr><tr><td>players</td><td>0</td><td>280</td><td>+280</td></tr><tr><td>player_game_stats</td><td>0</td><td>13972</td><td>+13972</td></tr></tbody></table>
+<h3>補足</h3>
+<ul><li><code>games</code> テーブルの <code>season='2016-17'</code> 件数は <code>557</code> 件。</li><li>再チャレンジでは RLS エラーは発生せず、<code>upsert completed</code> を確認。</li></ul></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">08　計画</p><h2>Planning 統合メモ（2026-05-26）</h2></div><div class="section-content"><p>この Issue に <code>docs/Planning_20260526.md</code> の要点と進捗を統合して管理する。</p>
+<h3>目的</h3>
+<ul><li>スクレイピング済みデータを、棚卸し・投入・検証まで含めて段階的にDBへ投入する。</li></ul>
+<h3>前提</h3>
+<ul><li>データソースは <code>scraper/data/</code> 配下。</li><li>投入スクリプトは <code>scripts/db/upsert_games.py</code> を利用。</li><li>正本マスタは <code>players.json</code>。</li></ul>
+<h3>実行チェックリスト（統合版）</h3>
+<h4>本体</h4>
+<ul><li>完了：<code>scraper/.env</code> に <code>SUPABASE_URL</code> と <code>SUPABASE_SECRET_KEYS</code> が設定済み。</li><li>完了：<code>scraper/data/</code> は月次JSON中心の構成へ整理済み。</li><li>完了：<code>season_2016-2017</code> から <code>season_2024-2025</code> まで投入対象が揃っていることを確認済み。</li><li>完了：<code>season_2022-2023</code> への命名統一を確認済み。</li><li>完了：代表JSONで dry-run 成功を確認済み。</li><li>完了：最古1シーズン（2016-2017）を投入実行済み。</li><li>完了：投入後の件数増分を確認済み（本記録）。</li><li>完了：問題なければ残りシーズンへ横展開する。</li><li>完了：全シーズン投入後に主要テーブル件数・代表レコードを確認する。</li></ul>
+<h4>保留（意思決定済み）</h4>
+<ul><li>完了：<code>player_alias_candidates.csv</code> は <code>status=ok</code> 行を <code>player_id_map</code> 適用対象として扱う。</li><li>完了：正本は <code>players.json</code>、<code>players.csv</code> は参考用。</li><li>完了：<code>game_team_stats_preview.csv</code> は保持しない（削除済み）。</li><li>完了：<code>play_by_play</code> 系は本運用から切り離す。</li><li>完了：プロフィール補完はDB投入後に再実行する（<code>nationality</code> が <code>null</code> の選手中心）。</li></ul>
+<h4>手動確認（意思決定済み）</h4>
+<ul><li>完了：接続先は本番投入先であることを確認済み。</li><li>完了：<code>SUPABASE_SECRET_KEYS</code> は service_role 相当キー利用で再試行済み。</li><li>完了：既存投入データなし（衝突リスクなし）。</li><li>完了：<code>player_id_map</code> 利用方針は採用。</li><li>完了：件数チェック観点は本記録の増分表で固定。</li><li>完了：差し戻し詳細メモは厳密運用しない方針。</li></ul></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">09　完了</p><h2>ここまでの完了事項（サマリー）</h2></div><div class="section-content"><ol><li>データ整理（確認用JSON削除、命名統一、不要フィールド除去）を実施し、GitHubへ反映済み。</li><li>Planning ドキュメントに実行チェックリストを整備し、意思決定内容を反映済み。</li><li>初回投入失敗（RLS 42501）を検知し、原因をキー権限と切り分け。</li><li><code>SUPABASE_SECRET_KEYS</code> を secret キーへ切替後、再チャレンジ成功。</li><li>最古シーズン（2016-2017）投入を完了し、件数増分を確認済み。</li><li>残り8シーズン（2017-18〜2024-25）を横展開投入し、全シーズン投入を完了。</li></ol></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">10　確認</p><h2>全シーズン投入後の確認結果（2026-05-26）</h2></div><div class="section-content"><h3>主要テーブル件数</h3>
+<table><thead><tr><th>テーブル</th><th>件数</th></tr></thead><tbody><tr><td>teams</td><td>40</td></tr><tr><td>games</td><td>5423</td></tr><tr><td>game_team_stats</td><td>10846</td></tr><tr><td>players</td><td>1016</td></tr><tr><td>player_game_stats</td><td>130342</td></tr></tbody></table>
+<h3>games 件数（season別）</h3>
+<table><thead><tr><th>season</th><th>件数</th></tr></thead><tbody><tr><td>2016-17</td><td>557</td></tr><tr><td>2017-18</td><td>552</td></tr><tr><td>2018-19</td><td>553</td></tr><tr><td>2019-20</td><td>367</td></tr><tr><td>2020-21</td><td>590</td></tr><tr><td>2021-22</td><td>618</td></tr><tr><td>2022-23</td><td>731</td></tr><tr><td>2023-24</td><td>731</td></tr><tr><td>2024-25</td><td>724</td></tr></tbody></table></div></section>
+
+      </main>
+      <footer>
+        <span>B.LEAGUE Stats · 作業記録 001</span>
+        <span><a href="md/work_record_001.md">Markdown原本</a></span>
+      </footer>
+    </div>
+  </body>
+</html>

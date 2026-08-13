@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light">
+    <title>2021-22シーズン303試合の日時・year補正 — 作業記録</title>
+    <link rel="stylesheet" href="work_record.css">
+  </head>
+  <body>
+    <div class="shell">
+      <header class="topbar">
+        <a class="wordmark" href="../README.md">B.LEAGUE STATS</a>
+        <nav class="toplinks" aria-label="関連文書">
+          <a href="README.md">運用ルール</a>
+          <a href="design.md">デザイン原則</a>
+          <a href="md/work_record_005.md">Markdownを読む</a>
+        </nav>
+      </header>
+      <main>
+        <header class="record-header">
+          <p class="kicker">作業記録 005 ・ 2026-08-04</p>
+          <h1>2021-22シーズン303試合の日時・year補正</h1>
+          <dl class="record-meta">
+            <div><dt>原本</dt><dd><code>md/work_record_005.md</code></dd></div>
+            <div><dt>状態</dt><dd>記録本文をHTML化</dd></div>
+          </dl>
+        </header>
+        <section class="record-section"><div class="section-intro"><p class="section-label">01　対象</p><h2>対象</h2></div><div class="section-content"><ul><li>GitHub Issue: <a href="https://github.com/tj-999-comp/B_Stats_Site/issues/10">#10 2021-22シーズンに誤配属された可能性がある303試合を修正する</a></li><li>対象テーブル: <code>public.games</code></li><li>対象条件: <code>season = '2021-22' AND year = 2020</code></li><li>対象件数: 303件</li></ul></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">02　原因</p><h2>原因と対応方針</h2></div><div class="section-content"><p>対象行は <code>year</code> だけでなく、<code>game_datetime</code>、<code>game_datetime_unix</code>、<code>game_date</code> も実際の開催年より約1年早い値だった。既存値の日付だけを機械的に加算せず、B.LEAGUE公式サイトから2022年1月〜4月分を再取得し、そのJSONを補正値の正本とした。</p></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">03　実施</p><h2>実施事項</h2></div><div class="section-content"><ol><li><code>season = 2021-22</code> の2022年1月〜4月を月単位で再取得した。</li><li>再取得した月次JSON 4ファイルについて、合計303試合、<code>schedule_key</code> 303件重複なし、取得失敗0件であることを確認した。</li><li>旧JSONと比較し、303件の <code>schedule_key</code>、対戦カード、スコア、home/away boxscore、試合概要が一致することを確認した。日時だけが2022年の正しい値へ変わることを確認した。</li><li>4ファイルすべてを <code>scripts.db.upsert_games --dry-run</code> で変換し、エラーがないことを確認した。</li><li>追跡済み月次JSONを再取得結果へ更新した。</li><li><code>public.games</code> のみを対象とするデータパッチとロールバックSQLを作成した。</li><li>DBeaver／トランザクションプーラー経由でも一時テーブルのセッション切替に依存しないよう、バックアップ、事前条件確認、303件更新、事後確認を単一の <code>DO</code> 文へまとめた。</li><li>使い捨てローカルPostgreSQLで、適用、永続バックアップ303件、ロールバック、再実行防止ガードを確認した。</li><li>live DBへデータパッチを適用し、シーズン別件数を再集計した。</li></ol></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">04　ファイル</p><h2>関連ファイル</h2></div><div class="section-content"><ul><li><code>scraper/data/season_2021-2022/games_2021-22_2022-01-01_2022-01-31.json</code></li><li><code>scraper/data/season_2021-2022/games_2021-22_2022-02-01_2022-02-28.json</code></li><li><code>scraper/data/season_2021-2022/games_2021-22_2022-03-01_2022-03-31.json</code></li><li><code>scraper/data/season_2021-2022/games_2021-22_2022-04-01_2022-04-30.json</code></li><li><code>supabase/sql/20260804_fix_2021_22_game_datetimes.sql</code></li><li><code>supabase/sql/20260804_rollback_fix_2021_22_game_datetimes.sql</code></li></ul>
+<p>更新SQLは適用前の303行を <code>public.data_patch_backup_20260804_issue_10_games</code> に保存してから、次の項目を補正する。</p>
+<ul><li><code>year</code>: <code>2020</code> から <code>2021</code></li><li><code>game_datetime_unix</code>: 再取得JSONの値</li><li><code>game_datetime</code>: 再取得日時からJSTで再生成</li><li><code>game_date</code>: 再取得日時からJSTで再生成</li><li><code>source_tab</code>: 再取得JSONの値</li><li><code>updated_at</code>: 適用時刻</li></ul></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">05　確認</p><h2>live DB適用後の確認結果</h2></div><div class="section-content"><pre><code class="language-text">2019  2019-20  367
+2020  2020-21  590
+2021  2021-22  618
+2022  2022-23  731</code></pre>
+<p>補正前に存在した <code>year = 2020 AND season = '2021-22'</code> の303件はなくなり、既存の <code>year = 2021 AND season = '2021-22'</code> 315件と統合されて618件になった。</p></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">06　判定</p><h2>完了判定</h2></div><div class="section-content"><ul><li>2021-22の対象試合日は2022年1月〜4月へ補正済み。</li><li><code>season = '2021-22' AND year = 2020</code> は0件。</li><li>対象303件の <code>schedule_key</code> に重複・欠落なし。</li><li>再取得、JSON比較、dry-run、ローカルDB適用・復旧、live DB再集計の手順と結果を記録済み。</li></ul>
+<p>以上によりIssue #10を完了とする。</p></div></section>
+        <aside class="history-note"><h2>GitHub Issueの状態（省略）</h2><p>当時のGitHub Issueの未完了・完了、親子関係、優先順位などは、現在の状態から正確に再現できないため、このHTMLでは省略しています。本文中のIssue番号・リンクは、作業記録上の参照情報として残しています。</p></aside>
+      </main>
+      <footer>
+        <span>B.LEAGUE Stats · 作業記録 005</span>
+        <span><a href="md/work_record_005.md">Markdown原本</a></span>
+      </footer>
+    </div>
+  </body>
+</html>

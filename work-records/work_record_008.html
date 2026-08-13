@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light">
+    <title>GitHub Issue #21 欠損プロフィール目視補完・DBパッチ準備 — 作業記録</title>
+    <link rel="stylesheet" href="work_record.css">
+  </head>
+  <body>
+    <div class="shell">
+      <header class="topbar">
+        <a class="wordmark" href="../README.md">B.LEAGUE STATS</a>
+        <nav class="toplinks" aria-label="関連文書">
+          <a href="README.md">運用ルール</a>
+          <a href="design.md">デザイン原則</a>
+          <a href="md/work_record_008.md">Markdownを読む</a>
+        </nav>
+      </header>
+      <main>
+        <header class="record-header">
+          <p class="kicker">作業記録 008 ・ 2026-08-13</p>
+          <h1>GitHub Issue #21 欠損プロフィール目視補完・DBパッチ準備</h1>
+          <dl class="record-meta">
+            <div><dt>原本</dt><dd><code>md/work_record_008.md</code></dd></div>
+            <div><dt>状態</dt><dd>記録本文をHTML化</dd></div>
+          </dl>
+        </header>
+        <section class="record-section"><div class="section-intro"><p class="section-label">01　対象</p><h2>対象</h2></div><div class="section-content"><p>GitHub Issue #21の目視確認用CSVをもとに、補完可能な選手プロフィールをlive DBへ反映するためのSQLを準備する。</p>
+<p>入力ファイルは <code>supabase/patches/20260813_issue21_missing_player_profiles.csv</code> とし、スクレイピング取得物や選手マスタ正本とは分離する。</p></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">02　補足</p><h2>目視確認での補足事項</h2></div><div class="section-content"><ol><li><code>last_seen_team_id</code> がNULLの選手は、所属チームがまだ取り込まれていないため、今回は補完しない。</li><li><code>player_id</code> 45848〜45865周辺には、同一人物が複数IDへ分割された可能性がある。<code>player_name_j</code> の重複検索などを起点に、既存IDとの統合を調査する。名寄せ作業はGitHub Issue #23へ切り出した。</li><li><code>league_registered_nationality</code> と <code>birthplace</code>（ユーザー記載の <code>birth_place</code> に相当）が未入力の選手は、上記のID分割の可能性に加えて、一時的に加入した「特別指定選手」としての登録である場合があるため、今回の空欄は許容する。</li></ol></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">03　成果物</p><h2>作成物</h2></div><div class="section-content"><ul><li><code>supabase/patches/20260813_issue21_missing_player_profiles.csv</code><ul><li>117選手</li><li>#12で除外したスタッフ相当47 IDとダミー1 IDは含めない</li></ul></li><li><code>supabase/sql/20260813_backup_issue_21_player_profiles.sql</code><ul><li>CSVの117行に対応する <code>players</code> 行を永続バックアップへ保存する</li></ul></li><li><code>supabase/sql/20260813_verify_issue_21_player_profiles.sql</code><ul><li>fix前・fix後・rollback後の状態をSELECTのみで判定する</li></ul></li><li><code>supabase/sql/20260813_fix_issue_21_player_profiles.sql</code><ul><li>CSVの117行をSQL内の一時テーブルへ読み込む</li><li>対象IDの存在、バックアップ後の変更、除外IDの混入を事前確認する</li><li>CSVの非空値で、DB側がNULLまたは空文字の列だけ補完する</li><li>CSVの空欄で既存DB値をNULLへ変更しない</li></ul></li><li><code>supabase/sql/20260813_rollback_fix_issue_21_player_profiles.sql</code><ul><li>fix後の状態を検証してからバックアップ時点へ復元する</li></ul></li></ul>
+<p>実行順は <code>backup → verify（実行前）→ fix → verify（実行後）</code>。問題があれば <code>rollback → verify（ロールバック後）</code> とする。</p></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">04　欠損</p><h2>現時点のCSV欠損</h2></div><div class="section-content"><table><thead><tr><th>項目</th><th>欠損件数</th><th>今回の扱い</th></tr></thead><tbody><tr><td><code>last_seen_team_id</code></td><td>8</td><td>チームマスタ未取り込みのため保留</td></tr><tr><td><code>last_seen_jersey_number</code></td><td>1</td><td>CSVに値がないため保留</td></tr><tr><td><code>league_registered_nationality</code></td><td>29</td><td>ID分割・特別指定選手等のため空欄を許容</td></tr><tr><td><code>birthplace</code></td><td>108</td><td>ID分割・特別指定選手等のため空欄を許容</td></tr></tbody></table></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">05　結果</p><h2>適用状況</h2></div><div class="section-content"><p>2026-08-13にbackup、verify、fix、verifyを実行した。対象117行、バックアップ117行、対象IDの欠落なしを確認した。CSVの非空値はすでにlive DBと一致しており、fillable 0件、変更差分0件、<code>updated_at</code>変更0件だったため、fixによる実更新は発生していない。実行後のverify判定は <code>BEFORE_APPLY_OR_AFTER_ROLLBACK</code> で、今回のCSV内容に関して問題はなかった。</p></div></section>
+        <aside class="history-note"><h2>GitHub Issueの状態（省略）</h2><p>当時のGitHub Issueの未完了・完了、親子関係、優先順位などは、現在の状態から正確に再現できないため、このHTMLでは省略しています。本文中のIssue番号・リンクは、作業記録上の参照情報として残しています。</p></aside>
+      </main>
+      <footer>
+        <span>B.LEAGUE Stats · 作業記録 008</span>
+        <span><a href="md/work_record_008.md">Markdown原本</a></span>
+      </footer>
+    </div>
+  </body>
+</html>
