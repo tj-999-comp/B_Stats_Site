@@ -47,7 +47,8 @@ python -m scripts.dev.convert_work_records_to_html
 - GitHub Issueの一覧、優先順位、親子関係、確認日時は、関連する番号付き作業記録の中に保存する。
 - HTMLがある場合は、GitHub Issue状況をその `work_record_###.html` の末尾へ追加する。
 - GitHub Issue状況だけを扱う独立したMarkdownやHTMLは作成しない。
-- 現在値のIssue状況は、対象プロジェクトのGitHub APIから `state=open` で取得した全Issueを記載する。Pull Requestは除外し、手作業の抜粋や件数だけの記録は認めない。
+- 現在値のIssue状況は、対象プロジェクトのGitHub APIから `state=open` で取得した全Issueを記載する。Pull Requestは除外し、手作業の抜粋や件数だけの記録は認めない。表示は `work_record_010.html` に合わせ、親子関係ツリーと、`順位`、`優先度`、`GitHub Issue`、`状態`、`関係・着手条件` の5列を持つ優先順位表を使う。
+- 親子関係はGitHubのsub-issues APIから取得し、優先度と補足関係は `scripts/dev/github_issue_status_policy.json` で管理する。
 - Issue状況の更新とHTML再生成は、リポジトリルートで `python -m scripts.dev.sync_github_issue_status --repo owner/name --write` を実行する。対象を省略した場合は番号が最大の作業記録を更新する。
 - 更新後は `python -m scripts.dev.sync_github_issue_status --repo owner/name --check` を実行し、MarkdownのIssue番号集合がGitHub APIの全オープンIssueと一致することを確認する。
 - 2026-08-13時点の一覧の初回記録は [作業記録008](md/work_record_008.md) と、その閲覧用 [work_record_008.html](work_record_008.html) の末尾に保存する。その後に確認した状態は、確認作業に対応する作業記録の末尾へ追記する。今回のチャットで確認した状態は [作業記録010](md/work_record_010.md) と、その閲覧用 [work_record_010.html](work_record_010.html) の末尾に保存する。

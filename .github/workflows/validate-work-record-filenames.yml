@@ -6,12 +6,14 @@ on:
       - 'work-records/**'
       - 'scripts/dev/validate_work_record_filenames.py'
       - 'scripts/dev/sync_github_issue_status.py'
+      - 'scripts/dev/github_issue_status_policy.json'
       - '.github/workflows/validate-work-record-filenames.yml'
   pull_request:
     paths:
       - 'work-records/**'
       - 'scripts/dev/validate_work_record_filenames.py'
       - 'scripts/dev/sync_github_issue_status.py'
+      - 'scripts/dev/github_issue_status_policy.json'
       - '.github/workflows/validate-work-record-filenames.yml'
   workflow_dispatch:
 

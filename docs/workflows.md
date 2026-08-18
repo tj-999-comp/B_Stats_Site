@@ -64,7 +64,7 @@ python -m scripts.dev.sync_github_issue_status \
   --write
 ```
 
-このコマンドはGitHub APIから全オープンIssueを取得し、番号が最大の作業記録のMarkdown末尾へ表を生成した後、対応するHTMLを再生成する。確認だけを行う場合は `--check` を使う。
+このコマンドはGitHub APIから全オープンIssueとsub-issuesの親子関係を取得し、`github_issue_status_policy.json` の優先度設定を使って、番号が最大の作業記録のMarkdown末尾へ `work_record_010.html` と同じツリー・優先順位表を生成した後、対応するHTMLを再生成する。確認だけを行う場合は `--check` を使う。
 
 ---
 
