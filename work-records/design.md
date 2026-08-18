@@ -86,10 +86,11 @@
 ### 共通フォーマット
 
 - GitHub Issue状況は作業記録HTMLの末尾に、`## GitHub Issue状況（YYYY-MM-DD時点の現在値）` という見出しで置く。
-- セクションの冒頭に `確認日: YYYY-MM-DD（JST）` と、GitHub APIで対象Issueの最新情報を取得したことを記載する。
-- 対象Issueは、`GitHub Issue`、`状態`、`最終更新`、`コメント`、`関係・残件` の5列を持つ表で示す。Issue番号にはGitHubへのリンクを付け、状態は「未完了」「完了」など日本語で記載する。
-- 対象Issueが1件だけの場合も表を省略せず、`work_record_010.html` と同じ表形式を使う。
-- 複数Issueを扱う場合は、同じセクション内で「親子関係」「優先順位順の未完了一覧」を表の後に追加する。状態、優先度、関係、着手条件は省略しない。
+- セクションの冒頭に `確認日: YYYY-MM-DD（JST）` と、GitHub APIで対象プロジェクトの最新情報を取得したことを記載する。
+- 対象Issueは、GitHubの `state=open` で取得した全Issueを、Pull Requestを除外して、`GitHub Issue`、`状態`、`最終更新`、`コメント`、`関係・残件` の5列を持つ表で示す。Issue番号にはGitHubへのリンクを付け、状態は「未完了」など日本語で記載する。
+- 対象Issueが1件だけの場合も表を省略せず、`work_record_010.html` と同じ表形式を使う。オープンIssueを手作業で抜粋したり、件数だけを記載したりしない。
+- 表の生成とHTML再生成は `python -m scripts.dev.sync_github_issue_status --repo owner/name --write` で行い、`--check` がGitHub API上のオープンIssue番号集合との一致を検証する。
+- 複数Issueの親子関係や優先順位を補足する場合も、全オープンIssueの表の後に追加する。状態、優先度、関係、着手条件は省略しない。
 - 「GitHub Issueの状態（省略）」の注記や、箇条書きだけで状態を示す形式は、新規作成・更新する作業記録では使用しない。
 
 ### 親子関係

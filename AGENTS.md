@@ -100,7 +100,7 @@ python -m pip install -r scraper/requirements.txt
 - GitHub Issueに紐づくコメント、PR、作業記録を作成・更新するときは、作成・更新の直前にGitHubから対象Issueの最新情報（少なくとも番号、タイトル、状態、更新日時。必要に応じて本文とコメント）を取得し、その状況を成果物へ反映する。以前の取得結果や手元の記憶だけでIssueの状況を記載しない。
 - 作業記録は `work-records/md/work_record_###.md` の3桁ゼロ埋めとし、既存最大番号を確認して採番する。`work-records/` 直下のMarkdownは `README.md` と `design.md` だけにする。
 - GitHub Issueの状況、優先順位、親子関係は独立した一覧ファイルにせず、関連する番号付き作業記録へ保存する。HTMLがある場合は、その作業記録HTMLの末尾へ追加する。
-- 作業記録のGitHub Issue状況は `work_record_010.html` の形式に統一する。末尾の `## GitHub Issue状況（YYYY-MM-DD時点の現在値）` セクションに、確認日、GitHub APIで取得した旨、対象Issueの状態・最終更新日時・コメント数を記載し、`GitHub Issue`、`状態`、`最終更新`、`コメント`、`関係・残件` の表で対象Issueを示す。複数Issueを扱う場合は、同じセクション内に親子関係と優先順位順の一覧を追加し、状態を省略しない。省略を示す注記や別形式のIssue一覧は新規・更新時に使用しない。
+- 作業記録のGitHub Issue状況は `work_record_010.html` の形式に統一する。末尾の `## GitHub Issue状況（YYYY-MM-DD時点の現在値）` セクションに、確認日、GitHub APIで取得した旨、対象プロジェクトの全オープンIssue（Pull Requestを除く）の状態・最終更新日時・コメント数を記載し、`GitHub Issue`、`状態`、`最終更新`、`コメント`、`関係・残件` の表で1件も省略せずに示す。更新は `python -m scripts.dev.sync_github_issue_status --repo owner/name --write` で行い、同コマンドがMarkdown更新後にHTMLを再生成する。確認は同コマンドの `--check` で行う。複数Issueの親子関係や優先順位を補足する場合も、全オープンIssueの表を省略しない。省略を示す注記や別形式のIssue一覧は新規・更新時に使用しない。
 - 作業記録のHTMLは `work-records/` 直下へ `work_record_###.html` として置き、作成・編集時は `work-records/design.md` を原則として守る。
 
 ## 副作用のある操作

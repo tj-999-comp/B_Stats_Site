@@ -41,8 +41,24 @@ Codexの既定サンドボックスでは外部ネットワークが無効だっ
 
 確認日: 2026-08-18（JST）
 
-GitHub APIで `tj-999-comp/B_Stats_Site` のIssue #24を確認した。Issueは未完了（open）で、コメントは1件だった。完了条件のうち、Live DB上の件数・抜け漏れ・重複・参照整合性の確認が残っている。
+GitHub APIで `tj-999-comp/B_Stats_Site` のオープンIssueを確認した。Pull Requestは除外した。オープンIssueは17件だった。
 
 | GitHub Issue | 状態 | 最終更新 | コメント | 関係・残件 |
 |---|---|---|---:|---|
-| [#24](https://github.com/tj-999-comp/B_Stats_Site/issues/24)「[DB] 2026年5月末までの未投入試合データをスクレイピング・投入する」 | 未完了 | 2026-08-18 22:46:41 JST | 1件 | 対象Issue。Live DB上の件数、抜け漏れ、重複、参照整合性の確認が残件。 |
+| [#7](https://github.com/tj-999-comp/B_Stats_Site/issues/7) 試合のスクレイピングデータ精査 | 未完了 | 2026-03-12 18:19:19 JST | 0件 | API取得時点でオープン |
+| [#9](https://github.com/tj-999-comp/B_Stats_Site/issues/9) 課題解決の原案を立てる | 未完了 | 2026-08-04 11:50:55 JST | 0件 | API取得時点でオープン |
+| [#13](https://github.com/tj-999-comp/B_Stats_Site/issues/13) [DB] player_slot_category の値を正規化する | 未完了 | 2026-08-04 11:14:12 JST | 0件 | API取得時点でオープン |
+| [#14](https://github.com/tj-999-comp/B_Stats_Site/issues/14) [DB] attendance 欠損14試合を調査・補完する | 未完了 | 2026-08-04 11:14:12 JST | 0件 | API取得時点でオープン |
+| [#15](https://github.com/tj-999-comp/B_Stats_Site/issues/15) [DB] 過年度の plus_minus・背番号欠損を調査する | 未完了 | 2026-08-04 11:14:13 JST | 0件 | API取得時点でオープン |
+| [#16](https://github.com/tj-999-comp/B_Stats_Site/issues/16) [DB] live DB・再構築SQL・テーブル定義のスキーマ差異を解消する | 未完了 | 2026-08-04 11:14:14 JST | 0件 | API取得時点でオープン |
+| [#17](https://github.com/tj-999-comp/B_Stats_Site/issues/17) [DB] play_by_play未投入と存在フラグの整合性を整理する | 未完了 | 2026-08-04 11:14:15 JST | 0件 | API取得時点でオープン |
+| [#18](https://github.com/tj-999-comp/B_Stats_Site/issues/18) [DB] 空の player_id_map と旧ID名寄せ経路を検証する | 未完了 | 2026-08-04 11:14:16 JST | 0件 | API取得時点でオープン |
+| [#22](https://github.com/tj-999-comp/B_Stats_Site/issues/22) [DB] スタッフ相当判定フラグを追加してプロフィール欠損一覧から除外する | 未完了 | 2026-08-13 12:21:22 JST | 0件 | API取得時点でオープン |
+| [#23](https://github.com/tj-999-comp/B_Stats_Site/issues/23) [DB] 45848〜45865周辺の分割player_idを調査・統合する | 未完了 | 2026-08-13 15:15:30 JST | 0件 | API取得時点でオープン |
+| [#24](https://github.com/tj-999-comp/B_Stats_Site/issues/24) [DB] 2026年5月末までの未投入試合データをスクレイピング・投入する | 未完了 | 2026-08-18 22:46:41 JST | 1件 | API取得時点でオープン |
+| [#25](https://github.com/tj-999-comp/B_Stats_Site/issues/25) [DB] 試合データ投入後のplayer_id重複整理とプロフィール欠損補完 | 未完了 | 2026-08-13 16:26:13 JST | 0件 | API取得時点でオープン |
+| [#28](https://github.com/tj-999-comp/B_Stats_Site/issues/28) [Work records] 親ディレクトリREADMEリンクをproject内リンクへ修正する | 未完了 | 2026-08-18 15:40:56 JST | 0件 | API取得時点でオープン |
+| [#29](https://github.com/tj-999-comp/B_Stats_Site/issues/29) [Work records] 001〜010のmetadataと生成元validator・CIを追加する | 未完了 | 2026-08-18 15:40:57 JST | 0件 | API取得時点でオープン |
+| [#30](https://github.com/tj-999-comp/B_Stats_Site/issues/30) [Actions] 手動公開要求workflowとdispatch権限を設定する | 未完了 | 2026-08-18 15:42:41 JST | 0件 | API取得時点でオープン |
+| [#31](https://github.com/tj-999-comp/B_Stats_Site/issues/31) [E2E] 新規作業記録1件を手動publish要求する | 未完了 | 2026-08-18 15:42:43 JST | 0件 | API取得時点でオープン |
+| [#32](https://github.com/tj-999-comp/B_Stats_Site/issues/32) [Automation] main更新時の公開要求triggerを有効化する | 未完了 | 2026-08-18 15:42:46 JST | 0件 | API取得時点でオープン |

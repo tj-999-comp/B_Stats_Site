@@ -47,8 +47,11 @@ python -m scripts.dev.convert_work_records_to_html
 - GitHub Issueの一覧、優先順位、親子関係、確認日時は、関連する番号付き作業記録の中に保存する。
 - HTMLがある場合は、GitHub Issue状況をその `work_record_###.html` の末尾へ追加する。
 - GitHub Issue状況だけを扱う独立したMarkdownやHTMLは作成しない。
+- 現在値のIssue状況は、対象プロジェクトのGitHub APIから `state=open` で取得した全Issueを記載する。Pull Requestは除外し、手作業の抜粋や件数だけの記録は認めない。
+- Issue状況の更新とHTML再生成は、リポジトリルートで `python -m scripts.dev.sync_github_issue_status --repo owner/name --write` を実行する。対象を省略した場合は番号が最大の作業記録を更新する。
+- 更新後は `python -m scripts.dev.sync_github_issue_status --repo owner/name --check` を実行し、MarkdownのIssue番号集合がGitHub APIの全オープンIssueと一致することを確認する。
 - 2026-08-13時点の一覧の初回記録は [作業記録008](md/work_record_008.md) と、その閲覧用 [work_record_008.html](work_record_008.html) の末尾に保存する。その後に確認した状態は、確認作業に対応する作業記録の末尾へ追記する。今回のチャットで確認した状態は [作業記録010](md/work_record_010.md) と、その閲覧用 [work_record_010.html](work_record_010.html) の末尾に保存する。
-- 一覧を更新するときは、更新作業と関係する作業記録に、その時点のopen件数、親子関係、優先順位、変更理由を残す。
+- 一覧を更新するときは、更新作業と関係する作業記録に、その時点のオープンIssue全件、確認日時、親子関係、優先順位、変更理由を残す。
 - 優先順位は `P0`（今すぐ）から `P3`（後回し）で表す。
 - 新規作成を強調する場合は `NEW` と作成日を記載し、次回の一覧更新時に外す。
 - 親子関係はGitHub上の登録状態を優先し、単なる関連Issueと混同しない。
@@ -62,7 +65,7 @@ python -m scripts.dev.convert_work_records_to_html
 - デザイン原則から外れる必要がある場合は、対応する作業記録に理由を書く。
 - HTMLは外部ライブラリなしでローカル表示でき、320px幅でもページ全体の横スクロールが発生しないようにする。
 - HTML内から対応するMarkdown作業記録へ相対リンクを設ける。
-- 当時のGitHub Issueの状態を現在の状態から再現できない場合、HTMLではIssue状況を省略し、その理由を明記する。本文中のIssue番号・リンクは参照情報として残してよい。
+- 過去時点のスナップショットを保存する作業記録は、見出しの日付時点の記録として保持する。現在値として更新する作業記録では、Issue状況を省略せず、必ず同期スクリプトで全オープンIssueを取得する。
 
 ## 自動検証
 
@@ -72,6 +75,7 @@ python -m scripts.dev.convert_work_records_to_html
 2. `work-records/md/work_record_*.md` が `work_record_###.md` 形式であること。
 3. 番号付き作業記録の先頭見出しが `# 作業記録 ###:` 形式であること。
 4. `work-records/md/` 内の各Markdownと同じベース名のHTMLが `work-records/` 直下に存在すること。
+5. 最新の番号付き作業記録について、GitHub API上の全オープンIssue（Pull Request除外）がIssue状況表に記載されていること。
 
 ローカルでは次を実行する。
 
