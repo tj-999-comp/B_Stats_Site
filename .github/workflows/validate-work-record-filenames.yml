@@ -5,16 +5,21 @@ on:
     paths:
       - 'work-records/**'
       - 'scripts/dev/validate_work_record_filenames.py'
+      - 'scripts/dev/sync_github_issue_status.py'
+      - 'scripts/dev/github_issue_status_policy.json'
       - '.github/workflows/validate-work-record-filenames.yml'
   pull_request:
     paths:
       - 'work-records/**'
       - 'scripts/dev/validate_work_record_filenames.py'
+      - 'scripts/dev/sync_github_issue_status.py'
+      - 'scripts/dev/github_issue_status_policy.json'
       - '.github/workflows/validate-work-record-filenames.yml'
   workflow_dispatch:
 
 permissions:
   contents: read
+  issues: read
 
 jobs:
   validate:
@@ -26,6 +31,11 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+
+      - name: Validate current GitHub Issue status
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/dev/sync_github_issue_status.py --repo "${{ github.repository }}" --check
 
       - name: Validate work record filenames and placement
         run: python scripts/dev/validate_work_record_filenames.py

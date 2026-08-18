@@ -54,6 +54,17 @@
    - 作業記録が `work-records/md/work_record_###.md` 形式であることを検査
    - ファイル番号と `# 作業記録 ###:` の見出し番号が一致することを検査
    - HTMLが `work-records/work_record_###.html` にあり、同番号のMarkdownが存在することを検査
+4. `scripts/dev/sync_github_issue_status.py --check` を実行し、最新の作業記録にGitHub API上の全オープンIssue（Pull Request除外）が記載されていることを検査
+
+Issue状況を更新する場合は、リポジトリルートで次を実行する。
+
+```bash
+python -m scripts.dev.sync_github_issue_status \
+  --repo tj-999-comp/B_Stats_Site \
+  --write
+```
+
+このコマンドはGitHub APIから全オープンIssueとsub-issuesの親子関係を取得し、`github_issue_status_policy.json` の優先度設定を使って、番号が最大の作業記録のMarkdown末尾へ `work_record_010.html` と同じツリー・優先順位表を生成した後、対応するHTMLを再生成する。確認だけを行う場合は `--check` を使う。
 
 ---
 

@@ -97,8 +97,10 @@ python -m pip install -r scraper/requirements.txt
 - スクレイパーは既存の同名 JSON と追跡済みログを上書きし得る。検証用出力は可能なら `/tmp` または別名を使い、意図したデータ差分だけを残す。
 - 新規 Markdown はタイトル直下に `作成日: YYYY-MM-DD` を入れる。
 - `Issue` はGitHub Issueだけを指す。リポジトリ内の調査、実行結果、判断経緯は「作業記録」と呼び、`ローカルIssue` や `Issueログ` という呼称は使わない。
+- GitHub Issueに紐づくコメント、PR、作業記録を作成・更新するときは、作成・更新の直前にGitHubから対象Issueの最新情報（少なくとも番号、タイトル、状態、更新日時。必要に応じて本文とコメント）を取得し、その状況を成果物へ反映する。以前の取得結果や手元の記憶だけでIssueの状況を記載しない。
 - 作業記録は `work-records/md/work_record_###.md` の3桁ゼロ埋めとし、既存最大番号を確認して採番する。`work-records/` 直下のMarkdownは `README.md` と `design.md` だけにする。
 - GitHub Issueの状況、優先順位、親子関係は独立した一覧ファイルにせず、関連する番号付き作業記録へ保存する。HTMLがある場合は、その作業記録HTMLの末尾へ追加する。
+- 作業記録のGitHub Issue状況は `work_record_010.html` の形式に統一する。末尾の `## GitHub Issue状況（YYYY-MM-DD時点の現在値）` セクションに、確認日、GitHub APIで取得した旨、親子関係ツリー、優先順位順の未完了一覧を記載する。一覧は `順位`、`優先度`、`GitHub Issue`、`状態`、`関係・着手条件` の5列とし、対象プロジェクトの全オープンIssue（Pull Requestを除く）を1件も省略せずに示す。親子関係はGitHubのsub-issues API、優先度と補足関係は `scripts/dev/github_issue_status_policy.json` から生成する。更新は `python -m scripts.dev.sync_github_issue_status --repo owner/name --write` で行い、同コマンドがMarkdown更新後にHTMLを再生成する。確認は同コマンドの `--check` で行う。省略を示す注記や別形式のIssue一覧は新規・更新時に使用しない。
 - 作業記録のHTMLは `work-records/` 直下へ `work_record_###.html` として置き、作成・編集時は `work-records/design.md` を原則として守る。
 
 ## 副作用のある操作

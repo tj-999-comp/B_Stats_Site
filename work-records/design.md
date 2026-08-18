@@ -83,6 +83,16 @@
 
 ## GitHub Issueの表示
 
+### 共通フォーマット
+
+- GitHub Issue状況は作業記録HTMLの末尾に、`## GitHub Issue状況（YYYY-MM-DD時点の現在値）` という見出しで置く。
+- セクションの冒頭に `確認日: YYYY-MM-DD（JST）` と、GitHub APIで対象プロジェクトの最新情報を取得したことを記載する。
+- `work_record_010.html` と同じく、「親子関係」のツリーと「優先順位順の未完了一覧」を置く。
+- 一覧は `順位`、`優先度`、`GitHub Issue`、`状態`、`関係・着手条件` の5列を持つ表で示す。GitHubの `state=open` で取得した全Issueを対象とし、Pull Requestは除外する。Issue番号にはGitHubへのリンクを付け、状態は「未完了」など日本語で記載する。
+- 対象Issueが1件だけの場合も表を省略せず、オープンIssueを手作業で抜粋したり、件数だけを記載したりしない。
+- 親子関係はGitHubのsub-issues APIから取得し、優先度と補足関係は `scripts/dev/github_issue_status_policy.json` から取得する。表の生成とHTML再生成は `python -m scripts.dev.sync_github_issue_status --repo owner/name --write` で行い、`--check` がGitHub API上のオープンIssue番号集合との一致を検証する。
+- 「GitHub Issueの状態（省略）」の注記や、箇条書きだけで状態を示す形式は、新規作成・更新する作業記録では使用しない。
+
 ### 親子関係
 
 - 親子関係は、優先順位一覧より先に専用のツリーで示す。
