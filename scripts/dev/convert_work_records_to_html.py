@@ -377,7 +377,11 @@ def render_sections(lines: list[str]) -> str:
                 break
             section_lines.append(lines[index])
             index += 1
-        label = SECTION_LABELS.get(heading, "記録")
+        label = (
+            "Issue状況"
+            if heading.startswith(CURRENT_GITHUB_H2_PREFIX)
+            else SECTION_LABELS.get(heading, "記録")
+        )
         output.append(
             '<section class="record-section">'
             '<div class="section-intro">'

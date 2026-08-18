@@ -37,11 +37,12 @@ Codexの既定サンドボックスでは外部ネットワークが無効だっ
 - `scraper/logs/game_detail_fetch_log.json`
 - `scraper/logs/schedule_fetch_log.json`
 
-## GitHub Issue状況（2026-08-18現在値）
+## GitHub Issue状況（2026-08-18時点の現在値）
 
-- Issue: [#24](https://github.com/tj-999-comp/B_Stats_Site/issues/24)「[DB] 2026年5月末までの未投入試合データをスクレイピング・投入する」
-- 状態: 未完了（open）
-- 最終更新: 2026-08-18 13:46:41 UTC（2026-08-18 22:46:41 JST）
-- コメント: 1件
-- Issueの完了条件: 2026-05-31までの未投入試合の解消、取得失敗・未投入理由の記録、DB各対象テーブルの件数・重複・参照整合性の確認、実行内容の文書化、子Issueへの引き継ぎ。
-- 現時点の残件: Live DB上で件数、抜け漏れ、重複、参照整合性を確認する。
+確認日: 2026-08-18（JST）
+
+GitHub APIで `tj-999-comp/B_Stats_Site` のIssue #24を確認した。Issueは未完了（open）で、コメントは1件だった。完了条件のうち、Live DB上の件数・抜け漏れ・重複・参照整合性の確認が残っている。
+
+| GitHub Issue | 状態 | 最終更新 | コメント | 関係・残件 |
+|---|---|---|---:|---|
+| [#24](https://github.com/tj-999-comp/B_Stats_Site/issues/24)「[DB] 2026年5月末までの未投入試合データをスクレイピング・投入する」 | 未完了 | 2026-08-18 22:46:41 JST | 1件 | 対象Issue。Live DB上の件数、抜け漏れ、重複、参照整合性の確認が残件。 |
