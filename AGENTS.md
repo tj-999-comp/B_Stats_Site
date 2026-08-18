@@ -97,6 +97,7 @@ python -m pip install -r scraper/requirements.txt
 - スクレイパーは既存の同名 JSON と追跡済みログを上書きし得る。検証用出力は可能なら `/tmp` または別名を使い、意図したデータ差分だけを残す。
 - 新規 Markdown はタイトル直下に `作成日: YYYY-MM-DD` を入れる。
 - `Issue` はGitHub Issueだけを指す。リポジトリ内の調査、実行結果、判断経緯は「作業記録」と呼び、`ローカルIssue` や `Issueログ` という呼称は使わない。
+- GitHub Issueに紐づくコメント、PR、作業記録を作成・更新するときは、作成・更新の直前にGitHubから対象Issueの最新情報（少なくとも番号、タイトル、状態、更新日時。必要に応じて本文とコメント）を取得し、その状況を成果物へ反映する。以前の取得結果や手元の記憶だけでIssueの状況を記載しない。
 - 作業記録は `work-records/md/work_record_###.md` の3桁ゼロ埋めとし、既存最大番号を確認して採番する。`work-records/` 直下のMarkdownは `README.md` と `design.md` だけにする。
 - GitHub Issueの状況、優先順位、親子関係は独立した一覧ファイルにせず、関連する番号付き作業記録へ保存する。HTMLがある場合は、その作業記録HTMLの末尾へ追加する。
 - 作業記録のHTMLは `work-records/` 直下へ `work_record_###.html` として置き、作成・編集時は `work-records/design.md` を原則として守る。
