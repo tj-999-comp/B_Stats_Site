@@ -18,6 +18,7 @@ TABLE_SEPARATOR_RE = re.compile(
     r"^\s*\|?\s*:?-+:?\s*(\|\s*:?-+:?\s*)+\|?\s*$"
 )
 OMITTED_H2_PREFIXES = ("GitHub Issue", "GitHub側の整理")
+CURRENT_GITHUB_H2_PREFIX = "GitHub Issue状況（"
 SECTION_LABELS = {
     "概要": "概要",
     "背景": "背景",
@@ -73,6 +74,7 @@ SECTION_LABELS = {
     "検証": "検証",
     "適用状況": "結果",
     "完了判定": "判定",
+    "GitHub Issue状況（2026-08-13時点の現在値）": "Issue状況",
 }
 
 
@@ -165,7 +167,16 @@ def omit_github_state(lines: list[str]) -> tuple[list[str], bool]:
             heading = heading_match.group(2)
             if skipping and level <= 2:
                 skipping = False
-            if level == 2 and any(heading.startswith(prefix) for prefix in OMITTED_H2_PREFIXES):
+            is_current_github_section = (
+                level == 2
+                and heading.startswith(CURRENT_GITHUB_H2_PREFIX)
+                and "現在値" in heading
+            )
+            if (
+                level == 2
+                and any(heading.startswith(prefix) for prefix in OMITTED_H2_PREFIXES)
+                and not is_current_github_section
+            ):
                 skipping = True
                 omitted = True
                 continue
@@ -385,6 +396,13 @@ def render_document(path: Path) -> tuple[str, bool]:
     lines, frontmatter_title = strip_frontmatter(original_lines)
     title, date = document_title(lines, frontmatter_title, path.stem)
     lines = remove_title_and_date(lines)
+    has_current_github_section = any(
+        (heading_match := HEADING_RE.match(line))
+        and len(heading_match.group(1)) == 2
+        and heading_match.group(2).startswith(CURRENT_GITHUB_H2_PREFIX)
+        and "現在値" in heading_match.group(2)
+        for line in lines
+    )
     lines, omitted_github_section = omit_github_state(lines)
     has_issue_reference = bool(re.search(r"GitHub Issue|Issue #|親Issue|子Issue|関連Issue", original_text))
 
@@ -392,7 +410,10 @@ def render_document(path: Path) -> tuple[str, bool]:
     record_label = f"作業記録 {record_number_match.group(1)}" if record_number_match else "補助文書"
     date_label = date or "作成日記載なし"
     note = ""
-    if has_issue_reference or omitted_github_section:
+    if (
+        not has_current_github_section
+        and (omitted_github_section or has_issue_reference)
+    ):
         note = (
             '<aside class="history-note">'
             '<h2>GitHub Issueの状態（省略）</h2>'

@@ -47,7 +47,7 @@ python -m scripts.dev.convert_work_records_to_html
 - GitHub Issueの一覧、優先順位、親子関係、確認日時は、関連する番号付き作業記録の中に保存する。
 - HTMLがある場合は、GitHub Issue状況をその `work_record_###.html` の末尾へ追加する。
 - GitHub Issue状況だけを扱う独立したMarkdownやHTMLは作成しない。
-- 2026-08-13時点の一覧は [作業記録008](md/work_record_008.md) と、その閲覧用 [work_record_008.html](work_record_008.html) の末尾を正本とする。
+- 2026-08-13時点の一覧の初回記録は [作業記録008](md/work_record_008.md) と、その閲覧用 [work_record_008.html](work_record_008.html) の末尾に保存する。その後に確認した状態は、確認作業に対応する作業記録の末尾へ追記する。今回のチャットで確認した状態は [作業記録010](md/work_record_010.md) と、その閲覧用 [work_record_010.html](work_record_010.html) の末尾に保存する。
 - 一覧を更新するときは、更新作業と関係する作業記録に、その時点のopen件数、親子関係、優先順位、変更理由を残す。
 - 優先順位は `P0`（今すぐ）から `P3`（後回し）で表す。
 - 新規作成を強調する場合は `NEW` と作成日を記載し、次回の一覧更新時に外す。
