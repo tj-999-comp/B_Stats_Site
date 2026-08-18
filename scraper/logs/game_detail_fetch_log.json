@@ -563,5 +563,185 @@
     "failed_count": 0,
     "failed_schedule_keys": [],
     "failed_games": []
+  },
+  {
+    "run_at": "2026-08-18T06:59:28.726047+00:00",
+    "season": "2024-25",
+    "start_date": "2025-05-01",
+    "end_date": "2025-05-31",
+    "game_count": 1,
+    "failed_count": 0,
+    "failed_schedule_keys": [],
+    "failed_games": []
+  },
+  {
+    "run_at": "2026-08-18T07:42:28.672128+00:00",
+    "season": "2025-26",
+    "start_date": "2025-10-01",
+    "end_date": "2025-10-31",
+    "game_count": 0,
+    "failed_count": 0,
+    "failed_schedule_keys": [],
+    "failed_games": []
+  },
+  {
+    "run_at": "2026-08-18T08:06:53.153298+00:00",
+    "season": "2025-26",
+    "start_date": "2025-11-01",
+    "end_date": "2025-11-30",
+    "game_count": 0,
+    "failed_count": 0,
+    "failed_schedule_keys": [],
+    "failed_games": []
+  },
+  {
+    "run_at": "2026-08-18T08:10:40.509564+00:00",
+    "season": "2025-26",
+    "start_date": "2025-12-01",
+    "end_date": "2025-12-31",
+    "game_count": 0,
+    "failed_count": 0,
+    "failed_schedule_keys": [],
+    "failed_games": []
+  },
+  {
+    "run_at": "2026-08-18T08:14:27.996241+00:00",
+    "season": "2025-26",
+    "start_date": "2026-01-01",
+    "end_date": "2026-01-31",
+    "game_count": 0,
+    "failed_count": 0,
+    "failed_schedule_keys": [],
+    "failed_games": []
+  },
+  {
+    "run_at": "2026-08-18T08:17:53.605319+00:00",
+    "season": "2025-26",
+    "start_date": "2026-02-01",
+    "end_date": "2026-02-28",
+    "game_count": 0,
+    "failed_count": 0,
+    "failed_schedule_keys": [],
+    "failed_games": []
+  },
+  {
+    "run_at": "2026-08-18T08:21:40.744137+00:00",
+    "season": "2025-26",
+    "start_date": "2026-03-01",
+    "end_date": "2026-03-31",
+    "game_count": 0,
+    "failed_count": 0,
+    "failed_schedule_keys": [],
+    "failed_games": []
+  },
+  {
+    "run_at": "2026-08-18T08:25:22.154500+00:00",
+    "season": "2025-26",
+    "start_date": "2026-04-01",
+    "end_date": "2026-04-30",
+    "game_count": 0,
+    "failed_count": 0,
+    "failed_schedule_keys": [],
+    "failed_games": []
+  },
+  {
+    "run_at": "2026-08-18T08:29:09.916025+00:00",
+    "season": "2025-26",
+    "start_date": "2026-05-01",
+    "end_date": "2026-05-31",
+    "game_count": 0,
+    "failed_count": 0,
+    "failed_schedule_keys": [],
+    "failed_games": []
+  },
+  {
+    "run_at": "2026-08-18T08:53:44.281563+00:00",
+    "season": "2025-26",
+    "start_date": "2025-10-05",
+    "end_date": "2025-10-25",
+    "game_count": 91,
+    "failed_count": 0,
+    "failed_schedule_keys": [],
+    "failed_games": []
+  },
+  {
+    "run_at": "2026-08-18T09:04:31.070285+00:00",
+    "season": "2025-26",
+    "start_date": "2025-10-01",
+    "end_date": "2025-10-31",
+    "game_count": 130,
+    "failed_count": 0,
+    "failed_schedule_keys": [],
+    "failed_games": []
+  },
+  {
+    "run_at": "2026-08-18T09:15:10.773486+00:00",
+    "season": "2025-26",
+    "start_date": "2025-11-01",
+    "end_date": "2025-11-30",
+    "game_count": 104,
+    "failed_count": 0,
+    "failed_schedule_keys": [],
+    "failed_games": []
+  },
+  {
+    "run_at": "2026-08-18T09:30:33.655919+00:00",
+    "season": "2025-26",
+    "start_date": "2025-12-01",
+    "end_date": "2025-12-31",
+    "game_count": 130,
+    "failed_count": 0,
+    "failed_schedule_keys": [],
+    "failed_games": []
+  },
+  {
+    "run_at": "2026-08-18T09:43:21.853645+00:00",
+    "season": "2025-26",
+    "start_date": "2026-01-01",
+    "end_date": "2026-01-31",
+    "game_count": 84,
+    "failed_count": 0,
+    "failed_schedule_keys": [],
+    "failed_games": []
+  },
+  {
+    "run_at": "2026-08-18T09:53:58.772787+00:00",
+    "season": "2025-26",
+    "start_date": "2026-02-01",
+    "end_date": "2026-02-28",
+    "game_count": 65,
+    "failed_count": 0,
+    "failed_schedule_keys": [],
+    "failed_games": []
+  },
+  {
+    "run_at": "2026-08-18T10:06:29.373758+00:00",
+    "season": "2025-26",
+    "start_date": "2026-03-01",
+    "end_date": "2026-03-31",
+    "game_count": 91,
+    "failed_count": 0,
+    "failed_schedule_keys": [],
+    "failed_games": []
+  },
+  {
+    "run_at": "2026-08-18T10:20:48.286910+00:00",
+    "season": "2025-26",
+    "start_date": "2026-04-01",
+    "end_date": "2026-04-30",
+    "game_count": 156,
+    "failed_count": 0,
+    "failed_schedule_keys": [],
+    "failed_games": []
+  },
+  {
+    "run_at": "2026-08-18T13:20:52.480258+00:00",
+    "season": "2025-26",
+    "start_date": "2026-05-01",
+    "end_date": "2026-05-31",
+    "game_count": 42,
+    "failed_count": 0,
+    "failed_schedule_keys": [],
+    "failed_games": []
   }
 ]

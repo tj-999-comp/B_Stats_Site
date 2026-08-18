@@ -1,0 +1,2189 @@
+[
+  {
+    "timestamp": "2026-08-18T07:38:56.493738+00:00",
+    "date": "2025-10-01",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=10&day=01&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=10&day=01&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T07:39:03.526472+00:00",
+    "date": "2025-10-02",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=10&day=02&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=10&day=02&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T07:39:10.592750+00:00",
+    "date": "2025-10-03",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=10&day=03&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=10&day=03&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T07:39:17.672110+00:00",
+    "date": "2025-10-04",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=10&day=04&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=10&day=04&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T07:39:24.738048+00:00",
+    "date": "2025-10-05",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=10&day=05&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=10&day=05&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T07:39:31.824938+00:00",
+    "date": "2025-10-06",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=10&day=06&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=10&day=06&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T07:39:38.893864+00:00",
+    "date": "2025-10-07",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=10&day=07&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=10&day=07&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T07:39:45.954993+00:00",
+    "date": "2025-10-08",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=10&day=08&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=10&day=08&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T07:39:53.064865+00:00",
+    "date": "2025-10-09",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=10&day=09&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=10&day=09&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T07:40:00.107548+00:00",
+    "date": "2025-10-10",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=10&day=10&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=10&day=10&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T07:40:07.184219+00:00",
+    "date": "2025-10-11",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=10&day=11&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=10&day=11&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T07:40:14.253595+00:00",
+    "date": "2025-10-12",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=10&day=12&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=10&day=12&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T07:40:21.330530+00:00",
+    "date": "2025-10-13",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=10&day=13&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=10&day=13&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T07:40:28.402355+00:00",
+    "date": "2025-10-14",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=10&day=14&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=10&day=14&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T07:40:35.473156+00:00",
+    "date": "2025-10-15",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=10&day=15&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=10&day=15&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T07:40:42.538352+00:00",
+    "date": "2025-10-16",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=10&day=16&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=10&day=16&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T07:40:49.604430+00:00",
+    "date": "2025-10-17",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=10&day=17&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=10&day=17&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T07:40:56.670074+00:00",
+    "date": "2025-10-18",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=10&day=18&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=10&day=18&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T07:41:03.756729+00:00",
+    "date": "2025-10-19",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=10&day=19&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=10&day=19&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T07:41:10.835351+00:00",
+    "date": "2025-10-20",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=10&day=20&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=10&day=20&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T07:41:17.903981+00:00",
+    "date": "2025-10-21",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=10&day=21&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=10&day=21&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T07:41:24.968991+00:00",
+    "date": "2025-10-22",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=10&day=22&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=10&day=22&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T07:41:32.038898+00:00",
+    "date": "2025-10-23",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=10&day=23&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=10&day=23&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T07:41:39.114021+00:00",
+    "date": "2025-10-24",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=10&day=24&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=10&day=24&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T07:41:46.184401+00:00",
+    "date": "2025-10-25",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=10&day=25&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=10&day=25&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T07:41:53.257272+00:00",
+    "date": "2025-10-26",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=10&day=26&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=10&day=26&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T07:42:00.326751+00:00",
+    "date": "2025-10-27",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=10&day=27&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=10&day=27&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T07:42:07.395610+00:00",
+    "date": "2025-10-28",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=10&day=28&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=10&day=28&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T07:42:14.468104+00:00",
+    "date": "2025-10-29",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=10&day=29&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=10&day=29&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T07:42:21.554351+00:00",
+    "date": "2025-10-30",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=10&day=30&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=10&day=30&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T07:42:28.635488+00:00",
+    "date": "2025-10-31",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=10&day=31&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=10&day=31&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:03:27.784145+00:00",
+    "date": "2025-11-01",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=11&day=01&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=11&day=01&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:03:34.865161+00:00",
+    "date": "2025-11-02",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=11&day=02&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=11&day=02&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:03:41.936183+00:00",
+    "date": "2025-11-03",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=11&day=03&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=11&day=03&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:03:49.012896+00:00",
+    "date": "2025-11-04",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=11&day=04&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=11&day=04&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:03:56.093034+00:00",
+    "date": "2025-11-05",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=11&day=05&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=11&day=05&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:04:03.165822+00:00",
+    "date": "2025-11-06",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=11&day=06&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=11&day=06&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:04:10.239451+00:00",
+    "date": "2025-11-07",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=11&day=07&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=11&day=07&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:04:17.305641+00:00",
+    "date": "2025-11-08",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=11&day=08&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=11&day=08&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:04:24.379547+00:00",
+    "date": "2025-11-09",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=11&day=09&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=11&day=09&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:04:31.449698+00:00",
+    "date": "2025-11-10",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=11&day=10&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=11&day=10&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:04:38.525600+00:00",
+    "date": "2025-11-11",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=11&day=11&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=11&day=11&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:04:45.602578+00:00",
+    "date": "2025-11-12",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=11&day=12&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=11&day=12&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:04:52.684509+00:00",
+    "date": "2025-11-13",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=11&day=13&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=11&day=13&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:04:59.837873+00:00",
+    "date": "2025-11-14",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=11&day=14&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=11&day=14&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:05:06.918442+00:00",
+    "date": "2025-11-15",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=11&day=15&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=11&day=15&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:05:14.005013+00:00",
+    "date": "2025-11-16",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=11&day=16&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=11&day=16&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:05:21.077311+00:00",
+    "date": "2025-11-17",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=11&day=17&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=11&day=17&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:05:28.195191+00:00",
+    "date": "2025-11-18",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=11&day=18&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=11&day=18&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:05:35.252883+00:00",
+    "date": "2025-11-19",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=11&day=19&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=11&day=19&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:05:42.327870+00:00",
+    "date": "2025-11-20",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=11&day=20&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=11&day=20&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:05:49.396717+00:00",
+    "date": "2025-11-21",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=11&day=21&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=11&day=21&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:05:56.445147+00:00",
+    "date": "2025-11-22",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=11&day=22&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=11&day=22&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:06:03.535998+00:00",
+    "date": "2025-11-23",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=11&day=23&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=11&day=23&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:06:10.615603+00:00",
+    "date": "2025-11-24",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=11&day=24&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=11&day=24&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:06:17.723822+00:00",
+    "date": "2025-11-25",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=11&day=25&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=11&day=25&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:06:24.810556+00:00",
+    "date": "2025-11-26",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=11&day=26&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=11&day=26&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:06:31.870026+00:00",
+    "date": "2025-11-27",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=11&day=27&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=11&day=27&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:06:38.953538+00:00",
+    "date": "2025-11-28",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=11&day=28&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=11&day=28&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:06:46.037168+00:00",
+    "date": "2025-11-29",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=11&day=29&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=11&day=29&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:06:53.114208+00:00",
+    "date": "2025-11-30",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=11&day=30&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=11&day=30&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:07:07.991013+00:00",
+    "date": "2025-12-01",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=12&day=01&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=12&day=01&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:07:15.079820+00:00",
+    "date": "2025-12-02",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=12&day=02&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=12&day=02&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:07:22.146441+00:00",
+    "date": "2025-12-03",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=12&day=03&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=12&day=03&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:07:29.202443+00:00",
+    "date": "2025-12-04",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=12&day=04&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=12&day=04&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:07:36.285327+00:00",
+    "date": "2025-12-05",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=12&day=05&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=12&day=05&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:07:43.362163+00:00",
+    "date": "2025-12-06",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=12&day=06&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=12&day=06&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:07:50.438895+00:00",
+    "date": "2025-12-07",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=12&day=07&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=12&day=07&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:07:57.568552+00:00",
+    "date": "2025-12-08",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=12&day=08&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=12&day=08&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:08:04.610590+00:00",
+    "date": "2025-12-09",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=12&day=09&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=12&day=09&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:08:11.690518+00:00",
+    "date": "2025-12-10",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=12&day=10&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=12&day=10&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:08:18.770225+00:00",
+    "date": "2025-12-11",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=12&day=11&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=12&day=11&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:08:25.849272+00:00",
+    "date": "2025-12-12",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=12&day=12&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=12&day=12&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:08:32.933052+00:00",
+    "date": "2025-12-13",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=12&day=13&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=12&day=13&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:08:40.006467+00:00",
+    "date": "2025-12-14",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=12&day=14&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=12&day=14&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:08:47.089833+00:00",
+    "date": "2025-12-15",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=12&day=15&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=12&day=15&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:08:54.166586+00:00",
+    "date": "2025-12-16",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=12&day=16&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=12&day=16&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:09:01.241539+00:00",
+    "date": "2025-12-17",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=12&day=17&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=12&day=17&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:09:08.309499+00:00",
+    "date": "2025-12-18",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=12&day=18&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=12&day=18&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:09:15.375093+00:00",
+    "date": "2025-12-19",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=12&day=19&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=12&day=19&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:09:22.523360+00:00",
+    "date": "2025-12-20",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=12&day=20&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=12&day=20&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:09:29.610619+00:00",
+    "date": "2025-12-21",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=12&day=21&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=12&day=21&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:09:36.687586+00:00",
+    "date": "2025-12-22",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=12&day=22&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=12&day=22&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:09:43.800829+00:00",
+    "date": "2025-12-23",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=12&day=23&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=12&day=23&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:09:50.884925+00:00",
+    "date": "2025-12-24",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=12&day=24&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=12&day=24&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:09:58.021861+00:00",
+    "date": "2025-12-25",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=12&day=25&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=12&day=25&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:10:05.106386+00:00",
+    "date": "2025-12-26",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=12&day=26&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=12&day=26&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:10:12.180700+00:00",
+    "date": "2025-12-27",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=12&day=27&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=12&day=27&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:10:19.249915+00:00",
+    "date": "2025-12-28",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=12&day=28&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=12&day=28&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:10:26.314509+00:00",
+    "date": "2025-12-29",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=12&day=29&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=12&day=29&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:10:33.393325+00:00",
+    "date": "2025-12-30",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=12&day=30&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=12&day=30&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:10:40.474206+00:00",
+    "date": "2025-12-31",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=12&day=31&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=12&day=31&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:10:55.800997+00:00",
+    "date": "2026-01-01",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=01&day=01&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=01&day=01&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:11:02.884540+00:00",
+    "date": "2026-01-02",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=01&day=02&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=01&day=02&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:11:09.950226+00:00",
+    "date": "2026-01-03",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=01&day=03&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=01&day=03&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:11:17.022800+00:00",
+    "date": "2026-01-04",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=01&day=04&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=01&day=04&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:11:24.122842+00:00",
+    "date": "2026-01-05",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=01&day=05&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=01&day=05&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:11:31.206654+00:00",
+    "date": "2026-01-06",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=01&day=06&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=01&day=06&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:11:38.304927+00:00",
+    "date": "2026-01-07",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=01&day=07&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=01&day=07&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:11:45.420697+00:00",
+    "date": "2026-01-08",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=01&day=08&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=01&day=08&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:11:52.459692+00:00",
+    "date": "2026-01-09",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=01&day=09&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=01&day=09&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:11:59.537814+00:00",
+    "date": "2026-01-10",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=01&day=10&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=01&day=10&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:12:06.605033+00:00",
+    "date": "2026-01-11",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=01&day=11&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=01&day=11&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:12:13.642604+00:00",
+    "date": "2026-01-12",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=01&day=12&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=01&day=12&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:12:20.711739+00:00",
+    "date": "2026-01-13",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=01&day=13&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=01&day=13&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:12:27.787161+00:00",
+    "date": "2026-01-14",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=01&day=14&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=01&day=14&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:12:34.863076+00:00",
+    "date": "2026-01-15",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=01&day=15&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=01&day=15&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:12:41.938199+00:00",
+    "date": "2026-01-16",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=01&day=16&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=01&day=16&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:12:48.998283+00:00",
+    "date": "2026-01-17",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=01&day=17&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=01&day=17&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:12:56.070141+00:00",
+    "date": "2026-01-18",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=01&day=18&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=01&day=18&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:13:03.141361+00:00",
+    "date": "2026-01-19",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=01&day=19&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=01&day=19&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:13:10.213835+00:00",
+    "date": "2026-01-20",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=01&day=20&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=01&day=20&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:13:17.290076+00:00",
+    "date": "2026-01-21",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=01&day=21&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=01&day=21&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:13:24.325819+00:00",
+    "date": "2026-01-22",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=01&day=22&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=01&day=22&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:13:31.388729+00:00",
+    "date": "2026-01-23",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=01&day=23&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=01&day=23&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:13:38.457322+00:00",
+    "date": "2026-01-24",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=01&day=24&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=01&day=24&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:13:45.529532+00:00",
+    "date": "2026-01-25",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=01&day=25&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=01&day=25&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:13:52.605275+00:00",
+    "date": "2026-01-26",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=01&day=26&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=01&day=26&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:13:59.683047+00:00",
+    "date": "2026-01-27",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=01&day=27&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=01&day=27&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:14:06.745462+00:00",
+    "date": "2026-01-28",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=01&day=28&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=01&day=28&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:14:13.817154+00:00",
+    "date": "2026-01-29",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=01&day=29&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=01&day=29&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:14:20.881821+00:00",
+    "date": "2026-01-30",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=01&day=30&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=01&day=30&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:14:27.958744+00:00",
+    "date": "2026-01-31",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=01&day=31&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=01&day=31&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:14:42.229084+00:00",
+    "date": "2026-02-01",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=02&day=01&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=02&day=01&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:14:49.567554+00:00",
+    "date": "2026-02-02",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=02&day=02&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=02&day=02&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:14:56.651003+00:00",
+    "date": "2026-02-03",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=02&day=03&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=02&day=03&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:15:03.741954+00:00",
+    "date": "2026-02-04",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=02&day=04&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=02&day=04&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:15:10.840139+00:00",
+    "date": "2026-02-05",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=02&day=05&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=02&day=05&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:15:17.925193+00:00",
+    "date": "2026-02-06",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=02&day=06&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=02&day=06&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:15:24.961414+00:00",
+    "date": "2026-02-07",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=02&day=07&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=02&day=07&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:15:32.083981+00:00",
+    "date": "2026-02-08",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=02&day=08&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=02&day=08&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:15:39.191923+00:00",
+    "date": "2026-02-09",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=02&day=09&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=02&day=09&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:15:46.271545+00:00",
+    "date": "2026-02-10",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=02&day=10&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=02&day=10&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:15:53.340125+00:00",
+    "date": "2026-02-11",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=02&day=11&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=02&day=11&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:16:00.410727+00:00",
+    "date": "2026-02-12",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=02&day=12&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=02&day=12&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:16:07.484838+00:00",
+    "date": "2026-02-13",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=02&day=13&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=02&day=13&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:16:14.563209+00:00",
+    "date": "2026-02-14",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=02&day=14&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=02&day=14&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:16:21.630228+00:00",
+    "date": "2026-02-15",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=02&day=15&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=02&day=15&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:16:28.715998+00:00",
+    "date": "2026-02-16",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=02&day=16&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=02&day=16&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:16:35.788581+00:00",
+    "date": "2026-02-17",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=02&day=17&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=02&day=17&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:16:42.853917+00:00",
+    "date": "2026-02-18",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=02&day=18&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=02&day=18&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:16:49.928479+00:00",
+    "date": "2026-02-19",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=02&day=19&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=02&day=19&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:16:57.000582+00:00",
+    "date": "2026-02-20",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=02&day=20&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=02&day=20&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:17:04.076163+00:00",
+    "date": "2026-02-21",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=02&day=21&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=02&day=21&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:17:11.165739+00:00",
+    "date": "2026-02-22",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=02&day=22&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=02&day=22&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:17:18.244167+00:00",
+    "date": "2026-02-23",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=02&day=23&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=02&day=23&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:17:25.287858+00:00",
+    "date": "2026-02-24",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=02&day=24&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=02&day=24&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:17:32.366357+00:00",
+    "date": "2026-02-25",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=02&day=25&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=02&day=25&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:17:39.456249+00:00",
+    "date": "2026-02-26",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=02&day=26&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=02&day=26&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:17:46.524492+00:00",
+    "date": "2026-02-27",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=02&day=27&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=02&day=27&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:17:53.602505+00:00",
+    "date": "2026-02-28",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=02&day=28&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=02&day=28&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:18:08.033221+00:00",
+    "date": "2026-03-01",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=03&day=01&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=03&day=01&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:18:15.100229+00:00",
+    "date": "2026-03-02",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=03&day=02&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=03&day=02&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:18:22.168181+00:00",
+    "date": "2026-03-03",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=03&day=03&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=03&day=03&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:18:29.249872+00:00",
+    "date": "2026-03-04",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=03&day=04&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=03&day=04&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:18:36.337804+00:00",
+    "date": "2026-03-05",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=03&day=05&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=03&day=05&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:18:43.474022+00:00",
+    "date": "2026-03-06",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=03&day=06&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=03&day=06&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:18:50.521188+00:00",
+    "date": "2026-03-07",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=03&day=07&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=03&day=07&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:18:57.635231+00:00",
+    "date": "2026-03-08",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=03&day=08&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=03&day=08&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:19:04.713281+00:00",
+    "date": "2026-03-09",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=03&day=09&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=03&day=09&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:19:11.789897+00:00",
+    "date": "2026-03-10",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=03&day=10&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=03&day=10&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:19:18.956311+00:00",
+    "date": "2026-03-11",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=03&day=11&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=03&day=11&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:19:25.996543+00:00",
+    "date": "2026-03-12",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=03&day=12&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=03&day=12&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:19:33.071928+00:00",
+    "date": "2026-03-13",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=03&day=13&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=03&day=13&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:19:40.146526+00:00",
+    "date": "2026-03-14",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=03&day=14&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=03&day=14&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:19:47.222514+00:00",
+    "date": "2026-03-15",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=03&day=15&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=03&day=15&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:19:54.293336+00:00",
+    "date": "2026-03-16",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=03&day=16&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=03&day=16&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:20:01.375519+00:00",
+    "date": "2026-03-17",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=03&day=17&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=03&day=17&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:20:08.441751+00:00",
+    "date": "2026-03-18",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=03&day=18&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=03&day=18&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:20:15.538352+00:00",
+    "date": "2026-03-19",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=03&day=19&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=03&day=19&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:20:22.682026+00:00",
+    "date": "2026-03-20",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=03&day=20&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=03&day=20&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:20:29.768162+00:00",
+    "date": "2026-03-21",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=03&day=21&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=03&day=21&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:20:36.844753+00:00",
+    "date": "2026-03-22",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=03&day=22&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=03&day=22&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:20:43.911395+00:00",
+    "date": "2026-03-23",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=03&day=23&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=03&day=23&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:20:51.203415+00:00",
+    "date": "2026-03-24",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=03&day=24&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=03&day=24&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:20:58.270715+00:00",
+    "date": "2026-03-25",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=03&day=25&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=03&day=25&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:21:05.347311+00:00",
+    "date": "2026-03-26",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=03&day=26&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=03&day=26&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:21:12.419033+00:00",
+    "date": "2026-03-27",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=03&day=27&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=03&day=27&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:21:19.500411+00:00",
+    "date": "2026-03-28",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=03&day=28&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=03&day=28&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:21:26.554787+00:00",
+    "date": "2026-03-29",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=03&day=29&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=03&day=29&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:21:33.637906+00:00",
+    "date": "2026-03-30",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=03&day=30&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=03&day=30&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:21:40.705183+00:00",
+    "date": "2026-03-31",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=03&day=31&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=03&day=31&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:21:56.560948+00:00",
+    "date": "2026-04-01",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=04&day=01&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=04&day=01&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:22:03.691753+00:00",
+    "date": "2026-04-02",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=04&day=02&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=04&day=02&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:22:10.774456+00:00",
+    "date": "2026-04-03",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=04&day=03&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=04&day=03&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:22:17.843736+00:00",
+    "date": "2026-04-04",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=04&day=04&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=04&day=04&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:22:24.945050+00:00",
+    "date": "2026-04-05",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=04&day=05&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=04&day=05&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:22:32.043532+00:00",
+    "date": "2026-04-06",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=04&day=06&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=04&day=06&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:22:39.130108+00:00",
+    "date": "2026-04-07",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=04&day=07&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=04&day=07&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:22:46.261071+00:00",
+    "date": "2026-04-08",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=04&day=08&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=04&day=08&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:22:53.351596+00:00",
+    "date": "2026-04-09",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=04&day=09&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=04&day=09&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:23:00.423287+00:00",
+    "date": "2026-04-10",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=04&day=10&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=04&day=10&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:23:07.516282+00:00",
+    "date": "2026-04-11",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=04&day=11&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=04&day=11&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:23:14.594930+00:00",
+    "date": "2026-04-12",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=04&day=12&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=04&day=12&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:23:21.673693+00:00",
+    "date": "2026-04-13",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=04&day=13&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=04&day=13&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:23:28.772299+00:00",
+    "date": "2026-04-14",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=04&day=14&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=04&day=14&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:23:35.847825+00:00",
+    "date": "2026-04-15",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=04&day=15&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=04&day=15&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:23:42.922967+00:00",
+    "date": "2026-04-16",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=04&day=16&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=04&day=16&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:23:49.967194+00:00",
+    "date": "2026-04-17",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=04&day=17&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=04&day=17&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:23:57.053604+00:00",
+    "date": "2026-04-18",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=04&day=18&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=04&day=18&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:24:04.146577+00:00",
+    "date": "2026-04-19",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=04&day=19&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=04&day=19&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:24:11.256845+00:00",
+    "date": "2026-04-20",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=04&day=20&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=04&day=20&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:24:18.344341+00:00",
+    "date": "2026-04-21",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=04&day=21&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=04&day=21&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:24:25.428126+00:00",
+    "date": "2026-04-22",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=04&day=22&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=04&day=22&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:24:32.508374+00:00",
+    "date": "2026-04-23",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=04&day=23&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=04&day=23&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:24:39.588037+00:00",
+    "date": "2026-04-24",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=04&day=24&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=04&day=24&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:24:46.657776+00:00",
+    "date": "2026-04-25",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=04&day=25&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=04&day=25&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:24:53.739102+00:00",
+    "date": "2026-04-26",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=04&day=26&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=04&day=26&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:25:00.844468+00:00",
+    "date": "2026-04-27",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=04&day=27&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=04&day=27&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:25:07.934336+00:00",
+    "date": "2026-04-28",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=04&day=28&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=04&day=28&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:25:15.026961+00:00",
+    "date": "2026-04-29",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=04&day=29&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=04&day=29&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:25:22.112815+00:00",
+    "date": "2026-04-30",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=04&day=30&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=04&day=30&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:25:36.810617+00:00",
+    "date": "2026-05-01",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=05&day=01&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=05&day=01&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:25:43.898516+00:00",
+    "date": "2026-05-02",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=05&day=02&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=05&day=02&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:25:50.977452+00:00",
+    "date": "2026-05-03",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=05&day=03&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=05&day=03&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:25:58.056529+00:00",
+    "date": "2026-05-04",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=05&day=04&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=05&day=04&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:26:05.221736+00:00",
+    "date": "2026-05-05",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=05&day=05&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=05&day=05&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:26:12.313515+00:00",
+    "date": "2026-05-06",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=05&day=06&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=05&day=06&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:26:19.394831+00:00",
+    "date": "2026-05-07",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=05&day=07&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=05&day=07&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:26:26.563226+00:00",
+    "date": "2026-05-08",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=05&day=08&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=05&day=08&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:26:33.658049+00:00",
+    "date": "2026-05-09",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=05&day=09&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=05&day=09&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:26:40.730903+00:00",
+    "date": "2026-05-10",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=05&day=10&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=05&day=10&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:26:47.815452+00:00",
+    "date": "2026-05-11",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=05&day=11&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=05&day=11&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:26:54.891629+00:00",
+    "date": "2026-05-12",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=05&day=12&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=05&day=12&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:27:01.996564+00:00",
+    "date": "2026-05-13",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=05&day=13&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=05&day=13&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:27:09.072285+00:00",
+    "date": "2026-05-14",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=05&day=14&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=05&day=14&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:27:16.157837+00:00",
+    "date": "2026-05-15",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=05&day=15&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=05&day=15&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:27:23.222383+00:00",
+    "date": "2026-05-16",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=05&day=16&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=05&day=16&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:27:30.288358+00:00",
+    "date": "2026-05-17",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=05&day=17&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=05&day=17&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:27:37.480481+00:00",
+    "date": "2026-05-18",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=05&day=18&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=05&day=18&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:27:44.588479+00:00",
+    "date": "2026-05-19",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=05&day=19&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=05&day=19&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:27:51.687740+00:00",
+    "date": "2026-05-20",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=05&day=20&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=05&day=20&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:27:58.754833+00:00",
+    "date": "2026-05-21",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=05&day=21&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=05&day=21&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:28:05.838906+00:00",
+    "date": "2026-05-22",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=05&day=22&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=05&day=22&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:28:12.923891+00:00",
+    "date": "2026-05-23",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=05&day=23&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=05&day=23&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:28:19.977259+00:00",
+    "date": "2026-05-24",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=05&day=24&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=05&day=24&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:28:27.035444+00:00",
+    "date": "2026-05-25",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=05&day=25&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=05&day=25&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:28:34.129277+00:00",
+    "date": "2026-05-26",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=05&day=26&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=05&day=26&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:28:41.206344+00:00",
+    "date": "2026-05-27",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=05&day=27&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=05&day=27&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:28:48.279267+00:00",
+    "date": "2026-05-28",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=05&day=28&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=05&day=28&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:28:55.316206+00:00",
+    "date": "2026-05-29",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=05&day=29&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=05&day=29&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:29:02.628461+00:00",
+    "date": "2026-05-30",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=05&day=30&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=05&day=30&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  },
+  {
+    "timestamp": "2026-08-18T08:29:09.902967+00:00",
+    "date": "2026-05-31",
+    "year": 2025,
+    "url": "https://www.bleague.jp/schedule/?data_format=json&year=2025&mon=05&day=31&tab=1&event=&club=",
+    "attempts": 4,
+    "error": "HTTPSConnectionPool(host='www.bleague.jp', port=443): Max retries exceeded with url: /schedule/?data_format=json&year=2025&mon=05&day=31&tab=1&event=&club= (Caused by NameResolutionError(\"HTTPSConn...",
+    "result": "failed_return_empty_topics"
+  }
+]
