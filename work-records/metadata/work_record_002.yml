@@ -1,0 +1,8 @@
+schema_version: 1
+title: "players.nationality 追加手順整理とrebuild SQL一本化"
+date: "2026-05-26"
+project_id: B_Stats_Site
+tags:
+  - database
+  - schema
+publish: true

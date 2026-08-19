@@ -1,0 +1,8 @@
+schema_version: 1
+title: "プロフィール項目（リーグ登録国籍・出身地）取得とUpsert準備"
+date: "2026-05-26"
+project_id: B_Stats_Site
+tags:
+  - database
+  - players
+publish: true

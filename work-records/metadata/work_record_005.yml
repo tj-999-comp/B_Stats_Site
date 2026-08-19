@@ -1,0 +1,8 @@
+schema_version: 1
+title: "2021-22シーズン303試合の日時・year補正"
+date: "2026-08-04"
+project_id: B_Stats_Site
+tags:
+  - database
+  - data-fix
+publish: true

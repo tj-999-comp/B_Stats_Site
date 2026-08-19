@@ -16,6 +16,8 @@ work-records/
 ├── work_record.css            # HTML共通スタイル
 ├── work_record_###.html       # 番号付き作業記録の閲覧用HTML
 ├── work_record_extra_##.html   # 補助Markdownの閲覧用HTML
+├── metadata/
+│   └── work_record_###.yml    # 公開用metadata
 └── md/
     ├── work_record_001.md    # 番号付き作業記録
     ├── phase_1_tasks.md      # 補助Markdown
@@ -29,6 +31,18 @@ work-records/
 - 補助Markdownは `phase_1_tasks.md` を `work_record_extra_01.html`、
   `scraping_db_automation.md` を `work_record_extra_02.html` として出力する。
 - HTMLは共通の `work_record.css` を参照し、外部ライブラリには依存しない。
+- 番号付き作業記録には、同じベース名の `metadata/work_record_###.yml` を置く。
+- metadataは `schema_version`、`title`、`date`、`project_id`、`tags`、`publish` を持つ。
+- 現在の `project_id` は `B_Stats_Site` とし、公開対象範囲は001〜014である。
+
+## 公開候補commitの確認
+
+このリポジトリのvalidatorとCIは、公開要求を出せる状態かを確認するものであり、公開承認そのものではない。公開候補commitは、次のいずれかを満たしてから公開要求の対象にする。
+
+1. 対象branchの保護設定で、必要なreviewと `Validate Work Record Filenames` checkの成功を必須にする。
+2. branch protectionを設定しない場合は、作成者とは別の人がmetadata、生成HTML、CI結果、差分を確認した記録を残す。
+
+公開先の受入workflowやPagesへの反映をこのリポジトリのCIが直接行うことはない。公開要求workflowを追加する場合も、まずこの確認を通過したcommit SHAを固定して扱う。
 
 MarkdownからHTMLを再生成する場合は、リポジトリルートで次を実行する。
 
@@ -88,9 +102,14 @@ python -m scripts.dev.convert_work_records_to_html --check
 3. 番号付き作業記録の先頭見出しが `# 作業記録 ###:` 形式であること。
 4. `work-records/md/` 内の各Markdownと同じベース名のHTMLが `work-records/` 直下に存在すること。
 5. 最新の番号付き作業記録について、GitHub API上の全オープンIssue（Pull Request除外）がIssue状況表に記載されていること。
+6. 番号付きMarkdown、同名HTML、metadataの対応とmetadata schemaが一致すること。
+7. MarkdownからのHTML再生成結果が既存HTMLと一致すること。
+8. HTML・CSS・URLのallowlist、必要なsupport file、補助HTMLの非公開対象扱いを確認すること。
 
 ローカルでは次を実行する。
 
 ```bash
 python scripts/dev/validate_work_record_filenames.py
+python scripts/dev/validate_work_record_source.py
+python scripts/dev/validate_work_record_source.py --check-fixtures
 ```
