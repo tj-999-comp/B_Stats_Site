@@ -34,6 +34,11 @@
 | ファイル | 用途 |
 |---|---|
 | `20260813_issue21_missing_player_profiles.csv` | Issue #21の目視確認用。#12で除外したスタッフ相当47 IDとダミー1 IDを除外し、指定プロフィール項目のいずれかが欠損する117選手を収録 |
+| `20260819_issue25_player_id_candidates.csv` | Issue #25の45848〜45865周辺について、同一人物候補18組を収録。統合判断前の確認用 |
+| `20260819_issue25_missing_player_profiles.csv` | Issue #25の統合後に再監査した補完対象281選手。公式取得値、提案差分、未補完理由を目視確認するための入力 |
+| `20260819_issue25_missing_player_profiles_proposed.csv` | 統合後に再監査した281選手。公式値、国籍からの出生地フォールバック、チーム・選手別の手動ルールを含むDB反映用入力 |
+| `20260819_issue25_missing_player_profiles_unresolved.csv` | 補完提案がない選手の確認用。2026-08-20時点では該当0件（ヘッダーのみ） |
+| `20260820_issue25_unresolved_player_slot_category.csv` | Issue #25の補完提案後も`player_slot_category`だけ未確定の18選手。目視確認用 |
 
 ## Issue #21 補足事項
 
