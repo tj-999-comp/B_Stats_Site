@@ -90,6 +90,7 @@ python -m pip install -r scraper/requirements.txt
 - `supabase/sql/` は一回限りまたは破壊的なデータパッチ・運用 SQL の集約先であり、現行スキーマの正本とはみなさない。新規ファイルは `supabase/sql/README.md` の `YYYYMMDD_<action>_<target>.sql` 命名に従う。
 - live DBのデータパッチは、原則として `backup`、`verify`、`fix`、`rollback` の4ファイルを同じIssue・対象名で作成する。実行順は `backup → verify（前）→ fix → verify（後）`、問題時は `rollback → verify（後）` とし、例外はSQL先頭コメントと `supabase/sql/README.md` に理由を残す。
 - SQLファイルを新規作成または変更した場合は、実行・提示の前に必ずreview-agentサブエージェント（`/Users/ryosuketajima/.codex/skills/.system/review-agent/SKILL.md`）を読み取り専用で実行する。レビュー結果の指摘を修正し、再レビューで重大な指摘がないことを確認するまで完了扱いにしない。
+- 「作業記録を作って」と依頼された場合は、作業記録の作成・検証・コミット・Pushに加えて、対象ブランチのPR作成まで行う。PRは既定でドラフトとし、ユーザーが明示的に通常PRを指定した場合だけドラフトを外す。
 
 ### データ、ログ、文書
 
