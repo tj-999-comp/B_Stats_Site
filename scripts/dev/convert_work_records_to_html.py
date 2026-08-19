@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import argparse
 import html
 import re
 from pathlib import Path
@@ -11,6 +12,10 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 MARKDOWN_DIR = ROOT / "work-records" / "md"
 OUTPUT_DIR = ROOT / "work-records"
+EXTRA_HTML_NAMES = {
+    "phase_1_tasks.md": "work_record_extra_01.html",
+    "scraping_db_automation.md": "work_record_extra_02.html",
+}
 DATE_RE = re.compile(r"^作成日:\s*(\S+)\s*$")
 HEADING_RE = re.compile(r"^\s*(#{1,6})\s+(.+?)\s*$")
 LIST_RE = re.compile(r"^(\s*)([-*+]|(\d+)\.)\s+(.+?)\s*$")
@@ -76,6 +81,15 @@ SECTION_LABELS = {
     "完了判定": "判定",
     "GitHub Issue状況（2026-08-13時点の現在値）": "Issue状況",
 }
+
+
+def output_name_for_markdown(path: Path) -> str:
+    """Return the deterministic HTML filename for a Markdown input."""
+
+    extra_name = EXTRA_HTML_NAMES.get(path.name)
+    if extra_name is not None:
+        return extra_name
+    return f"{path.stem}.html"
 
 
 def inline_markdown(value: str) -> str:
@@ -447,12 +461,7 @@ def render_document(path: Path) -> tuple[str, bool]:
   <body>
     <div class="shell">
       <header class="topbar">
-        <a class="wordmark" href="../README.md">B.LEAGUE STATS</a>
-        <nav class="toplinks" aria-label="関連文書">
-          <a href="README.md">運用ルール</a>
-          <a href="design.md">デザイン原則</a>
-          <a href="md/{html.escape(path.name, quote=True)}">Markdownを読む</a>
-        </nav>
+        <span class="wordmark">B.LEAGUE STATS</span>
       </header>
       <main>
         <header class="record-header">
@@ -478,13 +487,55 @@ def render_document(path: Path) -> tuple[str, bool]:
     return document, has_issue_reference or omitted_github_section
 
 
-def main() -> int:
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(
+        description="Render work-record Markdown files as static HTML."
+    )
+    parser.add_argument(
+        "--check",
+        action="store_true",
+        help="再生成結果と既存HTMLを比較し、差分があれば終了コード1で終了する",
+    )
+    parser.add_argument(
+        "--numbered-only",
+        action="store_true",
+        help="work_record_###.mdだけを対象にする（補助文書を除外）",
+    )
+    args = parser.parse_args(argv)
+
     markdown_paths = sorted(MARKDOWN_DIR.glob("*.md"))
+    if args.numbered_only:
+        markdown_paths = [
+            path
+            for path in markdown_paths
+            if re.fullmatch(r"work_record_\d{3}\.md", path.name)
+        ]
+    mismatches: list[str] = []
     for markdown_path in markdown_paths:
         document, _ = render_document(markdown_path)
-        output_name = f"{markdown_path.stem}.html"
-        (OUTPUT_DIR / output_name).write_text(document, encoding="utf-8")
-        print(f"generated {OUTPUT_DIR / output_name}")
+        output_name = output_name_for_markdown(markdown_path)
+        output_path = OUTPUT_DIR / output_name
+
+        if args.check:
+            if not output_path.is_file():
+                mismatches.append(f"missing {output_path}")
+            elif output_path.read_text(encoding="utf-8") != document:
+                mismatches.append(f"out-of-date {output_path}")
+            else:
+                print(f"matched {output_path}")
+            continue
+
+        output_path.write_text(document, encoding="utf-8")
+        print(f"generated {output_path}")
+
+    if args.check and mismatches:
+        print("regeneration check failed:")
+        for mismatch in mismatches:
+            print(f"- {mismatch}")
+        return 1
+
+    if args.check:
+        print("regeneration check passed.")
     return 0
 
 
