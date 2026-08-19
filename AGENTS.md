@@ -89,6 +89,7 @@ python -m pip install -r scraper/requirements.txt
 - `supabase/patches/` はDB補正用のCSV・JSONなど、目視確認・パッチ入力ファイルの置き場である。スクレイピング取得物や正本JSONを置かない。配置・命名は `supabase/patches/README.md` に従う。
 - `supabase/sql/` は一回限りまたは破壊的なデータパッチ・運用 SQL の集約先であり、現行スキーマの正本とはみなさない。新規ファイルは `supabase/sql/README.md` の `YYYYMMDD_<action>_<target>.sql` 命名に従う。
 - live DBのデータパッチは、原則として `backup`、`verify`、`fix`、`rollback` の4ファイルを同じIssue・対象名で作成する。実行順は `backup → verify（前）→ fix → verify（後）`、問題時は `rollback → verify（後）` とし、例外はSQL先頭コメントと `supabase/sql/README.md` に理由を残す。
+- SQLファイルを新規作成または変更した場合は、実行・提示の前に必ずreview-agentサブエージェント（`/Users/ryosuketajima/.codex/skills/.system/review-agent/SKILL.md`）を読み取り専用で実行する。レビュー結果の指摘を修正し、再レビューで重大な指摘がないことを確認するまで完了扱いにしない。
 
 ### データ、ログ、文書
 
@@ -166,4 +167,5 @@ pnpm lint
 - DB 行変換を変更した場合は、対象を絞った追跡済み月次 JSON を明示して `--dry-run` を追加する。
 - フロントは雛形で、ESLint の依存・共有設定の接続も未完成である。build/lint の既存不備による失敗は、依頼と無関係に広げて修正せず、実行コマンドと原因を報告する。
 - SQL は静的レビューに加え、実行が依頼範囲なら disposable/local プロジェクトで適用順と完了判定を確認する。live DB を検証先にしない。
+- SQLの作成後は、構文、件数ガード、適用前後の状態、ロールバック整合性をreview-agentで必ず確認する。レビュー未実施のSQLをユーザーへ実行依頼しない。
 - 挙動、スキーマ、Workflow、運用手順を変えた場合は、関連ドキュメントと新規ドキュメントの日付規則まで確認して完了とする。

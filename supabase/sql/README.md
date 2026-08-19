@@ -76,3 +76,11 @@ DBeaverの `Cmd + Enter` は通常、カーソル位置にある1文だけを実
 | `20260813_verify_issue_21_player_profiles.sql` | Issue #21の反映前・反映後・ロールバック後検証 | backup表を基準に変更予定件数と現在状態をSELECTのみで判定 |
 | `20260813_fix_issue_21_player_profiles.sql` | Issue #21のプロフィール欠損補完 | backup表、対象件数、反映前状態を検証し、CSVの非空値で空欄だけを更新 |
 | `20260813_rollback_fix_issue_21_player_profiles.sql` | Issue #21のプロフィール補完の復旧 | 期待する適用後状態を確認してからbackup表の値へ復元 |
+| `20260819_backup_issue25_player_id_merge.sql` | Issue #25の45848〜45865周辺18組の旧・現行IDと関連行を永続バックアップ | 対象ID、名前、既存IDマップ、試合成績の衝突を確認してからバックアップ |
+| `20260819_verify_issue25_player_id_merge.sql` | Issue #25の実行前・実行後・ロールバック後検証 | SELECTと一時表のみ。`PRE_FIX`、`POST_FIX`、`ROLLED_BACK_OR_PRE_FIX`、`UNEXPECTED_STATE`を返す |
+| `20260819_fix_issue25_player_id_merge.sql` | Issue #25の18組のplayer_id統合 | 旧IDの試合成績を現行IDへ移し、旧IDの履歴・所属・players行を削除して`player_id_map`へ記録 |
+| `20260819_rollback_fix_issue25_player_id_merge.sql` | Issue #25のID統合の復旧 | backup表から対象36選手と関連行を変更前へ復元 |
+| `20260820_backup_issue25_player_profiles.sql` | Issue #25の統合後プロフィール補完281人のバックアップと反映用パッチ表を作成 | 実行前に対象281行を固定。`player_slot_category`の標準表記も保持 |
+| `20260820_verify_issue25_player_profiles.sql` | Issue #25のプロフィール補完の実行前・実行後・復旧後検証 | backup表を基準に国籍・出生地・選手区分の差分をSELECTのみで確認 |
+| `20260820_fix_issue25_player_profiles.sql` | Issue #25の国籍・出生地補完と`player_slot_category`統一 | 国籍・出生地は空欄のみ補完し、選手区分は3表記へ更新 |
+| `20260820_rollback_fix_issue25_player_profiles.sql` | Issue #25のプロフィール補完の復旧 | backup表から対象281行の変更対象列を復元 |

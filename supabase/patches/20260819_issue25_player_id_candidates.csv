@@ -1,0 +1,19 @@
+old_player_id,candidate_player_id,old_name_j,candidate_name_j,candidate_name_e,old_team_id,old_jersey_number,candidate_team_ids_observed,candidate_jersey_number,old_player_game_stats_rows,candidate_player_game_stats_rows,old_name_history_rows,candidate_name_history_rows,old_affiliation_rows,candidate_affiliation_rows,status,evidence,review_note
+45848,5100000069,レイ・パークスジュニア,レイ・パークスジュニア,Ray Parks Jr.,3013,1,729;53000064;700,1,1,258,1,1,1,6,review_candidate,同名・英名・背番号一致。旧IDはschedule_key=502494の1試合、候補IDは258試合,統合前に旧IDの2024年1月試合を候補IDへ移す
+45849,51000259,カイ・ソット,カイ・ソット,Kai Sotto,3013,11,721;694;745,11,1,112,1,1,1,3,review_candidate,同名・英名・背番号一致,統合前に旧IDの2024年1月試合を候補IDへ移す
+45850,51000332,チュアンシン・リュウ,チュアンシン・リュウ,Liu Chuanxing,3013,12,3013,12,1,0,1,1,1,0,review_candidate,Live playersで日本語名・英名・所属チーム・背番号が完全一致。候補IDのplayer_game_statsとplayer_affiliationsは0行,候補IDへのプロフィール再投入後に旧IDの試合成績1行を移す
+45851,5100000062,キーファー・ラベナ,キーファー・ラベナ,Kiefer Ravena,3013,15,698;53000064;694,15,1,228,1,1,1,5,review_candidate,同名・英名・背番号一致,統合前に旧IDの2024年1月試合を候補IDへ移す
+45852,51000102,ドワイト・ラモス,ドワイト・ラモス,Dwight Ramos,3013,2,696;702;53000064,2,1,250,1,1,1,4,review_candidate,同名・英名・背番号一致,統合前に旧IDの2024年1月試合を候補IDへ移す
+45853,51000185,グレゴリー・スローター,グレゴリー・スローター,Gregory Slaughter,3013,20,53000064,20,1,1,1,1,1,1,review_candidate,同名・英名・背番号一致。候補IDはゲームJSON上1試合,候補IDの1試合との関係を公式プロフィールで確認
+45854,51000306,チャン ミンクク,チャン ミンクク,Min kug Chang,3013,3,2488,3,1,54,1,1,1,1,review_candidate,同名・英名・背番号一致,統合前に旧IDの2024年1月試合を候補IDへ移す
+45855,51000260,カール・タマヨ,カール・タマヨ,Carl Tamayo,3013,33,701,33,1,52,1,1,1,1,review_candidate,同名・英名・背番号一致,統合前に旧IDの2024年1月試合を候補IDへ移す
+45856,51000333,シェンゼ・リー,シェンゼ・リー,Li Shengzhe,3013,34,3013,34,1,0,1,1,1,0,review_candidate,Live playersで日本語名・英名・所属チーム・背番号が完全一致。候補IDのplayer_game_statsとplayer_affiliationsは0行,候補IDへのプロフィール再投入後に旧IDの試合成績1行を移す
+45857,51000314,イ デソン,イ デソン,Daesung Lee,3013,43,728,43,1,62,1,1,1,1,review_candidate,同名・英名・背番号一致,統合前に旧IDの2024年1月試合を候補IDへ移す
+45858,51000324,劉 駿霆,劉 駿霆,Chun-Ting Liu,3013,6,3013,6,1,0,1,1,1,0,review_candidate,Live playersで日本語名・英名・所属チーム・背番号が完全一致。候補IDのplayer_game_statsとplayer_affiliationsは0行,候補IDへのプロフィール再投入後に旧IDの試合成績1行を移す
+45859,51000187,マシュー・ライト,マシュー・ライト,Matthew Wright,3013,7,699;53000064;727,7,1,168,1,1,1,5,review_candidate,同名・英名・背番号一致,統合前に旧IDの2024年1月試合を候補IDへ移す
+45860,51000308,ロン･ジェイ･アバリエントス,ロン･ジェイ･アバリエントス,Rhon Jhay Abarrientos,3013,77,716,0,1,53,1,1,1,1,review_candidate,同名・英名一致。候補IDの現行背番号は0,背番号差異を公式プロフィール・試合履歴で確認
+45861,5100000041,王 偉嘉,王　偉嘉,Weijia Wang,3013,8,693,1,1,182,1,3,1,4,review_candidate,同名表記差（半角・全角空白）・英名一致。背番号は8対1,現行ID側の表記・新しい背番号を優先
+45862,5100000012,荒谷 裕秀,荒谷 裕秀,Hirohide Araya,3012,11,703;2488;692,11,1,293,1,1,1,3,review_candidate,同名・英名・背番号一致,統合前に旧IDの2024年1月試合を候補IDへ移す
+45863,51000137,上田 隼輔,上田 隼輔,Shunsuke Ueda,3012,20,696;720,20,1,167,1,1,1,2,review_candidate,同名・英名・背番号一致,統合前に旧IDの2024年1月試合を候補IDへ移す
+45864,51000113,飯尾 文哉,飯尾 文哉,Fumiya Iio,3012,22,700;720,22,1,217,1,1,1,2,review_candidate,同名・英名・背番号一致,統合前に旧IDの2024年1月試合を候補IDへ移す
+45865,5100000024,キング 開,キング 開,Kai King,3012,23,694;53000065,23,1,277,1,1,1,3,review_candidate,同名・英名・背番号一致,統合前に旧IDの2024年1月試合を候補IDへ移す
