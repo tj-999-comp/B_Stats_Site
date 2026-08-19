@@ -1,0 +1,9 @@
+schema_version: 1
+title: "Issue #24 試合データ取得・Live DB投入"
+date: "2026-08-18"
+project_id: B_Stats_Site
+tags:
+  - database
+  - scraping
+  - github
+publish: true
