@@ -15,16 +15,19 @@ work-records/
 ├── design.md                 # HTMLのデザイン原則
 ├── work_record.css            # HTML共通スタイル
 ├── work_record_###.html       # 番号付き作業記録の閲覧用HTML
-├── <補助文書名>.html          # 補助Markdownの閲覧用HTML
+├── work_record_extra_##.html   # 補助Markdownの閲覧用HTML
 └── md/
     ├── work_record_001.md    # 番号付き作業記録
-    └── phase_1_tasks.md      # 補助Markdown
+    ├── phase_1_tasks.md      # 補助Markdown
+    └── scraping_db_automation.md
 ```
 
 - HTMLはサブディレクトリを作らず、`work-records/` 直下へ置く。
 - `work-records/` 直下のMarkdownは `README.md` と `design.md` だけとする。
 - 作業記録と補助Markdownは `work-records/md/` に置く。
-- `work-records/md/` 内のMarkdownは、同じベース名のHTMLを `work-records/` 直下に置く。
+- 番号付きMarkdownは同じベース名のHTMLを `work-records/` 直下に置く。
+- 補助Markdownは `phase_1_tasks.md` を `work_record_extra_01.html`、
+  `scraping_db_automation.md` を `work_record_extra_02.html` として出力する。
 - HTMLは共通の `work_record.css` を参照し、外部ライブラリには依存しない。
 
 MarkdownからHTMLを再生成する場合は、リポジトリルートで次を実行する。
@@ -32,6 +35,14 @@ MarkdownからHTMLを再生成する場合は、リポジトリルートで次�
 ```bash
 python -m scripts.dev.convert_work_records_to_html
 ```
+
+既存HTMLを変更せず、Markdownからの再生成結果と一致するかだけを確認する場合は、次を実行する。
+
+```bash
+python -m scripts.dev.convert_work_records_to_html --check
+```
+
+番号付き作業記録だけを再生成・確認し、補助文書を対象外にする場合は `--numbered-only` を追加する。
 
 ## 作業記録の命名規則
 
@@ -60,7 +71,7 @@ python -m scripts.dev.convert_work_records_to_html
 ## HTMLの作成ルール
 
 - 番号付きHTMLは対応する作業記録と同じ番号の `work-records/work_record_###.html` とする。
-- 補助MarkdownのHTMLは、同じベース名の `work-records/<補助文書名>.html` とする。
+- 補助MarkdownのHTMLは、登録済みの `work_record_extra_##.html` とする。
 - 作業記録と分離した一覧専用HTMLは作成しない。Issue状況などの付随情報は、関連する作業記録HTMLの末尾へ入れる。
 - HTMLを新規作成・編集するときは、[design.md](design.md) を原則として守る。
 - デザイン原則から外れる必要がある場合は、対応する作業記録に理由を書く。

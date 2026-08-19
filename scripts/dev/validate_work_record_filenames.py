@@ -16,6 +16,13 @@ from pathlib import Path
 
 WORK_RECORDS_DIR = Path("work-records")
 MARKDOWN_DIR = WORK_RECORDS_DIR / "md"
+EXTRA_HTML_NAMES = {
+    "phase_1_tasks.md": "work_record_extra_01.html",
+    "scraping_db_automation.md": "work_record_extra_02.html",
+}
+EXTRA_MARKDOWN_NAMES = {
+    html_name: markdown_name for markdown_name, html_name in EXTRA_HTML_NAMES.items()
+}
 VALID_NAME_RE = re.compile(r"^work_record_(\d{3})\.md$")
 VALID_HEADING_RE = re.compile(r"^# 作業記録 (\d{3}): .+$")
 VALID_HTML_NAME_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_-]*\.html$")
@@ -69,7 +76,17 @@ def main() -> int:
                     f"{path}: expected filename pattern work_record_###.md"
                 )
 
-            expected_html = WORK_RECORDS_DIR / f"{path.stem}.html"
+            if path.name in EXTRA_HTML_NAMES:
+                expected_html = WORK_RECORDS_DIR / EXTRA_HTML_NAMES[path.name]
+            elif name_match is not None:
+                expected_html = WORK_RECORDS_DIR / f"{path.stem}.html"
+            else:
+                violations.append(
+                    f"{path}: auxiliary Markdown must have a registered "
+                    "work_record_extra_##.html filename"
+                )
+                continue
+
             if not expected_html.is_file():
                 violations.append(f"{path}: corresponding HTML not found at {expected_html}")
 
@@ -87,7 +104,15 @@ def main() -> int:
             )
             continue
 
-        markdown_path = MARKDOWN_DIR / f"{path.stem}.md"
+        if path.name in EXTRA_MARKDOWN_NAMES:
+            markdown_path = MARKDOWN_DIR / EXTRA_MARKDOWN_NAMES[path.name]
+        elif path.name.startswith("work_record_extra_"):
+            violations.append(
+                f"{path}: auxiliary HTML filename is not registered in the validator"
+            )
+            continue
+        else:
+            markdown_path = MARKDOWN_DIR / f"{path.stem}.md"
         if not markdown_path.is_file():
             violations.append(
                 f"{path}: corresponding Markdown record not found at {markdown_path}"
