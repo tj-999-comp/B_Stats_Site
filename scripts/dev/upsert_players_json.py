@@ -21,6 +21,7 @@ ALLOWED_KEYS = {
     "birthplace",
     "last_seen_team_id",
     "last_seen_jersey_number",
+    "entity_type",
     "created_at",
     "updated_at",
 }

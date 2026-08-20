@@ -21,6 +21,23 @@ ALTER TABLE players
 ALTER TABLE players
     ADD COLUMN IF NOT EXISTS birthplace TEXT;
 
+ALTER TABLE players
+    ADD COLUMN IF NOT EXISTS entity_type TEXT NOT NULL DEFAULT 'player';
+
+UPDATE players
+SET entity_type = 'player'
+WHERE entity_type IS NULL;
+
+ALTER TABLE players
+    ALTER COLUMN entity_type SET NOT NULL;
+
+ALTER TABLE players
+    DROP CONSTRAINT IF EXISTS players_entity_type_check;
+
+ALTER TABLE players
+    ADD CONSTRAINT players_entity_type_check
+    CHECK (entity_type IN ('player', 'staff', 'placeholder', 'unresolved'));
+
 -- 既存データがある場合のみ game_type をバックフィル
 UPDATE games
 SET game_type = CASE

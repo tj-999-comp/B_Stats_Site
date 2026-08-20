@@ -115,6 +115,14 @@ def _classification(player_id: str, observation: dict[str, Any] | None) -> str:
     return "unresolved"
 
 
+def _entity_type(classification: str) -> str:
+    """分類レポートとplayers.entity_typeで共有する正規化された分類値。"""
+    return {
+        "staff_like": "staff",
+        "unseen_in_tracked_games": "unresolved",
+    }.get(classification, classification)
+
+
 def build_report(
     live_players: list[dict[str, Any]],
     local_players: list[dict[str, Any]],
@@ -149,6 +157,7 @@ def build_report(
                 "player_id": player_id,
                 "player_name_j": player.get("player_name_j"),
                 "classification": classification,
+                "entity_type": _entity_type(classification),
                 "in_local_canonical": player_id in local_ids,
                 "missing_fields": [field for field in AUDIT_FIELDS if not _has_text(player.get(field))],
                 "evidence": evidence,
@@ -204,6 +213,7 @@ def build_report(
             "placeholder": f"player_id is one of {sorted(PLACEHOLDER_PLAYER_IDS)}",
             "unseen_in_tracked_games": "no PeriodCategory=18 row exists in the selected tracked game JSON files",
         },
+        "entity_type_values": ["player", "staff", "placeholder", "unresolved"],
         "excluded_player_ids": excluded_ids,
         "mixed_observation_ids": mixed_observation_ids,
         "entities": entities,

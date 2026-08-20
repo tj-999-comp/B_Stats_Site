@@ -55,6 +55,34 @@ def load_excluded_player_ids(path: Path | None) -> set[str]:
     return {str(value).strip() for value in values if str(value).strip()}
 
 
+def load_entity_types(path: Path | None) -> dict[str, str]:
+    if path is None:
+        return {}
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    entities = payload.get("entities") if isinstance(payload, dict) else None
+    if not isinstance(entities, list):
+        raise RuntimeError(f"Expected entities list in classification report: path={path}")
+
+    result: dict[str, str] = {}
+    allowed = {"player", "staff", "placeholder", "unresolved"}
+    for entity in entities:
+        if not isinstance(entity, dict):
+            continue
+        player_id = str(entity.get("player_id") or "").strip()
+        entity_type = str(entity.get("entity_type") or entity.get("classification") or "").strip()
+        # 旧レポートも再利用できるよう、旧分類名を現行値へ読み替える。
+        entity_type = {
+            "staff_like": "staff",
+            "unseen_in_tracked_games": "unresolved",
+        }.get(entity_type, entity_type)
+        if not player_id or entity_type not in allowed:
+            raise RuntimeError(
+                f"Invalid entity classification: player_id={player_id!r} entity_type={entity_type!r}"
+            )
+        result[player_id] = entity_type
+    return result
+
+
 def load_players_snapshot(path: Path) -> list[dict[str, Any]]:
     payload = json.loads(path.read_text(encoding="utf-8"))
     if not isinstance(payload, list) or not all(isinstance(row, dict) for row in payload):
@@ -276,7 +304,7 @@ def main() -> None:
         "--classification-report",
         type=Path,
         default=None,
-        help="classify_player_entities.pyのレポート。staff_like / placeholderを対象外にする",
+        help="classify_player_entities.pyのレポート。staff / placeholderを対象外にする",
     )
     parser.add_argument(
         "--fetch-cache",
@@ -312,6 +340,7 @@ def main() -> None:
         else fetch_all_players()
     )
     excluded_player_ids = load_excluded_player_ids(args.classification_report)
+    entity_types = load_entity_types(args.classification_report)
     all_player_ids = {
         str(player.get("player_id") or "").strip()
         for player in all_players
@@ -323,6 +352,18 @@ def main() -> None:
             f"classification report contains IDs not present in players source: "
             f"{sorted(unknown_excluded_ids)}"
         )
+    unknown_entity_ids = set(entity_types) - all_player_ids
+    if unknown_entity_ids:
+        raise RuntimeError(
+            f"classification report contains entity IDs not present in players source: "
+            f"{sorted(unknown_entity_ids)}"
+        )
+    if entity_types:
+        excluded_player_ids = {
+            player_id
+            for player_id, entity_type in entity_types.items()
+            if entity_type in {"staff", "placeholder"}
+        }
     fetch_cache = load_fetch_cache(args.fetch_cache)
     eligible_players = [
         player
@@ -367,6 +408,10 @@ def main() -> None:
         "players_total": len(all_players),
         "eligible_players": len(eligible_players),
         "excluded_player_ids": sorted(excluded_player_ids),
+        "excluded_entity_types": ["staff", "placeholder"],
+        "entity_type_counts": dict(
+            sorted(Counter(entity_types.values()).items())
+        ) if entity_types else None,
         "targets": len(targets),
         "status_counts": dict(sorted(status_counts.items())),
         "proposed_rows": proposed_rows,
