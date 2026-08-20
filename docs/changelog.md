@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-08-20
+
+### Issue #16: live・再構築 SQL・テーブル定義のスキーマ契約を同期
+
+- live `players` を読み取り専用で確認し、現行は12列で `nationality` は廃止済みであることを再確認
+- `player_slot_category`、`league_registered_nationality`、`birthplace` の責務を明文化
+- 再構築手順に、`players` の期待列・想定外列・廃止済み `nationality` を検出する再実行可能な確認SQLを追加
+- `01_base_schema.sql`、`05_batch_game_and_players_columns.sql`、`00_rebuild_all.sql`、
+  `docs/table_definition.md` の現行列契約を確認
+
 ## 2026-08-13
 
 ### 作業記録運用とGitHub Issue一覧の再編
