@@ -82,6 +82,7 @@ code { font-size: .88em; overflow-wrap: anywhere; }
   font-size: clamp(32px, 3.5vw, 40px);
   font-weight: 400;
   line-height: 1.2;
+  overflow-wrap: anywhere;
 }
 .record-meta {
   display: grid;

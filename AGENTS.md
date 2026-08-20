@@ -115,7 +115,15 @@ python -m pip install -r scraper/requirements.txt
 
 ## 副作用のある操作
 
-次の操作は通常の検証として実行しない。ユーザーが対象、接続先、実行を明示した場合に限り、対象確認、dry-run、バックアップまたは復旧方法を先に用意する。
+次の操作はClaudeが実行してはならない。実際のDB変更は、対象・接続先・実行内容を確認したうえでユーザーが行う。
+
+### DB変更操作に関する固定ルール
+
+- ClaudeはSupabaseその他のDBに対して、`UPSERT`、`INSERT ... ON CONFLICT`、`UPDATE`、`DELETE`、ID統合などの変更操作を実行してはならない。SQL Editor、CLI、API、MCP、シェル、Pythonスクリプトなど実行経路を問わない。
+- ClaudeがPythonやその他のプログラムを自動実行して、上記のDB変更操作を発生させることも禁止する。`--apply`、`--upsert`、dry-runなしの投入なども実行しない。
+- 依頼された場合、Claudeが行うのは変更SQLファイルの作成・提案と、ローカルでの静的確認・dry-run相当の変換確認までとする。実DBへの適用は必ずユーザーが行う。
+- `UPSERT`、`INSERT`、`UPDATE`、`DELETE`を含む変更を提案するときは、同じIssue・対象について必ず次の4種を揃える。`backup`（バックアップ）、`verify`（実行前後とロールバック後の確認）、`fix`（実行SQL）、`rollback`（復旧SQL）。ユーザーが実行する順序は `backup → verify（前）→ fix → verify（後）`、問題時は `rollback → verify（後）` とする。
+- 4種のSQLが揃っていない変更SQLは、ユーザーへ実行用として提示してはならない。例外が必要な場合は、理由をSQL先頭コメントと `supabase/sql/README.md` に明記する。
 
 Supabase の UPSERT、削除、ID統合は複数リクエストで進み、処理全体を包むトランザクションではない。途中失敗でも成功済みチャンクが残り得るため、実行単位ごとの件数照合、再実行可能性、部分反映からの復旧を先に確認する。
 
