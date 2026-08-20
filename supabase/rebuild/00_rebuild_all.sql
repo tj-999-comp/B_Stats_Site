@@ -220,6 +220,8 @@ CREATE TABLE IF NOT EXISTS players (
     player_name_e TEXT,
     last_seen_team_id TEXT REFERENCES teams(team_id),
     last_seen_jersey_number TEXT,
+    entity_type TEXT NOT NULL DEFAULT 'player'
+        CHECK (entity_type IN ('player', 'staff', 'placeholder', 'unresolved')),
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
@@ -914,6 +916,23 @@ ALTER TABLE players
 
 ALTER TABLE players
     ADD COLUMN IF NOT EXISTS birthplace TEXT;
+
+ALTER TABLE players
+    ADD COLUMN IF NOT EXISTS entity_type TEXT NOT NULL DEFAULT 'player';
+
+UPDATE players
+SET entity_type = 'player'
+WHERE entity_type IS NULL;
+
+ALTER TABLE players
+    ALTER COLUMN entity_type SET NOT NULL;
+
+ALTER TABLE players
+    DROP CONSTRAINT IF EXISTS players_entity_type_check;
+
+ALTER TABLE players
+    ADD CONSTRAINT players_entity_type_check
+    CHECK (entity_type IN ('player', 'staff', 'placeholder', 'unresolved'));
 
 -- 既存データがある場合のみ game_type をバックフィル
 UPDATE games
