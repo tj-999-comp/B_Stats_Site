@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light">
+    <title>Issue #29 公開前検証と自動公開フローの整理 — 作業記録</title>
+    <link rel="stylesheet" href="work_record.css">
+  </head>
+  <body>
+    <div class="shell">
+      <header class="topbar">
+        <a class="wordmark" href="../README.md">B.LEAGUE STATS</a>
+        <nav class="toplinks" aria-label="関連文書">
+          <a href="README.md">運用ルール</a>
+          <a href="design.md">デザイン原則</a>
+          <a href="md/work_record_014.md">Markdownを読む</a>
+        </nav>
+      </header>
+      <main>
+        <header class="record-header">
+          <p class="kicker">作業記録 014 ・ 2026-08-20</p>
+          <h1>Issue #29 公開前検証と自動公開フローの整理</h1>
+          <dl class="record-meta">
+            <div><dt>原本</dt><dd><code>md/work_record_014.md</code></dd></div>
+            <div><dt>状態</dt><dd>記録本文をHTML化</dd></div>
+          </dl>
+        </header>
+        <section class="record-section"><div class="section-intro"><p class="section-label">01　概要</p><h2>概要</h2></div><div class="section-content"><p>GitHub Issue #29に対応し、作業記録を自動公開へつなげる前段として、001〜013のmetadata、生成元validator、HTML再生成check、CI検証を整備した。あわせて、生成元の<code>B_Stats_Site</code>と公開側の<code>sandbox-pages</code>が分担する実際の公開フローを作業記録として整理した。</p></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">02　目的</p><h2>目的</h2></div><div class="section-content"><p>作業記録を<code>main</code>へ反映したとき、公開要求の前に命名、metadata、HTML再現性、依存ファイル、HTML・CSS・URL安全性を自動検証できるようにする。最終的な公開処理は生成元が直接行わず、<code>sandbox-pages</code>側が固定commitを受け入れてGitHub Pagesへ反映する構成とする。</p></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">03　対象</p><h2>対象</h2></div><div class="section-content"><ul><li>番号付き作業記録: <code>work_record_001</code>〜<code>work_record_013</code></li><li>生成元リポジトリ: <code>tj-999-comp/B_Stats_Site</code></li><li>公開リポジトリ: <code>tj-999-comp/sandbox-pages</code></li><li>公開方式: <code>source_html</code></li><li>project_id: <code>B_Stats_Site</code></li></ul></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">04　実施</p><h2>実施事項</h2></div><div class="section-content"><ul><li><code>work-records/metadata/work_record_001.yml</code>〜<code>work_record_013.yml</code>をschema version 1で追加した。</li><li>metadataに<code>title</code>、<code>date</code>、<code>project_id</code>、<code>tags</code>、<code>publish</code>を記録した。</li><li><code>scripts/dev/validate_work_record_source.py</code>を追加し、Markdown・metadata・HTMLの同一basename、metadataの型と値、日付・タイトル一致を検証するようにした。</li><li>同validatorで、HTML要素・属性、URL scheme、相対パス、HTMLから参照するローカルファイル、CSSの外部参照・実行構文を検証するようにした。</li><li><code>README.md</code>、<code>design.md</code>、<code>work_record.css</code>をsource_htmlのsupport fileとして確認するようにした。</li><li><code>phase_1_tasks.html</code>と<code>scraping_db_automation.html</code>を番号付き公開対象から除外するfixtureを追加した。</li><li><code>.github/workflows/validate-work-record-filenames.yml</code>へ、converterの再生成check、source validator、fixture検証を追加した。</li><li><code>work-records/README.md</code>へmetadata形式、公開候補commitの確認方針、自動公開時の責務分担を追記した。</li></ul></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">05　記録</p><h2>実際の公開フロー</h2></div><div class="section-content"><pre><code class="language-text">B_Stats_Siteで作業記録を変更
+  ↓
+mainへPush
+  ↓
+B側CIで命名・metadata・HTML再生成・安全性を検証
+  ↓（成功した場合だけ）
+publish: true のbasename、project_id、source SHAを抽出
+  ↓
+sandbox-pagesへworkflow_dispatchで公開要求
+  ↓
+sandbox-pagesが指定commit SHAを取得して再検証
+  ↓（受入成功した場合だけ）
+projects/B_Stats_Siteへ反映
+  ↓
+provenance manifestを記録
+  ↓
+GitHub Pagesへdeploy</code></pre>
+<p>生成元側は公開リポジトリをcheckout、編集、commit、pushしない。<code>B_Stats_Site</code>側の公開要求workflowは手動起動を復旧経路として残し、手動E2E確認後に<code>main</code>更新時の自動要求へ移行する。</p></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">06　記録</p><h2>Issueとの関係</h2></div><div class="section-content"><ul><li>#28の親ディレクトリREADMEリンク修正は完了済みである。</li><li>#29は今回の検証基盤とmetadata追加の対象である。</li><li>#30は<code>B_Stats_Site</code>側の手動公開要求workflowを追加する次工程である。</li><li>#31は実作業記録1件を使った手動E2E確認である。</li><li>#32は#31と公開側の受入確認が安定した後に、<code>main</code>更新時の自動公開要求を有効化する工程である。</li></ul></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">07　検証</p><h2>検証</h2></div><div class="section-content"><ul><li><code>.venv311/bin/python scripts/dev/validate_work_record_source.py</code> が成功した。</li><li><code>.venv311/bin/python scripts/dev/validate_work_record_source.py --check-fixtures</code> が成功した。</li><li><code>.venv311/bin/python -m scripts.dev.convert_work_records_to_html --check</code> が成功した。</li><li><code>.venv311/bin/python scripts/dev/validate_work_record_filenames.py</code> が成功した。</li><li><code>.venv311/bin/python -m compileall -q scripts/dev</code> が成功した。</li><li><code>git diff --check</code> が成功した。</li></ul></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">08　判定</p><h2>完了判定</h2></div><div class="section-content"><p>Issue #29の対象範囲を001〜013へ拡張し、metadata、生成元validator、HTML再生成check、support file依存、安全性検証、補助HTMLの除外fixture、CI連携、公開候補commitの運用記録を追加した。自動公開そのものと公開側の受入workflowは、#30以降の別工程として残っている。</p></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">09　記録</p><h2>GitHub Issue状況（2026-08-20時点の現在値）</h2></div><div class="section-content"><p>確認日: 2026-08-20（JST）</p>
+<p>GitHub APIで <code>tj-999-comp/B_Stats_Site</code> のIssueを確認した。Pull Requestは対象外とした。未完了Issueは13件だった。</p>
+<h3>親子関係</h3>
+<pre><code class="language-text">#7（未完了・親Issue）
+└── #8（完了・子Issue）
+#12（完了・親Issue）
+├── #21（完了・子Issue）
+├── #22（未完了・子Issue）
+└── #23（未完了・子Issue）
+#24（完了・親Issue）
+└── #25（完了・子Issue）</code></pre>
+<p>GitHubのsub-issues APIで登録された親子関係を記載した。親子登録のないIssueは、優先順位一覧の関係・着手条件に記載する。</p>
+<h3>優先順位順の未完了一覧</h3>
+<p>優先順位は <code>github_issue_status_policy.json</code> の運用設定を使い、設定のないIssueは既定値P3として記載する。</p>
+<table><thead><tr><th>順位</th><th>優先度</th><th>GitHub Issue</th><th>状態</th><th>関係・着手条件</th></tr></thead><tbody><tr><td>1</td><td>P1</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/22">#22</a> [DB] スタッフ相当判定フラグを追加してプロフィール欠損一覧から除外する</td><td>未完了</td><td>#12の子Issue。#25と関連</td></tr><tr><td>2</td><td>P1</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/23">#23</a> [DB] 45848〜45865周辺の分割player_idを調査・統合する</td><td>未完了</td><td>#12の子Issue。#25と関連</td></tr><tr><td>3</td><td>P2</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/13">#13</a> [DB] player_slot_category の値を正規化する</td><td>未完了</td><td>#25完了後が適切</td></tr><tr><td>4</td><td>P2</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/14">#14</a> [DB] attendance 欠損14試合を調査・補完する</td><td>未完了</td><td>独立</td></tr><tr><td>5</td><td>P2</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/16">#16</a> [DB] live DB・再構築SQL・テーブル定義のスキーマ差異を解消する</td><td>未完了</td><td>独立</td></tr><tr><td>6</td><td>P2</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/18">#18</a> [DB] 空の player_id_map と旧ID名寄せ経路を検証する</td><td>未完了</td><td>#23と関連</td></tr><tr><td>7</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/7">#7</a> 試合のスクレイピングデータ精査</td><td>未完了</td><td>#24と範囲が重なる</td></tr><tr><td>8</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/9">#9</a> 課題解決の原案を立てる</td><td>未完了</td><td>探索テーマ</td></tr><tr><td>9</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/15">#15</a> [DB] 過年度の plus_minus・背番号欠損を調査する</td><td>未完了</td><td>独立</td></tr><tr><td>10</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/17">#17</a> [DB] play_by_play未投入と存在フラグの整合性を整理する</td><td>未完了</td><td>独立</td></tr><tr><td>11</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/30">#30</a> [Actions] 手動公開要求workflowとdispatch権限を設定する</td><td>未完了</td><td>独立。優先度未設定</td></tr><tr><td>12</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/31">#31</a> [E2E] 新規作業記録1件を手動publish要求する</td><td>未完了</td><td>独立。優先度未設定</td></tr><tr><td>13</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/32">#32</a> [Automation] main更新時の公開要求triggerを有効化する</td><td>未完了</td><td>独立。優先度未設定</td></tr></tbody></table></div></section>
+
+      </main>
+      <footer>
+        <span>B.LEAGUE Stats · 作業記録 014</span>
+        <span><a href="md/work_record_014.md">Markdown原本</a></span>
+      </footer>
+    </div>
+  </body>
+</html>

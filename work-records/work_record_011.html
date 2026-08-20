@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light">
+    <title>Issue #24 試合データ取得・Live DB投入 — 作業記録</title>
+    <link rel="stylesheet" href="work_record.css">
+  </head>
+  <body>
+    <div class="shell">
+      <header class="topbar">
+        <a class="wordmark" href="../README.md">B.LEAGUE STATS</a>
+        <nav class="toplinks" aria-label="関連文書">
+          <a href="README.md">運用ルール</a>
+          <a href="design.md">デザイン原則</a>
+          <a href="md/work_record_011.md">Markdownを読む</a>
+        </nav>
+      </header>
+      <main>
+        <header class="record-header">
+          <p class="kicker">作業記録 011 ・ 2026-08-18</p>
+          <h1>Issue #24 試合データ取得・Live DB投入</h1>
+          <dl class="record-meta">
+            <div><dt>原本</dt><dd><code>md/work_record_011.md</code></dd></div>
+            <div><dt>状態</dt><dd>記録本文をHTML化</dd></div>
+          </dl>
+        </header>
+        <section class="record-section"><div class="section-intro"><p class="section-label">01　目的</p><h2>目的</h2></div><div class="section-content"><p>GitHub Issue #24の対象である、2026-05-31（JST）までの未投入試合データを取得し、Live DBへ投入する。</p></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">02　記録</p><h2>対象と入力</h2></div><div class="section-content"><ul><li>2025-05-18の未取得試合: <code>schedule_key=503896</code></li><li>2025-26シーズン: 2025年10月〜2026年5月の月次JSON 8ファイル</li><li>保存先: <code>scraper/data/season_2025-2026/</code></li><li><code>play_by_play</code> は取得・投入しない。</li></ul></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">03　記録</p><h2>実行結果</h2></div><div class="section-content"><ul><li><code>schedule_key=503896</code> を再取得し、2024-25年5月JSONへ反映した。</li><li>2025-26シーズンの10月、11月、12月、2026年1月、2月、3月、4月、5月を月順に取得した。</li><li>ユーザー環境のPython 3.11仮想環境で、古い月から順にLive DBへUPSERTした。</li><li>GitHub Issue #24へ実施結果をコメントした。</li></ul></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">04　記録</p><h2>実行上の問題と対応</h2></div><div class="section-content"><p>Codexの既定サンドボックスでは外部ネットワークが無効だったため、B.LEAGUEのスケジュールAPIでDNS解決に失敗した。スクレイパーはこの失敗を空のスケジュールとして扱い、<code>game_count=0</code> のJSONを保存していた。</p>
+<p>空JSONをUPSERTしても更新件数が0件になることを確認した後、ユーザーのネットワーク接続可能なローカル環境で再取得し、その結果をLive DBへ投入した。</p></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">05　記録</p><h2>残件</h2></div><div class="section-content"><ul><li>Live DB上で、試合・チーム・選手試合成績・チーム試合成績の件数、抜け漏れ、重複、参照整合性を確認する。</li><li>Issue #24の確認結果を踏まえ、子Issue #25（player_id重複整理・プロフィール欠損補完）へ引き継ぐ。</li></ul></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">06　ファイル</p><h2>関連ファイル</h2></div><div class="section-content"><ul><li><code>scraper/data/season_2024-2025/games_2024-25_2025-05-01_2025-05-31.json</code></li><li><code>scraper/data/season_2025-2026/</code></li><li><code>scraper/logs/game_detail_fetch_log.json</code></li><li><code>scraper/logs/schedule_fetch_log.json</code></li><li><code>scripts/dev/sync_github_issue_status.py</code></li><li><code>scripts/dev/github_issue_status_policy.json</code></li><li><code>.github/workflows/validate-work-record-filenames.yml</code></li></ul></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">07　記録</p><h2>GitHub Issue状況（2026-08-18時点の現在値）</h2></div><div class="section-content"><p>確認日: 2026-08-18（JST）</p>
+<p>GitHub APIで <code>tj-999-comp/B_Stats_Site</code> のIssueを確認した。Pull Requestは対象外とした。未完了Issueは17件だった。</p>
+<h3>親子関係</h3>
+<pre><code class="language-text">#7（未完了・親Issue）
+└── #8（完了・子Issue）
+#12（完了・親Issue）
+├── #21（完了・子Issue）
+├── #22（未完了・子Issue）
+└── #23（未完了・子Issue）
+#24（未完了・親Issue）
+└── #25（未完了・子Issue）</code></pre>
+<p>GitHubのsub-issues APIで登録された親子関係を記載した。親子登録のないIssueは、優先順位一覧の関係・着手条件に記載する。</p>
+<h3>優先順位順の未完了一覧</h3>
+<p>優先順位は <code>github_issue_status_policy.json</code> の運用設定を使い、設定のないIssueは既定値P3として記載する。</p>
+<table><thead><tr><th>順位</th><th>優先度</th><th>GitHub Issue</th><th>状態</th><th>関係・着手条件</th></tr></thead><tbody><tr><td>1</td><td>P0</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/24">#24</a> [DB] 2026年5月末までの未投入試合データをスクレイピング・投入する</td><td>未完了</td><td>親Issue。#25をブロック</td></tr><tr><td>2</td><td>P1</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/22">#22</a> [DB] スタッフ相当判定フラグを追加してプロフィール欠損一覧から除外する</td><td>未完了</td><td>#12の子Issue。#25と関連</td></tr><tr><td>3</td><td>P1</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/23">#23</a> [DB] 45848〜45865周辺の分割player_idを調査・統合する</td><td>未完了</td><td>#12の子Issue。#25と関連</td></tr><tr><td>4</td><td>P1</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/25">#25</a> [DB] 試合データ投入後のplayer_id重複整理とプロフィール欠損補完</td><td>未完了</td><td>#24の子Issue。#24完了後</td></tr><tr><td>5</td><td>P2</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/13">#13</a> [DB] player_slot_category の値を正規化する</td><td>未完了</td><td>#25完了後が適切</td></tr><tr><td>6</td><td>P2</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/14">#14</a> [DB] attendance 欠損14試合を調査・補完する</td><td>未完了</td><td>独立</td></tr><tr><td>7</td><td>P2</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/16">#16</a> [DB] live DB・再構築SQL・テーブル定義のスキーマ差異を解消する</td><td>未完了</td><td>独立</td></tr><tr><td>8</td><td>P2</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/18">#18</a> [DB] 空の player_id_map と旧ID名寄せ経路を検証する</td><td>未完了</td><td>#23と関連</td></tr><tr><td>9</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/7">#7</a> 試合のスクレイピングデータ精査</td><td>未完了</td><td>#24と範囲が重なる</td></tr><tr><td>10</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/9">#9</a> 課題解決の原案を立てる</td><td>未完了</td><td>探索テーマ</td></tr><tr><td>11</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/15">#15</a> [DB] 過年度の plus_minus・背番号欠損を調査する</td><td>未完了</td><td>独立</td></tr><tr><td>12</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/17">#17</a> [DB] play_by_play未投入と存在フラグの整合性を整理する</td><td>未完了</td><td>独立</td></tr><tr><td>13</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/28">#28</a> [Work records] 親ディレクトリREADMEリンクをproject内リンクへ修正する</td><td>未完了</td><td>独立。優先度未設定</td></tr><tr><td>14</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/29">#29</a> [Work records] 001〜010のmetadataと生成元validator・CIを追加する</td><td>未完了</td><td>独立。優先度未設定</td></tr><tr><td>15</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/30">#30</a> [Actions] 手動公開要求workflowとdispatch権限を設定する</td><td>未完了</td><td>独立。優先度未設定</td></tr><tr><td>16</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/31">#31</a> [E2E] 新規作業記録1件を手動publish要求する</td><td>未完了</td><td>独立。優先度未設定</td></tr><tr><td>17</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/32">#32</a> [Automation] main更新時の公開要求triggerを有効化する</td><td>未完了</td><td>独立。優先度未設定</td></tr></tbody></table></div></section>
+
+      </main>
+      <footer>
+        <span>B.LEAGUE Stats · 作業記録 011</span>
+        <span><a href="md/work_record_011.md">Markdown原本</a></span>
+      </footer>
+    </div>
+  </body>
+</html>

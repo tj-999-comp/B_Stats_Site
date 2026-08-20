@@ -1,0 +1,8 @@
+schema_version: 1
+title: "game_team_statsの得点誤マッピング補正"
+date: "2026-08-05"
+project_id: B_Stats_Site
+tags:
+  - database
+  - data-fix
+publish: true

@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light">
+    <title>Issue #22 スタッフ相当判定とプロフィール監査除外 — 作業記録</title>
+    <link rel="stylesheet" href="work_record.css">
+  </head>
+  <body>
+    <div class="shell">
+      <header class="topbar">
+        <a class="wordmark" href="../README.md">B.LEAGUE STATS</a>
+        <nav class="toplinks" aria-label="関連文書">
+          <a href="README.md">運用ルール</a>
+          <a href="design.md">デザイン原則</a>
+          <a href="md/work_record_015.md">Markdownを読む</a>
+        </nav>
+      </header>
+      <main>
+        <header class="record-header">
+          <p class="kicker">作業記録 015 ・ 2026-08-20</p>
+          <h1>Issue #22 スタッフ相当判定とプロフィール監査除外</h1>
+          <dl class="record-meta">
+            <div><dt>原本</dt><dd><code>md/work_record_015.md</code></dd></div>
+            <div><dt>状態</dt><dd>記録本文をHTML化</dd></div>
+          </dl>
+        </header>
+        <section class="record-section"><div class="section-intro"><p class="section-label">01　概要</p><h2>概要</h2></div><div class="section-content"><p>Issue #22に対応し、<code>players</code> の選手・スタッフ相当分類を <code>entity_type</code> として保存できるようにした。分類結果をプロフィール欠損監査へ連携し、スタッフ相当とダミーを補完対象から除外できることをlive DBで確認した。</p></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">02　目的</p><h2>目的</h2></div><div class="section-content"><p><code>PeriodCategory == 18</code> に混在するスタッフ相当行が、選手プロフィール欠損一覧へ再び含まれないようにする。ダミーID、スタッフ相当、追跡済み試合に未出現のIDは別分類として扱い、判定根拠を再生成できる状態を残す。</p></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">03　実施</p><h2>実施事項</h2></div><div class="section-content"><ul><li><code>players.entity_type</code> を追加し、<code>player</code>、<code>staff</code>、<code>placeholder</code>、<code>unresolved</code> の4分類を許可した。</li><li><code>supabase/rebuild/00_rebuild_all.sql</code>、<code>01_base_schema.sql</code>、<code>05_batch_game_and_players_columns.sql</code> を同期した。</li><li><code>scripts/dev/classify_player_entities.py</code> に <code>entities[].entity_type</code> を追加した。</li><li><code>scripts/dev/fill_missing_player_profile_fields.py</code> で <code>staff</code> と <code>placeholder</code> を除外し、<code>unresolved</code> は保持するようにした。</li><li><code>scripts/dev/apply_player_entity_types.py</code> を追加し、既定は監査、<code>--apply</code> 指定時だけDBへ反映するようにした。</li><li><code>scripts/dev/upsert_players_json.py</code> で <code>entity_type</code> を保持できるようにした。</li><li><code>docs/flow.md</code> と <code>supabase/rebuild/README.md</code> に実行順、検証方法、ベンチテクニカルの扱いを追記した。</li></ul></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">04　記録</p><h2>live DBの反映結果</h2></div><div class="section-content"><p>分類レポートと統合確認SQLにより、<code>players</code> 1,101件を次のとおり確認した。</p>
+<table><thead><tr><th>entity_type</th><th>件数</th></tr></thead><tbody><tr><td><code>player</code></td><td>1,049</td></tr><tr><td><code>staff</code></td><td>47</td></tr><tr><td><code>placeholder</code></td><td>1</td></tr><tr><td><code>unresolved</code></td><td>4</td></tr></tbody></table>
+<p>NULL、不正な分類値、重複 <code>player_id</code>、孤立した <code>player_game_stats</code> は0件だった。スタッフ相当47件、ダミー1件、未解決4件を選手1,049件と区別できている。</p></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">05　記録</p><h2>ベンチテクニカルの扱い</h2></div><div class="section-content"><p>ベンチテクニカルは選手マスタの <code>entity_type</code> へ混ぜない。公式記録上の責任者と実際の行為者が異なり得るため、将来扱う場合は試合イベントとして、チーム、テクニカル種別、公式記録上の責任者、行為者を分離して保存する。</p></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">06　検証</p><h2>検証</h2></div><div class="section-content"><ul><li>live <code>players</code> スナップショット取得が成功した。</li><li>82個のゲームJSONから <code>PeriodCategory == 18</code> の149,375行を走査した。</li><li>選手相当145,315行、スタッフ相当4,060行を確認した。</li><li>Python 3.11で関連スクリプトの構文確認が成功した。</li><li><code>git diff --check</code> が成功した。</li><li>SQL変更をreview-agentで再レビューし、指摘なしだった。</li><li><code>entity_type</code> 列、<code>NOT NULL</code>、CHECK制約、分類件数、参照整合性を統合SQLで確認した。</li><li>GitHub Issue #22へ結果をコメントし、2026-08-20にクローズした。</li></ul></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">07　判定</p><h2>完了判定</h2></div><div class="section-content"><p>Issue #22の完了条件を満たした。全 <code>players</code> IDについて分類を再生成でき、Issue #12で確認したスタッフ相当47 ID、ダミーID、未解決IDを区別して保持できる。欠損プロフィール監査ではスタッフ相当とダミーを自動除外できる。</p></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">08　記録</p><h2>GitHub Issue状況（2026-08-20時点の現在値）</h2></div><div class="section-content"><p>確認日: 2026-08-20（JST）</p>
+<p>GitHub APIで <code>tj-999-comp/B_Stats_Site</code> のIssueを確認した。Pull Requestは対象外とした。未完了Issueは12件だった。</p>
+<h3>親子関係</h3>
+<pre><code class="language-text">#7（未完了・親Issue）
+└── #8（完了・子Issue）
+#12（完了・親Issue）
+├── #21（完了・子Issue）
+├── #22（完了・子Issue）
+└── #23（未完了・子Issue）
+#24（完了・親Issue）
+└── #25（完了・子Issue）</code></pre>
+<p>GitHubのsub-issues APIで登録された親子関係を記載した。親子登録のないIssueは、優先順位一覧の関係・着手条件に記載する。</p>
+<h3>優先順位順の未完了一覧</h3>
+<p>優先順位は <code>github_issue_status_policy.json</code> の運用設定を使い、設定のないIssueは既定値P3として記載する。</p>
+<table><thead><tr><th>順位</th><th>優先度</th><th>GitHub Issue</th><th>状態</th><th>関係・着手条件</th></tr></thead><tbody><tr><td>1</td><td>P1</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/23">#23</a> [DB] 45848〜45865周辺の分割player_idを調査・統合する</td><td>未完了</td><td>#12の子Issue。#25と関連</td></tr><tr><td>2</td><td>P2</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/13">#13</a> [DB] player_slot_category の値を正規化する</td><td>未完了</td><td>#25完了後が適切</td></tr><tr><td>3</td><td>P2</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/14">#14</a> [DB] attendance 欠損14試合を調査・補完する</td><td>未完了</td><td>独立</td></tr><tr><td>4</td><td>P2</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/16">#16</a> [DB] live DB・再構築SQL・テーブル定義のスキーマ差異を解消する</td><td>未完了</td><td>独立</td></tr><tr><td>5</td><td>P2</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/18">#18</a> [DB] 空の player_id_map と旧ID名寄せ経路を検証する</td><td>未完了</td><td>#23と関連</td></tr><tr><td>6</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/7">#7</a> 試合のスクレイピングデータ精査</td><td>未完了</td><td>#24と範囲が重なる</td></tr><tr><td>7</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/9">#9</a> 課題解決の原案を立てる</td><td>未完了</td><td>探索テーマ</td></tr><tr><td>8</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/15">#15</a> [DB] 過年度の plus_minus・背番号欠損を調査する</td><td>未完了</td><td>独立</td></tr><tr><td>9</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/17">#17</a> [DB] play_by_play未投入と存在フラグの整合性を整理する</td><td>未完了</td><td>独立</td></tr><tr><td>10</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/30">#30</a> [Actions] 手動公開要求workflowとdispatch権限を設定する</td><td>未完了</td><td>独立。優先度未設定</td></tr><tr><td>11</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/31">#31</a> [E2E] 新規作業記録1件を手動publish要求する</td><td>未完了</td><td>独立。優先度未設定</td></tr><tr><td>12</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/32">#32</a> [Automation] main更新時の公開要求triggerを有効化する</td><td>未完了</td><td>独立。優先度未設定</td></tr></tbody></table></div></section>
+
+      </main>
+      <footer>
+        <span>B.LEAGUE Stats · 作業記録 015</span>
+        <span><a href="md/work_record_015.md">Markdown原本</a></span>
+      </footer>
+    </div>
+  </body>
+</html>

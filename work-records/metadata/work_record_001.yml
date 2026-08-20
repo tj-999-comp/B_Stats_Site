@@ -1,0 +1,8 @@
+schema_version: 1
+title: "2016-2017 シーズン投入（初回失敗→再チャレンジ成功）"
+date: "2026-05-26"
+project_id: B_Stats_Site
+tags:
+  - database
+  - scraping
+publish: true
