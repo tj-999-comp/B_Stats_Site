@@ -53,6 +53,13 @@ GitHub Issue [#14](https://github.com/tj-999-comp/B_Stats_Site/issues/14)につ�
 
 補完可能な個別試合の人数は確認できなかったため、DB更新、正本JSON変更、SQL作成は行わない。14件の`NULL`は公式未掲載を表す値として維持する。
 
+### 公開情報
+
+- ブランチ: `agent/issue-14-attendance`
+- 初回commit: `c110d57` (`docs: record issue 14 attendance audit`)
+- Draft PR: [#42](https://github.com/tj-999-comp/B_Stats_Site/pull/42)
+- Issue #14はPR未mergeのためopenのまま維持する。
+
 ## 検証
 
 - 14件の正本JSONを対象キーで走査し、`game`存在、`error`、`source_tab`、`Attendance`を確認した。
@@ -60,7 +67,9 @@ GitHub Issue [#14](https://github.com/tj-999-comp/B_Stats_Site/issues/14)につ�
 - 公式試合詳細ページ14件を読み取り専用で取得し、`Game.Attendance`がNULLであることを確認した。
 - 公式発表で確認できたイベント単位の人数を個別試合へ流用しないことを確認した。
 - DB変更操作は実行していない。
-- `git diff --check`、作業記録ファイル名検証、MarkdownからHTML生成後のHTML検証を実施する。
+- `git diff --check`、作業記録ファイル名検証、MarkdownからHTML生成後のHTML検証を実施した。
+- 作業記録 #020 は再生成チェックに一致した。既存 #018 は過去のHTML生成仕様との差分があるため、無関係な変更を加えず維持した。
+- 1280/900/640/320pxのブラウザ表示で横方向overflow、console error、page errorがないことを確認した。
 
 ## 完了判定
 
