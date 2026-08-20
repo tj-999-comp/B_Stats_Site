@@ -21,6 +21,20 @@ ALTER TABLE players
 ALTER TABLE players
     ADD COLUMN IF NOT EXISTS birthplace TEXT;
 
+UPDATE players
+SET player_slot_category = CASE player_slot_category
+    WHEN '日本' THEN '日本人選手'
+    WHEN '帰化選手枠' THEN '帰化選手'
+    ELSE player_slot_category
+END
+WHERE player_slot_category IN ('日本', '帰化選手枠');
+
+ALTER TABLE players
+    DROP CONSTRAINT IF EXISTS players_player_slot_category_check;
+
+ALTER TABLE players
+    ADD CONSTRAINT players_player_slot_category_check
+    CHECK (player_slot_category IS NULL OR player_slot_category IN ('日本人選手', '外国籍選手', '帰化選手'));
 -- 既存データがある場合のみ game_type をバックフィル
 UPDATE games
 SET game_type = CASE

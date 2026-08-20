@@ -76,3 +76,7 @@ DBeaverの `Cmd + Enter` は通常、カーソル位置にある1文だけを実
 | `20260813_verify_issue_21_player_profiles.sql` | Issue #21の反映前・反映後・ロールバック後検証 | backup表を基準に変更予定件数と現在状態をSELECTのみで判定 |
 | `20260813_fix_issue_21_player_profiles.sql` | Issue #21のプロフィール欠損補完 | backup表、対象件数、反映前状態を検証し、CSVの非空値で空欄だけを更新 |
 | `20260813_rollback_fix_issue_21_player_profiles.sql` | Issue #21のプロフィール補完の復旧 | 期待する適用後状態を確認してからbackup表の値へ復元 |
+| `20260820_backup_issue13_player_slot_category.sql` | Issue #13の非正規な選手区分をバックアップ | `日本`と`帰化選手枠`の対象行を固定。NULLは未確認として対象外 |
+| `20260820_verify_issue13_player_slot_category.sql` | Issue #13の実行前・実行後・復旧後検証 | backup表を基準に正規化状態と全カテゴリ件数を確認 |
+| `20260820_fix_issue13_player_slot_category.sql` | Issue #13の選手区分正規化とDB CHECK制約追加 | `日本`→`日本人選手`、`帰化選手枠`→`帰化選手` |
+| `20260820_rollback_fix_issue13_player_slot_category.sql` | Issue #13の選手区分正規化の復旧 | backup表から対象行の区分を復元 |

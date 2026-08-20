@@ -197,7 +197,7 @@ python -m scripts.dev.classify_player_entities \
 - `roster_detail` ページから国籍・出身地を取得
 - `league_registered_nationality`（リーグ登録国籍）と `birthplace`（出身地）を保存
 - 既存値は上書きせず、欠損列に実値を取得できた場合だけ差分を提案
-- `player_slot_category` は既存ルールで導出できる場合だけ提案
+- `player_slot_category` は `日本人選手`、`外国籍選手`、`帰化選手` の3値を正規値とし、未確認はNULLで保持する。投入層でも表記ゆれを正規化し、未知の非空値はエラーにする
 - 選手別に取得成功、公式空欄、404、通信失敗、提案差分をJSONレポートへ記録
 
 ```bash

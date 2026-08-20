@@ -5,6 +5,30 @@ from supabase import create_client, Client
 from .config import SUPABASE_URL, SUPABASE_SECRET_KEYS
 
 
+PLAYER_SLOT_CATEGORY_ALIASES = {
+    '日本': '日本人選手',
+    '帰化選手枠': '帰化選手',
+}
+PLAYER_SLOT_CATEGORY_VALUES = frozenset({'日本人選手', '外国籍選手', '帰化選手'})
+
+
+def normalize_player_slot_category(value: Any) -> str | None:
+    """DBへ保存する選手区分を正規化する。
+
+    NULL/空文字は公式情報等で未確認の状態を表す。未知の非空値は、
+    新しい表記を見逃さないようにエラーにする。
+    """
+    if value is None:
+        return None
+    normalized = str(value).strip()
+    if not normalized:
+        return None
+    normalized = PLAYER_SLOT_CATEGORY_ALIASES.get(normalized, normalized)
+    if normalized not in PLAYER_SLOT_CATEGORY_VALUES:
+        raise ValueError(f'Unknown player_slot_category: {value!r}')
+    return normalized
+
+
 def get_client() -> Client:
     if not SUPABASE_URL or not SUPABASE_SECRET_KEYS:
         raise RuntimeError('SUPABASE_URL / SUPABASE_SECRET_KEYS is not configured')
@@ -82,7 +106,15 @@ def upsert_game_team_stats(rows: list[dict[str, Any]]) -> None:
 
 
 def upsert_players(rows: list[dict[str, Any]]) -> None:
-    upsert_rows('players', rows, on_conflict='player_id')
+    normalized_rows: list[dict[str, Any]] = []
+    for row in rows:
+        normalized = dict(row)
+        if 'player_slot_category' in normalized:
+            normalized['player_slot_category'] = normalize_player_slot_category(
+                normalized['player_slot_category']
+            )
+        normalized_rows.append(normalized)
+    upsert_rows('players', normalized_rows, on_conflict='player_id')
 
 
 def upsert_player_game_stats(rows: list[dict[str, Any]]) -> None:
