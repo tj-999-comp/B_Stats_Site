@@ -10,12 +10,7 @@
   <body>
     <div class="shell">
       <header class="topbar">
-        <a class="wordmark" href="../README.md">B.LEAGUE STATS</a>
-        <nav class="toplinks" aria-label="関連文書">
-          <a href="README.md">運用ルール</a>
-          <a href="design.md">デザイン原則</a>
-          <a href="md/work_record_016.md">Markdownを読む</a>
-        </nav>
+        <span class="wordmark">B.LEAGUE STATS</span>
       </header>
       <main>
         <header class="record-header">
@@ -40,7 +35,7 @@
 <p>旧IDとの対応関係は、正規行の<code>old_player_id</code>とDBの<code>player_id_map</code>に保持する。正本JSONには旧IDを独立選手として再投入しない。</p></div></section>
 <section class="record-section"><div class="section-intro"><p class="section-label">06　検証</p><h2>検証</h2></div><div class="section-content"><ul><li><code>players.json</code>をPythonで読み込み、JSON構文を確認した。</li><li>対象18正規IDの重複が0件であることを確認した。</li><li>対象18正規IDの欠落が0件であることを確認した。</li><li>対象外IDの行内容が変更されていないことを確認した。</li><li><code>git diff --check</code>が成功した。</li><li>live DBの統合後検証結果はIssue #25の作業記録とverify SQLに記録されている。</li></ul></div></section>
 <section class="record-section"><div class="section-intro"><p class="section-label">07　判定</p><h2>完了判定</h2></div><div class="section-content"><p>Issue #23の完了条件を満たした。対象18件の正規ID、統合根拠、関連テーブルのバックアップ・ロールバック、試合成績の重複確認、正本JSONのID収束結果を記録した。追加のDB変更は不要である。</p></div></section>
-<section class="record-section"><div class="section-intro"><p class="section-label">08　記録</p><h2>GitHub Issue状況（2026-08-20時点の現在値）</h2></div><div class="section-content"><p>確認日: 2026-08-20（JST）</p>
+<section class="record-section"><div class="section-intro"><p class="section-label">08　Issue状況</p><h2>GitHub Issue状況（2026-08-20時点の現在値）</h2></div><div class="section-content"><p>確認日: 2026-08-20（JST）</p>
 <p>GitHub APIで <code>tj-999-comp/B_Stats_Site</code> のIssueを確認した。Pull Requestは対象外とした。未完了Issueは12件だった。</p>
 <h3>親子関係</h3>
 <pre><code class="language-text">#7（未完了・親Issue）

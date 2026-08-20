@@ -10,12 +10,7 @@
   <body>
     <div class="shell">
       <header class="topbar">
-        <a class="wordmark" href="../README.md">B.LEAGUE STATS</a>
-        <nav class="toplinks" aria-label="関連文書">
-          <a href="README.md">運用ルール</a>
-          <a href="design.md">デザイン原則</a>
-          <a href="md/work_record_015.md">Markdownを読む</a>
-        </nav>
+        <span class="wordmark">B.LEAGUE STATS</span>
       </header>
       <main>
         <header class="record-header">
@@ -35,7 +30,7 @@
 <section class="record-section"><div class="section-intro"><p class="section-label">05　記録</p><h2>ベンチテクニカルの扱い</h2></div><div class="section-content"><p>ベンチテクニカルは選手マスタの <code>entity_type</code> へ混ぜない。公式記録上の責任者と実際の行為者が異なり得るため、将来扱う場合は試合イベントとして、チーム、テクニカル種別、公式記録上の責任者、行為者を分離して保存する。</p></div></section>
 <section class="record-section"><div class="section-intro"><p class="section-label">06　検証</p><h2>検証</h2></div><div class="section-content"><ul><li>live <code>players</code> スナップショット取得が成功した。</li><li>82個のゲームJSONから <code>PeriodCategory == 18</code> の149,375行を走査した。</li><li>選手相当145,315行、スタッフ相当4,060行を確認した。</li><li>Python 3.11で関連スクリプトの構文確認が成功した。</li><li><code>git diff --check</code> が成功した。</li><li>SQL変更をreview-agentで再レビューし、指摘なしだった。</li><li><code>entity_type</code> 列、<code>NOT NULL</code>、CHECK制約、分類件数、参照整合性を統合SQLで確認した。</li><li>GitHub Issue #22へ結果をコメントし、2026-08-20にクローズした。</li></ul></div></section>
 <section class="record-section"><div class="section-intro"><p class="section-label">07　判定</p><h2>完了判定</h2></div><div class="section-content"><p>Issue #22の完了条件を満たした。全 <code>players</code> IDについて分類を再生成でき、Issue #12で確認したスタッフ相当47 ID、ダミーID、未解決IDを区別して保持できる。欠損プロフィール監査ではスタッフ相当とダミーを自動除外できる。</p></div></section>
-<section class="record-section"><div class="section-intro"><p class="section-label">08　記録</p><h2>GitHub Issue状況（2026-08-20時点の現在値）</h2></div><div class="section-content"><p>確認日: 2026-08-20（JST）</p>
+<section class="record-section"><div class="section-intro"><p class="section-label">08　Issue状況</p><h2>GitHub Issue状況（2026-08-20時点の現在値）</h2></div><div class="section-content"><p>確認日: 2026-08-20（JST）</p>
 <p>GitHub APIで <code>tj-999-comp/B_Stats_Site</code> のIssueを確認した。Pull Requestは対象外とした。未完了Issueは12件だった。</p>
 <h3>親子関係</h3>
 <pre><code class="language-text">#7（未完了・親Issue）

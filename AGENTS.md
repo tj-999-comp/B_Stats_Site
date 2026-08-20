@@ -7,6 +7,13 @@
 - コマンドは、特記がない限りリポジトリルートから実行する。特に Python は `python -m scripts...` の形式を使い、`scraper/` へ移動したまま実行しない。
 - 作業開始時と終了時に `git status --short` を確認する。既存の変更・未追跡ファイルはユーザーの作業として保持し、依頼に無関係な整形、削除、上書きをしない。
 
+## Portfolio作業標準
+
+- 共通標準は [`docs/PORTFOLIO_STANDARD.md`](docs/PORTFOLIO_STANDARD.md) とする。作業記録、GitHub Issue、Pull Request、公開受入に関する詳細は同文書を参照する。
+- ユーザーが「作業記録を残して」と依頼した場合は、対象Issueと完了条件を確定し、課題専用ブランチ、作業記録Markdown/HTML、検証、対象ファイルだけのcommit、push、Issue完了コメント、Draft PR作成までを一式として扱う。ドキュメントだけの短縮工程は共通標準と本ガイドの例外規則に従う。
+- Portfolio標準でいう「完了」は実装・検証・作業記録・push・PR作成までを指す。Issueのクローズは、PRのmerge後またはユーザーが早期クローズを明示した場合だけ行う。未mergeで閉じる場合は理由とPR URLをIssueコメントへ残す。
+- Issue、PR、レビュー、CIの取得には、可能な場合はGitHub AppのInstallation tokenを使う。秘密鍵、token、JWTは表示・保存・作業記録・PR本文へ転載しない。Issue状況を成果物へ記載するときは、作成・更新直前に最新の番号、タイトル、状態、更新日時、必要な親子関係とコメントを取得する。
+
 ## プロジェクトの現在像
 
 B.LEAGUE 公式サイトから試合情報を取得し、JSON に保存して Supabase PostgreSQL へ投入する統計サイト用リポジトリである。pnpm/Turborepo のモノレポ内に、GitHub Pages 向け静的 Next.js と Vercel 向け SSR Next.js の2構成を置いている。
@@ -26,6 +33,7 @@ B.LEAGUE 公式サイトから試合情報を取得し、JSON に保存して Su
 | 対象 | 正本・入口 |
 |---|---|
 | 全体像 | `README.md`, `docs/architecture.md` |
+| Portfolio作業標準 | `docs/PORTFOLIO_STANDARD.md` |
 | ローカル環境 | `docs/setup.md`, `scraper/README.md` |
 | スクレイピングと投入順 | `docs/flow.md`, `docs/date_resolution.md`, `scripts/scraping/`, `scripts/db/` |
 | 現行 DB 再構築 | `supabase/rebuild/README.md`, `supabase/rebuild/00_rebuild_all.sql`, 分割版 `01`〜`07` |
@@ -89,6 +97,8 @@ python -m pip install -r scraper/requirements.txt
 - `supabase/patches/` はDB補正用のCSV・JSONなど、目視確認・パッチ入力ファイルの置き場である。スクレイピング取得物や正本JSONを置かない。配置・命名は `supabase/patches/README.md` に従う。
 - `supabase/sql/` は一回限りまたは破壊的なデータパッチ・運用 SQL の集約先であり、現行スキーマの正本とはみなさない。新規ファイルは `supabase/sql/README.md` の `YYYYMMDD_<action>_<target>.sql` 命名に従う。
 - live DBのデータパッチは、原則として `backup`、`verify`、`fix`、`rollback` の4ファイルを同じIssue・対象名で作成する。実行順は `backup → verify（前）→ fix → verify（後）`、問題時は `rollback → verify（後）` とし、例外はSQL先頭コメントと `supabase/sql/README.md` に理由を残す。
+- SQLファイルを新規作成または変更した場合は、実行・提示の前に必ずreview-agentサブエージェント（`/Users/ryosuketajima/.codex/skills/.system/review-agent/SKILL.md`）を読み取り専用で実行する。レビュー結果の指摘を修正し、再レビューで重大な指摘がないことを確認するまで完了扱いにしない。
+- 「作業記録を作って」と依頼された場合は、作業記録の作成・検証・コミット・Pushに加えて、対象ブランチのPR作成まで行う。PRは既定でドラフトとし、ユーザーが明示的に通常PRを指定した場合だけドラフトを外す。
 
 ### データ、ログ、文書
 
@@ -97,8 +107,10 @@ python -m pip install -r scraper/requirements.txt
 - スクレイパーは既存の同名 JSON と追跡済みログを上書きし得る。検証用出力は可能なら `/tmp` または別名を使い、意図したデータ差分だけを残す。
 - 新規 Markdown はタイトル直下に `作成日: YYYY-MM-DD` を入れる。
 - `Issue` はGitHub Issueだけを指す。リポジトリ内の調査、実行結果、判断経緯は「作業記録」と呼び、`ローカルIssue` や `Issueログ` という呼称は使わない。
+- GitHub Issueに紐づくコメント、PR、作業記録を作成・更新するときは、作成・更新の直前にGitHubから対象Issueの最新情報（少なくとも番号、タイトル、状態、更新日時。必要に応じて本文とコメント）を取得し、その状況を成果物へ反映する。以前の取得結果や手元の記憶だけでIssueの状況を記載しない。
 - 作業記録は `work-records/md/work_record_###.md` の3桁ゼロ埋めとし、既存最大番号を確認して採番する。`work-records/` 直下のMarkdownは `README.md` と `design.md` だけにする。
 - GitHub Issueの状況、優先順位、親子関係は独立した一覧ファイルにせず、関連する番号付き作業記録へ保存する。HTMLがある場合は、その作業記録HTMLの末尾へ追加する。
+- 作業記録のGitHub Issue状況は `work_record_010.html` の形式に統一する。末尾の `## GitHub Issue状況（YYYY-MM-DD時点の現在値）` セクションに、確認日、GitHub APIで取得した旨、親子関係ツリー、優先順位順の未完了一覧を記載する。一覧は `順位`、`優先度`、`GitHub Issue`、`状態`、`関係・着手条件` の5列とし、対象プロジェクトの全オープンIssue（Pull Requestを除く）を1件も省略せずに示す。親子関係はGitHubのsub-issues API、優先度と補足関係は `scripts/dev/github_issue_status_policy.json` から生成する。更新は `python -m scripts.dev.sync_github_issue_status --repo owner/name --write` で行い、同コマンドがMarkdown更新後にHTMLを再生成する。確認は同コマンドの `--check` で行う。省略を示す注記や別形式のIssue一覧は新規・更新時に使用しない。
 - 作業記録のHTMLは `work-records/` 直下へ `work_record_###.html` として置き、作成・編集時は `work-records/design.md` を原則として守る。
 
 ## 副作用のある操作
@@ -172,4 +184,5 @@ pnpm lint
 - DB 行変換を変更した場合は、対象を絞った追跡済み月次 JSON を明示して `--dry-run` を追加する。
 - フロントは雛形で、ESLint の依存・共有設定の接続も未完成である。build/lint の既存不備による失敗は、依頼と無関係に広げて修正せず、実行コマンドと原因を報告する。
 - SQL は静的レビューに加え、実行が依頼範囲なら disposable/local プロジェクトで適用順と完了判定を確認する。live DB を検証先にしない。
+- SQLの作成後は、構文、件数ガード、適用前後の状態、ロールバック整合性をreview-agentで必ず確認する。レビュー未実施のSQLをユーザーへ実行依頼しない。
 - 挙動、スキーマ、Workflow、運用手順を変えた場合は、関連ドキュメントと新規ドキュメントの日付規則まで確認して完了とする。

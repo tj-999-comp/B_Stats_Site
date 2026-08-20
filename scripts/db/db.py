@@ -157,19 +157,30 @@ def _fetch_all_rows(
 
 def fetch_player_id_map(*, page_size: int = 1000, client: Client | None = None) -> dict[str, str]:
     """player_id_map テーブルから {old_player_id: player_id} のマップを返す。
-    テーブルが存在しない場合は空 dict を返す。
+
+    取得失敗は空のマップとして扱わず、そのまま呼び出し元へ伝播する。
+    空のマップは「旧IDの対応が存在しない」という正常な状態に限る。
     """
-    try:
-        rows = _fetch_all_rows(
-            'player_id_map',
-            columns='old_player_id,player_id',
-            order_by='old_player_id',
-            page_size=page_size,
-            client=client,
-        )
-        return {row['old_player_id']: row['player_id'] for row in rows}
-    except Exception:
-        return {}
+    rows = _fetch_all_rows(
+        'player_id_map',
+        columns='old_player_id,player_id',
+        order_by='old_player_id',
+        page_size=page_size,
+        client=client,
+    )
+
+    id_map: dict[str, str] = {}
+    for row in rows:
+        old_player_id = row.get('old_player_id')
+        player_id = row.get('player_id')
+        if not old_player_id or not player_id:
+            raise ValueError(f'Invalid player_id_map row: {row!r}')
+        if old_player_id in id_map and id_map[old_player_id] != player_id:
+            raise ValueError(
+                f'Duplicate old_player_id with conflicting targets: {old_player_id!r}'
+            )
+        id_map[old_player_id] = player_id
+    return id_map
 
 
 def fetch_all_players(

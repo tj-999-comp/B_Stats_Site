@@ -213,6 +213,8 @@ CREATE TABLE IF NOT EXISTS players (
     player_name_e TEXT,
     last_seen_team_id TEXT REFERENCES teams(team_id),
     last_seen_jersey_number TEXT,
+    entity_type TEXT NOT NULL DEFAULT 'player'
+        CHECK (entity_type IN ('player', 'staff', 'placeholder', 'unresolved')),
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );

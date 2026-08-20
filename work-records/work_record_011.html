@@ -10,12 +10,7 @@
   <body>
     <div class="shell">
       <header class="topbar">
-        <a class="wordmark" href="../README.md">B.LEAGUE STATS</a>
-        <nav class="toplinks" aria-label="関連文書">
-          <a href="README.md">運用ルール</a>
-          <a href="design.md">デザイン原則</a>
-          <a href="md/work_record_011.md">Markdownを読む</a>
-        </nav>
+        <span class="wordmark">B.LEAGUE STATS</span>
       </header>
       <main>
         <header class="record-header">
@@ -33,7 +28,7 @@
 <p>空JSONをUPSERTしても更新件数が0件になることを確認した後、ユーザーのネットワーク接続可能なローカル環境で再取得し、その結果をLive DBへ投入した。</p></div></section>
 <section class="record-section"><div class="section-intro"><p class="section-label">05　記録</p><h2>残件</h2></div><div class="section-content"><ul><li>Live DB上で、試合・チーム・選手試合成績・チーム試合成績の件数、抜け漏れ、重複、参照整合性を確認する。</li><li>Issue #24の確認結果を踏まえ、子Issue #25（player_id重複整理・プロフィール欠損補完）へ引き継ぐ。</li></ul></div></section>
 <section class="record-section"><div class="section-intro"><p class="section-label">06　ファイル</p><h2>関連ファイル</h2></div><div class="section-content"><ul><li><code>scraper/data/season_2024-2025/games_2024-25_2025-05-01_2025-05-31.json</code></li><li><code>scraper/data/season_2025-2026/</code></li><li><code>scraper/logs/game_detail_fetch_log.json</code></li><li><code>scraper/logs/schedule_fetch_log.json</code></li><li><code>scripts/dev/sync_github_issue_status.py</code></li><li><code>scripts/dev/github_issue_status_policy.json</code></li><li><code>.github/workflows/validate-work-record-filenames.yml</code></li></ul></div></section>
-<section class="record-section"><div class="section-intro"><p class="section-label">07　記録</p><h2>GitHub Issue状況（2026-08-18時点の現在値）</h2></div><div class="section-content"><p>確認日: 2026-08-18（JST）</p>
+<section class="record-section"><div class="section-intro"><p class="section-label">07　Issue状況</p><h2>GitHub Issue状況（2026-08-18時点の現在値）</h2></div><div class="section-content"><p>確認日: 2026-08-18（JST）</p>
 <p>GitHub APIで <code>tj-999-comp/B_Stats_Site</code> のIssueを確認した。Pull Requestは対象外とした。未完了Issueは17件だった。</p>
 <h3>親子関係</h3>
 <pre><code class="language-text">#7（未完了・親Issue）

@@ -4,17 +4,26 @@ on:
   push:
     paths:
       - 'work-records/**'
+      - 'scripts/dev/convert_work_records_to_html.py'
+      - 'scripts/dev/validate_work_record_source.py'
       - 'scripts/dev/validate_work_record_filenames.py'
+      - 'scripts/dev/sync_github_issue_status.py'
+      - 'scripts/dev/github_issue_status_policy.json'
       - '.github/workflows/validate-work-record-filenames.yml'
   pull_request:
     paths:
       - 'work-records/**'
+      - 'scripts/dev/convert_work_records_to_html.py'
+      - 'scripts/dev/validate_work_record_source.py'
       - 'scripts/dev/validate_work_record_filenames.py'
+      - 'scripts/dev/sync_github_issue_status.py'
+      - 'scripts/dev/github_issue_status_policy.json'
       - '.github/workflows/validate-work-record-filenames.yml'
   workflow_dispatch:
 
 permissions:
   contents: read
+  issues: read
 
 jobs:
   validate:
@@ -27,5 +36,19 @@ jobs:
         with:
           python-version: '3.11'
 
+      - name: Validate current GitHub Issue status
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/dev/sync_github_issue_status.py --repo "${{ github.repository }}" --check
+
       - name: Validate work record filenames and placement
         run: python scripts/dev/validate_work_record_filenames.py
+
+      - name: Validate deterministic HTML regeneration
+        run: python -m scripts.dev.convert_work_records_to_html --check
+
+      - name: Validate metadata, dependencies, and source safety
+        run: python scripts/dev/validate_work_record_source.py
+
+      - name: Validate source safety fixtures
+        run: python scripts/dev/validate_work_record_source.py --check-fixtures

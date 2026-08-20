@@ -10,12 +10,7 @@
   <body>
     <div class="shell">
       <header class="topbar">
-        <a class="wordmark" href="../README.md">B.LEAGUE STATS</a>
-        <nav class="toplinks" aria-label="関連文書">
-          <a href="README.md">運用ルール</a>
-          <a href="design.md">デザイン原則</a>
-          <a href="md/work_record_014.md">Markdownを読む</a>
-        </nav>
+        <span class="wordmark">B.LEAGUE STATS</span>
       </header>
       <main>
         <header class="record-header">
@@ -51,7 +46,7 @@ GitHub Pagesへdeploy</code></pre>
 <section class="record-section"><div class="section-intro"><p class="section-label">06　記録</p><h2>Issueとの関係</h2></div><div class="section-content"><ul><li>#28の親ディレクトリREADMEリンク修正は完了済みである。</li><li>#29は今回の検証基盤とmetadata追加の対象である。</li><li>#30は<code>B_Stats_Site</code>側の手動公開要求workflowを追加する次工程である。</li><li>#31は実作業記録1件を使った手動E2E確認である。</li><li>#32は#31と公開側の受入確認が安定した後に、<code>main</code>更新時の自動公開要求を有効化する工程である。</li></ul></div></section>
 <section class="record-section"><div class="section-intro"><p class="section-label">07　検証</p><h2>検証</h2></div><div class="section-content"><ul><li><code>.venv311/bin/python scripts/dev/validate_work_record_source.py</code> が成功した。</li><li><code>.venv311/bin/python scripts/dev/validate_work_record_source.py --check-fixtures</code> が成功した。</li><li><code>.venv311/bin/python -m scripts.dev.convert_work_records_to_html --check</code> が成功した。</li><li><code>.venv311/bin/python scripts/dev/validate_work_record_filenames.py</code> が成功した。</li><li><code>.venv311/bin/python -m compileall -q scripts/dev</code> が成功した。</li><li><code>git diff --check</code> が成功した。</li></ul></div></section>
 <section class="record-section"><div class="section-intro"><p class="section-label">08　判定</p><h2>完了判定</h2></div><div class="section-content"><p>Issue #29の対象範囲を001〜013へ拡張し、metadata、生成元validator、HTML再生成check、support file依存、安全性検証、補助HTMLの除外fixture、CI連携、公開候補commitの運用記録を追加した。自動公開そのものと公開側の受入workflowは、#30以降の別工程として残っている。</p></div></section>
-<section class="record-section"><div class="section-intro"><p class="section-label">09　記録</p><h2>GitHub Issue状況（2026-08-20時点の現在値）</h2></div><div class="section-content"><p>確認日: 2026-08-20（JST）</p>
+<section class="record-section"><div class="section-intro"><p class="section-label">09　Issue状況</p><h2>GitHub Issue状況（2026-08-20時点の現在値）</h2></div><div class="section-content"><p>確認日: 2026-08-20（JST）</p>
 <p>GitHub APIで <code>tj-999-comp/B_Stats_Site</code> のIssueを確認した。Pull Requestは対象外とした。未完了Issueは13件だった。</p>
 <h3>親子関係</h3>
 <pre><code class="language-text">#7（未完了・親Issue）

@@ -164,6 +164,24 @@ python -m scripts.dev.merge_player_ids \
 
 **対象テーブル:** players, player_game_stats, player_id_map
 
+通常の `scripts.db.upsert_games` 実行では、投入前に live DB の `player_id_map` を全件取得し、旧IDを正規IDへ読み替える。取得に失敗した場合は空マップとして続行せず、処理を停止して接続先・権限・テーブル定義を確認する。空マップは取得成功後に0行だった場合だけを意味する。
+
+`--dry-run` はDBを参照せず、`player_id_map` も取得しない。そのため、dry-runの変換件数だけで本番投入時の旧ID名寄せを検証してはならない。本番投入前は読み取り専用で次を確認し、対象旧IDがある場合は18件のマッピング、旧ID選手行0件、正規ID側の試合成績重複0件を確認する。
+
+```sql
+SELECT COUNT(*) AS map_rows
+FROM public.player_id_map;
+
+SELECT m.old_player_id, m.player_id,
+       (p_old.player_id IS NOT NULL) AS old_player_exists,
+       (p_new.player_id IS NOT NULL) AS canonical_player_exists
+FROM public.player_id_map AS m
+LEFT JOIN public.players AS p_old ON p_old.player_id = m.old_player_id
+LEFT JOIN public.players AS p_new ON p_new.player_id = m.player_id
+WHERE m.old_player_id BETWEEN '45848' AND '45865'
+ORDER BY m.old_player_id;
+```
+
 ### プロフィール補完
 
 **監査スクリプト:** `scripts/dev/audit_players_snapshot.py`
@@ -184,6 +202,9 @@ python -m scripts.dev.audit_players_snapshot \
 追跡済みゲームJSONの試合通算行を全件調べる。`PeriodCategory == 18` であっても、
 背番号、出場フラグ、先発フラグ、正の出場時間がすべてない行はスタッフ候補として
 プロフィール補完と今後の投入から除外する。追跡済み試合に存在しないIDは自動除外しない。
+分類レポートの `entity_type` が `players.entity_type` の再生成根拠となり、
+`player`、`staff`、`placeholder`、`unresolved` を区別する。`staff` と `placeholder` は
+プロフィール補完対象から除外し、`unresolved` は根拠不足のため保持する。
 
 ```bash
 python -m scripts.dev.classify_player_entities \
@@ -191,6 +212,31 @@ python -m scripts.dev.classify_player_entities \
   --local-input scraper/data/players.json \
   --report /tmp/player_entity_classification.json
 ```
+
+`players.entity_type` は、同レポートの `entities[].entity_type` を用いて確認・更新する。
+通常のゲーム投入ではスタッフ相当行を共通判定で抽出しないため、新規投入行の既定値
+`player` と矛盾しない。既存DB行の分類値を反映する場合は、レポートのID別根拠と件数を
+確認したうえで、別途バックアップ・検証付きのDBパッチを用意する。
+
+分類結果のDB反映は、既定では監査のみで、`--apply` を明示した場合だけ実行する。
+
+```bash
+python -m scripts.dev.apply_player_entity_types \
+  --classification-report /tmp/player_entity_classification.json \
+  --report /tmp/apply_player_entity_types_preview.json
+
+# バックアップ・件数確認後に限りDBへ反映
+python -m scripts.dev.apply_player_entity_types \
+  --classification-report /tmp/player_entity_classification.json \
+  --apply \
+  --report /tmp/apply_player_entity_types_applied.json
+```
+
+ベンチテクニカルは選手・スタッフのマスタ分類では表現しない。FIBAルールでは、
+ベンチに座る者のテクニカルは公式記録上ヘッドコーチにチャージされるため、将来扱う
+場合は `player_id` の属性ではなく、`technical_fouls` 等の試合イベントとして、
+`technical_type`、`team_id`、公式記録上の `charged_to_player_id`、実際の行為者が
+判明する場合の `committed_by_person_id` を分離して設計する。
 
 **差分補完スクリプト:** `scripts/dev/fill_missing_player_profile_fields.py`
 

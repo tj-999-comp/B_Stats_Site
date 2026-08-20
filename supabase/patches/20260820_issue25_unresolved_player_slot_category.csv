@@ -1,0 +1,19 @@
+player_id,player_name_j,player_name_e,last_seen_team_id,last_seen_jersey_number,existing_league_registered_nationality,existing_birthplace,existing_player_slot_category,proposed_league_registered_nationality,proposed_birthplace,proposed_player_slot_category,unresolved_patchable_after_proposed,status,review_decision,review_note
+15750,木田 貴明,Takaaki Kida,2486,0,,,,日本,日本,,player_slot_category,ok_with_partial_patch,pending,player_slot_categoryのみ未確定。国籍・出生地の提案は別CSVへ反映済み
+25149,イシュマエル・レーン,Ishmael Lane,729,4,アメリカ合衆国,,,,アメリカ合衆国,,player_slot_category,official_fields_blank,pending,player_slot_categoryのみ未確定。国籍・出生地の提案は別CSVへ反映済み
+26909,クリス・オトゥーレ,Chris Otule,728,42,アメリカ合衆国,,,,アメリカ合衆国,,player_slot_category,official_fields_blank,pending,player_slot_categoryのみ未確定。国籍・出生地の提案は別CSVへ反映済み
+5100000090,マーク・バートン,Mark Burton,717,1,,,,日本,日本,,player_slot_category,ok_with_partial_patch,pending,player_slot_categoryのみ未確定。国籍・出生地の提案は別CSVへ反映済み
+51000189,ブランドン・アシュリー,Brandon Ashley,2486,21,,,,アメリカ合衆国,アメリカ合衆国,,player_slot_category,ok_with_partial_patch,pending,player_slot_categoryのみ未確定。国籍・出生地の提案は別CSVへ反映済み
+51000426,ミッチェル・ライトフット,Mitchell Lightfoot,2488,44,,,,アメリカ合衆国,アメリカ合衆国,,player_slot_category,ok_with_partial_patch,pending,player_slot_categoryのみ未確定。国籍・出生地の提案は別CSVへ反映済み
+51000540,ティム・シュナイダー,Tim Schneider,712,30,,,,ドイツ,ドイツ,,player_slot_category,ok_with_partial_patch,pending,player_slot_categoryのみ未確定。国籍・出生地の提案は別CSVへ反映済み
+51000550,松村 竜吾,Ryugo Matsumura,721,5,,,,日本,日本,,player_slot_category,ok_with_partial_patch,pending,player_slot_categoryのみ未確定。国籍・出生地の提案は別CSVへ反映済み
+51000592,針間 大知,Daichi Harima,717,5,,,,日本,日本,,player_slot_category,ok_with_partial_patch,pending,player_slot_categoryのみ未確定。国籍・出生地の提案は別CSVへ反映済み
+51000593,月岡 熙,Hikaru Tsukioka,717,11,,,,日本,日本,,player_slot_category,ok_with_partial_patch,pending,player_slot_categoryのみ未確定。国籍・出生地の提案は別CSVへ反映済み
+51000599,堀田 尚秀,Naohide Hotta,693,7,,,,日本,日本,,player_slot_category,ok_with_partial_patch,pending,player_slot_categoryのみ未確定。国籍・出生地の提案は別CSVへ反映済み
+51000600,岩屋 頼,Yori Iwaya,693,18,,,,日本,日本,,player_slot_category,ok_with_partial_patch,pending,player_slot_categoryのみ未確定。国籍・出生地の提案は別CSVへ反映済み
+51000601,ギャリソン・ブルックス,Garrison Brooks,704,15,,,,アメリカ合衆国,アメリカ合衆国,,player_slot_category,ok_with_partial_patch,pending,player_slot_categoryのみ未確定。国籍・出生地の提案は別CSVへ反映済み
+51000603,新井 翔太,Shota Arai,720,5,,,,日本,日本,,player_slot_category,ok_with_partial_patch,pending,player_slot_categoryのみ未確定。国籍・出生地の提案は別CSVへ反映済み
+51000604,武富 楓太,Futa Takedomi,1638,11,,,,日本,日本,,player_slot_category,ok_with_partial_patch,pending,player_slot_categoryのみ未確定。国籍・出生地の提案は別CSVへ反映済み
+51000605,佐藤 瑠一シャンドレイ,Louieseandrey Sato,698,11,,,,日本,日本,,player_slot_category,ok_with_partial_patch,pending,player_slot_categoryのみ未確定。国籍・出生地の提案は別CSVへ反映済み
+8596,桜木 ジェイアール,JR Sakuragi,728,32,日本,,,,日本,,player_slot_category,official_fields_blank,pending,player_slot_categoryのみ未確定。国籍・出生地の提案は別CSVへ反映済み
+9392,ダニエル・ミラー,Daniel Miller,702,5,アメリカ合衆国,,,,アメリカ合衆国,,player_slot_category,official_fields_blank,pending,player_slot_categoryのみ未確定。国籍・出生地の提案は別CSVへ反映済み
