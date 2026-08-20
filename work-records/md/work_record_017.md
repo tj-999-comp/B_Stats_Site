@@ -64,7 +64,7 @@ GitHub Issue [#18](https://github.com/tj-999-comp/B_Stats_Site/issues/18)につ�
 
 Issue #18の完了条件を満たした。live DBの統合状態、旧ID名寄せの経路、取得失敗時の停止挙動、再投入前に実施する確認手順を記録した。
 
-実装変更は課題専用ブランチでcommit・pushし、Draft PRを作成する。Issueはユーザーの明示により、PR未mergeのためその理由とPR URLを完了コメントへ残したうえでクローズする。
+実装変更は課題専用ブランチ`agent/issue-18-player-id-map-validation`でcommit・pushし、commit `4c57dc3`としてDraft PR [#39](https://github.com/tj-999-comp/B_Stats_Site/pull/39)を作成した。Issueはユーザーの明示により、PR未mergeのためその理由とPR URLを完了コメントへ残したうえでクローズする。
 
 ## GitHub Issue状況（2026-08-20時点の現在値）
 
