@@ -167,6 +167,7 @@ Vercel Hobby Plan (Next.js App Router: SSR/ISR)
 | [docs/architecture.md](docs/architecture.md) | システム全体の構成（スクレイピング→DB→フロント） | 新規参加時、構成を思い出したい時 |
 | [docs/setup.md](docs/setup.md) | ローカル開発や Supabase 接続の初期セットアップ | 環境構築の開始時 |
 | [docs/deployment.md](docs/deployment.md) | GitHub Pages / Vercel へのデプロイ前提と必要Secrets | デプロイ前 |
+| [docs/PORTFOLIO_STANDARD.md](docs/PORTFOLIO_STANDARD.md) | 作業記録、Issue、PR、公開受入の共通標準 | 作業記録を残す時、Issue対応を完了させる時 |
 
 ### DB設計を確認する
 

@@ -164,6 +164,24 @@ python -m scripts.dev.merge_player_ids \
 
 **対象テーブル:** players, player_game_stats, player_id_map
 
+通常の `scripts.db.upsert_games` 実行では、投入前に live DB の `player_id_map` を全件取得し、旧IDを正規IDへ読み替える。取得に失敗した場合は空マップとして続行せず、処理を停止して接続先・権限・テーブル定義を確認する。空マップは取得成功後に0行だった場合だけを意味する。
+
+`--dry-run` はDBを参照せず、`player_id_map` も取得しない。そのため、dry-runの変換件数だけで本番投入時の旧ID名寄せを検証してはならない。本番投入前は読み取り専用で次を確認し、対象旧IDがある場合は18件のマッピング、旧ID選手行0件、正規ID側の試合成績重複0件を確認する。
+
+```sql
+SELECT COUNT(*) AS map_rows
+FROM public.player_id_map;
+
+SELECT m.old_player_id, m.player_id,
+       (p_old.player_id IS NOT NULL) AS old_player_exists,
+       (p_new.player_id IS NOT NULL) AS canonical_player_exists
+FROM public.player_id_map AS m
+LEFT JOIN public.players AS p_old ON p_old.player_id = m.old_player_id
+LEFT JOIN public.players AS p_new ON p_new.player_id = m.player_id
+WHERE m.old_player_id BETWEEN '45848' AND '45865'
+ORDER BY m.old_player_id;
+```
+
 ### プロフィール補完
 
 **監査スクリプト:** `scripts/dev/audit_players_snapshot.py`
