@@ -98,20 +98,6 @@
     "birthplace": "アメリカ"
   },
   {
-    "player_id": "51000308",
-    "old_player_id": null,
-    "player_name_j": "ロン･ジェイ･アバリエントス",
-    "player_name_e": "Rhon Jhay Abarrientos",
-    "nationality": "フィリピン",
-    "player_slot_category": "外国籍選手",
-    "last_seen_team_id": "716",
-    "last_seen_jersey_number": "0",
-    "created_at": "2026-03-05 13:29:27.395803+00",
-    "updated_at": "2026-03-05 13:29:27.395803+00",
-    "league_registered_nationality": "フィリピン",
-    "birthplace": "フィリピン"
-  },
-  {
     "player_id": "32992",
     "old_player_id": null,
     "player_name_j": "ジェームズ・マイケル・マカドゥ",
@@ -278,20 +264,6 @@
     "updated_at": "2026-03-05 23:32:08.441358+00",
     "league_registered_nationality": "アメリカ合衆国",
     "birthplace": null
-  },
-  {
-    "player_id": "51000259",
-    "old_player_id": null,
-    "player_name_j": "カイ・ソット",
-    "player_name_e": "Kai Sotto",
-    "nationality": "フィリピン",
-    "player_slot_category": "外国籍選手",
-    "last_seen_team_id": "721",
-    "last_seen_jersey_number": "11",
-    "created_at": "2026-02-24 05:57:28.719254+00",
-    "updated_at": "2026-02-24 05:57:28.719254+00",
-    "league_registered_nationality": "フィリピン",
-    "birthplace": "フィリピン"
   },
   {
     "player_id": "51000429",
@@ -684,20 +656,6 @@
     "updated_at": "2026-02-24 05:57:28.719254+00",
     "league_registered_nationality": "チャイニーズタイペイ",
     "birthplace": "チャイニーズタイペイ"
-  },
-  {
-    "player_id": "51000260",
-    "old_player_id": null,
-    "player_name_j": "カール・タマヨ",
-    "player_name_e": "Carl Tamayo",
-    "nationality": "フィリピン",
-    "player_slot_category": "外国籍選手",
-    "last_seen_team_id": "701",
-    "last_seen_jersey_number": "33",
-    "created_at": "2026-03-05 13:29:27.395803+00",
-    "updated_at": "2026-03-05 13:29:27.395803+00",
-    "league_registered_nationality": "フィリピン",
-    "birthplace": "フィリピン"
   },
   {
     "player_id": "51000394",
@@ -1806,20 +1764,6 @@
     "birthplace": "ニュージーランド"
   },
   {
-    "player_id": "51000187",
-    "old_player_id": null,
-    "player_name_j": "マシュー・ライト",
-    "player_name_e": "Matthew Wright",
-    "nationality": "カナダ",
-    "player_slot_category": "外国籍選手",
-    "last_seen_team_id": "699",
-    "last_seen_jersey_number": "7",
-    "created_at": "2026-02-24 05:57:28.719254+00",
-    "updated_at": "2026-02-24 05:57:28.719254+00",
-    "league_registered_nationality": "フィリピン",
-    "birthplace": "カナダ"
-  },
-  {
     "player_id": "51000264",
     "old_player_id": null,
     "player_name_j": "アラン・ウィリアムズ",
@@ -2002,34 +1946,6 @@
     "birthplace": "アメリカ合衆国"
   },
   {
-    "player_id": "5100000062",
-    "old_player_id": null,
-    "player_name_j": "キーファー・ラベナ",
-    "player_name_e": "Kiefer Ravena",
-    "nationality": "フィリピン",
-    "player_slot_category": "外国籍選手",
-    "last_seen_team_id": "698",
-    "last_seen_jersey_number": "15",
-    "created_at": "2026-02-24 05:57:28.719254+00",
-    "updated_at": "2026-02-24 05:57:28.719254+00",
-    "league_registered_nationality": "フィリピン",
-    "birthplace": "フィリピン"
-  },
-  {
-    "player_id": "51000314",
-    "old_player_id": null,
-    "player_name_j": "イ デソン",
-    "player_name_e": "Daesung Lee",
-    "nationality": "韓国",
-    "player_slot_category": "外国籍選手",
-    "last_seen_team_id": "728",
-    "last_seen_jersey_number": "43",
-    "created_at": "2026-03-05 13:29:27.395803+00",
-    "updated_at": "2026-03-05 13:29:27.395803+00",
-    "league_registered_nationality": "大韓民国",
-    "birthplace": "韓国"
-  },
-  {
     "player_id": "26921",
     "old_player_id": null,
     "player_name_j": "セバスチャン・サイズ",
@@ -2196,20 +2112,6 @@
     "updated_at": "2026-03-05 23:27:06.34015+00",
     "league_registered_nationality": "日本",
     "birthplace": "アメリカ合衆国"
-  },
-  {
-    "player_id": "5100000069",
-    "old_player_id": null,
-    "player_name_j": "レイ・パークスジュニア",
-    "player_name_e": "Ray Parks Jr.",
-    "nationality": "フィリピン",
-    "player_slot_category": "外国籍選手",
-    "last_seen_team_id": "729",
-    "last_seen_jersey_number": "1",
-    "created_at": "2026-02-24 05:57:28.719254+00",
-    "updated_at": "2026-02-24 05:57:28.719254+00",
-    "league_registered_nationality": "フィリピン",
-    "birthplace": "フィリピン"
   },
   {
     "player_id": "51000391",
@@ -2518,20 +2420,6 @@
     "updated_at": "2026-03-03 08:25:04.626419+00",
     "league_registered_nationality": "アメリカ合衆国",
     "birthplace": "アメリカ合衆国"
-  },
-  {
-    "player_id": "5100000041",
-    "old_player_id": null,
-    "player_name_j": "王　偉嘉",
-    "player_name_e": "Weijia Wang",
-    "nationality": "中国",
-    "player_slot_category": "外国籍選手",
-    "last_seen_team_id": "693",
-    "last_seen_jersey_number": "1",
-    "created_at": "2026-03-05 13:29:27.395803+00",
-    "updated_at": "2026-03-05 13:29:27.395803+00",
-    "league_registered_nationality": "中華人民共和国",
-    "birthplace": "中国"
   },
   {
     "player_id": "51000148",
@@ -3248,20 +3136,6 @@
     "birthplace": "韓国"
   },
   {
-    "player_id": "51000185",
-    "old_player_id": null,
-    "player_name_j": "グレゴリー・スローター",
-    "player_name_e": "Gregory Slaughter",
-    "nationality": "アメリカ合衆国",
-    "player_slot_category": "外国籍選手",
-    "last_seen_team_id": "53000064",
-    "last_seen_jersey_number": "20",
-    "created_at": "2026-03-05 23:42:09.497423+00",
-    "updated_at": "2026-03-05 23:42:09.497423+00",
-    "league_registered_nationality": "フィリピン",
-    "birthplace": "アメリカ合衆国"
-  },
-  {
     "player_id": "51000153",
     "old_player_id": null,
     "player_name_j": "ラショーン・トーマス",
@@ -3372,20 +3246,6 @@
     "updated_at": "2026-03-05 23:42:09.497423+00",
     "league_registered_nationality": "アメリカ合衆国",
     "birthplace": null
-  },
-  {
-    "player_id": "51000102",
-    "old_player_id": null,
-    "player_name_j": "ドワイト・ラモス",
-    "player_name_e": "Dwight Ramos",
-    "nationality": "フィリピン",
-    "player_slot_category": "外国籍選手",
-    "last_seen_team_id": "702",
-    "last_seen_jersey_number": "2",
-    "created_at": "2026-02-24 05:57:28.719254+00",
-    "updated_at": "2026-02-24 05:57:28.719254+00",
-    "league_registered_nationality": "フィリピン",
-    "birthplace": "フィリピン"
   },
   {
     "player_id": "51000245",
@@ -4788,20 +4648,6 @@
     "birthplace": "青森県"
   },
   {
-    "player_id": "51000113",
-    "old_player_id": null,
-    "player_name_j": "飯尾 文哉",
-    "player_name_e": "Fumiya Iio",
-    "nationality": "日本",
-    "player_slot_category": "日本人選手",
-    "last_seen_team_id": "700",
-    "last_seen_jersey_number": "22",
-    "created_at": "2026-02-24 05:57:28.719254+00",
-    "updated_at": "2026-02-24 05:57:28.719254+00",
-    "league_registered_nationality": "日本",
-    "birthplace": "大阪府"
-  },
-  {
     "player_id": "51000109",
     "old_player_id": null,
     "player_name_j": "小室 昂大",
@@ -5136,20 +4982,6 @@
     "updated_at": "2026-02-24 05:57:28.719254+00",
     "league_registered_nationality": "日本",
     "birthplace": "福島県"
-  },
-  {
-    "player_id": "5100000024",
-    "old_player_id": null,
-    "player_name_j": "キング 開",
-    "player_name_e": "Kai King",
-    "nationality": "日本",
-    "player_slot_category": "日本人選手",
-    "last_seen_team_id": "694",
-    "last_seen_jersey_number": "23",
-    "created_at": "2026-02-24 05:57:28.719254+00",
-    "updated_at": "2026-02-24 05:57:28.719254+00",
-    "league_registered_nationality": "日本",
-    "birthplace": "神奈川県"
   },
   {
     "player_id": "32956",
@@ -6860,20 +6692,6 @@
     "birthplace": "愛知県"
   },
   {
-    "player_id": "5100000012",
-    "old_player_id": null,
-    "player_name_j": "荒谷 裕秀",
-    "player_name_e": "Hirohide Araya",
-    "nationality": "日本",
-    "player_slot_category": "日本人選手",
-    "last_seen_team_id": "703",
-    "last_seen_jersey_number": "11",
-    "created_at": "2026-02-24 05:57:28.719254+00",
-    "updated_at": "2026-02-24 05:57:28.719254+00",
-    "league_registered_nationality": "日本",
-    "birthplace": "宮城県"
-  },
-  {
     "player_id": "18167",
     "old_player_id": null,
     "player_name_j": "笠井 康平",
@@ -7180,20 +6998,6 @@
     "updated_at": "2026-03-05 23:27:06.34015+00",
     "league_registered_nationality": "日本",
     "birthplace": "東京都"
-  },
-  {
-    "player_id": "51000137",
-    "old_player_id": null,
-    "player_name_j": "上田 隼輔",
-    "player_name_e": "Shunsuke Ueda",
-    "nationality": "日本",
-    "player_slot_category": "日本人選手",
-    "last_seen_team_id": "696",
-    "last_seen_jersey_number": "20",
-    "created_at": "2026-03-03 08:46:17.378534+00",
-    "updated_at": "2026-03-03 08:46:17.378534+00",
-    "league_registered_nationality": "日本",
-    "birthplace": "熊本県"
   },
   {
     "player_id": "30347",
