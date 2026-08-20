@@ -4,7 +4,11 @@
 
 - 取得日時 (UTC): 2026-03-10T00:00:00.000Z
 - 取得元: https://mngqmfvsxcqjhsgkbyju.supabase.co/rest/v1/
-- 部分確認: 2026-08-05にlive `players` の列を読み取り専用で再確認し、廃止済みの `nationality` を同テーブルの定義から除外。その他は上記取得日時のスナップショットのまま。
+- 部分確認: 2026-08-20にlive `players` の列を読み取り専用で再確認。12列（`player_id`、
+  `player_name_j`、`player_name_e`、`player_slot_category`、`league_registered_nationality`、
+  `birthplace`、`last_seen_team_id`、`last_seen_jersey_number`、`old_player_id`、
+  `entity_type`、`created_at`、`updated_at`）で、廃止済みの `nationality` は存在しないことを確認した。
+  その他のテーブルは上記取得日時のスナップショットのまま。
 
 ## テーブル一覧
 

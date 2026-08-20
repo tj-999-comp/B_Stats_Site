@@ -1,80 +1,70 @@
-# 作業記録 018: Issue #13 player_slot_category の正規化準備
+# 作業記録 018: Issue #16 live DB・再構築SQL・テーブル定義の整合
 作成日: 2026-08-20
 
 ## 概要
 
-GitHub Issue [#13](https://github.com/tj-999-comp/B_Stats_Site/issues/13)について、`players.player_slot_category`の表記ゆれを解消し、新規投入時にも正規値だけを保存できるようにするための実装とDB適用SQLを準備した。
+GitHub Issue [#16](https://github.com/tj-999-comp/B_Stats_Site/issues/16)について、live DBの`players`列、canonical rebuild SQL、分割SQL、`docs/table_definition.md`の差異を確認した。
 
-Issueで確認されていた正規値は`日本人選手`、`外国籍選手`、`帰化選手`とし、NULL/空欄は未確認・未判定として保持する。`日本`は`日本人選手`へ、`帰化選手枠`は`帰化選手`へ変換する。
-
-完了条件に関係するDBの実更新はユーザーが行う運用であり、本作業ではlive DBへの`upsert`、`update`、`delete`を実行していない。Issue 13向けの4種のSQLと投入経路の変更を提案可能な状態にした。
+完了条件は、再構築後の`players`スキーマと期待するliveスキーマの一致、nationality関連列の責務の一意化、SQLとテーブル定義の差異解消、差異検出手順の再実行可能化である。
 
 ## 適用した役割
 
 ### 実際に担当したRole
 
-- `DB/SQL`: 正規値、NULLの意味、CHECK制約、バックアップ・確認・修正・ロールバックSQLの設計
-- `Python`: 選手投入経路での`player_slot_category`正規化と未知値の検知
-- `Documentation`: 運用ルール、投入フロー、SQL一覧、作業記録の更新
+- `DB/SQL`: live DBの列定義を読み取り専用で確認し、再構築SQLとの契約を照合
+- `Documentation`: 現行プロフィール列の責務と、再構築後の差異検出手順を文書化
+- `GitHub`: Issueの最新状態を確認し、作業記録・PR・完了コメントの対象を整理
 
 ## 主要な判断
 
-- DBへ保存する正規値は`日本人選手`、`外国籍選手`、`帰化選手`の3値とする。
-- NULL/空欄は情報未確認・未判定を表すため、正規値へ無理に補完しない。
-- 既知の表記ゆれ2種類だけを変換し、未知の非空値は`ValueError`で停止して見逃さない。
-- 正規化処理は`upsert_players`へ集約し、選手JSON投入、試合JSONからの選手投入、プロフィール補完の共通経路で適用する。
-- DB変更の実行主体はユーザーとする。ClaudeはDB変更SQLを作成・提案するが、Supabaseへの適用、CLI/API/Python経由の自動実行を行わない。
-- DB変更SQLは、同じIssue・対象について`backup`、`verify`、`fix`、`rollback`の4種を必ず用意する。
+- live `players`には`nationality`が存在せず、同列は廃止済みの旧列と判断した。
+- `player_slot_category`は選手区分、`league_registered_nationality`はリーグ登録国籍、`birthplace`は出身地として責務を分離する。
+- canonical SQLと分割SQLは`nationality`を作成しておらず、現行liveの期待列と一致しているため、live DBへのDDL変更は不要とした。
+- 今後の新規再構築や別環境の差異を検出できるよう、期待列・想定外列・廃止済み`nationality`を確認する読み取りSQLを再構築手順へ追加した。
 
 ## 最終結果
 
-### 実装変更
+### live DB確認
 
-- `scripts/db/db.py`
-  - `player_slot_category`の正規化関数を追加。
-  - NULL/空欄をNULLへ統一。
-  - `日本`、`帰化選手枠`を正規値へ変換。
-  - 未知の非空値を拒否。
-- `supabase/rebuild/00_rebuild_all.sql`
-- `supabase/rebuild/05_batch_game_and_players_columns.sql`
-  - 既存表記ゆれの事前変換と、3値またはNULLに限定するCHECK制約を追加。
-- `docs/flow.md`
-  - 正規値とNULLの意味、新規投入時の検知方針を記載。
-- `AGENTS.md`
-  - DB変更はユーザーが実行し、Claudeは実行しないルールを明文化。
+2026-08-20にSupabase REST OpenAPIを読み取り、`players`の列を確認した。
 
-### ユーザーが実行するDB適用SQL
+- 列数: 12
+- `nationality`: 存在しない
+- 現行プロフィール列: `player_slot_category`、`league_registered_nationality`、`birthplace`
+- その他の列: `player_id`、`player_name_j`、`player_name_e`、`last_seen_team_id`、`last_seen_jersey_number`、`old_player_id`、`entity_type`、`created_at`、`updated_at`
 
-次の順序で、ユーザーが対象接続先を確認して実行する。Claudeはこれらを実行しない。
+`players`全件監査では、live 1,101行・ユニークID 1,101件を読み取った。監査は読み取り専用で、DBの更新は発生していない。
 
-1. [`20260820_backup_issue13_player_slot_category.sql`](../../supabase/sql/20260820_backup_issue13_player_slot_category.sql)
-2. [`20260820_verify_issue13_player_slot_category.sql`](../../supabase/sql/20260820_verify_issue13_player_slot_category.sql)（実行前）
-3. [`20260820_fix_issue13_player_slot_category.sql`](../../supabase/sql/20260820_fix_issue13_player_slot_category.sql)
-4. [`20260820_verify_issue13_player_slot_category.sql`](../../supabase/sql/20260820_verify_issue13_player_slot_category.sql)（実行後）
-5. 問題がある場合のみ[`20260820_rollback_fix_issue13_player_slot_category.sql`](../../supabase/sql/20260820_rollback_fix_issue13_player_slot_category.sql)を実行し、その後に`verify`を再実行する。
+### 実装・文書変更
 
-バックアップ対象は、実行時点で`日本`または`帰化選手枠`を持つ行である。バックアップSQLは対象件数を固定し、修正SQLはバックアップ件数と更新件数を照合する。検証SQLは正規化状態とCHECK制約の存在を確認する。
+- `supabase/rebuild/README.md`
+  - `players`プロフィール列の現行契約を追加
+  - 期待列との差分、想定外列、廃止済み`nationality`を検出するSQLを追加
+  - 再構築完了判定に列契約の確認を追加
+- `docs/table_definition.md`
+  - 2026-08-20のlive`players`列再確認結果を追記
+- `docs/changelog.md`
+  - Issue #16の判断と変更内容を追記
 
 ## 検証
 
-- Python 3.11で`scripts`と`Colab`の構文確認を実行した。
-- 正規化関数について、NULL、空欄、既知の別名、正規値、未知値拒否を確認した。
-- `upsert_players`が別名を正規値へ変換することを確認した。
-- `git diff --check`を実行した。
-- SQL変更に対するreview-agentの読み取り専用レビューを実行し、指摘を修正した。最終レビューは`No findings.`だった。
-- live DBへのSQL適用、DB件数の実更新確認は未実施。ユーザー実行後にIssue 13のDB側完了条件を確認する。
+- live DBを読み取り専用で確認した。
+- `supabase/rebuild/01_base_schema.sql`、`05_batch_game_and_players_columns.sql`、`00_rebuild_all.sql`の列契約を確認した。
+- `nationality`がrebuild SQLに作成対象として存在しないことを確認した。
+- `git diff --check`を実行し、成功した。
+- 作業記録MarkdownからHTMLを生成し、filename・Markdown・HTMLの検証を実行する。
 
 ## 完了判定
 
-正規値、NULLの意味、新規投入時の検知、既存データ用の4種SQL、ロールバック方針、運用上の実行主体を記録した。実装とSQL提案の準備は完了しているが、live DBの実更新はユーザー実行待ちであるため、Issue 13自体は未完了のまま維持する。
+Issue #16の完了条件を満たした。現行live DBと再構築SQLの間に、今回の対象である`nationality`関連のDB変更は不要である。差異が発生した場合に再実行できる確認SQLを`supabase/rebuild/README.md`へ残した。
 
-作業ブランチは`agent/issue-13-player-slot-category-normalization`。実装commitは`31e1ecc`、push済みである。Draft PR [#40](https://github.com/tj-999-comp/B_Stats_Site/pull/40)を作成した。作業記録へのこの追記は同PRの後続commitに含める。
+実装変更は課題専用ブランチ`agent/issue-16-schema-drift`でcommit・pushし、Draft PRを作成する。Issueはユーザーの明示により、PR未mergeの理由とPR URLを完了コメントへ残したうえでクローズする。
 
 ## GitHub Issue状況（2026-08-20時点の現在値）
 
 確認日: 2026-08-20（JST）
 
-GitHub APIで`tj-999-comp/B_Stats_Site`のIssue 13、Issue 13のコメント、全オープンIssue、親Issueのsub-issuesを取得した。Issue 13はopenで、コメントは0件だった。Pull Requestは一覧から除外した。
+GitHub APIで `tj-999-comp/B_Stats_Site` のIssueを確認した。Pull Requestは対象外とした。未完了Issueは10件だった。
 
 ### 親子関係
 
@@ -89,11 +79,11 @@ GitHub APIで`tj-999-comp/B_Stats_Site`のIssue 13、Issue 13のコメント、�
 └── #25（完了・子Issue）
 ```
 
-Issue 13は親子関係の登録がない。Issue 25の完了後に着手する関係として、優先順位一覧へ記載する。
+GitHubのsub-issues APIで登録された親子関係を記載した。親子登録のないIssueは、優先順位一覧の関係・着手条件に記載する。
 
 ### 優先順位順の未完了一覧
 
-優先度と関係・着手条件は`scripts/dev/github_issue_status_policy.json`の運用設定を使用し、設定のないIssueは既定値P3とした。
+優先順位は `github_issue_status_policy.json` の運用設定を使い、設定のないIssueは既定値P3として記載する。
 
 | 順位 | 優先度 | GitHub Issue | 状態 | 関係・着手条件 |
 |---:|---|---|---|---|

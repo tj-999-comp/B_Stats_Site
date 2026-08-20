@@ -37,6 +37,18 @@
 > - Step7/8/11 は `supabase/rebuild/06_batch_player_identity.sql` に統合
 > - 旧分割 migration は不要化したため削除
 
+### `players` プロフィール列の現行契約
+
+`players.nationality` は live DB で廃止済みの旧列であり、再構築後も作成しない。
+国籍に関する責務は次のとおり分離する。
+
+- `player_slot_category`: 日本人選手・外国籍選手・帰化選手の区分
+- `league_registered_nationality`: リーグ登録国籍
+- `birthplace`: 出身地
+
+この契約は `01_base_schema.sql`（基本列）、`05_batch_game_and_players_columns.sql`（プロフィール列）、
+`00_rebuild_all.sql`（統合版）、`docs/table_definition.md` で同期させる。
+
 ---
 
 ## 実行ステップ一覧（順番固定）
@@ -178,6 +190,28 @@ from information_schema.views
 where table_schema = 'public'
   and table_name in ('v_teams_current','v_players_current','v_player_transfer_events')
 order by table_name;
+
+-- 4) players の現行列と廃止列を確認（全件0なら合格）
+with expected(column_name) as (
+    values
+        ('player_id'), ('player_name_j'), ('player_name_e'),
+        ('player_slot_category'), ('league_registered_nationality'), ('birthplace'),
+        ('last_seen_team_id'), ('last_seen_jersey_number'), ('old_player_id'),
+        ('entity_type'), ('created_at'), ('updated_at')
+), actual as (
+    select column_name
+    from information_schema.columns
+    where table_schema = 'public' and table_name = 'players'
+)
+select 'missing_expected_column' as difference, column_name
+from (select column_name from expected except select column_name from actual) missing
+union all
+select 'unexpected_column' as difference, column_name
+from (select column_name from actual except select column_name from expected) unexpected
+union all
+select 'retired_nationality_present' as difference, column_name
+from actual
+where column_name = 'nationality';
 ```
 
 ---
@@ -260,7 +294,14 @@ where table_schema = 'public'
 select pg_get_functiondef('track_player_affiliation_from_game_stats()'::regprocedure) as fn;
 ```
 
-### 判定E: players 参照エラーが解消している
+### 判定E: `players` の列契約に差異がない
+
+- 合格条件: 上記「4) players の現行列と廃止列を確認」の結果が **0件**
+- `nationality` が1件でも返った場合は、live DBと再構築SQLのどちらを正本にするか決めずに投入へ進まない
+- 差異が出た場合は、`01_base_schema.sql`、`05_batch_game_and_players_columns.sql`、
+  `00_rebuild_all.sql`、`docs/table_definition.md` の4箇所を同じ変更で更新する
+
+### 判定F: players 参照エラーが解消している
 
 - 合格条件: 下記がエラーなく `0` 以上の件数を返す
 
@@ -270,7 +311,7 @@ select count(*) as players_count from players;
 
 ### 総合判定
 
-- A〜E がすべて合格: migration 完了。JSON 再投入へ進んでよい。
+- A〜F がすべて合格: migration 完了。JSON 再投入へ進んでよい。
 - 1つでも不合格: 不足している migration を再実行してから再判定する。
 
 ---
