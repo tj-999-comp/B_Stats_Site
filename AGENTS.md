@@ -7,6 +7,13 @@
 - コマンドは、特記がない限りリポジトリルートから実行する。特に Python は `python -m scripts...` の形式を使い、`scraper/` へ移動したまま実行しない。
 - 作業開始時と終了時に `git status --short` を確認する。既存の変更・未追跡ファイルはユーザーの作業として保持し、依頼に無関係な整形、削除、上書きをしない。
 
+## Portfolio作業標準
+
+- 共通標準は [`docs/PORTFOLIO_STANDARD.md`](docs/PORTFOLIO_STANDARD.md) とする。作業記録、GitHub Issue、Pull Request、公開受入に関する詳細は同文書を参照する。
+- ユーザーが「作業記録を残して」と依頼した場合は、対象Issueと完了条件を確定し、課題専用ブランチ、作業記録Markdown/HTML、検証、対象ファイルだけのcommit、push、Issue完了コメント、Draft PR作成までを一式として扱う。ドキュメントだけの短縮工程は共通標準と本ガイドの例外規則に従う。
+- Portfolio標準でいう「完了」は実装・検証・作業記録・push・PR作成までを指す。Issueのクローズは、PRのmerge後またはユーザーが早期クローズを明示した場合だけ行う。未mergeで閉じる場合は理由とPR URLをIssueコメントへ残す。
+- Issue、PR、レビュー、CIの取得には、可能な場合はGitHub AppのInstallation tokenを使う。秘密鍵、token、JWTは表示・保存・作業記録・PR本文へ転載しない。Issue状況を成果物へ記載するときは、作成・更新直前に最新の番号、タイトル、状態、更新日時、必要な親子関係とコメントを取得する。
+
 ## プロジェクトの現在像
 
 B.LEAGUE 公式サイトから試合情報を取得し、JSON に保存して Supabase PostgreSQL へ投入する統計サイト用リポジトリである。pnpm/Turborepo のモノレポ内に、GitHub Pages 向け静的 Next.js と Vercel 向け SSR Next.js の2構成を置いている。
@@ -26,6 +33,7 @@ B.LEAGUE 公式サイトから試合情報を取得し、JSON に保存して Su
 | 対象 | 正本・入口 |
 |---|---|
 | 全体像 | `README.md`, `docs/architecture.md` |
+| Portfolio作業標準 | `docs/PORTFOLIO_STANDARD.md` |
 | ローカル環境 | `docs/setup.md`, `scraper/README.md` |
 | スクレイピングと投入順 | `docs/flow.md`, `docs/date_resolution.md`, `scripts/scraping/`, `scripts/db/` |
 | 現行 DB 再構築 | `supabase/rebuild/README.md`, `supabase/rebuild/00_rebuild_all.sql`, 分割版 `01`〜`07` |

@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light">
+    <title>Issue #18 player_id_mapと旧ID名寄せ経路の検証 — 作業記録</title>
+    <link rel="stylesheet" href="work_record.css">
+  </head>
+  <body>
+    <div class="shell">
+      <header class="topbar">
+        <span class="wordmark">B.LEAGUE STATS</span>
+      </header>
+      <main>
+        <header class="record-header">
+          <p class="kicker">作業記録 017 ・ 2026-08-20</p>
+          <h1>Issue #18 player_id_mapと旧ID名寄せ経路の検証</h1>
+          <dl class="record-meta">
+            <div><dt>原本</dt><dd><code>md/work_record_017.md</code></dd></div>
+            <div><dt>状態</dt><dd>記録本文をHTML化</dd></div>
+          </dl>
+        </header>
+        <section class="record-section"><div class="section-intro"><p class="section-label">01　概要</p><h2>概要</h2></div><div class="section-content"><p>GitHub Issue <a href="https://github.com/tj-999-comp/B_Stats_Site/issues/18">#18</a>について、2026-08-04のlive DB監査で0行だった<code>player_id_map</code>の状態を再確認し、旧ID名寄せのデータフロー、Issue #23・#25で実施したID統合、再投入時の分裂防止を検証した。</p>
+<p>完了条件は、旧ID名寄せの正しいデータフローを説明できること、旧ID側の未統合・成績衝突がないこと、<code>player_id_map</code>が空だった理由を確定すること、再投入時の安全な検証手順が残ることである。</p></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">02　記録</p><h2>適用した役割</h2></div><div class="section-content"><h3>実際に担当したRole</h3>
+<ul><li><code>DB/SQL</code>: live DBの読み取り検証と既存の統合結果の確認</li><li><code>Python</code>: <code>player_id_map</code>取得処理の失敗時挙動の修正</li><li><code>Documentation</code>: 再投入・dry-run・live確認手順の文書化</li></ul></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">03　記録</p><h2>主要な判断</h2></div><div class="section-content"><ul><li>2026-08-04時点の<code>player_id_map</code> 0行は、旧ID名寄せが不要という仕様ではなく、Issue #23・#25の統合前の状態だったと判断した。</li><li>Issue #25の統合により、45848〜45865の18件は正規IDへ収束し、live DBの<code>player_id_map</code>に対応関係を保持する方針を採用した。</li><li><code>player_id_map</code>取得時のDB接続・権限・テーブルエラーを空マップとして扱うと、旧IDが未変換のまま再投入されるため、取得失敗は処理停止とする。</li><li><code>--dry-run</code>はDBから<code>player_id_map</code>を取得しない既存仕様を維持し、本番投入時の名寄せ検証はlive DBの読み取り確認と投入後の重複確認で行う。</li></ul></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">04　記録</p><h2>最終結果</h2></div><div class="section-content"><h3>live DB確認</h3>
+<ul><li><code>player_id_map</code>は18行だった。</li><li>45848〜45865の18件すべてに正規IDの対応があった。</li><li>旧IDの<code>players</code>行は0件だった。</li><li>正規ID側の選手行は18件で、全件に対応する<code>old_player_id</code>が設定されていた。</li><li>旧IDを持つ試合成績は0件だった。</li><li>既存の正規ID側との試合成績衝突は0件だった。</li></ul>
+<h3>実装・文書変更</h3>
+<ul><li><code>scripts/db/db.py</code>の<code>fetch_player_id_map()</code>から広範な例外握りつぶしを削除した。</li><li>マッピング行の旧ID・正規ID欠損と、同一旧IDの異なる対応先をエラーにした。</li><li><code>docs/flow.md</code>へ通常投入時の取得失敗時挙動、dry-runの制約、live確認SQLを追記した。</li></ul>
+<p>変更ファイル:</p>
+<ul><li><code>scripts/db/db.py</code></li><li><code>docs/flow.md</code></li><li><code>AGENTS.md</code></li><li><code>README.md</code></li><li><code>docs/PORTFOLIO_STANDARD.md</code></li><li><code>work-records/md/work_record_017.md</code></li><li><code>work-records/metadata/work_record_017.yml</code></li><li><code>work-records/work_record_017.html</code></li></ul></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">05　検証</p><h2>検証</h2></div><div class="section-content"><ul><li>live DBを読み取り専用で確認した。</li><li><code>player_id_map</code>の18件、旧ID選手行0件、正規ID18件を確認した。</li><li>旧ID側の試合成績0件、試合成績衝突0件を確認した。</li><li><code>fetch_player_id_map()</code>の空マップ、正常な1件、不正行、競合行に対する簡易動作チェックを実行した。</li><li><code>py_compile</code>を実行した。</li><li><code>git diff --check</code>を実行した。</li><li>作業記録のMarkdown・HTML・metadataをvalidatorで確認する。</li></ul></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">06　判定</p><h2>完了判定</h2></div><div class="section-content"><p>Issue #18の完了条件を満たした。live DBの統合状態、旧ID名寄せの経路、取得失敗時の停止挙動、再投入前に実施する確認手順を記録した。</p>
+<p>実装変更は課題専用ブランチでcommit・pushし、Draft PRを作成する。Issueはユーザーの明示により、PR未mergeのためその理由とPR URLを完了コメントへ残したうえでクローズする。</p></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">07　Issue状況</p><h2>GitHub Issue状況（2026-08-20時点の現在値）</h2></div><div class="section-content"><p>確認日: 2026-08-20（JST）</p>
+<p>GitHub APIで <code>tj-999-comp/B_Stats_Site</code> のIssueを確認した。Pull Requestは対象外とした。未完了Issueは11件だった。</p>
+<h3>親子関係</h3>
+<pre><code class="language-text">#7（未完了・親Issue）
+└── #8（完了・子Issue）
+#12（完了・親Issue）
+├── #21（完了・子Issue）
+├── #22（完了・子Issue）
+└── #23（完了・子Issue）
+#24（完了・親Issue）
+└── #25（完了・子Issue）</code></pre>
+<p>GitHubのsub-issues APIで登録された親子関係を記載した。親子登録のないIssueは、優先順位一覧の関係・着手条件に記載する。</p>
+<h3>優先順位順の未完了一覧</h3>
+<p>優先順位は <code>github_issue_status_policy.json</code> の運用設定を使い、設定のないIssueは既定値P3として記載する。</p>
+<table><thead><tr><th>順位</th><th>優先度</th><th>GitHub Issue</th><th>状態</th><th>関係・着手条件</th></tr></thead><tbody><tr><td>1</td><td>P2</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/13">#13</a> [DB] player_slot_category の値を正規化する</td><td>未完了</td><td>#25完了後が適切</td></tr><tr><td>2</td><td>P2</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/14">#14</a> [DB] attendance 欠損14試合を調査・補完する</td><td>未完了</td><td>独立</td></tr><tr><td>3</td><td>P2</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/16">#16</a> [DB] live DB・再構築SQL・テーブル定義のスキーマ差異を解消する</td><td>未完了</td><td>独立</td></tr><tr><td>4</td><td>P2</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/18">#18</a> [DB] 空の player_id_map と旧ID名寄せ経路を検証する</td><td>未完了</td><td>#23と関連</td></tr><tr><td>5</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/7">#7</a> 試合のスクレイピングデータ精査</td><td>未完了</td><td>#24と範囲が重なる</td></tr><tr><td>6</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/9">#9</a> 課題解決の原案を立てる</td><td>未完了</td><td>探索テーマ</td></tr><tr><td>7</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/15">#15</a> [DB] 過年度の plus_minus・背番号欠損を調査する</td><td>未完了</td><td>独立</td></tr><tr><td>8</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/17">#17</a> [DB] play_by_play未投入と存在フラグの整合性を整理する</td><td>未完了</td><td>独立</td></tr><tr><td>9</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/30">#30</a> [Actions] 手動公開要求workflowとdispatch権限を設定する</td><td>未完了</td><td>独立。優先度未設定</td></tr><tr><td>10</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/31">#31</a> [E2E] 新規作業記録1件を手動publish要求する</td><td>未完了</td><td>独立。優先度未設定</td></tr><tr><td>11</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/32">#32</a> [Automation] main更新時の公開要求triggerを有効化する</td><td>未完了</td><td>独立。優先度未設定</td></tr></tbody></table></div></section>
+
+      </main>
+      <footer>
+        <span>B.LEAGUE Stats · 作業記録 017</span>
+        <span><a href="md/work_record_017.md">Markdown原本</a></span>
+      </footer>
+    </div>
+  </body>
+</html>
