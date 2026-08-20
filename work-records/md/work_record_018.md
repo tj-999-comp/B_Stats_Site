@@ -68,7 +68,7 @@ Issueで確認されていた正規値は`日本人選手`、`外国籍選手`�
 
 正規値、NULLの意味、新規投入時の検知、既存データ用の4種SQL、ロールバック方針、運用上の実行主体を記録した。実装とSQL提案の準備は完了しているが、live DBの実更新はユーザー実行待ちであるため、Issue 13自体は未完了のまま維持する。
 
-作業ブランチは`agent/issue-13-player-slot-category-normalization`とする。commit・push・Draft PRの情報は作成後に本記録へ追記する。
+作業ブランチは`agent/issue-13-player-slot-category-normalization`。実装commitは`31e1ecc`、push済みである。Draft PR [#40](https://github.com/tj-999-comp/B_Stats_Site/pull/40)を作成した。作業記録へのこの追記は同PRの後続commitに含める。
 
 ## GitHub Issue状況（2026-08-20時点の現在値）
 
