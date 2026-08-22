@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light">
+    <title>Colab版スクレイパーのB2・B3対応 — 作業記録</title>
+    <link rel="stylesheet" href="work_record.css">
+  </head>
+  <body>
+    <div class="shell">
+      <header class="topbar">
+        <span class="wordmark">B.LEAGUE STATS</span>
+      </header>
+      <main>
+        <header class="record-header">
+          <p class="kicker">作業記録 021 ・ 2026-08-22</p>
+          <h1>Colab版スクレイパーのB2・B3対応</h1>
+          <dl class="record-meta">
+            <div><dt>原本</dt><dd><code>md/work_record_021.md</code></dd></div>
+            <div><dt>状態</dt><dd>記録本文をHTML化</dd></div>
+          </dl>
+        </header>
+        <section class="record-section"><div class="section-intro"><p class="section-label">01　概要</p><h2>概要</h2></div><div class="section-content"><p>GitHub Issue <a href="https://github.com/tj-999-comp/B_Stats_Site/issues/7">#7</a>に関連して、<code>Colab/</code> の試合情報スクレイパーがB1だけでなくB2・B3も取得できるように整理・検証した。</p>
+<p>Google Drive上のColab実行環境から、リーグを引数で指定して月単位または任意期間のJSONを保存できることを完了条件とした。既存のB1利用者の保存先・ファイル名は維持し、B2・B3ではリーグ識別用のプレフィックスを付ける仕様とした。</p></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">02　記録</p><h2>適用した役割</h2></div><div class="section-content"><h3>実際に担当したRole</h3>
+<ul><li><code>Scraper maintenance</code>: 公式スケジュールAPIと試合詳細HTMLのリーグ別取得条件を整理</li><li><code>Validation</code>: B1、B2、B3の実データ取得結果とJSON内容を確認</li><li><code>Documentation</code>: ColabでのGoogle Drive運用、引数、出力ファイル命名を更新</li></ul></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">03　記録</p><h2>主要な判断</h2></div><div class="section-content"><ul><li><code>--league {B1,B2,B3}</code> を追加し、既定値は従来互換のB1とする。</li><li>B1の出力ファイル名は既存どおり <code>games_SEASON_DATE.json</code> または <code>games_SEASON_START_END.json</code> とする。</li><li>B2・B3は <code>games_B2_SEASON_DATE.json</code>、<code>games_B3_SEASON_DATE.json</code> の形式で保存する。</li><li>スケジュールAPIではリーグIDを、試合詳細ページではリーグ別タブを指定する。取得後に <code>ConventionTitleJ</code> も検証し、別リーグの試合をJSONへ混在させない。</li><li><code>Accept-Encoding</code> から<code>br</code>を外した。ローカルのHTTPクライアントがBrotli本文を復号できず、試合詳細HTMLをJSONとして解釈できないケースを避けるためである。</li><li>通常取得ではplay-by-playを扱わず、Supabaseへの投入も行わない。Colab版は取得したJSONの保存までを担当する。</li><li>B3は対象期間に試合がないことがあるため、該当月の取得件数が0でも直ちに取得失敗とは判定しない。</li></ul></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">04　記録</p><h2>最終結果</h2></div><div class="section-content"><h3>変更対象</h3>
+<ul><li><code>Colab/bleague_parallel_scraper.py</code><ul><li>B1/B2/B3のリーグ指定</li><li>リーグ別スケジュール・試合詳細取得</li><li>リーグ別出力ファイル名</li><li>出力先ディレクトリの自動作成</li></ul></li><li><code>Colab/run_scrape_colab.py</code><ul><li><code>--league</code> の受け取りとスクレイパーへの引き渡し</li></ul></li><li><code>Colab/README.md</code><ul><li>Google Driveへ<code>Colab</code>フォルダだけを配置する構成と実行例</li></ul></li><li><code>Colab/Colab_Scraping_Template.ipynb</code><ul><li>B1/B2/B3を指定するColab実行例</li></ul></li></ul>
+<h3>取得確認</h3>
+<p>次のJSONを生成し、取得結果を確認した。</p>
+<table><thead><tr><th>リーグ</th><th>対象</th><th>結果</th></tr></thead><tbody><tr><td>B1</td><td>2018-10-06</td><td>9/9試合成功、ボックススコアあり</td></tr><tr><td>B2</td><td>2018-10-06</td><td>9/9試合成功、<code>ConventionTitleJ</code>は<code>2018-19 B2リーグ</code>、ボックススコアあり</td></tr><tr><td>B3</td><td>2018-11-03</td><td>1/1試合成功、<code>ConventionTitleJ</code>は<code>2018-19 B3レギュラーシーズン</code>、ボックススコアあり</td></tr><tr><td>B1</td><td>2018-10-21〜2018-10-25</td><td>19/19試合成功、全件B1</td></tr><tr><td>B2</td><td>2018-10-21〜2018-10-25</td><td>25/25試合成功、失敗キーなし、全件B2</td></tr><tr><td>B3</td><td>2018-11-03</td><td>1/1試合成功、失敗キーなし、全件B3</td></tr></tbody></table>
+<p>検証用JSONの主な保存先は次のとおりである。</p>
+<ul><li><code>/tmp/b2_b3_validation/games_2018-19_2018-10-06.json</code></li><li><code>/tmp/b2_b3_validation/games_B2_2018-19_2018-10-06.json</code></li><li><code>/tmp/b2_b3_validation/games_B3_2018-19_2018-11-03.json</code></li><li><code>/tmp/b2_b3_test/games_2018-19_2018-10-21_2018-10-25.json</code></li><li><code>/tmp/b2_b3_test/games_B2_2018-19_2018-10-21_2018-10-25.json</code></li><li><code>/tmp/b2_b3_test/games_B3_2018-19_2018-11-03.json</code></li></ul>
+<h3>Git・公開情報</h3>
+<p>実装変更は次のコミットで<code>main</code>へPush済みである。</p>
+<ul><li><code>7790327</code> <code>feat: support B2 and B3 Colab scraping</code></li></ul>
+<p>本作業記録は、実装コミットを基準に作成した記録専用ブランチへ追加する。無関係な次の未追跡ファイルは変更・削除・コミットしない。</p>
+<ul><li><code>scraper/data/club_season_game_counts.csv</code></li><li><code>scripts/dev/scrape_club_season_game_counts.py</code></li></ul></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">05　検証</p><h2>検証</h2></div><div class="section-content"><ul><li>B1、B2、B3の単日取得と期間取得を実行した。</li><li>B2・B3のJSONでリーグ名、試合詳細、ボックススコア、失敗キーを確認した。</li><li><code>python3 -m py_compile</code>でColab用Pythonファイルの構文を確認した。</li><li><code>git diff --check</code>を実行した。</li><li>DB変更操作、Supabaseへの投入、play-by-playの取得は行っていない。</li><li>Google Drive上のファイルコピーやColabの実行環境自体は、ユーザーの運用環境で行う範囲であるため変更していない。</li></ul></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">06　判定</p><h2>完了判定</h2></div><div class="section-content"><p>B1の既存仕様を維持したまま、B2・B3の試合情報をリーグ混在なしで取得できることを確認した。B2・B3の出力ファイル名にもリーグプレフィックスが付くため、複数リーグ・複数月のJSONを同じ保存先で管理できる。</p></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">07　Issue状況</p><h2>GitHub Issue状況（2026-08-22時点の現在値）</h2></div><div class="section-content"><p>確認日: 2026-08-22（JST）</p>
+<p>GitHub APIで <code>tj-999-comp/B_Stats_Site</code> のIssueを確認した。Pull Requestは対象外とした。未完了Issueは7件だった。</p>
+<h3>親子関係</h3>
+<pre><code class="language-text">#7（未完了・親Issue）
+└── #8（完了・子Issue）
+#12（完了・親Issue）
+├── #21（完了・子Issue）
+├── #22（完了・子Issue）
+└── #23（完了・子Issue）
+#24（完了・親Issue）
+└── #25（完了・子Issue）</code></pre>
+<p>GitHubのsub-issues APIで登録された親子関係を記載した。親子登録のないIssueは、優先順位一覧の関係・着手条件に記載する。</p>
+<h3>優先順位順の未完了一覧</h3>
+<p>優先順位は <code>github_issue_status_policy.json</code> の運用設定を使い、設定のないIssueは既定値P3として記載する。</p>
+<table><thead><tr><th>順位</th><th>優先度</th><th>GitHub Issue</th><th>状態</th><th>関係・着手条件</th></tr></thead><tbody><tr><td>1</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/7">#7</a> 試合のスクレイピングデータ精査</td><td>未完了</td><td>#24と範囲が重なる</td></tr><tr><td>2</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/9">#9</a> 課題解決の原案を立てる</td><td>未完了</td><td>探索テーマ</td></tr><tr><td>3</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/15">#15</a> [DB] 過年度の plus_minus・背番号欠損を調査する</td><td>未完了</td><td>独立</td></tr><tr><td>4</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/17">#17</a> [DB] play_by_play未投入と存在フラグの整合性を整理する</td><td>未完了</td><td>独立</td></tr><tr><td>5</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/30">#30</a> [Actions] 手動公開要求workflowとdispatch権限を設定する</td><td>未完了</td><td>独立。優先度未設定</td></tr><tr><td>6</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/31">#31</a> [E2E] 新規作業記録1件を手動publish要求する</td><td>未完了</td><td>独立。優先度未設定</td></tr><tr><td>7</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/32">#32</a> [Automation] main更新時の公開要求triggerを有効化する</td><td>未完了</td><td>独立。優先度未設定</td></tr></tbody></table></div></section>
+
+      </main>
+      <footer>
+        <span>B.LEAGUE Stats · 作業記録 021</span>
+        <span><a href="md/work_record_021.md">Markdown原本</a></span>
+      </footer>
+    </div>
+  </body>
+</html>

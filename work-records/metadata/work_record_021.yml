@@ -1,0 +1,10 @@
+schema_version: 1
+title: "Colab版スクレイパーのB2・B3対応"
+date: "2026-08-22"
+project_id: B_Stats_Site
+tags:
+  - colab
+  - scraping
+  - b2
+  - b3
+publish: true
