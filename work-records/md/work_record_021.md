@@ -71,10 +71,17 @@ Google Drive上のColab実行環境から、リーグを引数で指定して月
 
 - Draft PR [#43](https://github.com/tj-999-comp/B_Stats_Site/pull/43)
 
-本作業記録は、実装コミットを基準に作成した記録専用ブランチへ追加する。無関係な次の未追跡ファイルは変更・削除・コミットしない。
+作業記録は当初記録専用ブランチへ追加したが、今回はユーザー指定の特例として、作業記録のコミットを`main`へ取り込み、直接Pushした。無関係な次の未追跡ファイルは変更・削除・コミットしない。
 
 - `scraper/data/club_season_game_counts.csv`
 - `scripts/dev/scrape_club_season_game_counts.py`
+
+作業記録のmain反映コミットは次のとおりである。
+
+- `0c87462` `docs: add work record 021 for Colab league scraping`
+- `ad0629e` `docs: link work record 021 draft PR`
+
+先に作成したDraft PR [#43](https://github.com/tj-999-comp/B_Stats_Site/pull/43)は、mainへ直接Pushする方針に変更したためクローズした。
 
 ## 検証
 
