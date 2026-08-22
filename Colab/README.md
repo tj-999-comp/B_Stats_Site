@@ -12,48 +12,52 @@
 
 以下のセルを上から順番に実行してください。
 
-### 1) リポジトリを取得して、このフォルダへ移動
+### 1) Google Driveをマウントして、リポジトリルートへ移動
 
 ```python
-!git clone https://github.com/<your-account>/B_Stats_Site.git
-%cd /content/B_Stats_Site/Colab
+from google.colab import drive
+drive.mount('/content/drive')
+%cd /content/drive/MyDrive/git-tj999/B_Stats_Site
 ```
 
-リポジトリが private の場合は、Google Drive をマウントして既存のコピーを使ってください。
+Google Drive上に配置済みのリポジトリを使用します。GitHubからのCloneは行いません。
 
 ### 2) 依存パッケージをインストール
 
 ```python
-!pip install -r requirements.txt
+!pip install -r Colab/requirements.txt
 ```
 
 ### 3) スクレイピング実行（単日）
 
 ```python
-!python run_scrape_colab.py \
+!python Colab/run_scrape_colab.py \
   --date 2024-10-05 \
   --season 2024-25 \
-  --output-dir /content
+  --league B1 \
+  --output-dir /content/drive/MyDrive/git-tj999/B_Stats_Site/scraper/data
 ```
 
 ### 4) スクレイピング実行（期間指定）
 
 ```python
-!python run_scrape_colab.py \
+!python Colab/run_scrape_colab.py \
   --start-date 2024-10-01 \
   --end-date 2024-10-07 \
   --season 2024-25 \
-  --output-dir /content \
+  --league B1 \
+  --output-dir /content/drive/MyDrive/git-tj999/B_Stats_Site/scraper/data \
   --max-workers 12
 ```
 
 ### 5) 任意: Play-by-Play も取得
 
 ```python
-!python run_scrape_colab.py \
+!python Colab/run_scrape_colab.py \
   --date 2024-10-05 \
   --season 2024-25 \
-  --output-dir /content \
+  --league B1 \
+  --output-dir /content/drive/MyDrive/git-tj999/B_Stats_Site/scraper/data \
   --include-play-by-play
 ```
 
@@ -61,12 +65,27 @@
 
 JSON は次のファイル名で保存されます。
 
-- 単日: `games_<season>_<date>.json`
-- 期間指定: `games_<season>_<start>_<end>.json`
+- B1単日: `games_<season>_<date>.json`（既存形式を維持）
+- B1期間指定: `games_<season>_<start>_<end>.json`（既存形式を維持）
+- B2/B3単日: `games_<league>_<season>_<date>.json`
+- B2/B3期間指定: `games_<league>_<season>_<start>_<end>.json`
+
+リーグを指定する場合は、`--league B1`、`--league B2`、`--league B3` のいずれかを指定します。省略時はB1です。
+
+例:
+
+```python
+!python Colab/run_scrape_colab.py \
+  --date 2018-10-06 \
+  --season 2018-19 \
+  --league B2 \
+  --output-dir /content/drive/MyDrive/git-tj999/B_Stats_Site/scraper/data
+```
 
 各 JSON には次のキーが含まれます。
 
 - `date_to_schedule_keys`
+- `league`
 - `game_count`
 - `failed_schedule_keys`
 - `games`

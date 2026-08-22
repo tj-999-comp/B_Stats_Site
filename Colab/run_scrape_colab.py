@@ -14,6 +14,12 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--end-date", type=str, help="End date: YYYY-MM-DD")
     parser.add_argument("--season", type=str, default="2024-25", help="Season label, e.g. 2024-25")
     parser.add_argument(
+        "--league",
+        choices=("B1", "B2", "B3"),
+        default="B1",
+        help="League to scrape (default: B1)",
+    )
+    parser.add_argument(
         "--output-dir",
         type=str,
         default="/content/drive/MyDrive/B_Stats_Site/scraper/data",
@@ -50,6 +56,7 @@ def main() -> None:
         raise SystemExit("start date must be less than or equal to end date")
 
     options = ScrapeOptions(
+        league=args.league,
         include_play_by_play=args.include_play_by_play,
         max_workers=max(1, args.max_workers),
         request_timeout_sec=max(1, args.request_timeout_sec),
@@ -63,6 +70,7 @@ def main() -> None:
         end_date=end,
         season=args.season,
         output_dir=Path(args.output_dir),
+        league=args.league,
         options=options,
     )
 

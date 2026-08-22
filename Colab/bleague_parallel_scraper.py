@@ -22,14 +22,18 @@ HEADERS = {
     ),
     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
     "Accept-Language": "ja,en-US;q=0.9,en;q=0.8",
-    "Accept-Encoding": "gzip, deflate, br",
+    # requests標準ではBrotliを確実に展開できない環境があるため、
+    # brを要求しない。B.LEAGUEはgzipを返し、requestsが自動展開する。
+    "Accept-Encoding": "gzip, deflate",
     "Referer": "https://www.bleague.jp/",
 }
 SCHEDULE_KEY_PATTERN = re.compile(r"ScheduleKey=(\d+)")
+LEAGUE_SCHEDULE_TABS = {"B1": 1, "B2": 2, "B3": 3}
 
 
 @dataclass
 class ScrapeOptions:
+    league: str = "B1"
     include_play_by_play: bool = False
     max_workers: int = 8
     request_timeout_sec: int = 60
@@ -80,14 +84,23 @@ def _extract_context_data(html: str) -> dict[str, Any]:
     raise RuntimeError("Unterminated JSON object while extracting contexts")
 
 
-def _fetch_schedule_topics(target_date: date, schedule_api_year: int) -> list[str]:
+def _fetch_schedule_topics(
+    target_date: date,
+    schedule_api_year: int,
+    league: str,
+) -> list[str]:
+    try:
+        schedule_tab = LEAGUE_SCHEDULE_TABS[league]
+    except KeyError as exc:
+        raise ValueError(f"Unsupported league: {league}") from exc
+
     url = f"{BASE_URL}/schedule/"
     params = {
         "data_format": "json",
         "year": str(schedule_api_year),
         "mon": f"{target_date.month:02d}",
         "day": f"{target_date.day:02d}",
-        "tab": "1",
+        "tab": str(schedule_tab),
         "event": "",
         "club": "",
     }
@@ -139,12 +152,14 @@ def _extract_schedule_keys_from_topics(topics: list[str]) -> list[int]:
 
 def _fetch_game_detail_with_retry(
     schedule_key: int,
-    tab: str,
+    tab: str | None,
     timeout_sec: int,
     max_retries: int,
 ) -> tuple[requests.Response | None, int, Exception | None]:
     url = f"{BASE_URL}/game_detail/"
-    params = {"ScheduleKey": str(schedule_key), "tab": tab}
+    params = {"ScheduleKey": str(schedule_key)}
+    if tab is not None:
+        params["tab"] = tab
 
     last_exc: Exception | None = None
     last_response: requests.Response | None = None
@@ -170,6 +185,7 @@ def _fetch_game_detail_with_retry(
 def _fetch_single_game(
     schedule_key: int,
     candidate_dates: list[str] | None,
+    league: str,
     options: ScrapeOptions,
 ) -> dict[str, Any]:
     if options.max_delay_sec > 0:
@@ -178,7 +194,9 @@ def _fetch_single_game(
     jst = timezone(timedelta(hours=9))
     first_success: dict[str, Any] | None = None
 
-    for tab in ("4", "2"):
+    mismatched_titles: list[str] = []
+
+    for tab in ("4", "2", None):
         response, _retried, conn_exc = _fetch_game_detail_with_retry(
             schedule_key=schedule_key,
             tab=tab,
@@ -201,6 +219,7 @@ def _fetch_single_game(
         game = context.get("Game", {})
         result = {
             "schedule_key": schedule_key,
+            "league": league,
             "source_tab": tab,
             "game": game,
             "summaries": context.get("Summaries", []),
@@ -209,6 +228,12 @@ def _fetch_single_game(
             "play_by_play_count": len(context.get("PlayByPlays", [])),
             "play_by_plays": context.get("PlayByPlays", []) if options.include_play_by_play else [],
         }
+
+        title = str(game.get("ConventionTitleJ") or "")
+        if league not in title:
+            if title:
+                mismatched_titles.append(title)
+            continue
 
         if candidate_dates:
             raw_ts = game.get("GameDateTime")
@@ -228,6 +253,7 @@ def _fetch_single_game(
 
     return {
         "schedule_key": schedule_key,
+        "league": league,
         "source_tab": None,
         "game": {},
         "summaries": [],
@@ -235,7 +261,8 @@ def _fetch_single_game(
         "away_boxscores": [],
         "play_by_play_count": 0,
         "play_by_plays": [],
-        "error": "Failed to fetch game_detail",
+        "error": "Failed to fetch matching game_detail",
+        "observed_titles": mismatched_titles,
     }
 
 
@@ -304,9 +331,13 @@ def scrape_date_range_games_parallel(
     start_date: date,
     end_date: date,
     season: str,
+    league: str = "B1",
     options: ScrapeOptions | None = None,
 ) -> dict[str, Any]:
     options = options or ScrapeOptions()
+
+    if league not in LEAGUE_SCHEDULE_TABS:
+        raise ValueError(f"Unsupported league: {league}")
 
     day_to_keys: dict[str, list[int]] = {}
     all_keys: list[int] = []
@@ -316,7 +347,7 @@ def scrape_date_range_games_parallel(
 
     current = start_date
     while current <= end_date:
-        topics = _fetch_schedule_topics(current, schedule_api_year)
+        topics = _fetch_schedule_topics(current, schedule_api_year, league)
         keys = _extract_schedule_keys_from_topics(topics)
         day_to_keys[current.isoformat()] = keys
 
@@ -338,6 +369,7 @@ def scrape_date_range_games_parallel(
                     _fetch_single_game,
                     schedule_key,
                     schedule_key_to_dates.get(schedule_key),
+                    league,
                     options,
                 ): schedule_key
                 for schedule_key in all_keys
@@ -355,6 +387,7 @@ def scrape_date_range_games_parallel(
 
     return {
         "season": season,
+        "league": league,
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "include_play_by_play": options.include_play_by_play,
         "start_date": start_date.isoformat(),
@@ -368,9 +401,28 @@ def scrape_date_range_games_parallel(
 
 def output_path_for_date_range(output_dir: Path, season: str, start_date: date, end_date: date) -> Path:
     output_dir.mkdir(parents=True, exist_ok=True)
+    return output_path_for_league_date_range(
+        output_dir=output_dir,
+        season=season,
+        league="B1",
+        start_date=start_date,
+        end_date=end_date,
+    )
+
+
+def output_path_for_league_date_range(
+    output_dir: Path,
+    season: str,
+    league: str,
+    start_date: date,
+    end_date: date,
+) -> Path:
+    output_dir.mkdir(parents=True, exist_ok=True)
+    # 既存B1 JSONのファイル名は維持し、新規B2/B3だけ衝突回避用のprefixを付ける。
+    prefix = f"games_{season}" if league == "B1" else f"games_{league}_{season}"
     if start_date == end_date:
-        return output_dir / f"games_{season}_{start_date.isoformat()}.json"
-    return output_dir / f"games_{season}_{start_date.isoformat()}_{end_date.isoformat()}.json"
+        return output_dir / f"{prefix}_{start_date.isoformat()}.json"
+    return output_dir / f"{prefix}_{start_date.isoformat()}_{end_date.isoformat()}.json"
 
 
 def save_date_range_games_parallel(
@@ -378,14 +430,22 @@ def save_date_range_games_parallel(
     end_date: date,
     season: str,
     output_dir: Path,
+    league: str = "B1",
     options: ScrapeOptions | None = None,
 ) -> Path:
     payload = scrape_date_range_games_parallel(
         start_date=start_date,
         end_date=end_date,
         season=season,
+        league=league,
         options=options,
     )
-    out_path = output_path_for_date_range(output_dir, season, start_date, end_date)
+    out_path = output_path_for_league_date_range(
+        output_dir=output_dir,
+        season=season,
+        league=league,
+        start_date=start_date,
+        end_date=end_date,
+    )
     out_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
     return out_path
