@@ -69,6 +69,8 @@ Google Drive上のColab実行環境から、リーグを引数で指定して月
 
 - `7790327` `feat: support B2 and B3 Colab scraping`
 
+- Draft PR [#43](https://github.com/tj-999-comp/B_Stats_Site/pull/43)
+
 本作業記録は、実装コミットを基準に作成した記録専用ブランチへ追加する。無関係な次の未追跡ファイルは変更・削除・コミットしない。
 
 - `scraper/data/club_season_game_counts.csv`

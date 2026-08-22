@@ -36,6 +36,7 @@
 <h3>Git・公開情報</h3>
 <p>実装変更は次のコミットで<code>main</code>へPush済みである。</p>
 <ul><li><code>7790327</code> <code>feat: support B2 and B3 Colab scraping</code></li></ul>
+<ul><li>Draft PR <a href="https://github.com/tj-999-comp/B_Stats_Site/pull/43">#43</a></li></ul>
 <p>本作業記録は、実装コミットを基準に作成した記録専用ブランチへ追加する。無関係な次の未追跡ファイルは変更・削除・コミットしない。</p>
 <ul><li><code>scraper/data/club_season_game_counts.csv</code></li><li><code>scripts/dev/scrape_club_season_game_counts.py</code></li></ul></div></section>
 <section class="record-section"><div class="section-intro"><p class="section-label">05　検証</p><h2>検証</h2></div><div class="section-content"><ul><li>B1、B2、B3の単日取得と期間取得を実行した。</li><li>B2・B3のJSONでリーグ名、試合詳細、ボックススコア、失敗キーを確認した。</li><li><code>python3 -m py_compile</code>でColab用Pythonファイルの構文を確認した。</li><li><code>git diff --check</code>を実行した。</li><li>DB変更操作、Supabaseへの投入、play-by-playの取得は行っていない。</li><li>Google Drive上のファイルコピーやColabの実行環境自体は、ユーザーの運用環境で行う範囲であるため変更していない。</li></ul></div></section>
