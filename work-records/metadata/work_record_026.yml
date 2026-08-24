@@ -1,0 +1,9 @@
+schema_version: 1
+title: "新規作業記録の手動公開要求E2E"
+date: "2026-08-24"
+project_id: B_Stats_Site
+tags:
+  - e2e
+  - publish
+  - issue-31
+publish: true
