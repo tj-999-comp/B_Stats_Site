@@ -67,6 +67,7 @@ GitHub Issue [#7](https://github.com/tj-999-comp/B_Stats_Site/issues/7)の試合
 - `sync_github_issue_status --check`を実行し、#022のIssue状況がGitHub上のオープンIssue 10件と一致することを確認した。
 - スクレイパーのPython構文確認、`git diff --check`を実行した。
 - 集計CSVは212行、候補リストは40試合、チーム側候補は78件、残存不足数は0件であることを確認した。
+- PRのCIで既存の`work_record_018.html`がMarkdownからの再生成結果と不一致と判定されたため、公式変換結果へ更新して再検証する。
 
 ## 未完了事項と次アクション
 
