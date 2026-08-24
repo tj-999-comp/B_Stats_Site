@@ -68,7 +68,7 @@ workflow_dispatch
 ## 最終結果
 
 - 作業ブランチ: `agent/issue-30-manual-publish-dispatch`
-- 実装commit: 実装後に追記
+- 実装commit: `4c9d217` `feat(actions): add manual publish request workflow`
 - Draft PR: 実装後に追記
 - Issue #30: workflow・Secret運用・安全境界の実装を完了し、PRレビュー待ち
 - 未解決事項: `SANDBOX_PAGES_DISPATCH_TOKEN`の実PAT登録と手動公開E2Eは未実施
@@ -77,21 +77,28 @@ workflow_dispatch
 
 確認日: 2026-08-24（JST）
 
-GitHub APIで取得した`tj-999-comp/B_Stats_Site`のIssueを確認した。Pull Requestは対象外とした。Issue #30の最新状態はOPEN（2026-08-18 15:42:41 JST更新）である。Issue状況同期スクリプトはsub-issues APIへの接続が一時的に失敗したため、取得できたIssue一覧と直前のsub-issues確認結果をもとに記録し、API復旧後に`--check`で再確認する。
+GitHub APIで `tj-999-comp/B_Stats_Site` のIssueを確認した。Pull Requestは対象外とした。未完了Issueは8件だった。
 
 ### 親子関係
 
 ```text
 #7（未完了・親Issue）
+├── #8（完了・子Issue）
 ├── #45（完了・子Issue）
 └── #46（完了・子Issue）
+#12（完了・親Issue）
+├── #21（完了・子Issue）
+├── #22（完了・子Issue）
+└── #23（完了・子Issue）
+#24（完了・親Issue）
+└── #25（完了・子Issue）
 ```
 
-GitHubのsub-issues APIで確認済みの親子関係を記載した。親子登録のないIssueは、優先順位一覧の関係・着手条件に記載する。
+GitHubのsub-issues APIで登録された親子関係を記載した。親子登録のないIssueは、優先順位一覧の関係・着手条件に記載する。
 
 ### 優先順位順の未完了一覧
 
-優先順位は`github_issue_status_policy.json`の運用設定を使い、設定のないIssueは既定値P3として記載する。
+優先順位は `github_issue_status_policy.json` の運用設定を使い、設定のないIssueは既定値P3として記載する。
 
 | 順位 | 優先度 | GitHub Issue | 状態 | 関係・着手条件 |
 |---:|---|---|---|---|

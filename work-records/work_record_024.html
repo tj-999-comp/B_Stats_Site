@@ -37,16 +37,23 @@
 <p>公開先側の受入、provenance、Pages反映は<code>sandbox-pages</code>が担当し、このrepositoryのworkflowは公開先の状態を変更しない。</p></div></section>
 <section class="record-section"><div class="section-intro"><p class="section-label">05　検証</p><h2>検証</h2></div><div class="section-content"><ul><li><code>python scripts/dev/validate_publish_request.py --target-basename work_record_023</code></li><li><code>python scripts/dev/validate_work_record_filenames.py</code></li><li><code>python -m scripts.dev.convert_work_records_to_html --check</code></li><li><code>python scripts/dev/validate_work_record_source.py</code></li><li><code>python scripts/dev/validate_work_record_source.py --check-fixtures</code></li><li><code>git diff --check</code></li><li>workflow YAMLのtrigger、permissions、Secret参照、dispatch入力を静的確認</li></ul>
 <p>実際の公開要求dispatchとPATの設定は、秘密情報と外部workflowの状態を伴うためこの作業では実行しない。手動E2EはIssue #31で扱う。</p></div></section>
-<section class="record-section"><div class="section-intro"><p class="section-label">06　記録</p><h2>最終結果</h2></div><div class="section-content"><ul><li>作業ブランチ: <code>agent/issue-30-manual-publish-dispatch</code></li><li>実装commit: 実装後に追記</li><li>Draft PR: 実装後に追記</li><li>Issue #30: workflow・Secret運用・安全境界の実装を完了し、PRレビュー待ち</li><li>未解決事項: <code>SANDBOX_PAGES_DISPATCH_TOKEN</code>の実PAT登録と手動公開E2Eは未実施</li></ul></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">06　記録</p><h2>最終結果</h2></div><div class="section-content"><ul><li>作業ブランチ: <code>agent/issue-30-manual-publish-dispatch</code></li><li>実装commit: <code>4c9d217</code> <code>feat(actions): add manual publish request workflow</code></li><li>Draft PR: 実装後に追記</li><li>Issue #30: workflow・Secret運用・安全境界の実装を完了し、PRレビュー待ち</li><li>未解決事項: <code>SANDBOX_PAGES_DISPATCH_TOKEN</code>の実PAT登録と手動公開E2Eは未実施</li></ul></div></section>
 <section class="record-section"><div class="section-intro"><p class="section-label">07　Issue状況</p><h2>GitHub Issue状況（2026-08-24時点の現在値）</h2></div><div class="section-content"><p>確認日: 2026-08-24（JST）</p>
-<p>GitHub APIで取得した<code>tj-999-comp/B_Stats_Site</code>のIssueを確認した。Pull Requestは対象外とした。Issue #30の最新状態はOPEN（2026-08-18 15:42:41 JST更新）である。Issue状況同期スクリプトはsub-issues APIへの接続が一時的に失敗したため、取得できたIssue一覧と直前のsub-issues確認結果をもとに記録し、API復旧後に<code>--check</code>で再確認する。</p>
+<p>GitHub APIで <code>tj-999-comp/B_Stats_Site</code> のIssueを確認した。Pull Requestは対象外とした。未完了Issueは8件だった。</p>
 <h3>親子関係</h3>
 <pre><code class="language-text">#7（未完了・親Issue）
+├── #8（完了・子Issue）
 ├── #45（完了・子Issue）
-└── #46（完了・子Issue）</code></pre>
-<p>GitHubのsub-issues APIで確認済みの親子関係を記載した。親子登録のないIssueは、優先順位一覧の関係・着手条件に記載する。</p>
+└── #46（完了・子Issue）
+#12（完了・親Issue）
+├── #21（完了・子Issue）
+├── #22（完了・子Issue）
+└── #23（完了・子Issue）
+#24（完了・親Issue）
+└── #25（完了・子Issue）</code></pre>
+<p>GitHubのsub-issues APIで登録された親子関係を記載した。親子登録のないIssueは、優先順位一覧の関係・着手条件に記載する。</p>
 <h3>優先順位順の未完了一覧</h3>
-<p>優先順位は<code>github_issue_status_policy.json</code>の運用設定を使い、設定のないIssueは既定値P3として記載する。</p>
+<p>優先順位は <code>github_issue_status_policy.json</code> の運用設定を使い、設定のないIssueは既定値P3として記載する。</p>
 <table><thead><tr><th>順位</th><th>優先度</th><th>GitHub Issue</th><th>状態</th><th>関係・着手条件</th></tr></thead><tbody><tr><td>1</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/7">#7</a> 試合のスクレイピングデータ精査</td><td>未完了</td><td>#24と範囲が重なる</td></tr><tr><td>2</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/9">#9</a> 課題解決の原案を立てる</td><td>未完了</td><td>探索テーマ</td></tr><tr><td>3</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/15">#15</a> [DB] 過年度の plus_minus・背番号欠損を調査する</td><td>未完了</td><td>独立。優先度未設定</td></tr><tr><td>4</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/17">#17</a> [DB] play_by_play未投入と存在フラグの整合性を整理する</td><td>未完了</td><td>独立。優先度未設定</td></tr><tr><td>5</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/30">#30</a> [Actions] 手動公開要求workflowとdispatch権限を設定する</td><td>未完了</td><td>独立。優先度未設定</td></tr><tr><td>6</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/31">#31</a> [E2E] 新規作業記録1件を手動publish要求する</td><td>未完了</td><td>独立。優先度未設定</td></tr><tr><td>7</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/32">#32</a> [Automation] main更新時の公開要求triggerを有効化する</td><td>未完了</td><td>独立。優先度未設定</td></tr><tr><td>8</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/44">#44</a> [DB] live DBへB2・B3スタッツを追加する</td><td>未完了</td><td>独立。優先度未設定</td></tr></tbody></table></div></section>
 
       </main>
