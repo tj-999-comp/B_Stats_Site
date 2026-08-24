@@ -69,7 +69,7 @@ workflow_dispatch
 
 - 作業ブランチ: `agent/issue-30-manual-publish-dispatch`
 - 実装commit: `4c9d217` `feat(actions): add manual publish request workflow`
-- Draft PR: 実装後に追記
+- Draft PR: [#50](https://github.com/tj-999-comp/B_Stats_Site/pull/50) `[Actions] 手動公開要求workflowとdispatch権限を設定する`
 - Issue #30: workflow・Secret運用・安全境界の実装を完了し、PRレビュー待ち
 - 未解決事項: `SANDBOX_PAGES_DISPATCH_TOKEN`の実PAT登録と手動公開E2Eは未実施
 
