@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light">
+    <title>欠落B1試合の子Issue分割と補完候補の確定 — 作業記録</title>
+    <link rel="stylesheet" href="work_record.css">
+  </head>
+  <body>
+    <div class="shell">
+      <header class="topbar">
+        <span class="wordmark">B.LEAGUE STATS</span>
+      </header>
+      <main>
+        <header class="record-header">
+          <p class="kicker">作業記録 022 ・ 2026-08-24</p>
+          <h1>欠落B1試合の子Issue分割と補完候補の確定</h1>
+          <dl class="record-meta">
+            <div><dt>原本</dt><dd><code>md/work_record_022.md</code></dd></div>
+            <div><dt>状態</dt><dd>記録本文をHTML化</dd></div>
+          </dl>
+        </header>
+        <section class="record-section"><div class="section-intro"><p class="section-label">01　概要</p><h2>概要</h2></div><div class="section-content"><p>GitHub Issue <a href="https://github.com/tj-999-comp/B_Stats_Site/issues/7">#7</a>の試合レコード精査で、ローカルデータに存在しない可能性があるB1試合を、スクレイピングとUpsertの2段階へ分割した。</p>
+<p>公式クラブページのチーム・シーズン別試合数とローカルJSONの件数を比較し、候補リストとの重複を除いた結果、補完候補は40試合、チーム側候補は78件となった。集計CSV上の残存不足数は0件である。ただし、実際の試合詳細取得とSupabaseへの反映は、この作業記録の時点では実施していない。</p></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">02　記録</p><h2>適用した役割</h2></div><div class="section-content"><h3>実際に担当したRole</h3>
+<ul><li><code>Issue planning</code>: 親Issue #7の残作業をスクレイピングとUpsertの子Issueへ分割</li><li><code>Data audit</code>: 公式件数、ローカル件数、補完候補件数の対応を確認</li><li><code>Documentation</code>: 子Issueの完了条件と依存関係、作業記録を整理</li></ul></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">03　記録</p><h2>主要な判断</h2></div><div class="section-content"><ul><li>試合詳細の取得とDB反映を同じIssueに混在させず、#45で取得・検証、#46で変換・Upsertを行う。</li><li>#46は#45の取得成功分を入力とし、schedule_key、シーズン、対戦チーム、件数を確認してから着手する。</li><li>Supabaseのlive DB変更はこの作業記録では実施しない。Upsert時はbackup、verify前、fix、rollback、verify後の順序と、対象・接続先・件数の確認を必要条件とする。</li><li>既存のB1対象を維持し、B2・B3の試合を今回の補完対象へ混在させない。</li><li><code>main</code>への直接Pushはリポジトリ標準に従って行わず、専用ブランチとDraft PRで受け渡す。</li></ul></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">04　記録</p><h2>最終結果</h2></div><div class="section-content"><h3>作成した子Issue</h3>
+<ul><li>親Issue <a href="https://github.com/tj-999-comp/B_Stats_Site/issues/7">#7</a><ul><li>子Issue <a href="https://github.com/tj-999-comp/B_Stats_Site/issues/45">#45</a>: 特定済みの欠落B1試合をスクレイピングする</li><li>子Issue <a href="https://github.com/tj-999-comp/B_Stats_Site/issues/46">#46</a>: 特定済みの欠落B1試合をUpsertする</li></ul></li><li>既存の子Issue <a href="https://github.com/tj-999-comp/B_Stats_Site/issues/8">#8</a>は完了済み。</li><li>#46の着手条件は#45の取得・検証完了である。</li></ul>
+<h3>変更ファイル</h3>
+<ul><li><code>scraper/data/game_supplement_candidates.csv</code><ul><li>既存候補へ今回の7試合候補を追加</li><li>片側チームだけを数える候補は<code>counted_team_ids</code>で明示</li></ul></li><li><code>scraper/data/club_season_game_counts.csv</code><ul><li>補完候補数と残存不足数を更新</li><li><code>remaining_team_game_count</code>の合計は0</li></ul></li><li><code>scripts/dev/scrape_club_season_game_counts.py</code><ul><li>候補のチーム側指定と残存不足数の集計に対応</li></ul></li></ul>
+<h3>確認結果</h3>
+<table><thead><tr><th>項目</th><th>件数</th></tr></thead><tbody><tr><td>補完候補のユニーク試合</td><td>40</td></tr><tr><td>補完候補のチーム側件数</td><td>78</td></tr><tr><td>残存チーム側不足数</td><td>0</td></tr><tr><td>候補で充足した差異行</td><td>57</td></tr></tbody></table>
+<h3>Git・PR</h3>
+<ul><li>作業ブランチ: <code>agent/issue-7-missing-game-child-issues</code></li><li>コミット: <code>76f573b</code> <code>docs: record missing B1 game child issues</code></li><li>Draft PR: <a href="https://github.com/tj-999-comp/B_Stats_Site/pull/47">#47</a></li><li><code>main</code>への直接Pushは行わず、Draft PRで確認可能な状態にした。</li></ul></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">05　検証</p><h2>検証</h2></div><div class="section-content"><ul><li><code>scripts/dev/validate_work_record_filenames.py</code>を実行し、作業記録の番号・配置を確認した。</li><li><code>scripts/dev/validate_work_record_source.py --check-fixtures</code>を実行し、作業記録の構成を確認した。</li><li><code>sync_github_issue_status --check</code>を実行し、#022のIssue状況がGitHub上のオープンIssue 10件と一致することを確認した。</li><li>スクレイパーのPython構文確認、<code>git diff --check</code>を実行した。</li><li>集計CSVは212行、候補リストは40試合、チーム側候補は78件、残存不足数は0件であることを確認した。</li><li>PRのCIで既存の<code>work_record_018.html</code>がMarkdownからの再生成結果と不一致と判定されたため、公式変換結果へ更新して再検証する。</li></ul></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">06　記録</p><h2>未完了事項と次アクション</h2></div><div class="section-content"><ul><li>#45で公式スケジュールからschedule_keyを確定し、既存JSONとの重複を除いて試合詳細を取得する。</li><li>#46で取得成功分をdry-run変換し、必要なDB変更一式をreview-agentで確認したうえで、ユーザーがlive DBへ適用する。</li><li>Upsert後にチーム・シーズン別件数を再集計し、<code>club_season_game_counts.csv</code>と一致することを確認する。</li></ul></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">07　Issue状況</p><h2>GitHub Issue状況（2026-08-24時点の現在値）</h2></div><div class="section-content"><p>確認日: 2026-08-24（JST）</p>
+<p>GitHub APIで <code>tj-999-comp/B_Stats_Site</code> のIssueを確認した。Pull Requestは対象外とした。未完了Issueは10件だった。</p>
+<h3>親子関係</h3>
+<pre><code class="language-text">#7（未完了・親Issue）
+├── #8（完了・子Issue）
+├── #45（未完了・子Issue）
+└── #46（未完了・子Issue）
+#12（完了・親Issue）
+├── #21（完了・子Issue）
+├── #22（完了・子Issue）
+└── #23（完了・子Issue）
+#24（完了・親Issue）
+└── #25（完了・子Issue）</code></pre>
+<p>GitHubのsub-issues APIで登録された親子関係を記載した。親子登録のないIssueは、優先順位一覧の関係・着手条件に記載する。</p>
+<h3>優先順位順の未完了一覧</h3>
+<p>優先順位は <code>github_issue_status_policy.json</code> の運用設定を使い、設定のないIssueは既定値P3として記載する。</p>
+<table><thead><tr><th>順位</th><th>優先度</th><th>GitHub Issue</th><th>状態</th><th>関係・着手条件</th></tr></thead><tbody><tr><td>1</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/7">#7</a> 試合のスクレイピングデータ精査</td><td>未完了</td><td>#24と範囲が重なる</td></tr><tr><td>2</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/9">#9</a> 課題解決の原案を立てる</td><td>未完了</td><td>探索テーマ</td></tr><tr><td>3</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/15">#15</a> [DB] 過年度の plus_minus・背番号欠損を調査する</td><td>未完了</td><td>独立</td></tr><tr><td>4</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/17">#17</a> [DB] play_by_play未投入と存在フラグの整合性を整理する</td><td>未完了</td><td>独立</td></tr><tr><td>5</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/30">#30</a> [Actions] 手動公開要求workflowとdispatch権限を設定する</td><td>未完了</td><td>独立。優先度未設定</td></tr><tr><td>6</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/31">#31</a> [E2E] 新規作業記録1件を手動publish要求する</td><td>未完了</td><td>独立。優先度未設定</td></tr><tr><td>7</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/32">#32</a> [Automation] main更新時の公開要求triggerを有効化する</td><td>未完了</td><td>独立。優先度未設定</td></tr><tr><td>8</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/44">#44</a> [DB] live DBへB2・B3スタッツを追加する</td><td>未完了</td><td>独立。優先度未設定</td></tr><tr><td>9</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/45">#45</a> [Scraping] 特定済みの欠落B1試合をスクレイピングする</td><td>未完了</td><td>#7の子Issue。#7完了後</td></tr><tr><td>10</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/46">#46</a> [DB] 特定済みの欠落B1試合をUpsertする</td><td>未完了</td><td>#7の子Issue。#7完了後</td></tr></tbody></table></div></section>
+
+      </main>
+      <footer>
+        <span>B.LEAGUE Stats · 作業記録 022</span>
+        <span><a href="md/work_record_022.md">Markdown原本</a></span>
+      </footer>
+    </div>
+  </body>
+</html>

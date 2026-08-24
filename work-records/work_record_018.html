@@ -10,12 +10,7 @@
   <body>
     <div class="shell">
       <header class="topbar">
-        <a class="wordmark" href="../README.md">B.LEAGUE STATS</a>
-        <nav class="toplinks" aria-label="関連文書">
-          <a href="README.md">運用ルール</a>
-          <a href="design.md">デザイン原則</a>
-          <a href="md/work_record_018.md">Markdownを読む</a>
-        </nav>
+        <span class="wordmark">B.LEAGUE STATS</span>
       </header>
       <main>
         <header class="record-header">
@@ -40,7 +35,7 @@
 <section class="record-section"><div class="section-intro"><p class="section-label">05　検証</p><h2>検証</h2></div><div class="section-content"><ul><li>Python 3.11で<code>scripts</code>と<code>Colab</code>の構文確認を実行した。</li><li>正規化関数について、NULL、空欄、既知の別名、正規値、未知値拒否を確認した。</li><li><code>upsert_players</code>が別名を正規値へ変換することを確認した。</li><li><code>git diff --check</code>を実行した。</li><li>SQL変更に対するreview-agentの読み取り専用レビューを実行し、指摘を修正した。最終レビューは<code>No findings.</code>だった。</li><li>live DBへのSQL適用、DB件数の実更新確認は未実施。ユーザー実行後にIssue 13のDB側完了条件を確認する。</li></ul></div></section>
 <section class="record-section"><div class="section-intro"><p class="section-label">06　判定</p><h2>完了判定</h2></div><div class="section-content"><p>正規値、NULLの意味、新規投入時の検知、既存データ用の4種SQL、ロールバック方針、運用上の実行主体を記録した。実装とSQL提案の準備は完了しているが、live DBの実更新はユーザー実行待ちであるため、Issue 13自体は未完了のまま維持する。</p>
 <p>作業ブランチは<code>agent/issue-13-player-slot-category-normalization</code>。実装commitは<code>31e1ecc</code>、push済みである。Draft PR <a href="https://github.com/tj-999-comp/B_Stats_Site/pull/40">#40</a>を作成した。作業記録へのこの追記は同PRの後続commitに含める。</p></div></section>
-<section class="record-section"><div class="section-intro"><p class="section-label">07　記録</p><h2>GitHub Issue状況（2026-08-20時点の現在値）</h2></div><div class="section-content"><p>確認日: 2026-08-20（JST）</p>
+<section class="record-section"><div class="section-intro"><p class="section-label">07　Issue状況</p><h2>GitHub Issue状況（2026-08-20時点の現在値）</h2></div><div class="section-content"><p>確認日: 2026-08-20（JST）</p>
 <p>GitHub APIで<code>tj-999-comp/B_Stats_Site</code>のIssue 13、Issue 13のコメント、全オープンIssue、親Issueのsub-issuesを取得した。Issue 13はopenで、コメントは0件だった。Pull Requestは一覧から除外した。</p>
 <h3>親子関係</h3>
 <pre><code class="language-text">#7（未完了・親Issue）
