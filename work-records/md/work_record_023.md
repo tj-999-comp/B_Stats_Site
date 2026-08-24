@@ -81,8 +81,8 @@ GitHub Issue [#45](https://github.com/tj-999-comp/B_Stats_Site/issues/45)で、`
 ### Git・PR
 
 - 作業ブランチ: `agent/issue-45-scrape-missing-b1-games`
-- コミット: Draft PR作成後に追記
-- Draft PR: 作成後に追記
+- コミット: [`5720032`](https://github.com/tj-999-comp/B_Stats_Site/commit/5720032) `feat: merge 40 missing B1 game records`
+- Draft PR: [#48](https://github.com/tj-999-comp/B_Stats_Site/pull/48) `[Scraping] 欠落B1試合40件を月次JSONへ統合`
 - `main`への直接Push、Supabaseへの接続・変換・Upsertは行っていない。
 
 ## 検証
