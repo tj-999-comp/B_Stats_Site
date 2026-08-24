@@ -89,14 +89,14 @@ Issue #46の最新状態を作業記録作成前に確認した時点では、�
 ## Git・PR
 
 - 作業ブランチ: `agent/issue-46-upsert-missing-b1-games`
-- コミット: 作成後追記
-- Draft PR: 作成後追記
+- コミット: [`c40c7dd`](https://github.com/tj-999-comp/B_Stats_Site/commit/c40c7dd) `feat: prepare issue 46 missing game upsert patch`
+- Draft PR: [#49](https://github.com/tj-999-comp/B_Stats_Site/pull/49) `[DB] 欠落B1試合40件のUpsert SQLを整備`
 - mainへの直接Pushは行っていない
 
 ## 未完了事項と次アクション
 
-- 作業記録、metadata、HTMLを検証してcommit・pushする。
-- Draft PRを作成し、Issue #46へ完了コメントとPR URLを記録する。
+- 作業記録、metadata、HTML、SQL一式のcommit・push・Draft PR作成まで完了した。
+- Issue #46へ完了コメントとPR URLを記録する。
 - IssueのクローズはPR merge後に行う。
 
 ## GitHub Issue状況（2026-08-24時点の現在値）
