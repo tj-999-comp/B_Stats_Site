@@ -19,6 +19,9 @@ venv/
 .env.local
 .env.*.local
 
+# Local GitHub App configuration (the private key stays in macOS Keychain)
+config/github_app.json
+
 # Build outputs
 dist/
 build/
