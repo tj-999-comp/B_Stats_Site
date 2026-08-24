@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light">
+    <title>新規作業記録の手動公開要求E2E — 作業記録</title>
+    <link rel="stylesheet" href="work_record.css">
+  </head>
+  <body>
+    <div class="shell">
+      <header class="topbar">
+        <span class="wordmark">B.LEAGUE STATS</span>
+      </header>
+      <main>
+        <header class="record-header">
+          <p class="kicker">作業記録 026 ・ 2026-08-24</p>
+          <h1>新規作業記録の手動公開要求E2E</h1>
+          <dl class="record-meta">
+            <div><dt>原本</dt><dd><code>md/work_record_026.md</code></dd></div>
+            <div><dt>状態</dt><dd>記録本文をHTML化</dd></div>
+          </dl>
+        </header>
+        <section class="record-section"><div class="section-intro"><p class="section-label">01　概要</p><h2>概要</h2></div><div class="section-content"><p>GitHub Issue <a href="https://github.com/tj-999-comp/B_Stats_Site/issues/31">#31</a>に対応し、<code>B_Stats_Site</code>で新しく作成した作業記録1件を、固定commitと対象basenameを指定する手動公開要求workflowから<code>sandbox-pages</code>へ送る。</p>
+<p>完了条件は、既存最大番号の次を採番し、Markdown・metadata・同名HTMLを揃え、B側のvalidatorとブラウザ確認を通したcommitを公開要求の入力に固定すること、A側の受入workflowとPages公開結果を確認すること、Aのファイルを直接変更しないことである。</p></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">02　記録</p><h2>適用した役割</h2></div><div class="section-content"><h3>実際に担当したRole</h3>
+<ul><li><code>E2E validation</code>: B側の生成・検証結果、固定commit、対象basename、A側workflowの実行結果を照合</li><li><code>Release operation</code>: <code>workflow_dispatch</code>による公開要求と公開URLの確認</li><li><code>Documentation</code>: 採番、入力、実行順、未確認事項を作業記録へ整理</li></ul></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">03　記録</p><h2>主要な判断</h2></div><div class="section-content"><ul><li>既存ファイルとGit履歴で確認できる最大番号は<code>025</code>だったため、欠番の再利用をせず<code>work_record_026</code>を採用する。</li><li>公開対象は<code>work-records/md/work_record_026.md</code>、<code>work-records/metadata/work_record_026.yml</code>、<code>work-records/work_record_026.html</code>の同名3ファイルとする。</li><li>metadataの<code>project_id</code>は登録済みの<code>B_Stats_Site</code>、<code>publish</code>は公開要求対象を示す<code>true</code>とする。</li><li>B側で作成したcommitのSHAを<code>source_commit_sha</code>へ固定し、<code>target_basename=work_record_026</code>として手動workflowを起動する。公開先<code>sandbox-pages</code>はcheckout・編集・commit・pushの対象にしない。</li><li>A側の受入結果とPagesの公開URLは、dispatch後のGitHub Actions実行結果で確認する。A側の作業ツリーは変更しない。</li></ul></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">04　成果物</p><h2>作成物</h2></div><div class="section-content"><ul><li><code>work-records/md/work_record_026.md</code></li><li><code>work-records/metadata/work_record_026.yml</code></li><li><code>work-records/work_record_026.html</code></li></ul></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">05　実行</p><h2>実行内容</h2></div><div class="section-content"><ol><li><code>origin/main</code>を基準にIssue #31専用ブランチを作成する。</li><li>過去最大番号<code>025</code>の次としてMarkdownとmetadataを作成する。</li><li>converterで同名HTMLを生成し、filename、metadata、source safety、HTML再生成を検証する。</li><li>1280pxと320pxのChromium表示で横overflow、console error、page error、failed requestを確認する。</li><li>レビュー済みcommitをBへpushし、その40文字SHAと<code>work_record_026</code>を手動公開要求へ渡す。</li><li>A側の受入workflow、provenance、Pages公開URLを確認し、結果をIssue #31へ記録する。</li></ol></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">06　検証</p><h2>検証</h2></div><div class="section-content"><p>実行結果は、作業記録の作成・変換後に追記する。公開要求はB側の検証がすべて成功したcommitだけを対象にする。</p></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">07　記録</p><h2>最終結果</h2></div><div class="section-content"><ul><li>作業ブランチ: <code>agent/issue-31-manual-publish-e2e</code></li><li>対象basename: <code>work_record_026</code></li><li>A側の公開結果: 公開要求実行後に確認する</li><li>Aのファイル直接変更: 実施しない</li></ul></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">08　記録</p><h2>未完了事項と次アクション</h2></div><div class="section-content"><ul><li>B側のレビュー、push、手動公開要求、A側の受入・Pages反映結果を確認する。</li><li>Issue #31はA側の公開URLとprovenanceを確認してから完了コメントを記録する。</li></ul></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">09　Issue状況</p><h2>GitHub Issue状況（2026-08-24時点の現在値）</h2></div><div class="section-content"><p>確認日: 2026-08-24（JST）</p>
+<p>GitHub APIで <code>tj-999-comp/B_Stats_Site</code> のIssueを確認した。Pull Requestは対象外とした。未完了Issueは7件だった。</p>
+<h3>親子関係</h3>
+<pre><code class="language-text">#7（未完了・親Issue）
+├── #8（完了・子Issue）
+├── #45（完了・子Issue）
+└── #46（完了・子Issue）
+#12（完了・親Issue）
+├── #21（完了・子Issue）
+├── #22（完了・子Issue）
+└── #23（完了・子Issue）
+#24（完了・親Issue）
+└── #25（完了・子Issue）</code></pre>
+<p>GitHubのsub-issues APIで登録された親子関係を記載した。親子登録のないIssueは、優先順位一覧の関係・着手条件に記載する。</p>
+<h3>優先順位順の未完了一覧</h3>
+<p>優先順位は <code>github_issue_status_policy.json</code> の運用設定を使い、設定のないIssueは既定値P3として記載する。</p>
+<table><thead><tr><th>順位</th><th>優先度</th><th>GitHub Issue</th><th>状態</th><th>関係・着手条件</th></tr></thead><tbody><tr><td>1</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/7">#7</a> 試合のスクレイピングデータ精査</td><td>未完了</td><td>#24と範囲が重なる</td></tr><tr><td>2</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/9">#9</a> 課題解決の原案を立てる</td><td>未完了</td><td>探索テーマ</td></tr><tr><td>3</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/15">#15</a> [DB] 過年度の plus_minus・背番号欠損を調査する</td><td>未完了</td><td>独立</td></tr><tr><td>4</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/17">#17</a> [DB] play_by_play未投入と存在フラグの整合性を整理する</td><td>未完了</td><td>独立</td></tr><tr><td>5</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/31">#31</a> [E2E] 新規作業記録1件を手動publish要求する</td><td>未完了</td><td>独立。優先度未設定</td></tr><tr><td>6</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/32">#32</a> [Automation] main更新時の公開要求triggerを有効化する</td><td>未完了</td><td>独立。優先度未設定</td></tr><tr><td>7</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/44">#44</a> [DB] live DBへB2・B3スタッツを追加する</td><td>未完了</td><td>独立。優先度未設定</td></tr></tbody></table></div></section>
+
+      </main>
+      <footer>
+        <span>B.LEAGUE Stats · 作業記録 026</span>
+        <span><a href="md/work_record_026.md">Markdown原本</a></span>
+      </footer>
+    </div>
+  </body>
+</html>
