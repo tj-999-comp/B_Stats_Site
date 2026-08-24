@@ -47,11 +47,11 @@ Issueで確認されていた正規値は`日本人選手`、`外国籍選手`�
 
 次の順序で、ユーザーが対象接続先を確認して実行する。Claudeはこれらを実行しない。
 
-1. [`20260820_backup_issue13_player_slot_category.sql`](../../supabase/sql/20260820_backup_issue13_player_slot_category.sql)
-2. [`20260820_verify_issue13_player_slot_category.sql`](../../supabase/sql/20260820_verify_issue13_player_slot_category.sql)（実行前）
-3. [`20260820_fix_issue13_player_slot_category.sql`](../../supabase/sql/20260820_fix_issue13_player_slot_category.sql)
-4. [`20260820_verify_issue13_player_slot_category.sql`](../../supabase/sql/20260820_verify_issue13_player_slot_category.sql)（実行後）
-5. 問題がある場合のみ[`20260820_rollback_fix_issue13_player_slot_category.sql`](../../supabase/sql/20260820_rollback_fix_issue13_player_slot_category.sql)を実行し、その後に`verify`を再実行する。
+1. `20260820_backup_issue13_player_slot_category.sql`
+2. `20260820_verify_issue13_player_slot_category.sql`（実行前）
+3. `20260820_fix_issue13_player_slot_category.sql`
+4. `20260820_verify_issue13_player_slot_category.sql`（実行後）
+5. 問題がある場合のみ`20260820_rollback_fix_issue13_player_slot_category.sql`を実行し、その後に`verify`を再実行する。
 
 バックアップ対象は、実行時点で`日本`または`帰化選手枠`を持つ行である。バックアップSQLは対象件数を固定し、修正SQLはバックアップ件数と更新件数を照合する。検証SQLは正規化状態とCHECK制約の存在を確認する。
 
