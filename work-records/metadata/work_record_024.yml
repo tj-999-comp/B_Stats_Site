@@ -1,0 +1,10 @@
+schema_version: 1
+title: "固定commitの手動公開要求workflowとdispatch権限"
+date: "2026-08-24"
+project_id: B_Stats_Site
+tags:
+  - actions
+  - publish
+  - security
+  - issue-30
+publish: true

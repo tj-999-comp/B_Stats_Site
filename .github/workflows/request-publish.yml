@@ -1,0 +1,113 @@
+name: Request work-record publish
+
+on:
+  workflow_dispatch:
+    inputs:
+      source_commit_sha:
+        description: Exact 40-character source commit SHA to validate and publish
+        required: true
+        type: string
+      target_basename:
+        description: Numbered work-record basename, for example work_record_025
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+env:
+  PROJECT_ID: B_Stats_Site
+  PUBLISH_REPOSITORY: tj-999-comp/sandbox-pages
+  PUBLISH_WORKFLOW: accept-source.yml
+  PUBLISH_REF: main
+
+jobs:
+  validate:
+    name: Validate fixed source commit
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Validate dispatch inputs
+        env:
+          SOURCE_COMMIT_SHA: ${{ inputs.source_commit_sha }}
+          TARGET_BASENAME: ${{ inputs.target_basename }}
+        run: |
+          set -euo pipefail
+          if [[ ! "$SOURCE_COMMIT_SHA" =~ ^[0-9a-fA-F]{40}$ ]]; then
+            echo "source_commit_sha must be a 40-character hexadecimal commit SHA" >&2
+            exit 1
+          fi
+          if [[ ! "$TARGET_BASENAME" =~ ^work_record_[0-9]{3}$ ]]; then
+            echo "target_basename must match work_record_001 through work_record_999" >&2
+            exit 1
+          fi
+          number="${TARGET_BASENAME##*_}"
+          if (( 10#$number < 1 || 10#$number > 999 )); then
+            echo "target_basename number must be between 001 and 999" >&2
+            exit 1
+          fi
+
+      - name: Checkout fixed source commit
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.source_commit_sha }}
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Verify fixed checkout
+        env:
+          SOURCE_COMMIT_SHA: ${{ inputs.source_commit_sha }}
+        run: |
+          set -euo pipefail
+          checked_out_sha="$(git rev-parse HEAD)"
+          expected_sha="$(printf '%s' "$SOURCE_COMMIT_SHA" | tr '[:upper:]' '[:lower:]')"
+          test "$checked_out_sha" = "$expected_sha"
+          test "$(git cat-file -t "$checked_out_sha")" = commit
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Validate work-record filenames and placement
+        run: python scripts/dev/validate_work_record_filenames.py
+
+      - name: Validate deterministic HTML regeneration
+        run: python -m scripts.dev.convert_work_records_to_html --check
+
+      - name: Validate metadata and source safety
+        run: python scripts/dev/validate_work_record_source.py
+
+      - name: Validate source safety fixtures
+        run: python scripts/dev/validate_work_record_source.py --check-fixtures
+
+      - name: Validate selected publish request
+        env:
+          TARGET_BASENAME: ${{ inputs.target_basename }}
+        run: python -m scripts.dev.validate_publish_request --target-basename "$TARGET_BASENAME"
+
+  dispatch:
+    name: Dispatch validated publish request
+    needs: validate
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Send request to sandbox-pages
+        env:
+          GH_TOKEN: ${{ secrets.SANDBOX_PAGES_DISPATCH_TOKEN }}
+          PROJECT_ID: ${{ env.PROJECT_ID }}
+          PUBLISH_REPOSITORY: ${{ env.PUBLISH_REPOSITORY }}
+          PUBLISH_WORKFLOW: ${{ env.PUBLISH_WORKFLOW }}
+          PUBLISH_REF: ${{ env.PUBLISH_REF }}
+          SOURCE_COMMIT_SHA: ${{ inputs.source_commit_sha }}
+          TARGET_BASENAME: ${{ inputs.target_basename }}
+        run: |
+          set -euo pipefail
+          test -n "$GH_TOKEN"
+          gh api \
+            --method POST \
+            "repos/$PUBLISH_REPOSITORY/actions/workflows/$PUBLISH_WORKFLOW/dispatches" \
+            -f "ref=$PUBLISH_REF" \
+            -f "inputs[project_id]=$PROJECT_ID" \
+            -f "inputs[source_commit_sha]=$SOURCE_COMMIT_SHA" \
+            -f "inputs[target_basename]=$TARGET_BASENAME"
