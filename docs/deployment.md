@@ -45,3 +45,7 @@
 
 毎日UTC 15:00（JST 深夜0時）に自動実行されます。
 手動実行はGitHub ActionsのWorkflow dispatchから可能です。
+
+## 作業記録の手動公開要求
+
+公開要求は`.github/workflows/request-publish.yml`をWorkflow dispatchから実行します。検証済みの固定commit SHAと、`publish: true`の対象basenameを指定してください。公開先`sandbox-pages`へのdispatchには`SANDBOX_PAGES_DISPATCH_TOKEN`を使います。PATは`sandbox-pages`だけに限定し、ActionsのRead and writeだけを付与し、Contents writeは付与しません。期限、rotation、失効手順は[`docs/workflows.md`](workflows.md)に記録しています。

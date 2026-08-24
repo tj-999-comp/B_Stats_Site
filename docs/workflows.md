@@ -66,6 +66,31 @@ python -m scripts.dev.sync_github_issue_status \
 
 このコマンドはGitHub APIから全オープンIssueとsub-issuesの親子関係を取得し、`github_issue_status_policy.json` の優先度設定を使って、番号が最大の作業記録のMarkdown末尾へ `work_record_010.html` と同じツリー・優先順位表を生成した後、対応するHTMLを再生成する。確認だけを行う場合は `--check` を使う。
 
+## request-publish.yml — 固定commitの手動公開要求
+
+**ファイル:** `.github/workflows/request-publish.yml`
+
+### トリガー
+
+`workflow_dispatch`だけで実行します。入力には、検証して公開要求する固定40文字SHAと、対象の`work_record_###` basenameを指定します。push triggerはありません。
+
+### 処理概要
+
+1. 入力形式を検査し、指定SHAをcheckoutして`HEAD`と一致することを確認する
+2. filename、metadata、HTML再生成、HTML・CSS・URL安全性、fixtureを検証する
+3. 対象metadataの`publish: true`、`project_id: B_Stats_Site`、同名Markdown・metadata・HTMLの存在を確認する
+4. `sandbox-pages`の`accept-source.yml`へ`project_id`、`source_commit_sha`、`target_basename`だけをworkflow dispatchする
+
+このworkflowは公開先リポジトリをcheckout、編集、commit、pushしません。公開先側の受入・provenance・Pages反映は公開先workflowの責務です。公開要求元の検証成功は公開承認を意味しません。
+
+### dispatch用Secretの運用
+
+| Secret名 | 設定内容 |
+|---|---|
+| `SANDBOX_PAGES_DISPATCH_TOKEN` | Fine-grained PAT。repository accessは`tj-999-comp/sandbox-pages`だけ、Repository permissionsは`Actions: Read and write`だけ（Contents writeは付与しない） |
+
+PATは作成時に有効期限を設定し、最大90日で運用します。期限の14日前をrotation開始目安とし、新PATを同じSecretへ登録して手動公開要求を1件テストした後、旧PATをGitHubで失効させます。漏えいまたは不要化が判明した場合は、直ちにPATを失効させてSecretを削除または置換し、該当Actions実行を監査します。PAT値、期限付きtoken、API応答をworkflowのmetadata・artifact・ログ・作業記録へ保存しません。
+
 ---
 
 ## deploy-pages.yml — GitHub Pages へのデプロイ
