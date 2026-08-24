@@ -33,11 +33,13 @@ python3 -c 'import jwt, cryptography; print("GitHub App dependencies OK")'
 
 Issue、PR、レビュー、CIの取得には、個人の期限付きOAuth/PATではなくGitHub AppのInstallation tokenを使う。
 
-- 設定: `config/github_app.json`
+- 設定: `config/github_app.json`（`config/github_app.example.json`を複製してローカルで作成）
 - 秘密鍵: Macキーチェーンの一般パスワード項目
 - 発行: `python3 scripts/dev/github_app_token.py`
 - token: 実行ごとに発行し、保存しない
 - `GH_TOKEN`: 対象コマンドのサブプロセスだけへ渡す
+
+設定値、Keychain項目、確認コマンドは[`config/README.md`](../config/README.md)を正本とする。`config/github_app.json`はGit管理外とし、追跡するのは秘密値を含まない`config/github_app.example.json`だけにする。
 
 標準コマンドは次の形式にする。`--print-token`の出力を画面やログへ直接表示しない。
 

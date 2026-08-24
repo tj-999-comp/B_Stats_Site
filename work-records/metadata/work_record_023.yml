@@ -1,0 +1,10 @@
+schema_version: 1
+title: "欠落B1試合40件の取得と月次JSON統合"
+date: "2026-08-24"
+project_id: B_Stats_Site
+tags:
+  - scraping
+  - b1
+  - json
+  - issue-45
+publish: true

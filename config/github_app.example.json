@@ -1,0 +1,6 @@
+{
+  "app_id": "REPLACE_WITH_GITHUB_APP_ID",
+  "client_id": "REPLACE_WITH_GITHUB_APP_CLIENT_ID",
+  "repository": "tj-999-comp/B_Stats_Site",
+  "keychain_service": "codex-github-app-private-key"
+}

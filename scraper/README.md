@@ -49,6 +49,42 @@ python -m scripts.scraping.scraper --start-date 2024-10-05 --end-date 2024-10-11
 python -m scripts.scraping.scraper --start-date 2024-10-05 --end-date 2024-10-11 --season 2024-25
 ```
 
+### 補完候補の日付を一括取得
+
+`game_supplement_candidates.csv`の候補を読み込み、同一日付をまとめて1回ずつ取得します。
+候補40試合・38日付の場合でも、シェルからの実行は1回です。日付別JSONと実行結果の
+`manifest.json`は`--output-dir`へ保存されます。
+
+```bash
+python -m scripts.scraping.scrape_candidate_dates \
+  --input scraper/data/game_supplement_candidates.csv \
+  --output-dir scraper/data/issue45_candidate_scrapes
+```
+
+取得前の候補確認だけを行う場合:
+
+```bash
+python -m scripts.scraping.scrape_candidate_dates \
+  --input scraper/data/game_supplement_candidates.csv \
+  --dry-run
+```
+
+既存の出力を明示的に再作成する場合だけ`--overwrite`を指定します。
+
+### fallbackになった試合詳細の再取得
+
+`fallback_html`になった試合は、追加タブを含めて再取得し、サマリーと両チームのboxscoreが
+そろわなければ終了コード1で失敗扱いにします。通常の`game_detail`取得を置き換えず、結果は
+指定した別JSONへ保存します。
+
+```bash
+python -m scripts.dev.refetch_game_detail \
+  --schedule-key 1810 \
+  --date 2018-01-01 \
+  --season 2017-18 \
+  --output /tmp/issue45_schedule_key_1810_retry.json
+```
+
 ### オプション
 
 | オプション | 説明 |

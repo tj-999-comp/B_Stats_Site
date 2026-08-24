@@ -596,6 +596,7 @@ def fetch_game_context(
     max_retries: int = 3,
     candidate_dates: list[str] | None = None,
     fetch_audit: dict[int, dict[str, Any]] | None = None,
+    tab_candidates: list[str | None] | None = None,
 ) -> dict[str, Any]:
     """Fetch game_detail contexts for `schedule_key`.
 
@@ -608,8 +609,8 @@ def fetch_game_context(
     fallback_candidates: list[tuple[str | None, str, str]] = []
     jst = timezone(timedelta(hours=9))
 
-    tab_candidates: list[str | None] = ['4', '2', None]
-    for tab in tab_candidates:
+    tabs = tab_candidates or ['4', '2', None]
+    for tab in tabs:
         params = {'ScheduleKey': str(schedule_key)}
         if tab is not None:
             params['tab'] = tab
