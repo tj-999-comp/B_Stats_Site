@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light">
+    <title>B_Stats_Site mainへのpush確認テスト — 作業記録</title>
+    <link rel="stylesheet" href="work_record.css">
+  </head>
+  <body>
+    <div class="shell">
+      <header class="topbar">
+        <span class="wordmark">B.LEAGUE STATS</span>
+      </header>
+      <main>
+        <header class="record-header">
+          <p class="kicker">作業記録 027 ・ 2026-08-25</p>
+          <h1>B_Stats_Site mainへのpush確認テスト</h1>
+          <dl class="record-meta">
+            <div><dt>原本</dt><dd><code>md/work_record_027.md</code></dd></div>
+            <div><dt>状態</dt><dd>記録本文をHTML化</dd></div>
+          </dl>
+        </header>
+        <section class="record-section"><div class="section-intro"><p class="section-label">01　概要</p><h2>概要</h2></div><div class="section-content"><ul><li>対象: <code>tj-999-comp/B_Stats_Site</code> の作業記録027。</li><li>目的: 作業記録のMarkdown、metadata、対応HTMLを揃え、<code>B_Stats_Site</code> の <code>main</code> へpushできることを確認する。</li><li>完了条件: 3ファイルの対応、既存validatorとHTML再生成チェックの合格、<code>main</code> へのpush、GitHub上の先端commit確認。</li></ul></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">02　記録</p><h2>主要な判断</h2></div><div class="section-content"><ul><li>既存の最大番号が026だったため、次の番号として027を採用する。</li><li>GitHub Issueに紐づく実装課題ではなく、リポジトリのpush経路確認を目的とするテスト記録として作成する。</li><li>公開対象の作業記録としてmetadataの<code>publish</code>を<code>true</code>にする。</li></ul></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">03　成果物</p><h2>作成物</h2></div><div class="section-content"><ul><li><code>work-records/md/work_record_027.md</code></li><li><code>work-records/metadata/work_record_027.yml</code></li><li><code>work-records/work_record_027.html</code></li></ul></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">04　検証</p><h2>検証</h2></div><div class="section-content"><ul><li>MarkdownからHTMLを再生成し、対応HTMLとの差分がないことを確認した。</li><li>作業記録のファイル名、metadata、HTML対応、source safetyを検証した。</li><li><code>git diff --check</code>を実行した。</li><li>commit後、<code>B_Stats_Site</code> の<code>main</code>へpushし、GitHub上の先端commitを確認した。</li></ul></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">05　記録</p><h2>最終結果</h2></div><div class="section-content"><ul><li>作業記録027のMarkdown、metadata、HTMLを作成した。</li><li><code>B_Stats_Site</code> の<code>main</code>へのpush確認テストを完了した。</li><li>未解決事項: なし。</li></ul></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">06　Issue状況</p><h2>GitHub Issue状況（2026-08-25時点の現在値）</h2></div><div class="section-content"><p>確認日: 2026-08-25（JST）</p>
+<p>GitHub APIで <code>tj-999-comp/B_Stats_Site</code> のIssueを確認した。Pull Requestは対象外とした。未完了Issueは6件だった。</p>
+<h3>親子関係</h3>
+<pre><code class="language-text">#7（未完了・親Issue）
+├── #8（完了・子Issue）
+├── #45（完了・子Issue）
+└── #46（完了・子Issue）
+#12（完了・親Issue）
+├── #21（完了・子Issue）
+├── #22（完了・子Issue）
+└── #23（完了・子Issue）
+#24（完了・親Issue）
+└── #25（完了・子Issue）</code></pre>
+<p>GitHubのsub-issues APIで登録された親子関係を記載した。親子登録のないIssueは、優先順位一覧の関係・着手条件に記載する。</p>
+<h3>優先順位順の未完了一覧</h3>
+<p>優先順位は <code>github_issue_status_policy.json</code> の運用設定を使い、設定のないIssueは既定値P3として記載する。</p>
+<table><thead><tr><th>順位</th><th>優先度</th><th>GitHub Issue</th><th>状態</th><th>関係・着手条件</th></tr></thead><tbody><tr><td>1</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/7">#7</a> 試合のスクレイピングデータ精査</td><td>未完了</td><td>#24と範囲が重なる</td></tr><tr><td>2</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/9">#9</a> 課題解決の原案を立てる</td><td>未完了</td><td>探索テーマ</td></tr><tr><td>3</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/15">#15</a> [DB] 過年度の plus_minus・背番号欠損を調査する</td><td>未完了</td><td>独立</td></tr><tr><td>4</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/17">#17</a> [DB] play_by_play未投入と存在フラグの整合性を整理する</td><td>未完了</td><td>独立</td></tr><tr><td>5</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/32">#32</a> [Automation] main更新時の公開要求triggerを有効化する</td><td>未完了</td><td>独立。優先度未設定</td></tr><tr><td>6</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/44">#44</a> [DB] live DBへB2・B3スタッツを追加する</td><td>未完了</td><td>独立。優先度未設定</td></tr></tbody></table></div></section>
+
+      </main>
+      <footer>
+        <span>B.LEAGUE Stats · 作業記録 027</span>
+        <span><a href="md/work_record_027.md">Markdown原本</a></span>
+      </footer>
+    </div>
+  </body>
+</html>

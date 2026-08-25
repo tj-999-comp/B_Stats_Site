@@ -1,0 +1,8 @@
+schema_version: 1
+title: "B_Stats_Site mainへのpush確認テスト"
+date: "2026-08-25"
+project_id: B_Stats_Site
+tags:
+  - test
+  - work-record
+publish: true
