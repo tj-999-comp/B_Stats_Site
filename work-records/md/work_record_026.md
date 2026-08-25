@@ -5,7 +5,7 @@
 
 GitHub Issue [#31](https://github.com/tj-999-comp/B_Stats_Site/issues/31)に対応し、`B_Stats_Site`で新しく作成した作業記録1件を、固定commitと対象basenameを指定する手動公開要求workflowから`sandbox-pages`へ送る。
 
-完了条件は、既存最大番号の次を採番し、Markdown・metadata・同名HTMLを揃え、B側のvalidatorとブラウザ確認を通したcommitを公開要求の入力に固定すること、A側の受入workflowとPages公開結果を確認すること、Aのファイルを直接変更しないことである。B側の公開要求とA側のdry-run受入までは完了したが、A側applyが環境上の未追跡`__pycache__`で停止したため、Pages公開は次セッションへ引き継ぐ。
+完了条件は、既存最大番号の次を採番し、Markdown・metadata・同名HTMLを揃え、B側のvalidatorとブラウザ確認を通したcommitを公開要求の入力に固定すること、A側の受入workflowとPages公開結果を確認すること、Aのファイルを直接変更しないことである。初回のA側applyは未追跡`__pycache__`で停止したが、A側workflow修正後に同じ固定入力で再実行し、provenance更新とPages公開まで確認した。
 
 ## 適用した役割
 
@@ -21,8 +21,9 @@ GitHub Issue [#31](https://github.com/tj-999-comp/B_Stats_Site/issues/31)に対�
 - 公開対象は`work-records/md/work_record_026.md`、`work-records/metadata/work_record_026.yml`、`work-records/work_record_026.html`の同名3ファイルとする。
 - metadataの`project_id`は登録済みの`B_Stats_Site`、`publish`は公開要求対象を示す`true`とする。
 - B側のmerge commit `8210edbcd271089d6942ce44371a90261bcfc0a0`を`source_commit_sha`へ固定し、`target_basename=work_record_026`として手動workflowを起動した。公開先`sandbox-pages`はcheckout・編集・commit・pushの対象にしない。
-- A側のdry-run受入が成功した後、applyで停止した。失敗原因はA側workflowのPython実行で生成された未追跡`__pycache__/*.pyc`が、apply前の`Repository A worktree must be clean`チェックに残ったことである。
-- A側のファイル、provenance、Pages公開物を直接変更しない。A側workflowまたは実行環境の修正後に同じ入力で再実行する。
+- A側のdry-run受入が成功した後、初回applyで停止した。失敗原因はA側workflowのPython実行で生成された未追跡`__pycache__/*.pyc`が、apply前の`Repository A worktree must be clean`チェックに残ったことである。
+- A側の修正commit `b9c7a4d27ed4597a55de6f6a6e2400b30b64ef5e`でapply時の`PYTHONDONTWRITEBYTECODE=1`を設定し、A側のファイルを直接編集せずに再実行した。
+- 公開先への適用・provenance更新・Pages公開は、`sandbox-pages`のworkflowが行った。B側からA側のファイルを直接変更していない。
 
 ## 作成物
 
@@ -37,7 +38,8 @@ GitHub Issue [#31](https://github.com/tj-999-comp/B_Stats_Site/issues/31)に対�
 3. converterで同名HTMLを生成し、filename、metadata、source safety、HTML再生成を検証した。
 4. 1280px、900px、640px、320pxのChromium表示で横overflow、console error、page error、failed requestを確認した。
 5. commit `b476f4688a1463e51bd98aeb4b4139af211fbd21`を作成し、PR #51をmergeした。main上のmerge commit `8210edbcd271089d6942ce44371a90261bcfc0a0`を固定してB側publish要求を起動した。
-6. B側workflow attempt 2とA側workflowを確認した。B側の全検証とA側dry-runは成功したが、A側applyが未追跡`__pycache__`で停止した。
+6. B側workflow attempt 2とA側workflowを確認した。初回A側applyは未追跡`__pycache__`で停止した。
+7. A側修正後、同じ`source_commit_sha=8210edbcd271089d6942ce44371a90261bcfc0a0`と`target_basename=work_record_026`で再実行した。A側dry-run・apply、Pages build/deploy、公開物を確認した。
 
 ## 検証
 
@@ -51,9 +53,11 @@ GitHub Issue [#31](https://github.com/tj-999-comp/B_Stats_Site/issues/31)に対�
 ### 実行結果
 
 - B側workflow run [32712590804](https://github.com/tj-999-comp/B_Stats_Site/actions/runs/32712590804)のattempt 2: 固定SHA checkout、全validator、A側dispatchが成功
-- A側workflow run [32714174339](https://github.com/tj-999-comp/sandbox-pages/actions/runs/32714174339)のdry-run: source registry、固定SHA、ファイル、metadata、HTML安全性が成功
-- A側apply: `Repository A worktree must be clean before apply`で失敗。Python実行で生成された`__pycache__/*.pyc`が原因
-- A側main: `94362a0698652c815f324cc3b816f2ac9eabce94`のまま。公開先commit・provenance更新・Pages反映は未実施
+- 初回A側workflow run [32714174339](https://github.com/tj-999-comp/sandbox-pages/actions/runs/32714174339): dry-runは成功、applyは`__pycache__`で停止
+- 修正後A側workflow run [32715367822](https://github.com/tj-999-comp/sandbox-pages/actions/runs/32715367822): dry-run・applyが成功し、固定commit `c88a5cc77fb46a15546554d3bbcf539f3f8862b`を生成
+- A側Pages build/deploy run [32715402294](https://github.com/tj-999-comp/sandbox-pages/actions/runs/32715402294): build・deployとも成功
+- 公開先のprovenanceに`source.commit_sha=8210edbcd271089d6942ce44371a90261bcfc0a0`、対象`work_record_026`、公開URLを確認
+- 親の受入runは最終conclusionが`failure`だが、dry-run/applyと呼び出し先Pages deployは成功し、失敗ログは出力されなかった。公開成果物とPages状態は独立に確認済み
 
 ## 最終結果
 
@@ -61,14 +65,17 @@ GitHub Issue [#31](https://github.com/tj-999-comp/B_Stats_Site/issues/31)に対�
 - 対象basename: `work_record_026`
 - B側publish要求: 成功
 - A側dry-run受入: 成功
-- A側Pages公開結果: 未完了。apply失敗のため公開URLは未生成
+- A側Pages公開結果: 完了。`https://tj-999-comp.github.io/sandbox-pages/projects/B_Stats_Site/work_record_026.html`
+- A側provenance: 完了。公開対象、source commit、metadata、HTMLの記録を確認
 - Aのファイル直接変更: 実施しない
 
 ## 未完了事項と次アクション
 
-- `sandbox-pages`側でapply前に`__pycache__`を生成しない、またはapply前に除去する修正を行う。
-- 修正後、`source_commit_sha=8210edbcd271089d6942ce44371a90261bcfc0a0`、`target_basename=work_record_026`でA側受入workflowを再実行する。
-- A側の公開URLとprovenanceを確認してからIssue #31を完了扱いにする。現在Issue #31は未完了のままである。
+初回失敗からの再実行、公開先commit・provenance更新、Pages build/deploy、公開URL確認まで完了した。残る作業は、この最終結果を記録した変更をB側へ反映し、Issue #31へ完了コメントを残すことである。
+
+## 最終追記（2026-08-25）
+
+`sandbox-pages`の現在mainとGitHub Actionsを再確認した。A側workflowの修正commit後の受入runでは、`work_record_026`が`c88a5cc77fb46a15546554d3bbcf539f3f8862b`として反映され、provenanceに固定source commitと公開対象が保存されている。Pagesの公開状態は`built`で、対象HTMLを公開URLから確認できる。これによりIssue #31のE2E完了条件を満たした。
 
 ## GitHub Issue状況（2026-08-25時点の現在値）
 
