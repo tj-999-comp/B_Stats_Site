@@ -1,6 +1,11 @@
 name: Request work-record publish
 
 on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'work-records/**'
   workflow_dispatch:
     inputs:
       source_commit_sha:
@@ -21,13 +26,81 @@ env:
   PUBLISH_WORKFLOW: accept-source.yml
   PUBLISH_REF: main
 
+concurrency:
+  group: request-work-record-publish
+  cancel-in-progress: false
+
 jobs:
+  prepare:
+    name: Select changed work records
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      source_commit_sha: ${{ steps.targets.outputs.source_commit_sha }}
+      target_basenames: ${{ steps.targets.outputs.target_basenames }}
+    steps:
+      - name: Validate manual dispatch inputs
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          SOURCE_COMMIT_SHA: ${{ inputs.source_commit_sha }}
+          TARGET_BASENAME: ${{ inputs.target_basename }}
+        run: |
+          set -euo pipefail
+          if [[ ! "$SOURCE_COMMIT_SHA" =~ ^[0-9a-fA-F]{40}$ ]]; then
+            echo "source_commit_sha must be a 40-character hexadecimal commit SHA" >&2
+            exit 1
+          fi
+          if [[ ! "$TARGET_BASENAME" =~ ^work_record_[0-9]{3}$ ]]; then
+            echo "target_basename must match work_record_001 through work_record_999" >&2
+            exit 1
+          fi
+          number="${TARGET_BASENAME##*_}"
+          if (( 10#$number < 1 || 10#$number > 999 )); then
+            echo "target_basename number must be between 001 and 999" >&2
+            exit 1
+          fi
+
+      - name: Checkout source commit
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'workflow_dispatch' && inputs.source_commit_sha || github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Select publish targets
+        id: targets
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          BEFORE_SHA: ${{ github.event.before }}
+          AFTER_SHA: ${{ github.sha }}
+          MANUAL_SOURCE_COMMIT_SHA: ${{ inputs.source_commit_sha }}
+          MANUAL_TARGET_BASENAME: ${{ inputs.target_basename }}
+        run: |
+          set -euo pipefail
+          if [[ "$EVENT_NAME" == "workflow_dispatch" ]]; then
+            target_basenames="[\"$MANUAL_TARGET_BASENAME\"]"
+            source_commit_sha="$MANUAL_SOURCE_COMMIT_SHA"
+          else
+            target_basenames="$(python -m scripts.dev.list_changed_work_record_targets \
+              --before "$BEFORE_SHA" \
+              --after "$AFTER_SHA" \
+              --publish-only)"
+            source_commit_sha="$AFTER_SHA"
+          fi
+          echo "source_commit_sha=$source_commit_sha" >> "$GITHUB_OUTPUT"
+          echo "target_basenames=$target_basenames" >> "$GITHUB_OUTPUT"
+          echo "Selected work-record targets: $target_basenames"
+
   validate:
     name: Validate fixed source commit
+    needs: prepare
+    if: needs.prepare.outputs.target_basenames != '[]'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
       - name: Validate dispatch inputs
+        if: github.event_name == 'workflow_dispatch'
         env:
           SOURCE_COMMIT_SHA: ${{ inputs.source_commit_sha }}
           TARGET_BASENAME: ${{ inputs.target_basename }}
@@ -50,13 +123,13 @@ jobs:
       - name: Checkout fixed source commit
         uses: actions/checkout@v4
         with:
-          ref: ${{ inputs.source_commit_sha }}
+          ref: ${{ needs.prepare.outputs.source_commit_sha }}
           fetch-depth: 1
           persist-credentials: false
 
       - name: Verify fixed checkout
         env:
-          SOURCE_COMMIT_SHA: ${{ inputs.source_commit_sha }}
+          SOURCE_COMMIT_SHA: ${{ needs.prepare.outputs.source_commit_sha }}
         run: |
           set -euo pipefail
           checked_out_sha="$(git rev-parse HEAD)"
@@ -83,12 +156,17 @@ jobs:
 
       - name: Validate selected publish request
         env:
-          TARGET_BASENAME: ${{ inputs.target_basename }}
-        run: python -m scripts.dev.validate_publish_request --target-basename "$TARGET_BASENAME"
+          TARGET_BASENAMES_JSON: ${{ needs.prepare.outputs.target_basenames }}
+        run: |
+          set -euo pipefail
+          while IFS= read -r target_basename; do
+            python -m scripts.dev.validate_publish_request --target-basename "$target_basename"
+          done < <(jq -r '.[]' <<< "$TARGET_BASENAMES_JSON")
 
   dispatch:
     name: Dispatch validated publish request
-    needs: validate
+    needs: [prepare, validate]
+    if: needs.validate.result == 'success' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -99,15 +177,17 @@ jobs:
           PUBLISH_REPOSITORY: ${{ env.PUBLISH_REPOSITORY }}
           PUBLISH_WORKFLOW: ${{ env.PUBLISH_WORKFLOW }}
           PUBLISH_REF: ${{ env.PUBLISH_REF }}
-          SOURCE_COMMIT_SHA: ${{ inputs.source_commit_sha }}
-          TARGET_BASENAME: ${{ inputs.target_basename }}
+          SOURCE_COMMIT_SHA: ${{ needs.prepare.outputs.source_commit_sha }}
+          TARGET_BASENAMES_JSON: ${{ needs.prepare.outputs.target_basenames }}
         run: |
           set -euo pipefail
           test -n "$GH_TOKEN"
-          gh api \
-            --method POST \
-            "repos/$PUBLISH_REPOSITORY/actions/workflows/$PUBLISH_WORKFLOW/dispatches" \
-            -f "ref=$PUBLISH_REF" \
-            -f "inputs[project_id]=$PROJECT_ID" \
-            -f "inputs[source_commit_sha]=$SOURCE_COMMIT_SHA" \
-            -f "inputs[target_basename]=$TARGET_BASENAME"
+          while IFS= read -r target_basename; do
+            gh api \
+              --method POST \
+              "repos/$PUBLISH_REPOSITORY/actions/workflows/$PUBLISH_WORKFLOW/dispatches" \
+              -f "ref=$PUBLISH_REF" \
+              -f "inputs[project_id]=$PROJECT_ID" \
+              -f "inputs[source_commit_sha]=$SOURCE_COMMIT_SHA" \
+              -f "inputs[target_basename]=$target_basename"
+          done < <(jq -r '.[]' <<< "$TARGET_BASENAMES_JSON")
