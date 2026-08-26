@@ -66,22 +66,34 @@ python -m scripts.dev.sync_github_issue_status \
 
 このコマンドはGitHub APIから全オープンIssueとsub-issuesの親子関係を取得し、`github_issue_status_policy.json` の優先度設定を使って、番号が最大の作業記録のMarkdown末尾へ `work_record_010.html` と同じツリー・優先順位表を生成した後、対応するHTMLを再生成する。確認だけを行う場合は `--check` を使う。
 
-## request-publish.yml — 固定commitの手動公開要求
+## request-publish.yml — 作業記録の公開要求
 
 **ファイル:** `.github/workflows/request-publish.yml`
 
 ### トリガー
 
-`workflow_dispatch`だけで実行します。入力には、検証して公開要求する固定40文字SHAと、対象の`work_record_###` basenameを指定します。push triggerはありません。
+- `push`（`main`ブランチの`work-records/**`変更時）
+- `workflow_dispatch`（手動復旧経路）
+
+自動実行ではpushの差分から変更された番号付き作業記録のbasenameだけを抽出します。対象metadataの`publish: true`、同名Markdown・metadata・HTMLの存在、生成元validatorなどの検証に成功したbasenameごとに、`sandbox-pages`へ1件ずつ公開要求をdispatchします。差分に番号付き作業記録がない場合、対象metadataが`publish: true`でない場合、または`work-records/README.md`など無関係な変更だけの場合はdispatchしません。
+
+PR、`pull_request`、fork向けのtriggerは定義していません。Secretを使うdispatch jobは、`main`へのpushまたは利用者が明示した手動実行でのみ動作します。
 
 ### 処理概要
 
-1. 入力形式を検査し、指定SHAをcheckoutして`HEAD`と一致することを確認する
-2. filename、metadata、HTML再生成、HTML・CSS・URL安全性、fixtureを検証する
-3. 対象metadataの`publish: true`、`project_id: B_Stats_Site`、同名Markdown・metadata・HTMLの存在を確認する
-4. `sandbox-pages`の`accept-source.yml`へ`project_id`、`source_commit_sha`、`target_basename`だけをworkflow dispatchする
+1. 自動実行ではpushのbefore/after SHAから変更対象を抽出し、手動実行では入力形式を検査する
+2. 対象SHAをcheckoutして`HEAD`と一致することを確認する
+3. filename、metadata、HTML再生成、HTML・CSS・URL安全性、fixtureを検証する
+4. 対象metadataの`publish: true`、`project_id: B_Stats_Site`、同名Markdown・metadata・HTMLの存在を確認する
+5. `sandbox-pages`の`accept-source.yml`へ`project_id`、`source_commit_sha`、`target_basename`だけをworkflow dispatchする
 
 このworkflowは公開先リポジトリをcheckout、編集、commit、pushしません。公開先側の受入・provenance・Pages反映は公開先workflowの責務です。公開要求元の検証成功は公開承認を意味しません。
+
+### 自動triggerの停止と切り戻し
+
+自動公開要求だけを止める場合は、`.github/workflows/request-publish.yml`の`push` triggerを削除して`workflow_dispatch`を残す変更をmainへ反映します。これにより手動公開要求を復旧経路として維持できます。緊急時はActions画面でworkflow自体を一時停止できますが、その場合は手動経路も停止するため、原因確認後にworkflowを再有効化してください。
+
+誤dispatchや障害が発生した場合は、まず自動triggerを停止し、`sandbox-pages`側の受入workflowとprovenance・Pages公開結果を確認します。生成元のmain変更を戻す必要がある場合は、原因となったcommitをrevertして検証workflowを通し、必要な作業記録だけを固定SHA指定の手動実行で再送します。公開先の反映済みデータを直接このrepositoryから削除・上書きせず、公開先のrollback手順に従います。
 
 ### dispatch用Secretの運用
 
