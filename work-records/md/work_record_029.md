@@ -69,8 +69,8 @@ GitHub Pages版MVP（#58）の公開確認で、Pages workflowとHTML配信は�
 - 未解決事項: Supabase側の設定適用と公開データの読み取り確認は、#63の手順に従って実施する必要がある。
 - 次アクション: #63の設定完了後、Pages workflowを再実行し、#58の公開受入を再確認する。
 - ブランチ: `agent/issue-63-supabase-public-read`
-- commit: 作成後に追記
-- PR: 作成後に追記
+- commit: `b7aca5e`、追加記録コミットはPR #64で確認
+- PR: [#64 docs: Supabase公開読み取り設定の工程を記録](https://github.com/tj-999-comp/B_Stats_Site/pull/64)
 
 ## GitHub Issue状況（2026-08-27時点の現在値）
 
