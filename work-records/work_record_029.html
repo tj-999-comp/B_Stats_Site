@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light">
+    <title>Supabase公開読み取り設定の工程整理 — 作業記録</title>
+    <link rel="stylesheet" href="work_record.css">
+  </head>
+  <body>
+    <div class="shell">
+      <header class="topbar">
+        <span class="wordmark">B.LEAGUE STATS</span>
+      </header>
+      <main>
+        <header class="record-header">
+          <p class="kicker">作業記録 029 ・ 2026-08-27</p>
+          <h1>Supabase公開読み取り設定の工程整理</h1>
+          <dl class="record-meta">
+            <div><dt>原本</dt><dd><code>md/work_record_029.md</code></dd></div>
+            <div><dt>状態</dt><dd>記録本文をHTML化</dd></div>
+          </dl>
+        </header>
+        <section class="record-section"><div class="section-intro"><p class="section-label">01　概要</p><h2>概要</h2></div><div class="section-content"><p>GitHub Pages版MVP（#58）の公開確認で、Pages workflowとHTML配信は成功した一方、未認証ブラウザからSupabaseの<code>games</code>を取得するとHTTP 200の空配列になり、画面が読み込み中のままになることを確認した。ログインなしで公開データを表示するために、Supabase側で必要な確認・設定・検証工程を明文化した子Issueを#56へ追加する。</p>
+<p>完了条件は、#56の子Issue作成、#56→新規Issueのsub-issues登録、Supabaseの接続先・Data API・RLS・キー・REST確認・Pages再デプロイ・ブラウザ受入を含む実行手順の記載、Issue状況の同期、作業記録の検証、PR作成とマージである。Supabaseのlive DB変更はこの作業の対象外とする。</p>
+<p>対象Issue:</p>
+<ul><li><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/56">#56 GitHub Pages版の親Issue</a></li><li><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/58">#58 GitHub Pages版MVP</a></li><li><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/63">#63 Supabase公開読み取り設定</a></li></ul></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">02　記録</p><h2>適用した役割</h2></div><div class="section-content"><h3>実際に担当したRole</h3>
+<ul><li><code>Issue planning</code>: Supabase側の作業を接続先、Data API、RLS、キー、REST、Pages受入へ分解</li><li><code>Documentation</code>: #63の実行手順・完了条件・対象外と作業記録を作成</li><li><code>GitHub operation</code>: #63の作成、#56との親子関係登録、PRとIssue状態の確認</li></ul></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">03　記録</p><h2>主要な判断</h2></div><div class="section-content"><ul><li>公開サイトはログインなしで動かすため、publishable keyによる未認証リクエストを前提にする。publishable keyは公開されるため、行単位の公開範囲はRLSで制御する。</li><li>Pagesのブラウザへ<code>sb_secret_...</code>を渡さない。<code>SUPABASE_PUBLISHABLE_KEYS</code>には<code>sb_publishable_...</code>だけを設定し、secret keyはサーバー用途に限定する。</li><li>MVPの読み取り対象は<code>public.games</code>、<code>public.teams</code>、<code>public.players</code>、<code>public.game_team_stats</code>、<code>public.player_game_stats</code>の5テーブルとする。</li><li>5テーブルは未認証ブラウザからSELECTだけを許可し、INSERT・UPDATE・DELETEは許可しない方針をIssueに記載した。</li><li>データ投入、テーブル変更、live DBへのSQL適用は実行しない。IssueではDashboard確認、読み取り専用REST確認、公開サイト受入までを案内する。</li><li>RLSとpublishable keyの関係、API keyの用途はSupabase公式ドキュメントを参照して記載した。</li></ul></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">04　実行</p><h2>実行内容</h2></div><div class="section-content"><ol><li><code>main</code>の作業ツリーがクリーンで、#56がOPEN、#58が未完了であることを確認した。</li><li>公開URLをブラウザで検証し、Pages workflow成功後も<code>games</code>のREST応答が<code>200 []</code>であることを再現した。</li><li>Supabase公式ドキュメントでpublishable/secret key、RLS、Data APIの確認事項を確認した。</li><li>#56の最新情報を取得したうえで、#63「[DB][GitHub Pages] Supabase公開読み取り設定を整備する」を作成した。</li><li>GitHub APIのsub-issuesエンドポイントで#56→#63を登録し、#58と#63が子Issueとして返ることを確認した。</li><li><code>scripts/dev/github_issue_status_policy.json</code>へ#63をP2、#56の子Issueとして追加した。</li><li>本作業記録のMarkdownを作成し、Issue状況をGitHub APIから同期してHTMLを生成・検証する。</li></ol></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">05　記録</p><h2>#63に記載した工程</h2></div><div class="section-content"><ul><li>対象プロジェクトのProject URLとGitHub Secretの<code>SUPABASE_URL</code>を照合</li><li>5テーブルのデータ有無を読み取り専用で確認</li><li><code>public</code> schemaと5テーブルのData API公開対象を確認</li><li>5テーブルの未認証<code>anon</code> SELECTと書き込み拒否を確認・設定</li><li><code>SUPABASE_PUBLISHABLE_KEYS</code>へpublishable keyだけを設定し、secret keyをPagesから排除</li><li>REST APIのHTTP status、空配列、必要テーブルの応答を確認</li><li>Pages workflow再実行と、ログインなしの公開URLでのMVP受入</li><li>1280px/320px、画面遷移、コンソールエラー、失敗リクエストを確認</li></ul></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">06　検証</p><h2>検証</h2></div><div class="section-content"><ul><li>GitHub Pages workflow再実行: 成功（run 33070623791）</li><li>公開URLのHTTP status: 200</li><li>Supabase REST接続: <code>games</code>はHTTP 200だが空配列。公開読み取り設定または接続先データの未成立を確認</li><li>Issue #56のsub-issues: #58、#63を確認</li><li>SQL実行・DB変更: 未実施</li><li>作業ツリー: ブランチ作成時点で変更なし</li></ul></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">07　記録</p><h2>最終結果</h2></div><div class="section-content"><ul><li>#56の子Issue <a href="https://github.com/tj-999-comp/B_Stats_Site/issues/63">#63</a>を作成した。</li><li>#63へ、Supabase Dashboardでの確認箇所、5テーブルの権限方針、キーの使い分け、REST確認、Pages受入の具体的な工程と完了条件を記載した。</li><li>#56→#63の親子関係をGitHub APIへ登録した。</li><li>優先順位設定へ#63をP2として追加した。</li><li>未解決事項: Supabase側の設定適用と公開データの読み取り確認は、#63の手順に従って実施する必要がある。</li><li>次アクション: #63の設定完了後、Pages workflowを再実行し、#58の公開受入を再確認する。</li><li>ブランチ: <code>agent/issue-63-supabase-public-read</code></li><li>commit: 作成後に追記</li><li>PR: 作成後に追記</li></ul></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">08　Issue状況</p><h2>GitHub Issue状況（2026-08-27時点の現在値）</h2></div><div class="section-content"><p>確認日: 2026-08-27（JST）</p>
+<p>GitHub APIで <code>tj-999-comp/B_Stats_Site</code> のIssueを確認した。Pull Requestは対象外とした。未完了Issueは10件だった。</p>
+<h3>親子関係</h3>
+<pre><code class="language-text">#7（未完了・親Issue）
+├── #8（完了・子Issue）
+├── #45（完了・子Issue）
+└── #46（完了・子Issue）
+#12（完了・親Issue）
+├── #21（完了・子Issue）
+├── #22（完了・子Issue）
+└── #23（完了・子Issue）
+#24（完了・親Issue）
+└── #25（完了・子Issue）
+#56（未完了・親Issue）
+├── #58（未完了・子Issue）
+└── #63（未完了・子Issue）
+#57（未完了・親Issue）
+└── #59（未完了・子Issue）</code></pre>
+<p>GitHubのsub-issues APIで登録された親子関係を記載した。親子登録のないIssueは、優先順位一覧の関係・着手条件に記載する。</p>
+<h3>優先順位順の未完了一覧</h3>
+<p>優先順位は <code>github_issue_status_policy.json</code> の運用設定を使い、設定のないIssueは既定値P3として記載する。</p>
+<table><thead><tr><th>順位</th><th>優先度</th><th>GitHub Issue</th><th>状態</th><th>関係・着手条件</th></tr></thead><tbody><tr><td>1</td><td>P1</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/56">#56</a> [Web][GitHub Pages] 静的版の統計サイトを実装・公開する</td><td>未完了</td><td>Web導入のGitHub Pages親Issue。#58、#63を管理</td></tr><tr><td>2</td><td>P1</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/57">#57</a> [Web][Vercel] SSR/ISR版の統計サイトを実装・公開する</td><td>未完了</td><td>Web導入のVercel親Issue。#59を管理。#58のデータ契約・共通UIを前提</td></tr><tr><td>3</td><td>P2</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/58">#58</a> [Web][GitHub Pages] B1データを表示する静的サイトMVPを実装する</td><td>未完了</td><td>#56の子Issue。GitHub Pages版のMVP</td></tr><tr><td>4</td><td>P2</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/59">#59</a> [Web][Vercel] B1データを表示するSSR/ISR MVPを実装する</td><td>未完了</td><td>#57の子Issue。Vercel版のMVP。#58のデータ契約・共通UIを前提</td></tr><tr><td>5</td><td>P2</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/63">#63</a> [DB][GitHub Pages] Supabase公開読み取り設定を整備する</td><td>未完了</td><td>#56の子Issue。#58の公開データ読み取り設定を前提</td></tr><tr><td>6</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/7">#7</a> 試合のスクレイピングデータ精査</td><td>未完了</td><td>#24と範囲が重なる</td></tr><tr><td>7</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/9">#9</a> 課題解決の原案を立てる</td><td>未完了</td><td>探索テーマ</td></tr><tr><td>8</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/15">#15</a> [DB] 過年度の plus_minus・背番号欠損を調査する</td><td>未完了</td><td>独立</td></tr><tr><td>9</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/17">#17</a> [DB] play_by_play未投入と存在フラグの整合性を整理する</td><td>未完了</td><td>独立</td></tr><tr><td>10</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/44">#44</a> [DB] live DBへB2・B3スタッツを追加する</td><td>未完了</td><td>独立。優先度未設定</td></tr></tbody></table></div></section>
+
+      </main>
+      <footer>
+        <span>B.LEAGUE Stats · 作業記録 029</span>
+        <span><a href="md/work_record_029.md">Markdown原本</a></span>
+      </footer>
+    </div>
+  </body>
+</html>
