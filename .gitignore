@@ -25,6 +25,7 @@ config/github_app.json
 # Build outputs
 dist/
 build/
+*.tsbuildinfo
 
 # Editor
 .vscode/

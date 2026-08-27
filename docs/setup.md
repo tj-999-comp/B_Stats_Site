@@ -24,10 +24,10 @@ pnpm install
 
 1. [Supabase](https://supabase.com) でプロジェクトを作成
 2. `supabase/rebuild/00_rebuild_all.sql` を実行して現行テーブル群を作成
-3. Supabase AuthenticationでEmail+Password認証を有効化
-4. 新規登録を無効化（Settings > Authentication > Disable signups）
-5. 自分用のアカウントを作成
-6. MFA（多要素認証）を有効化
+3. `web-static` は認証なしの公開閲覧とし、ブラウザからPublishable keyで読み取る
+4. Publishable keyで現行4テーブルを読み取れるRLS設定を確認する
+
+認証が必要なVercel版の設定は、#57/#59の実装範囲で別途確定する。
 
 ## 4. 環境変数の設定
 

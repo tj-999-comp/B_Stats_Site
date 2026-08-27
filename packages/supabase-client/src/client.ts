@@ -1,15 +1,21 @@
 import { createClient } from '@supabase/supabase-js';
+import type { SupabaseClient } from '@supabase/supabase-js';
 import type { Database } from './types';
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const supabasePublishableKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
+let client: SupabaseClient<Database> | undefined;
 
-if (!supabaseUrl) {
-	throw new Error('Supabase URL is not configured.');
+export function getSupabaseClient(): SupabaseClient<Database> {
+  if (client) {
+    return client;
+  }
+
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabasePublishableKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
+
+  if (!supabaseUrl || !supabasePublishableKey) {
+    throw new Error('Supabase public connection is not configured.');
+  }
+
+  client = createClient<Database>(supabaseUrl, supabasePublishableKey);
+  return client;
 }
-
-if (!supabasePublishableKey) {
-	throw new Error('Supabase publishable key is not configured.');
-}
-
-export const supabase = createClient<Database>(supabaseUrl, supabasePublishableKey);

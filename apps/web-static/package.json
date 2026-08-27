@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@bleague-stats/shared-ui": "workspace:*",
+    "@bleague-stats/supabase-client": "workspace:*",
     "@supabase/supabase-js": "^2.0.0",
     "next": "^14.0.0",
     "react": "^18.0.0",
