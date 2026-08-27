@@ -1,0 +1,10 @@
+schema_version: 1
+title: "Web導入親IssueとMVP子Issueの作成"
+date: "2026-08-27"
+project_id: B_Stats_Site
+tags:
+  - web
+  - github-pages
+  - vercel
+  - issue-planning
+publish: true
