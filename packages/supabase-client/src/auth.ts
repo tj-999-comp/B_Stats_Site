@@ -1,17 +1,17 @@
-import { supabase } from './client';
+import { getSupabaseClient } from './client';
 
 export async function signIn(email: string, password: string) {
-  return supabase.auth.signInWithPassword({ email, password });
+  return getSupabaseClient().auth.signInWithPassword({ email, password });
 }
 
 export async function signOut() {
-  return supabase.auth.signOut();
+  return getSupabaseClient().auth.signOut();
 }
 
 export async function getSession() {
-  return supabase.auth.getSession();
+  return getSupabaseClient().auth.getSession();
 }
 
 export async function getUser() {
-  return supabase.auth.getUser();
+  return getSupabaseClient().auth.getUser();
 }

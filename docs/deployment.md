@@ -15,6 +15,10 @@
 2. 上記Secretsを設定
 3. `main`ブランチへのプッシュで自動デプロイ（`apps/web-static/`変更時）
 
+`web-static` は認証なしの公開閲覧で、データは公開キーを使ってブラウザからSupabaseへ読み取る。service role keyはフロントエンドへ渡さない。リポジトリサイトのURLは `https://tj-999-comp.github.io/B_Stats_Site/` を前提とし、Next.jsの `basePath` は `/B_Stats_Site` に設定する。
+
+B2・B3などのDB更新後は、ブラウザの再読み込みで同じ画面から参照できる。RLSを変更する場合は、Web実装とは別のDB作業としてバックアップ・検証・修正・ロールバックの手順を用意する。
+
 ## 構成2: Vercel
 
 ### 必要なGitHub Secrets
