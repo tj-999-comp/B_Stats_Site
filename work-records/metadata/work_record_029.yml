@@ -1,0 +1,10 @@
+schema_version: 1
+title: "Supabase公開読み取り設定の工程整理"
+date: "2026-08-27"
+project_id: B_Stats_Site
+tags:
+  - supabase
+  - github-pages
+  - issue-planning
+  - rls
+publish: true
