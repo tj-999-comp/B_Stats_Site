@@ -59,10 +59,10 @@ Issue #68「[Actions][Docs] 認証方式・Secrets名・運用ドキュメント
 - 現行実装と公開先workflowの認証方式を整理し、B側dispatchのPATをGitHub App移行済みと誤認しない記載へ更新した。
 - `SUPABASE_SECRET_KEYS`、`SUPABASE_PUBLISHABLE_KEYS`、`NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`、`SUPABASE_DB_PASSSWORD`の役割と正確な綴りを文書化した。
 - 未解決事項: GitHub Actions SettingsにおけるSecret登録有無、PATの発行主体・期限・実値はApp権限不足と非対象条件により確認していない。必要ならリポジトリ管理者が値を表示せず、Secret名・有効期限・fine-grained対象repository・Actions権限だけを確認する。
-- 次アクション: 文書検証とPR作成後、ユーザーまたは管理者が本番Secretの登録状態を確認する。PATからAppへ移行する場合は、別Issueで公開先install、最小権限、段階的切替、非回帰、旧PAT失効を実施する。
+- 次アクション: Draft PR #69のレビューとmerge後、ユーザーまたは管理者が本番Secretの登録状態を確認する。PATからAppへ移行する場合は、別Issueで公開先install、最小権限、段階的切替、非回帰、旧PAT失効を実施する。
 - ブランチ: `issue-68-auth-docs`
-- commit: 検証後に記載
-- PR: 検証後に記載
+- commit: `8b57b47`（実装・作業記録初回commit）
+- PR: [#69 Draft PR: 認証方式とSecret運用の記載を整合](https://github.com/tj-999-comp/B_Stats_Site/pull/69)
 
 ## GitHub Issue状況（2026-08-28時点の現在値）
 
