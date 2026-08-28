@@ -28,14 +28,22 @@ export default function HomePage() {
     loadSeasonData(season).then(setData).catch((reason: Error) => setError(reason.message));
   }, [season]);
 
+  const featuredGame = data?.games.find((game) => game.game_ended_flg && game.home_team_score_total !== null && game.away_team_score_total !== null) ?? data?.games[0];
+  const topScorer = data?.playerAverages[0];
+
   return (
     <>
       <section className="hero">
-        <div className="container">
-          <p className="eyebrow">BASKETBALL DATA, SIMPLIFIED</p>
-          <h1>試合の数字から、<br />シーズンの流れを読む。</h1>
-          <p className="hero-copy">B.LEAGUEの試合結果、チームスタッツ、選手スタッツをひとつの画面で確認できます。</p>
-          {seasons.length > 0 && <SeasonSelect seasons={seasons} value={season} onChange={setSeason} />}
+        <div className="container hero-inner">
+          <div className="hero-copy-block">
+            <p className="eyebrow">B STATS / FOR B.LEAGUE FANS</p>
+            <h1>B STATS</h1>
+            <p className="hero-copy">B.LEAGUEの公開データをもとにした、非公式の第三者ファン統計ビューア。</p>
+            <div className="hero-actions">
+              {seasons.length > 0 && <SeasonSelect seasons={seasons} value={season} onChange={setSeason} />}
+              <a className="text-link text-link-light" href="#featured">今季を見る ↓</a>
+            </div>
+          </div>
         </div>
       </section>
       <main className="container main-content">
@@ -43,17 +51,30 @@ export default function HomePage() {
         {!error && !data && <LoadingState />}
         {data && (
           <>
-            <section className="summary-grid" aria-label="シーズン概要">
-              <div className="summary-card"><span>試合数</span><strong>{data.games.length}</strong></div>
-              <div className="summary-card"><span>チーム数</span><strong>{data.standings.length}</strong></div>
-              <div className="summary-card"><span>選手数</span><strong>{data.playerAverages.length}</strong></div>
+            <section className="featured-section" id="featured" aria-labelledby="featured-heading">
+              <div className="section-heading section-heading-light"><div><p className="eyebrow">FEATURED / 今見る</p><h2 id="featured-heading">最新確定試合</h2></div><span className="section-index">01 / 04</span></div>
+              <div className="featured-grid">
+                <article className="featured-card">
+                  <div className="featured-label">LATEST VERIFIED GAME</div>
+                  {featuredGame ? <>
+                    <div className="featured-matchup"><span>{featuredGame.home_team_name}</span><b>VS</b><span>{featuredGame.away_team_name}</span></div>
+                    <div className="featured-score"><strong>{displayNumber(featuredGame.home_team_score_total)}</strong><span>—</span><strong>{displayNumber(featuredGame.away_team_score_total)}</strong></div>
+                    <div className="featured-meta"><span>{formatGameDate(featuredGame)}</span><Link className="text-link text-link-light" href={`/games/detail/?scheduleKey=${featuredGame.schedule_key}`}>試合詳細 →</Link></div>
+                  </> : <p className="empty-state">注目の試合がありません。</p>}
+                </article>
+                <div className="featured-note">
+                  <p className="eyebrow">A QUICK READ</p>
+                  <p>まずは最新の1試合から。スコアの裏側にあるチームと選手の数字へ進めます。</p>
+                  {topScorer && <div className="featured-stat"><span>平均得点上位（当サイト集計）</span><strong>{topScorer.player_name}</strong><b>{topScorer.average_points.toFixed(1)} <small>PPG</small></b></div>}
+                </div>
+              </div>
             </section>
 
-            <section className="section">
-              <div className="section-heading"><h2>基本ランキング</h2><span className="muted-text">{season}</span></div>
+            <section className="section" id="rankings">
+              <div className="section-heading"><div><p className="eyebrow">RANKINGS / 順位を見る</p><h2>シーズンの現在地</h2></div><span className="muted-text">{season}</span></div>
               <div className="ranking-grid">
                 <div className="panel">
-                  <RankingList title="チーム順位" items={data.standings.slice(0, 8).map((standing, index) => ({
+                  <RankingList title="TEAM / 勝敗順" items={data.standings.slice(0, 5).map((standing, index) => ({
                     rank: index + 1,
                     label: standing.team_name,
                     secondary: `${standing.wins}勝 ${standing.losses}敗`,
@@ -61,7 +82,7 @@ export default function HomePage() {
                   }))} />
                 </div>
                 <div className="panel">
-                  <RankingList title="選手平均得点" items={data.playerAverages.slice(0, 8).map((player, index) => ({
+                  <RankingList title="PLAYER / 平均得点" items={data.playerAverages.slice(0, 5).map((player, index) => ({
                     rank: index + 1,
                     label: player.player_name,
                     secondary: player.team_name,
@@ -71,15 +92,15 @@ export default function HomePage() {
               </div>
             </section>
 
-            <section className="section">
-              <div className="section-heading"><h2>選手平均得点 TOP 6</h2></div>
+            <section className="section" id="players">
+              <div className="section-heading"><div><p className="eyebrow">PLAYERS / 選手を知る</p><h2>数字で見つける選手</h2></div><span className="section-index dark-index">03 / 04</span></div>
               <div className="player-grid">
-                {data.playerAverages.slice(0, 6).map((player, index) => <PlayerCard key={player.player_id} rank={index + 1} playerName={player.player_name} teamName={player.team_name} gamesPlayed={player.games_played} averagePoints={player.average_points} />)}
+                {data.playerAverages.slice(0, 3).map((player, index) => <PlayerCard key={player.player_id} rank={index + 1} playerName={player.player_name} teamName={player.team_name} gamesPlayed={player.games_played} averagePoints={player.average_points} />)}
               </div>
             </section>
 
-            <section className="section">
-              <div className="section-heading"><h2>最近の試合</h2><Link className="section-link" href={`/games/?season=${encodeURIComponent(season)}`}>すべて見る →</Link></div>
+            <section className="section games-section" id="games">
+              <div className="section-heading"><div><p className="eyebrow">GAMES / 試合を追う</p><h2>最近の試合</h2></div><Link className="section-link" href={`/games/?season=${encodeURIComponent(season)}`}>すべて見る →</Link></div>
               <div className="panel">
                 <StatsTable
                   columns={[
@@ -91,6 +112,12 @@ export default function HomePage() {
                   rowKey={(game) => game.schedule_key}
                 />
               </div>
+            </section>
+
+            <section className="archive-note" id="about" aria-label="このサイトについて">
+              <p className="eyebrow">ABOUT THIS SITE</p>
+              <p>B STATSは、B.LEAGUE公式公開情報をもとにした第三者ファンサイトです。公式情報・観戦体験を補助する統計ビューアとして、集計方法と更新時点を明示して運営します。順位・ランキングは当サイト集計です。</p>
+              <span>PUBLIC DATA / {season}</span>
             </section>
           </>
         )}
