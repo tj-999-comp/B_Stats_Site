@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light">
+    <title>認証方式・Secret名・運用文書の整合確認 — 作業記録</title>
+    <link rel="stylesheet" href="work_record.css">
+  </head>
+  <body>
+    <div class="shell">
+      <header class="topbar">
+        <span class="wordmark">B.LEAGUE STATS</span>
+      </header>
+      <main>
+        <header class="record-header">
+          <p class="kicker">作業記録 030 ・ 2026-08-28</p>
+          <h1>認証方式・Secret名・運用文書の整合確認</h1>
+          <dl class="record-meta">
+            <div><dt>原本</dt><dd><code>md/work_record_030.md</code></dd></div>
+            <div><dt>状態</dt><dd>記録本文をHTML化</dd></div>
+          </dl>
+        </header>
+        <section class="record-section"><div class="section-intro"><p class="section-label">01　概要</p><h2>概要</h2></div><div class="section-content"><p>Issue #68「[Actions][Docs] 認証方式・Secrets名・運用ドキュメントの整合を確認する」について、GitHub Actions、Supabase、Web公開、公開先リポジトリの受入workflow、Portfolio作業の認証境界をソースコードから照合した。資格情報の値、本番Secretの変更、DB変更、workflow dispatchの実行は対象外とした。</p>
+<p>完了条件は、対象workflowごとの認証方式・権限・対象範囲の確定、Secret名の整合、GitHub Appの発行・短期token・rotation・失効・障害復旧手順の文書化、Publishable keyとserver-side Secretの境界の表化、旧表記の再検索、文書と作業記録の検証である。</p>
+<p>対象Issue:</p>
+<ul><li><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/68">#68 認証方式・Secrets名・運用ドキュメントの整合を確認する</a></li><li><a href="https://github.com/tj-999-comp/sandbox-pages/issues/25">sandbox-pages#25 dispatch認証をFine-grained PATからGitHub Appへ移行する</a></li></ul></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">02　記録</p><h2>適用した役割</h2></div><div class="section-content"><h3>実際に担当したRole</h3>
+<ul><li><code>Security review</code>: workflowの権限、Secretの用途、公開キーとserver-side Secretの露出範囲を確認</li><li><code>Documentation</code>: workflow、deployment、setup、Portfolio標準の記載を現行実装へ同期</li><li><code>GitHub operation</code>: Issueと公開先Issueの最新状態、公開先受入workflow、GitHub App接続を確認</li></ul></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">03　記録</p><h2>主要な判断</h2></div><div class="section-content"><ul><li>B側の<code>.github/workflows/request-publish.yml</code>は、2026-08-28時点で<code>SANDBOX_PAGES_DISPATCH_TOKEN</code>というFine-grained PATを使い、<code>tj-999-comp/sandbox-pages</code>の<code>accept-source.yml</code>へdispatchしている。B側workflowにGitHub App Installation tokenの参照はない。</li><li><code>sandbox-pages#25</code>はGitHub上で<code>closed</code>・<code>completed</code>だが、Issue本文の完了条件は未チェックのままで、公開先の現行<code>accept-source.yml</code>はworkflow内のcheckout・commit・Pages deployに<code>github.token</code>を使う。公開要求を開始するB側PATが廃止されたとは確認できないため、移行済みとは断定しない。</li><li>ローカルPortfolio作業のGitHub App Installation tokenは、Issue・PR・CIのAPI操作用であり、Actions workflowのdispatch認証とは別である。App tokenは短期発行・保存しない運用を文書化した。</li><li><code>--verify</code>の表示可能なメタデータでは、現行Installation tokenに<code>actions: write</code>、<code>contents: write</code>、<code>workflows: write</code>などが含まれていた。Portfolio作業に必要な最小権限（<code>contents: read</code>、<code>issues: write</code>、<code>pull_requests: write</code>、<code>actions: read</code>）を設定テンプレートへ追加したが、実インストールの権限変更は行っていない。</li><li>Python scraperと<code>scrape.yml</code>のSupabase Secret名は<code>SUPABASE_SECRET_KEYS</code>、Pages buildのGitHub Secret名は<code>SUPABASE_PUBLISHABLE_KEYS</code>、Webアプリの公開環境変数名は<code>NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY</code>である。</li><li><code>migrate.yml</code>が参照する<code>SUPABASE_DB_PASSSWORD</code>は綴りを含む現行Secret名として文書化した。実Secretを改名するにはworkflowと登録を同時に切り替える必要があるため、本作業では変更しない。</li><li>GitHub Actions Secret一覧APIは、使用したGitHub App Installation tokenにActions Secretの参照権限がなくHTTP 403となった。登録有無・発行主体・PAT期限は推測せず、workflowが参照する名前と必要権限だけを記録した。</li></ul></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">04　実行</p><h2>実行内容</h2></div><div class="section-content"><ol><li>作業開始時の<code>git status --short</code>が空であることを確認し、<code>issue-68-auth-docs</code>ブランチを作成した。</li><li>Issue #68と公開先<code>sandbox-pages#25</code>の最新状態をGitHub APIで取得した。#68は<code>open</code>、更新日時は2026-08-28 15:12:56 JST、#25は<code>closed</code>・<code>completed</code>、更新日時は2026-08-20 15:40:50 JSTだった。</li><li><code>.github/workflows/request-publish.yml</code>、<code>scrape.yml</code>、<code>migrate.yml</code>、<code>deploy-pages.yml</code>、<code>deploy-vercel.yml</code>を確認し、Secret名、job permissions、tokenの用途、triggerを一覧化した。<code>scrape.yml</code>の既存設定を確認し、<code>migrate.yml</code>にもcheckoutに必要な<code>contents: read</code>を明示した。</li><li>公開先の<code>.github/workflows/accept-source.yml</code>（取得SHA: <code>ca676e852f37d470f3d45631a627dd7b25680760</code>）を確認し、dispatch後は公開先の<code>github.token</code>で固定SHA checkout、commit、Pages deployを行う契約を確認した。</li><li><code>scripts/db/config.py</code>、<code>scripts/db/db.py</code>、<code>scripts/generate_table_definition_live.mjs</code>、Web側のSupabase clientとmiddlewareを検索し、runtimeで使う環境変数名と互換フォールバックを確認した。</li><li><code>docs/workflows.md</code>へ認証方式対応表、PAT現行状態、GitHub Appとの境界、rotation・失効・障害復旧手順を追加した。</li><li><code>docs/deployment.md</code>と<code>docs/setup.md</code>へ、workflowの実際のtrigger、Secret名の単複、<code>SUPABASE_DB_PASSSWORD</code>の綴り、公開キーとWeb環境変数の境界を反映した。</li><li><code>config/github_app.example.json</code>と<code>config/README.md</code>へ、ローカルGitHub App Installation tokenの最小権限要求を追加し、<code>docs/PORTFOLIO_STANDARD.md</code>へActions workflow認証との境界を追記した。</li></ol></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">05　検証</p><h2>検証</h2></div><div class="section-content"><ul><li>GitHub App設定の形式確認: 成功</li><li>GitHub App Installation tokenによるB側repository確認: 成功。token本体は表示・保存していない</li><li>GitHub App tokenの権限メタデータ確認: 成功。現行Installation側に標準文書より広い権限があることを確認</li><li>GitHub Actions Secret一覧取得: 未確認。GitHub APIがHTTP 403（AppにActions Secret参照権限なし）</li><li><code>sandbox-pages#25</code>と公開先受入workflowの読み取り: 成功</li><li>旧表記・認証境界の<code>rg</code>再検索: 実施。単数形はライブ定義生成スクリプトの互換フォールバック1か所だけで、新規設定では使わない旨を文書化</li><li>Markdownリンク・日付・作業記録配置: <code>git diff --check</code>、作業記録filename検証で確認</li><li>作業記録HTML生成・filename検証・GitHub Issue状況同期: 成功。Issue状況は8件の未完了Issueを取得</li><li>DB変更、Supabase Secret変更、PATのrotation・失効、公開要求dispatch: 未実施（Issueの非対象）</li></ul></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">06　記録</p><h2>最終結果</h2></div><div class="section-content"><ul><li>変更ファイル: <code>.github/workflows/scrape.yml</code>、<code>.github/workflows/migrate.yml</code>、<code>config/README.md</code>、<code>config/github_app.example.json</code>、<code>docs/workflows.md</code>、<code>docs/deployment.md</code>、<code>docs/setup.md</code>、<code>docs/PORTFOLIO_STANDARD.md</code>、本作業記録のMarkdown/HTML。</li><li>現行実装と公開先workflowの認証方式を整理し、B側dispatchのPATをGitHub App移行済みと誤認しない記載へ更新した。</li><li><code>SUPABASE_SECRET_KEYS</code>、<code>SUPABASE_PUBLISHABLE_KEYS</code>、<code>NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY</code>、<code>SUPABASE_DB_PASSSWORD</code>の役割と正確な綴りを文書化した。</li><li>未解決事項: GitHub Actions SettingsにおけるSecret登録有無、PATの発行主体・期限・実値はApp権限不足と非対象条件により確認していない。必要ならリポジトリ管理者が値を表示せず、Secret名・有効期限・fine-grained対象repository・Actions権限だけを確認する。</li><li>次アクション: 文書検証とPR作成後、ユーザーまたは管理者が本番Secretの登録状態を確認する。PATからAppへ移行する場合は、別Issueで公開先install、最小権限、段階的切替、非回帰、旧PAT失効を実施する。</li><li>ブランチ: <code>issue-68-auth-docs</code></li><li>commit: 検証後に記載</li><li>PR: 検証後に記載</li></ul></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">07　Issue状況</p><h2>GitHub Issue状況（2026-08-28時点の現在値）</h2></div><div class="section-content"><p>確認日: 2026-08-28（JST）</p>
+<p>GitHub APIで <code>tj-999-comp/B_Stats_Site</code> のIssueを確認した。Pull Requestは対象外とした。未完了Issueは8件だった。</p>
+<h3>親子関係</h3>
+<pre><code class="language-text">#7（未完了・親Issue）
+├── #8（完了・子Issue）
+├── #45（完了・子Issue）
+└── #46（完了・子Issue）
+#12（完了・親Issue）
+├── #21（完了・子Issue）
+├── #22（完了・子Issue）
+└── #23（完了・子Issue）
+#24（完了・親Issue）
+└── #25（完了・子Issue）
+#56（完了・親Issue）
+├── #58（完了・子Issue）
+└── #63（完了・子Issue）
+#57（未完了・親Issue）
+└── #59（未完了・子Issue）</code></pre>
+<p>GitHubのsub-issues APIで登録された親子関係を記載した。親子登録のないIssueは、優先順位一覧の関係・着手条件に記載する。</p>
+<h3>優先順位順の未完了一覧</h3>
+<p>優先順位は <code>github_issue_status_policy.json</code> の運用設定を使い、設定のないIssueは既定値P3として記載する。</p>
+<table><thead><tr><th>順位</th><th>優先度</th><th>GitHub Issue</th><th>状態</th><th>関係・着手条件</th></tr></thead><tbody><tr><td>1</td><td>P1</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/57">#57</a> [Web][Vercel] SSR/ISR版の統計サイトを実装・公開する</td><td>未完了</td><td>Web導入のVercel親Issue。#59を管理。#58のデータ契約・共通UIを前提</td></tr><tr><td>2</td><td>P2</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/59">#59</a> [Web][Vercel] B1データを表示するSSR/ISR MVPを実装する</td><td>未完了</td><td>#57の子Issue。Vercel版のMVP。#58のデータ契約・共通UIを前提</td></tr><tr><td>3</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/7">#7</a> 試合のスクレイピングデータ精査</td><td>未完了</td><td>#24と範囲が重なる</td></tr><tr><td>4</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/9">#9</a> 課題解決の原案を立てる</td><td>未完了</td><td>探索テーマ</td></tr><tr><td>5</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/15">#15</a> [DB] 過年度の plus_minus・背番号欠損を調査する</td><td>未完了</td><td>独立</td></tr><tr><td>6</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/17">#17</a> [DB] play_by_play未投入と存在フラグの整合性を整理する</td><td>未完了</td><td>独立</td></tr><tr><td>7</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/44">#44</a> [DB] live DBへB2・B3スタッツを追加する</td><td>未完了</td><td>独立。優先度未設定</td></tr><tr><td>8</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/68">#68</a> [Actions][Docs] 認証方式・Secrets名・運用ドキュメントの整合を確認する</td><td>未完了</td><td>独立。優先度未設定</td></tr></tbody></table></div></section>
+
+      </main>
+      <footer>
+        <span>B.LEAGUE Stats · 作業記録 030</span>
+        <span><a href="md/work_record_030.md">Markdown原本</a></span>
+      </footer>
+    </div>
+  </body>
+</html>
