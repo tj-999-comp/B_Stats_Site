@@ -55,7 +55,7 @@ Issue #68「[Actions][Docs] 認証方式・Secrets名・運用ドキュメント
 
 ## 最終結果
 
-- 変更ファイル: `.github/workflows/scrape.yml`、`.github/workflows/migrate.yml`、`config/README.md`、`config/github_app.example.json`、`docs/workflows.md`、`docs/deployment.md`、`docs/setup.md`、`docs/PORTFOLIO_STANDARD.md`、本作業記録のMarkdown/HTML。
+- 変更ファイル: `.github/workflows/migrate.yml`、`config/README.md`、`config/github_app.example.json`、`docs/workflows.md`、`docs/deployment.md`、`docs/setup.md`、`docs/PORTFOLIO_STANDARD.md`、本作業記録のMarkdown/HTML/metadata。`scrape.yml`は既存の`contents: read`を確認した。
 - 現行実装と公開先workflowの認証方式を整理し、B側dispatchのPATをGitHub App移行済みと誤認しない記載へ更新した。
 - `SUPABASE_SECRET_KEYS`、`SUPABASE_PUBLISHABLE_KEYS`、`NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`、`SUPABASE_DB_PASSSWORD`の役割と正確な綴りを文書化した。
 - 未解決事項: GitHub Actions SettingsにおけるSecret登録有無、PATの発行主体・期限・実値はApp権限不足と非対象条件により確認していない。必要ならリポジトリ管理者が値を表示せず、Secret名・有効期限・fine-grained対象repository・Actions権限だけを確認する。
