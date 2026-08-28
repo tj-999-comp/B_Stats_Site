@@ -1,6 +1,25 @@
 # GitHub Actions ワークフロー解説
 
+更新日: 2026-08-28
+
 `.github/workflows/` 配下にある各 yml ファイルの内容を説明します。
+
+## 認証方式の対応表
+
+| workflow | 外部処理の認証方式 | 参照するSecret・token | 権限と対象 |
+|---|---|---|---|
+| `scrape.yml` | Supabase Secret key | `SUPABASE_URL`、`SUPABASE_SECRET_KEYS` | Bリーグデータの取得・Supabase投入。server-side専用 |
+| `migrate.yml` | PostgreSQL password | `SUPABASE_DB_PASSSWORD` | Supabase接続用。現行workflowのSecret名は綴りを含めこの表記 |
+| `deploy-pages.yml` | GitHub Actions内蔵token、Pages OIDC | `GITHUB_TOKEN`、`SUPABASE_URL`、`SUPABASE_PUBLISHABLE_KEYS` | Pages artifactの公開とビルド時の公開キー。Contents writeは不要 |
+| `deploy-vercel.yml` | Vercel token | `VERCEL_TOKEN`、`VERCEL_ORG_ID`、`VERCEL_PROJECT_ID` | Vercelへの本番デプロイ。Supabaseの`NEXT_PUBLIC_*`はVercel側の環境変数 |
+| `request-publish.yml` | Fine-grained PAT | `SANDBOX_PAGES_DISPATCH_TOKEN` | `tj-999-comp/sandbox-pages`のActions dispatchだけ。Contents writeは付与しない |
+| `sandbox-pages/.github/workflows/accept-source.yml` | GitHub Actions内蔵token | dispatch元はBのPAT、workflow内は`github.token` | 公開先自身のcheckout・commit・Pages deploy。jobごとに権限を限定 |
+
+この表はworkflowのソースコードが参照する名前と権限を示すもので、GitHub SettingsにSecretが登録されていること自体は確認しません。Secretの値、token、秘密鍵は表示・保存・記録しません。
+
+Portfolio作業で使うGitHub App Installation tokenは、ローカルからIssue・PR・CIのGitHub APIを操作するための認証です。Actions workflowへ自動的に引き継がれるものではなく、`SANDBOX_PAGES_DISPATCH_TOKEN`の代替として設定済みとは扱いません。
+
+ローカル用App tokenは最長1時間の短期tokenをコマンドごとに発行し、保存しません。秘密鍵のrotation・失効、Keychain確認、発行障害時の確認順は[`config/README.md`](../config/README.md)に従います。
 
 ---
 
@@ -29,7 +48,9 @@
 | シークレット名 | 説明 |
 |---|---|
 | `SUPABASE_URL` | Supabase プロジェクトの URL |
-| `SUPABASE_SECRET_KEYS` | Supabase の service_role キー |
+| `SUPABASE_SECRET_KEYS` | Supabase の Secret key（旧service_role相当） |
+
+`workflow_dispatch`だけが定義されており、現行workflowは定期実行しません。通常版のscraperは後段の`python -m scripts.db.upsert_games`まで実行します。
 
 ---
 
@@ -101,7 +122,17 @@ PR、`pull_request`、fork向けのtriggerは定義していません。Secret�
 |---|---|
 | `SANDBOX_PAGES_DISPATCH_TOKEN` | Fine-grained PAT。repository accessは`tj-999-comp/sandbox-pages`だけ、Repository permissionsは`Actions: Read and write`だけ（Contents writeは付与しない） |
 
+2026-08-28時点のB側実装はこのFine-grained PATで`sandbox-pages`の`accept-source.yml`をdispatchします。公開先Issue [sandbox-pages#25](https://github.com/tj-999-comp/sandbox-pages/issues/25)は完了状態ですが、B側workflowの参照方式はPATのままであり、GitHub App Installation tokenへ移行済みとは断定しません。移行する場合は、公開先へのApp install、dispatchに必要な最小Actions権限、B側Secretの段階的廃止、手動・push triggerの非回帰を別途確認します。
+
 PATは作成時に有効期限を設定し、最大90日で運用します。期限の14日前をrotation開始目安とし、新PATを同じSecretへ登録して手動公開要求を1件テストした後、旧PATをGitHubで失効させます。漏えいまたは不要化が判明した場合は、直ちにPATを失効させてSecretを削除または置換し、該当Actions実行を監査します。PAT値、期限付きtoken、API応答をworkflowのmetadata・artifact・ログ・作業記録へ保存しません。
+
+### Secretの変更・障害時手順
+
+1. 変更前に対象workflow、参照名、対象repository、必要権限を確認する。
+2. rotationでは新しい資格情報を同じSecret名へ登録し、固定SHAの手動公開要求など最小の疎通確認を行う。
+3. 成功を確認してから旧資格情報を失効し、Actions実行履歴と失敗の有無を監査する。
+4. dispatch障害時は自動triggerを停止して公開先の受入・provenance・Pages反映を確認する。原因となったsource commitを推測で再送せず、固定SHAを指定した手動実行で復旧する。
+5. 秘密値はログ、artifact、workflow出力、Issue、PR、作業記録へ記録しない。
 
 ---
 

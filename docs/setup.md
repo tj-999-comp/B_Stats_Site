@@ -1,5 +1,7 @@
 # セットアップガイド
 
+更新日: 2026-08-28
+
 ## 前提条件
 
 - Node.js 20+
@@ -33,14 +35,10 @@ pnpm install
 
 ```bash
 # apps/web-static/.env.local
-SUPABASE_URL=https://your-project.supabase.co
-SUPABASE_PUBLISHABLE_KEYS=your-publishable-key
 NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
 NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=your-publishable-key
 
 # apps/web-vercel/.env.local
-SUPABASE_URL=https://your-project.supabase.co
-SUPABASE_PUBLISHABLE_KEYS=your-publishable-key
 NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
 NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=your-publishable-key
 
@@ -67,7 +65,7 @@ GitHub Actions（スクレイピング・マイグレーション）が使用す
 | Secret名 | 値の取得先 | 用途 |
 |---|---|---|
 | `SUPABASE_URL` | Supabase → Project Settings → API → Project URL | スクレイパーのDB接続先 |
-| `SUPABASE_SECRET_KEY` | Supabase → Project Settings → API → service_role key | スクレイパーのDB認証 |
+| `SUPABASE_SECRET_KEYS` | Supabase → Project Settings → API → Secret key（旧service_role相当） | スクレイパーのDB認証 |
 | `SUPABASE_PUBLISHABLE_KEYS` | Supabase → Project Settings → API → anon key | フロントエンドの公開キー |
 | `SUPABASE_DB_PASSSWORD` | Supabase → Project Settings → Database → Database password | マイグレーション適用（psql接続） |
 
@@ -76,6 +74,10 @@ GitHub Actions（スクレイピング・マイグレーション）が使用す
 > 2. 対象プロジェクト → **Database** → **Settings**
 > 3. **Database password** 欄の「Reset database password」またはコピーアイコンから取得
 > 4. 上記の GitHub Secrets 登録先に `SUPABASE_DB_PASSSWORD` として登録
+
+`SUPABASE_SECRET_KEYS`はPython scraperと`scrape.yml`が実際に参照する複数形です。`SUPABASE_PUBLISHABLE_KEYS`はGitHub Secret名、`NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`はWebアプリ内の公開環境変数名です。`SUPABASE_DB_PASSSWORD`は現行workflowの既存名で、綴りを変更する場合はworkflowとSecret登録を同時に切り替えます。
+
+なお、`scripts/generate_table_definition_live.mjs`には過去設定との互換性のため`SUPABASE_SECRET_KEY`（単数）のフォールバックが残っています。新規設定とGitHub Actionsでは`SUPABASE_SECRET_KEYS`（複数）を使用し、単数形へ戻さないでください。
 
 ## 7. 開発サーバーの起動
 

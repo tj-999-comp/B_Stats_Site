@@ -33,7 +33,9 @@ python3 -c 'import jwt, cryptography; print("GitHub App dependencies OK")'
 
 Issue、PR、レビュー、CIの取得には、個人の期限付きOAuth/PATではなくGitHub AppのInstallation tokenを使う。
 
-- 設定: `config/github_app.json`（`config/github_app.example.json`を複製してローカルで作成）
+これはローカルのPortfolio作業でGitHub APIを操作するための標準です。GitHub Actions workflowの認証方式を変更する規定ではありません。公開要求workflowなどが参照するActions Secretは、各workflowと公開先の受入契約を確認したうえで別途管理します。現行の`request-publish.yml`は`SANDBOX_PAGES_DISPATCH_TOKEN`のFine-grained PATを参照しており、ローカル用GitHub App tokenへ置き換わったとは扱いません。
+
+- 設定: `config/github_app.json`（`config/github_app.example.json`を複製してローカルで作成。`permissions`はテンプレートの最小権限を維持する）
 - 秘密鍵: Macキーチェーンの一般パスワード項目
 - 発行: `python3 scripts/dev/github_app_token.py`
 - token: 実行ごとに発行し、保存しない

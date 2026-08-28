@@ -1,0 +1,10 @@
+schema_version: 1
+title: "認証方式・Secret名・運用文書の整合確認"
+date: "2026-08-28"
+project_id: B_Stats_Site
+tags:
+  - actions
+  - secrets
+  - security
+  - issue-68
+publish: true
