@@ -51,6 +51,8 @@ Issue #68「[Actions][Docs] 認証方式・Secrets名・運用ドキュメント
 - 旧表記・認証境界の`rg`再検索: 実施。単数形はライブ定義生成スクリプトの互換フォールバック1か所だけで、新規設定では使わない旨を文書化
 - Markdownリンク・日付・作業記録配置: `git diff --check`、作業記録filename検証で確認
 - 作業記録HTML生成・filename検証・GitHub Issue状況同期: 成功。Issue状況は8件の未完了Issueを取得
+- PR CI（push検証run `33148437366`、pull request検証run `33148440870`）: 成功。Node.js 20廃止予定warningのみ
+- 初回PR CIのmetadata不足: `work_record_030.yml`を追加して解消
 - DB変更、Supabase Secret変更、PATのrotation・失効、公開要求dispatch: 未実施（Issueの非対象）
 
 ## 最終結果
