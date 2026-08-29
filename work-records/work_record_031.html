@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light">
+    <title>Secret登録状態と公開要求認証の段階移行設計 — 作業記録</title>
+    <link rel="stylesheet" href="work_record.css">
+  </head>
+  <body>
+    <div class="shell">
+      <header class="topbar">
+        <span class="wordmark">B.LEAGUE STATS</span>
+      </header>
+      <main>
+        <header class="record-header">
+          <p class="kicker">作業記録 031 ・ 2026-08-29</p>
+          <h1>Secret登録状態と公開要求認証の段階移行設計</h1>
+          <dl class="record-meta">
+            <div><dt>原本</dt><dd><code>md/work_record_031.md</code></dd></div>
+            <div><dt>状態</dt><dd>記録本文をHTML化</dd></div>
+          </dl>
+        </header>
+        <section class="record-section"><div class="section-intro"><p class="section-label">01　概要</p><h2>概要</h2></div><div class="section-content"><p>Issue #71「[Actions][Security] Secret運用確認とPATからGitHub Appへの移行を検討する」について、B側のGitHub Actions workflowが参照するSecret名と登録名を値を表示せず確認し、公開要求のPATからGitHub App installation tokenへの段階移行経路を実装・文書化した。</p>
+<p>GitHub Actions Secret一覧では、<code>SANDBOX_PAGES_DISPATCH_TOKEN</code>、<code>SUPABASE_DB_PASSSWORD</code>、<code>SUPABASE_PUBLISHABLE_KEYS</code>、<code>SUPABASE_URL</code>、旧単数形の<code>SUPABASE_SECRET_KEY</code>を確認した。一方、現行workflowが参照する<code>SUPABASE_SECRET_KEYS</code>と<code>VERCEL_*</code> 3件は一覧になかった。移行用の<code>PUBLISH_APP_ID</code>と<code>PUBLISH_APP_PRIVATE_KEY</code>も未登録である。</p></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">02　記録</p><h2>対象と制約</h2></div><div class="section-content"><ul><li><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/71">#71 Secret運用確認とPATからGitHub Appへの移行検討</a></li><li><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/68">#68 認証方式・Secrets名・運用ドキュメントの整合</a></li><li><a href="https://github.com/tj-999-comp/sandbox-pages/issues/25">sandbox-pages#25 dispatch認証のGitHub App移行</a></li><li>Secret値、PAT値、秘密鍵、発行主体、有効期限の取得・表示・保存は行わない。</li><li>Secret変更、PAT rotation・失効、GitHub App install、workflow dispatch、DB変更は管理者確認が必要なため行わない。</li></ul></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">03　記録</p><h2>主要な判断</h2></div><div class="section-content"><ul><li><code>request-publish.yml</code>は、<code>PUBLISH_APP_ID</code>と<code>PUBLISH_APP_PRIVATE_KEY</code>が両方設定された場合だけGitHub App installation tokenを発行する。tokenの対象は<code>tj-999-comp/sandbox-pages</code>だけ、要求権限は<code>Actions: write</code>だけとする。</li><li>App Secretが未設定で<code>SANDBOX_PAGES_DISPATCH_TOKEN</code>が設定されている場合は、既存PAT経路へ戻す。App IDと秘密鍵の片方だけが設定された場合、または両経路が未設定の場合はdispatch前に失敗させる。</li><li>App経路を有効化しても旧PATを直ちに失効させず、固定SHA・単一対象の手動公開、公開先受入、provenance、Pages deploy、公開URL、Slack通知、push起点の順で非回帰を確認してから失効する。</li><li><code>sandbox-pages</code>側の受入workflowは、公開要求の認証方式とは独立して、同リポジトリの<code>github.token</code>で固定SHA checkout、commit、Pages deploy、Slack通知を行う。移行対象はB側のdispatch認証だけである。</li></ul></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">04　実行</p><h2>実行内容</h2></div><div class="section-content"><ol><li>作業開始時の作業ツリーがクリーンで、<code>main</code>と<code>origin/main</code>が一致していることを確認し、Issue専用ブランチを作成した。</li><li>GitHub APIでIssue #71、Issue #68、PR #69、<code>sandbox-pages#25</code>の状態を確認した。#71は未完了、#68は完了、PR #69はマージ済み、#25は完了である。</li><li><code>gh api repos/tj-999-comp/B_Stats_Site/actions/secrets</code>でSecret名と更新日時だけを取得し、値は取得しなかった。</li><li><code>.github/workflows/scrape.yml</code>、<code>migrate.yml</code>、<code>deploy-pages.yml</code>、<code>deploy-vercel.yml</code>、<code>request-publish.yml</code>を照合し、参照名との差異を整理した。</li><li>公開先<code>sandbox-pages</code>の<code>accept-source.yml</code>を読み取り、固定SHAの受入、Pages deploy、Slack通知の経路を確認した。</li><li>GitHub公式仕様を確認し、workflow dispatchに必要なGitHub App installation tokenの最小権限を<code>Actions: write</code>とした。</li><li><code>request-publish.yml</code>へ、App経路の選択、App tokenの短期発行、PAT fallback、片側設定検出、認証方式の非秘密ログを追加した。</li><li><code>docs/workflows.md</code>、<code>docs/deployment.md</code>、<code>docs/setup.md</code>へSecret登録状態、段階移行、rollback、E2E確認手順を反映した。</li></ol></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">05　記録</p><h2>管理者が行う残作業</h2></div><div class="section-content"><ol><li><code>SUPABASE_SECRET_KEYS</code>の登録要否を確認し、必要なら旧単数形<code>SUPABASE_SECRET_KEY</code>との用途を切り分けて登録する。<code>scrape.yml</code>を実行するまで、一覧にない状態では復旧しない。</li><li>Vercel公開を利用する場合だけ、<code>VERCEL_TOKEN</code>、<code>VERCEL_ORG_ID</code>、<code>VERCEL_PROJECT_ID</code>の登録状態と値の有効性を確認する。</li><li><code>SANDBOX_PAGES_DISPATCH_TOKEN</code>について、値を表示せず発行主体、期限、対象repository、Actions権限を確認する。</li><li>GitHub Appを<code>sandbox-pages</code>だけへinstallし、Actions writeだけを許可してから、<code>PUBLISH_APP_ID</code>と<code>PUBLISH_APP_PRIVATE_KEY</code>を登録する。Contents writeとWorkflows権限は付与しない。</li><li>固定SHA・単一対象の手動公開でApp経路を確認し、続けてpush起点、公開先受入、provenance、Pages、公開URL、Slack通知を確認する。これらのdispatchは管理者の明示承認後に行う。</li><li>App経路の成功を確認した後、旧PATを失効し、<code>SANDBOX_PAGES_DISPATCH_TOKEN</code>を削除または未使用状態にする。失敗時は旧PAT経路へ戻し、固定SHAの手動実行で復旧する。</li></ol></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">06　検証</p><h2>検証</h2></div><div class="section-content"><ul><li>Secret一覧の読み取り: 成功。値は取得していない。</li><li>現行workflowのSecret参照名との照合: 成功。</li><li><code>sandbox-pages</code>の受入workflow読み取り: 成功。受入、commit、Pages deploy、Slack通知を確認した。</li><li>GitHub公式REST API仕様の確認: 成功。workflow dispatchはGitHub App installation access tokenの<code>Actions: write</code>に対応する。</li><li>YAML差分の静的確認: Ruby YAML parserで成功。<code>actionlint</code>は環境に未導入のため未実施。</li><li><code>git diff --check</code>: 成功。</li><li>Python構文確認（<code>scripts</code>、<code>Colab</code>）: 成功。</li><li>作業記録filename、MarkdownからHTMLへの再生成・再生成check、Issue状況同期: 成功。</li><li>App install、Secret変更、PAT rotation・失効、公開要求dispatch、Pages公開、Slack通知: 未実施（管理者承認が必要）。</li></ul></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">07　記録</p><h2>最終結果</h2></div><div class="section-content"><ul><li>B側workflowに、既存PATを維持したままGitHub Appへ切り替えられる段階移行経路を追加した。</li><li>Secret登録名の実測結果を文書化し、<code>SUPABASE_SECRET_KEYS</code>未登録、旧単数形のみ登録、Vercel Secret未登録という差異を明記した。</li><li>App install、Secret登録、E2E、旧PAT失効は未完了であり、管理者操作待ちとして残した。</li><li>ブランチ: <code>issue-71-secret-operations</code></li></ul></div></section>
+<section class="record-section"><div class="section-intro"><p class="section-label">08　Issue状況</p><h2>GitHub Issue状況（2026-08-29時点の現在値）</h2></div><div class="section-content"><p>確認日: 2026-08-29（JST）</p>
+<p>GitHub APIで <code>tj-999-comp/B_Stats_Site</code> のIssueを確認した。Pull Requestは対象外とした。未完了Issueは8件だった。</p>
+<h3>親子関係</h3>
+<pre><code class="language-text">#7（未完了・親Issue）
+├── #8（完了・子Issue）
+├── #45（完了・子Issue）
+└── #46（完了・子Issue）
+#12（完了・親Issue）
+├── #21（完了・子Issue）
+├── #22（完了・子Issue）
+└── #23（完了・子Issue）
+#24（完了・親Issue）
+└── #25（完了・子Issue）
+#56（完了・親Issue）
+├── #58（完了・子Issue）
+└── #63（完了・子Issue）
+#57（未完了・親Issue）
+└── #59（未完了・子Issue）</code></pre>
+<p>GitHubのsub-issues APIで登録された親子関係を記載した。親子登録のないIssueは、優先順位一覧の関係・着手条件に記載する。</p>
+<h3>優先順位順の未完了一覧</h3>
+<p>優先順位は <code>github_issue_status_policy.json</code> の運用設定を使い、設定のないIssueは既定値P3として記載する。</p>
+<table><thead><tr><th>順位</th><th>優先度</th><th>GitHub Issue</th><th>状態</th><th>関係・着手条件</th></tr></thead><tbody><tr><td>1</td><td>P1</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/57">#57</a> [Web][Vercel] SSR/ISR版の統計サイトを実装・公開する</td><td>未完了</td><td>Web導入のVercel親Issue。#59を管理。#58のデータ契約・共通UIを前提</td></tr><tr><td>2</td><td>P2</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/59">#59</a> [Web][Vercel] B1データを表示するSSR/ISR MVPを実装する</td><td>未完了</td><td>#57の子Issue。Vercel版のMVP。#58のデータ契約・共通UIを前提</td></tr><tr><td>3</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/7">#7</a> 試合のスクレイピングデータ精査</td><td>未完了</td><td>#24と範囲が重なる</td></tr><tr><td>4</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/9">#9</a> 課題解決の原案を立てる</td><td>未完了</td><td>探索テーマ</td></tr><tr><td>5</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/15">#15</a> [DB] 過年度の plus_minus・背番号欠損を調査する</td><td>未完了</td><td>独立</td></tr><tr><td>6</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/17">#17</a> [DB] play_by_play未投入と存在フラグの整合性を整理する</td><td>未完了</td><td>独立</td></tr><tr><td>7</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/44">#44</a> [DB] live DBへB2・B3スタッツを追加する</td><td>未完了</td><td>独立。優先度未設定</td></tr><tr><td>8</td><td>P3</td><td><a href="https://github.com/tj-999-comp/B_Stats_Site/issues/71">#71</a> [Actions][Security] Secret運用確認とPATからGitHub Appへの移行を検討する</td><td>未完了</td><td>独立。優先度未設定</td></tr></tbody></table></div></section>
+
+      </main>
+      <footer>
+        <span>B.LEAGUE Stats · 作業記録 031</span>
+        <span><a href="md/work_record_031.md">Markdown原本</a></span>
+      </footer>
+    </div>
+  </body>
+</html>
