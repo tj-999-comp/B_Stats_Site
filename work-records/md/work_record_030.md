@@ -61,16 +61,17 @@ Issue #68「[Actions][Docs] 認証方式・Secrets名・運用ドキュメント
 - 現行実装と公開先workflowの認証方式を整理し、B側dispatchのPATをGitHub App移行済みと誤認しない記載へ更新した。
 - `SUPABASE_SECRET_KEYS`、`SUPABASE_PUBLISHABLE_KEYS`、`NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`、`SUPABASE_DB_PASSSWORD`の役割と正確な綴りを文書化した。
 - 未解決事項: GitHub Actions SettingsにおけるSecret登録有無、PATの発行主体・期限・実値はApp権限不足と非対象条件により確認していない。必要ならリポジトリ管理者が値を表示せず、Secret名・有効期限・fine-grained対象repository・Actions権限だけを確認する。
-- 次アクション: Draft PR #69のレビューとmerge後、ユーザーまたは管理者が本番Secretの登録状態を確認する。PATからAppへ移行する場合は、別Issueで公開先install、最小権限、段階的切替、非回帰、旧PAT失効を実施する。
+- 次アクション: [Issue #71](https://github.com/tj-999-comp/B_Stats_Site/issues/71)で、ユーザーまたは管理者が本番Secretの登録状態を確認する。PATからAppへ移行する場合は、同Issueで公開先install、最小権限、段階的切替、非回帰、旧PAT失効を実施する。
 - ブランチ: `issue-68-auth-docs`
 - commit: `8b57b47`（実装・作業記録初回commit）
-- PR: [#69 Draft PR: 認証方式とSecret運用の記載を整合](https://github.com/tj-999-comp/B_Stats_Site/pull/69)
+- PR: [#69 認証方式とSecret運用の記載を整合](https://github.com/tj-999-comp/B_Stats_Site/pull/69)（merge済み）
+- 事後修正PR: [#70 作業記録のIssue状況修正](https://github.com/tj-999-comp/B_Stats_Site/pull/70)
 
 ## GitHub Issue状況（2026-08-29時点の現在値）
 
 確認日: 2026-08-29（JST）
 
-GitHub APIで `tj-999-comp/B_Stats_Site` のIssueを確認した。Pull Requestは対象外とした。未完了Issueは7件だった。
+GitHub APIで `tj-999-comp/B_Stats_Site` のIssueを確認した。Pull Requestは対象外とした。未完了Issueは8件だった。
 
 ### 親子関係
 
@@ -107,3 +108,4 @@ GitHubのsub-issues APIで登録された親子関係を記載した。親子登
 | 5 | P3 | [#15](https://github.com/tj-999-comp/B_Stats_Site/issues/15) [DB] 過年度の plus_minus・背番号欠損を調査する | 未完了 | 独立 |
 | 6 | P3 | [#17](https://github.com/tj-999-comp/B_Stats_Site/issues/17) [DB] play_by_play未投入と存在フラグの整合性を整理する | 未完了 | 独立 |
 | 7 | P3 | [#44](https://github.com/tj-999-comp/B_Stats_Site/issues/44) [DB] live DBへB2・B3スタッツを追加する | 未完了 | 独立。優先度未設定 |
+| 8 | P3 | [#71](https://github.com/tj-999-comp/B_Stats_Site/issues/71) [Actions][Security] Secret運用確認とPATからGitHub Appへの移行を検討する | 未完了 | 独立。優先度未設定 |
