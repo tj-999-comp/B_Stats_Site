@@ -66,11 +66,11 @@ Issue #68「[Actions][Docs] 認証方式・Secrets名・運用ドキュメント
 - commit: `8b57b47`（実装・作業記録初回commit）
 - PR: [#69 Draft PR: 認証方式とSecret運用の記載を整合](https://github.com/tj-999-comp/B_Stats_Site/pull/69)
 
-## GitHub Issue状況（2026-08-28時点の現在値）
+## GitHub Issue状況（2026-08-29時点の現在値）
 
-確認日: 2026-08-28（JST）
+確認日: 2026-08-29（JST）
 
-GitHub APIで `tj-999-comp/B_Stats_Site` のIssueを確認した。Pull Requestは対象外とした。未完了Issueは8件だった。
+GitHub APIで `tj-999-comp/B_Stats_Site` のIssueを確認した。Pull Requestは対象外とした。未完了Issueは7件だった。
 
 ### 親子関係
 
@@ -107,4 +107,3 @@ GitHubのsub-issues APIで登録された親子関係を記載した。親子登
 | 5 | P3 | [#15](https://github.com/tj-999-comp/B_Stats_Site/issues/15) [DB] 過年度の plus_minus・背番号欠損を調査する | 未完了 | 独立 |
 | 6 | P3 | [#17](https://github.com/tj-999-comp/B_Stats_Site/issues/17) [DB] play_by_play未投入と存在フラグの整合性を整理する | 未完了 | 独立 |
 | 7 | P3 | [#44](https://github.com/tj-999-comp/B_Stats_Site/issues/44) [DB] live DBへB2・B3スタッツを追加する | 未完了 | 独立。優先度未設定 |
-| 8 | P3 | [#68](https://github.com/tj-999-comp/B_Stats_Site/issues/68) [Actions][Docs] 認証方式・Secrets名・運用ドキュメントの整合を確認する | 未完了 | 独立。優先度未設定 |
