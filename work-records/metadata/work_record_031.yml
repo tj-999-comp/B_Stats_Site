@@ -1,0 +1,11 @@
+schema_version: 1
+title: "Secret登録状態と公開要求認証の段階移行設計"
+date: "2026-08-29"
+project_id: B_Stats_Site
+tags:
+  - actions
+  - secrets
+  - github-app
+  - security
+  - issue-71
+publish: true

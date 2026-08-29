@@ -68,6 +68,9 @@ GitHub Actions（スクレイピング・マイグレーション）が使用す
 | `SUPABASE_SECRET_KEYS` | Supabase → Project Settings → API → Secret key（旧service_role相当） | スクレイパーのDB認証 |
 | `SUPABASE_PUBLISHABLE_KEYS` | Supabase → Project Settings → API → anon key | フロントエンドの公開キー |
 | `SUPABASE_DB_PASSSWORD` | Supabase → Project Settings → Database → Database password | マイグレーション適用（psql接続） |
+| `SANDBOX_PAGES_DISPATCH_TOKEN` | GitHub fine-grained PAT（移行完了までの既存経路） | `sandbox-pages`への公開要求dispatch |
+| `PUBLISH_APP_ID` | GitHub App settings | GitHub App経路のApp ID（段階移行時だけ） |
+| `PUBLISH_APP_PRIVATE_KEY` | GitHub App settingsで発行した秘密鍵 | GitHub App経路のinstallation token発行（段階移行時だけ） |
 
 > **`SUPABASE_DB_PASSSWORD` の取得手順**
 > 1. [Supabase ダッシュボード](https://supabase.com/dashboard) を開く
@@ -78,6 +81,8 @@ GitHub Actions（スクレイピング・マイグレーション）が使用す
 `SUPABASE_SECRET_KEYS`はPython scraperと`scrape.yml`が実際に参照する複数形です。`SUPABASE_PUBLISHABLE_KEYS`はGitHub Secret名、`NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`はWebアプリ内の公開環境変数名です。`SUPABASE_DB_PASSSWORD`は現行workflowの既存名で、綴りを変更する場合はworkflowとSecret登録を同時に切り替えます。
 
 なお、`scripts/generate_table_definition_live.mjs`には過去設定との互換性のため`SUPABASE_SECRET_KEY`（単数）のフォールバックが残っています。新規設定とGitHub Actionsでは`SUPABASE_SECRET_KEYS`（複数）を使用し、単数形へ戻さないでください。
+
+GitHub Actions Secretの登録名はworkflowの参照名と一致させる。`SANDBOX_PAGES_DISPATCH_TOKEN`はGitHub App経路の疎通と旧PAT失効が完了するまで残し、`PUBLISH_APP_ID`と`PUBLISH_APP_PRIVATE_KEY`は管理者がAppを`sandbox-pages`だけへinstallした後に登録する。Secretの値は作業記録やログへ記載しない。
 
 ## 7. 開発サーバーの起動
 

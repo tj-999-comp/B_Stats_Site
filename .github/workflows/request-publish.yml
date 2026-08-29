@@ -170,9 +170,53 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
+      - name: Select dispatch authentication
+        id: auth
+        env:
+          PUBLISH_APP_ID: ${{ secrets.PUBLISH_APP_ID }}
+          PUBLISH_APP_PRIVATE_KEY: ${{ secrets.PUBLISH_APP_PRIVATE_KEY }}
+          PAT_TOKEN: ${{ secrets.SANDBOX_PAGES_DISPATCH_TOKEN }}
+        run: |
+          set -euo pipefail
+          app_id_set=false
+          private_key_set=false
+          pat_set=false
+          [[ -n "$PUBLISH_APP_ID" ]] && app_id_set=true
+          [[ -n "$PUBLISH_APP_PRIVATE_KEY" ]] && private_key_set=true
+          [[ -n "$PAT_TOKEN" ]] && pat_set=true
+
+          if [[ "$app_id_set" != "$private_key_set" ]]; then
+            echo "PUBLISH_APP_ID and PUBLISH_APP_PRIVATE_KEY must be configured together" >&2
+            exit 1
+          fi
+
+          if [[ "$app_id_set" == "true" ]]; then
+            echo "use_app=true" >> "$GITHUB_OUTPUT"
+            echo "auth_mode=github-app" >> "$GITHUB_OUTPUT"
+          elif [[ "$pat_set" == "true" ]]; then
+            echo "use_app=false" >> "$GITHUB_OUTPUT"
+            echo "auth_mode=fine-grained-pat" >> "$GITHUB_OUTPUT"
+          else
+            echo "Configure GitHub App credentials or SANDBOX_PAGES_DISPATCH_TOKEN" >&2
+            exit 1
+          fi
+
+      - name: Create GitHub App installation token
+        id: app-token
+        if: steps.auth.outputs.use_app == 'true'
+        uses: actions/create-github-app-token@v3
+        with:
+          app-id: ${{ secrets.PUBLISH_APP_ID }}
+          private-key: ${{ secrets.PUBLISH_APP_PRIVATE_KEY }}
+          owner: tj-999-comp
+          repositories: sandbox-pages
+          permission-actions: write
+
       - name: Send request to sandbox-pages
         env:
-          GH_TOKEN: ${{ secrets.SANDBOX_PAGES_DISPATCH_TOKEN }}
+          APP_TOKEN: ${{ steps.app-token.outputs.token }}
+          PAT_TOKEN: ${{ secrets.SANDBOX_PAGES_DISPATCH_TOKEN }}
+          AUTH_MODE: ${{ steps.auth.outputs.auth_mode }}
           PROJECT_ID: ${{ env.PROJECT_ID }}
           PUBLISH_REPOSITORY: ${{ env.PUBLISH_REPOSITORY }}
           PUBLISH_WORKFLOW: ${{ env.PUBLISH_WORKFLOW }}
@@ -181,7 +225,13 @@ jobs:
           TARGET_BASENAMES_JSON: ${{ needs.prepare.outputs.target_basenames }}
         run: |
           set -euo pipefail
+          if [[ -n "$APP_TOKEN" ]]; then
+            export GH_TOKEN="$APP_TOKEN"
+          else
+            export GH_TOKEN="$PAT_TOKEN"
+          fi
           test -n "$GH_TOKEN"
+          echo "Dispatch authentication: $AUTH_MODE"
           while IFS= read -r target_basename; do
             gh api \
               --method POST \

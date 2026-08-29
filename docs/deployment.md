@@ -1,6 +1,6 @@
 # デプロイガイド
 
-更新日: 2026-08-28
+更新日: 2026-08-29
 
 ## 構成1: GitHub Pages
 
@@ -65,4 +65,4 @@ B2・B3などのDB更新後は、ブラウザの再読み込みで同じ画面�
 
 ## 作業記録の手動公開要求
 
-公開要求は`.github/workflows/request-publish.yml`のmainへの`work-records/**` push、またはWorkflow dispatchから実行します。検証済みの固定commit SHAと、`publish: true`の対象basenameを指定してください。公開先`sandbox-pages`へのdispatchには現行実装では`SANDBOX_PAGES_DISPATCH_TOKEN`（Fine-grained PAT）を使います。PATは`sandbox-pages`だけに限定し、ActionsのRead and writeだけを付与し、Contents writeは付与しません。GitHub App Installation tokenはローカルのIssue・PR操作用で、公開要求workflowの認証方式とは別です。期限、rotation、失効手順は[`docs/workflows.md`](workflows.md)に記録しています。
+公開要求は`.github/workflows/request-publish.yml`のmainへの`work-records/**` push、またはWorkflow dispatchから実行します。検証済みの固定commit SHAと、`publish: true`の対象basenameを指定してください。公開先`sandbox-pages`へのdispatchは、`PUBLISH_APP_ID`と`PUBLISH_APP_PRIVATE_KEY`が両方登録されている場合はGitHub App installation token、それ以外は既存の`SANDBOX_PAGES_DISPATCH_TOKEN`（Fine-grained PAT）を使います。GitHub Appは`sandbox-pages`だけを対象にActions writeを要求し、PATは`sandbox-pages`だけに限定してActionsのRead and writeだけを付与します。どちらもContents writeは付与しません。GitHub App Secretの登録、公開先へのinstall、手動・push起点のE2E、旧PATの失効は管理者の確認後に行います。期限、rotation、失効手順は[`docs/workflows.md`](workflows.md)に記録しています。
