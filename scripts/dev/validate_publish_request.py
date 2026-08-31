@@ -15,7 +15,7 @@ PROJECT_ID = "B_Stats_Site"
 TARGET_BASENAME_RE = re.compile(r"work_record_([0-9]{3})")
 
 
-def validate_target(target_basename: str) -> tuple[str, Path, Path, Path]:
+def validate_target(target_basename: str) -> tuple[str, Path, Path]:
     match = TARGET_BASENAME_RE.fullmatch(target_basename)
     if match is None or not 1 <= int(match.group(1)) <= 999:
         raise ValueError("target_basename must match work_record_001 through work_record_999")
@@ -23,8 +23,7 @@ def validate_target(target_basename: str) -> tuple[str, Path, Path, Path]:
     records_dir = ROOT / "work-records"
     markdown_path = records_dir / "md" / f"{target_basename}.md"
     metadata_path = records_dir / "metadata" / f"{target_basename}.yml"
-    html_path = records_dir / f"{target_basename}.html"
-    for path in (markdown_path, metadata_path, html_path):
+    for path in (markdown_path, metadata_path):
         if not path.is_file():
             raise ValueError(f"selected publish file is missing: {path}")
 
@@ -33,7 +32,7 @@ def validate_target(target_basename: str) -> tuple[str, Path, Path, Path]:
         raise ValueError(f"{metadata_path}: project_id must be {PROJECT_ID}")
     if metadata.get("publish") is not True:
         raise ValueError(f"{metadata_path}: publish must be true for a publish request")
-    return PROJECT_ID, markdown_path, metadata_path, html_path
+    return PROJECT_ID, markdown_path, metadata_path
 
 
 def main() -> int:
@@ -42,7 +41,7 @@ def main() -> int:
     args = parser.parse_args()
 
     try:
-        project_id, markdown_path, metadata_path, html_path = validate_target(args.target_basename)
+        project_id, markdown_path, metadata_path = validate_target(args.target_basename)
     except ValueError as error:
         print(f"Publish request validation failed: {error}")
         return 1
@@ -50,7 +49,7 @@ def main() -> int:
     print(
         "Publish request validation passed: "
         f"project_id={project_id} target_basename={args.target_basename} "
-        f"files={markdown_path.name},{metadata_path.name},{html_path.name}"
+        f"files={markdown_path.name},{metadata_path.name} (A-rendered HTML)"
     )
     return 0
 

@@ -11,9 +11,8 @@
 1. 対象Issue、完了条件、変更範囲を確定する。
 2. 課題専用ブランチを作成する。ドキュメントだけの短縮工程は`AGENTS.md`の例外規則に従う。
 3. 実装または文書変更を行う。
-4. `work-records/md/work_record_###.md`を作成する。
-5. `python3 scripts/dev/convert_work_records_to_html.py`で同番号のHTMLを生成する。
-6. filename・Markdown・HTML・構文・テスト・必要なブラウザ確認を実行する。
+4. `work-records/md/work_record_###.md`とmetadataを作成する。
+5. Markdown・metadata・構文・テストを実行する。HTMLはsandbox-pagesのA側rendererが生成する。
 7. 対象ファイルだけをstageし、commitする。
 8. 作業ブランチをpushする。
 9. GitHub App tokenでIssueの実状態とPR情報を取得し、Issueへ完了コメントを残す。
@@ -104,8 +103,8 @@ work-records/work_record_###.html
 
 ### HTML
 
-- HTMLはMarkdownからconverterで生成し、直接編集しない。
-- CSSは`work-record.css`を参照する。
+- HTMLはsandbox-pagesの`a_rendered` rendererがMarkdownとmetadataから生成し、生成元では管理しない。
+- CSSとHTML構造はsandbox-pagesの共通rendererを参照する。
 - タイトル、見出し、表、コードブロック、リンクを同じ変換規則で生成する。
 - Markdownのraw HTMLは実行せず、文字列としてescapeする。
 - 相対リンクはHTMLの出力位置を基準に解決する。
@@ -115,9 +114,8 @@ work-records/work_record_###.html
 検証コマンド:
 
 ```bash
-python3 scripts/dev/convert_work_records_to_html.py
-python3 scripts/dev/convert_work_records_to_html.py --check
-python3 scripts/dev/validate_work_record_filenames.py
+python3 scripts/dev/validate_work_record_source.py
+python3 scripts/dev/validate_work_record_source.py --check-fixtures
 ```
 
 表示変更がある場合は、少なくとも1280pxと320pxでChromium確認を行う。
@@ -130,7 +128,7 @@ python3 scripts/dev/validate_work_record_filenames.py
 
 - 不変な`project_id`を決める。
 - source repository、branch、source directory、metadata directory、destination directoryを確定する。
-- `a_rendered`または既存互換の`source_html`を選ぶ。新規C/Dは原則`a_rendered`。
+- `a_rendered`を選ぶ。`source_html`は既存移行対象の互換方式に限る。
 - metadata、命名、HTML生成、リンク、安全性、容量制限を確認する。
 - A側にregistry entry、validator fixture、provenanceの保管場所を追加する。
 - `enabled: false`のままdry-runとno-opを通す。
@@ -145,7 +143,7 @@ python3 scripts/dev/validate_work_record_filenames.py
 6. 新規1件でpublish・Pages・公開URL・必要な通知をE2E確認する。
 7. 問題がなければ`enabled: true`へ変更する。
 
-Bは既存の`source_html`互換方式を維持し、既存URLと番号を変更しない。C/Dは番号を各project内で独立採番し、`<project_id>:<work_record_###>`を一意識別子とする。project間で番号を共有する必要はない。
+Bも`a_rendered`へ移行し、既存URLと番号を変更しない。C/Dは番号を各project内で独立採番し、`<project_id>:<work_record_###>`を一意識別子とする。project間で番号を共有する必要はない。
 
 ## 6. リポジトリへの適用範囲
 

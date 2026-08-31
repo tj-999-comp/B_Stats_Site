@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Synchronize a work record's GitHub Issue status section.
 
-The Markdown work record remains the source of truth for the rendered HTML, but
-the current Issue section is generated from GitHub's open issues API. Pull
+The Markdown work record remains the source of truth for the A-rendered HTML,
+but the current Issue section is generated from GitHub's open issues API. Pull
 Requests are excluded because GitHub exposes them through the issues endpoint.
 """
 
@@ -51,11 +51,6 @@ def _parse_args() -> argparse.Namespace:
     action = parser.add_mutually_exclusive_group(required=True)
     action.add_argument("--write", action="store_true", help="Issue状況を更新する")
     action.add_argument("--check", action="store_true", help="Issue状況を照合する")
-    parser.add_argument(
-        "--skip-html",
-        action="store_true",
-        help="--write時にMarkdownからHTMLを再生成しない",
-    )
     return parser.parse_args()
 
 
@@ -403,12 +398,6 @@ def main() -> int:
             _replace_issue_section(path.read_text(encoding="utf-8"), section),
             encoding="utf-8",
         )
-        if not args.skip_html:
-            subprocess.run(
-                [sys.executable, "-m", "scripts.dev.convert_work_records_to_html"],
-                cwd=ROOT,
-                check=True,
-            )
         print(f"GitHub Issue状況を更新しました: {path}（{len(open_issues)}件）")
         return 0
     except (OSError, RuntimeError, ValueError) as error:
