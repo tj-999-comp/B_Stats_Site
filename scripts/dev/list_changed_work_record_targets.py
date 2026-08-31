@@ -14,7 +14,7 @@ from scripts.dev.validate_work_record_source import parse_metadata
 
 ROOT = Path(__file__).resolve().parents[2]
 TARGET_PATH_RE = re.compile(
-    r"^work-records/(?:md/|metadata/)?(work_record_[0-9]{3})\.(?:md|yml|html)$"
+    r"^work-records/(?:md/|metadata/)(work_record_[0-9]{3})\.(?:md|yml)$"
 )
 
 

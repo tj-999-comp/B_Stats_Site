@@ -145,13 +145,10 @@ jobs:
       - name: Validate work-record filenames and placement
         run: python scripts/dev/validate_work_record_filenames.py
 
-      - name: Validate deterministic HTML regeneration
-        run: python -m scripts.dev.convert_work_records_to_html --check
-
-      - name: Validate metadata and source safety
+      - name: Validate Markdown and metadata source contract
         run: python scripts/dev/validate_work_record_source.py
 
-      - name: Validate source safety fixtures
+      - name: Validate source contract fixtures
         run: python scripts/dev/validate_work_record_source.py --check-fixtures
 
       - name: Validate selected publish request
