@@ -69,7 +69,7 @@ HTMLはsandbox-pagesのA側rendererが生成するため、このリポジトリ
   python -m scripts.dev.sync_github_issue_status --repo tj-999-comp/B_Stats_Site --check
   ```
 
-  GitHub APIの取得件数を記録し、表の行数と一致しない場合は完了扱いにしない。
+  同期スクリプトの出力後、各Issueの`state reason`をGitHub API結果で補完し、GitHub APIの取得件数と表の行数を照合する。一致しない場合は完了扱いにしない。
 - 2026-08-13時点の一覧の初回記録は [作業記録008](md/work_record_008.md) と、その閲覧用 [work_record_008.html](work_record_008.html) の末尾に保存する。その後に確認した状態は、確認作業に対応する作業記録の末尾へ追記する。今回のチャットで確認した状態は [作業記録010](md/work_record_010.md) と、その閲覧用 [work_record_010.html](work_record_010.html) の末尾に保存する。
 - 一覧を更新するときは、更新作業と関係する作業記録に、その時点のオープンIssue全件、確認日時、親子関係、優先順位、変更理由を残す。
 - 優先順位は `P0`（今すぐ）から `P3`（後回し）で表す。
@@ -85,7 +85,7 @@ HTMLはsandbox-pagesのA側rendererが生成するため、このリポジトリ
 
 ## 共通HTMLデザイン
 
-公開HTMLの正本は `tj-999-comp/sandbox-pages` の [`work-records/design.md`](https://github.com/tj-999-comp/sandbox-pages/blob/main/work-records/design.md) とA側renderer/CSSである。`a_rendered` の公開ページは、生成元ごとのHTML・CSS・designを使わず、`record-page`、`shell`、`topbar`、`record-header`、`record-meta`、番号付き`record-section`、共通footerを同じ構造で出力する。新規・更新時は1280pxと320pxを含む代表viewportで横overflow、console/page error、failed requestがないこと、生成元間の主要構造・スタイルが一致することを確認する。デザイン不一致が残る場合は公開導入を完了扱いにしない。
+公開HTMLの正本は `tj-999-comp/sandbox-pages` の [`work-records/design.md`](https://github.com/tj-999-comp/sandbox-pages/blob/main/work-records/design.md) とA側renderer/CSSである。`a_rendered` の公開ページは、生成元ごとのHTML・CSS・designを使わず、`record-page`、`shell`、`topbar`、`record-header`、`record-meta`、番号付き`record-section`、共通footerを同じ構造で出力する。新規・更新時は1280px、900px、640px、320pxのviewportで横overflow、console/page error、failed requestがないこと、生成元間の主要構造・スタイルが一致することを確認する。デザイン不一致が残る場合は公開導入を完了扱いにしない。
 
 ## 自動検証
 
