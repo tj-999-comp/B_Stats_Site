@@ -53,6 +53,8 @@ HTMLはsandbox-pagesのA側rendererが生成するため、このリポジトリ
 
 ## GitHub Issue状況の記録
 
+作業記録を作成する直前に、Pull Requestを除くこのリポジトリの全Open IssueをGitHub APIから再取得する。取得件数と優先順位表のIssue行数を一致させ、番号、タイトル、URL、state、state reason、作業記録との関係・着手条件を各Issueについて記録する。親子関係はsub-issues APIで確認できたものだけを記載し、Issue本文の言及から推測したツリーを作らない。外部リポジトリのIssueは一覧へ混在させず、必要な場合だけ対象と理由を補足する。API取得に失敗した場合は状態を推測せず、未確認範囲と再取得手順を記録する。
+
 - GitHub Issueの一覧、優先順位、親子関係、確認日時は、関連する番号付き作業記録の中に保存する。
 - GitHub Issue状況は対応するMarkdownへ記録し、公開時にsandbox-pages側rendererがHTMLへ反映する。
 - GitHub Issue状況だけを扱う独立したMarkdownやHTMLは作成しない。
@@ -60,6 +62,14 @@ HTMLはsandbox-pagesのA側rendererが生成するため、このリポジトリ
 - 親子関係はGitHubのsub-issues APIから取得し、優先度と補足関係は `scripts/dev/github_issue_status_policy.json` で管理する。
 - Issue状況の更新は、リポジトリルートで `python -m scripts.dev.sync_github_issue_status --repo owner/name --write` を実行する。対象を省略した場合は番号が最大の作業記録を更新する。
 - 更新後は `python -m scripts.dev.sync_github_issue_status --repo owner/name --check` を実行し、MarkdownのIssue番号集合がGitHub APIの全オープンIssueと一致することを確認する。
+- このリポジトリでは対象を明示して取得・検証する。
+
+  ```bash
+  python -m scripts.dev.sync_github_issue_status --repo tj-999-comp/B_Stats_Site --write
+  python -m scripts.dev.sync_github_issue_status --repo tj-999-comp/B_Stats_Site --check
+  ```
+
+  同期スクリプトの出力後、各Issueの`state reason`をGitHub API結果で補完し、GitHub APIの取得件数と表の行数を照合する。一致しない場合は完了扱いにしない。
 - 2026-08-13時点の一覧の初回記録は [作業記録008](md/work_record_008.md) と、その閲覧用 [work_record_008.html](work_record_008.html) の末尾に保存する。その後に確認した状態は、確認作業に対応する作業記録の末尾へ追記する。今回のチャットで確認した状態は [作業記録010](md/work_record_010.md) と、その閲覧用 [work_record_010.html](work_record_010.html) の末尾に保存する。
 - 一覧を更新するときは、更新作業と関係する作業記録に、その時点のオープンIssue全件、確認日時、親子関係、優先順位、変更理由を残す。
 - 優先順位は `P0`（今すぐ）から `P3`（後回し）で表す。
@@ -72,6 +82,10 @@ HTMLはsandbox-pagesのA側rendererが生成するため、このリポジトリ
 - 共通デザイン、CSS、HTML構造、安全性、320px幅の表示確認はsandbox-pages側で管理する。
 - 作業記録の内容とIssue状況はMarkdownへ記録し、公開時にA側rendererがHTMLへ反映する。
 - 過去時点のスナップショットを保存する作業記録は、見出しの日付時点の記録として保持する。現在値として更新する作業記録では、Issue状況を省略せず、必ず同期スクリプトで全オープンIssueを取得する。
+
+## 共通HTMLデザイン
+
+公開HTMLの正本は `tj-999-comp/sandbox-pages` の [`work-records/design.md`](https://github.com/tj-999-comp/sandbox-pages/blob/main/work-records/design.md) とA側renderer/CSSである。`a_rendered` の公開ページは、生成元ごとのHTML・CSS・designを使わず、`record-page`、`shell`、`topbar`、`record-header`、`record-meta`、番号付き`record-section`、共通footerを同じ構造で出力する。新規・更新時は1280px、900px、640px、320pxのviewportで横overflow、console/page error、failed requestがないこと、生成元間の主要構造・スタイルが一致することを確認する。デザイン不一致が残る場合は公開導入を完了扱いにしない。
 
 ## 自動検証
 
