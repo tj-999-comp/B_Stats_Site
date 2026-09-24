@@ -53,7 +53,7 @@ python -m scripts.scraping.daily_batch --date 2026-09-24 --season 2026-27
 
 同じ対象日を再実行した場合は、同じシーズンディレクトリ内のJSONを置き換えます。取得失敗した`ScheduleKey`が残る場合は終了コード1となり、後続の再取得処理で扱います。`play_by_play`は取得しません。
 
-GitHub Actionsの`Daily B.League game scrape`は毎日03:00 JSTに前日分を取得します。手動実行では`target_date`、`season`、`max_retries`を指定できます。WorkflowはDBを変更せず、取得JSONとログをArtifactへ保存します。
+GitHub Actionsの`Daily B.League game scrape`は毎日03:00 JSTに前日分を取得します。公式スケジュールのB1/B2（`tab=1/2`）を対象にし、手動実行では`target_date`、`season`、`max_retries`を指定できます。WorkflowはDBを変更せず、取得JSONとログをArtifactへ保存します。B.LEAGUE NEXT（`tab=3`）は公式Box Scoreが提供されるまで投入対象外です。
 
 ### 期間指定
 

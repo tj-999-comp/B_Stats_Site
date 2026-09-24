@@ -17,6 +17,10 @@ from scripts.db.config import BASE_URL, HEADERS, SCRAPER_ROOT
 
 
 SCHEDULE_KEY_PATTERN = re.compile(r'ScheduleKey=(\d+)')
+# tab=1/2 are the current B1/B2 score feeds. The tab=3 B.LEAGUE NEXT feed
+# may expose schedule headers without a box score and is not an ingestible
+# game-stat source until its official detail endpoint is available.
+SCHEDULE_TABS = ('1', '2')
 
 
 def _game_detail_fetch_log_path() -> Path:
@@ -284,14 +288,18 @@ def _resolve_schedule_api_year(season: str, target_date: date) -> int:
     return target_date.year
 
 
-def _fetch_schedule_topics(target_date: date, schedule_api_year: int) -> list[str]:
+def _fetch_schedule_topics(
+    target_date: date,
+    schedule_api_year: int,
+    tab: str = '1',
+) -> list[str]:
     url = f'{BASE_URL}/schedule/'
     params = {
         'data_format': 'json',
         'year': str(schedule_api_year),
         'mon': f'{target_date.month:02d}',
         'day': f'{target_date.day:02d}',
-        'tab': '1',
+        'tab': tab,
         'event': '',
         'club': '',
     }
@@ -329,6 +337,7 @@ def _fetch_schedule_topics(target_date: date, schedule_api_year: int) -> list[st
             'timestamp': datetime.now(timezone.utc).isoformat(),
             'date': target_date.isoformat(),
             'year': schedule_api_year,
+            'tab': tab,
             'url': requests.Request('GET', url, params=params).prepare().url,
             'attempts': max_attempts,
             'error': _summarize_error(last_error),
@@ -851,18 +860,26 @@ def scrape_date_range_games(
     current = start_date
     schedule_api_year = _resolve_schedule_api_year(season, start_date)
     while current <= end_date:
-        if current > start_date:
-            time.sleep(1.0)  # スロットリング: schedule API リクエスト間の待機
-        topics = _fetch_schedule_topics(current, schedule_api_year)
-        keys = _extract_schedule_keys_from_topics(topics)
-        schedule_score_map.update(_extract_schedule_score_map_from_topics(topics))
-        day_to_keys[current.isoformat()] = keys
+        day_keys: list[int] = []
+        day_seen: set[int] = set()
+        for tab_index, tab in enumerate(SCHEDULE_TABS):
+            if current > start_date or tab_index > 0:
+                time.sleep(1.0)  # スロットリング: schedule API リクエスト間の待機
+            topics = _fetch_schedule_topics(current, schedule_api_year, tab=tab)
+            keys = _extract_schedule_keys_from_topics(topics)
+            schedule_score_map.update(_extract_schedule_score_map_from_topics(topics))
 
-        for key in keys:
-            if key in seen:
-                continue
-            seen.add(key)
-            all_keys.append(key)
+            for key in keys:
+                if key in day_seen:
+                    continue
+                day_seen.add(key)
+                day_keys.append(key)
+                if key in seen:
+                    continue
+                seen.add(key)
+                all_keys.append(key)
+
+        day_to_keys[current.isoformat()] = day_keys
 
         current += timedelta(days=1)
 
