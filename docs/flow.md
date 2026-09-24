@@ -126,6 +126,20 @@ python -m scripts.db.upsert_games \
   --input scraper/data/season_YYYY-YYYY/games_SEASON_START_END.json
 ```
 
+#### 2026-27シーズンの投入前監査例
+
+取得済みの対象JSONを明示し、まずdry-runだけを実行する。`--dry-run`はDBを参照・変更せず、入力JSONからの変換と得点監査を確認する。
+
+```bash
+python -m scripts.db.upsert_games \
+  --input scraper/data/season_2026-2027/games_2026-27_2026-09-23.json \
+  --dry-run
+```
+
+2026-09-23の実行結果（2026-09-24 JST確認）は、`teams=4`、`games=2`、`game_team_stats=4`、`players=47`、`player_game_stats=47`、`play_by_play=0`だった。`points_validation`の監査行は4件、スコア欠損・シュート式不一致・変換後不一致・欠落・余剰・重複はすべて0件だった。
+
+このdry-runはlive DBの`player_id_map`を取得しないため、実投入前には通常経路での読み取り確認を別途行う。検証で不一致が1件でも出た場合は、DB変更へ進まず入力JSONまたは取得結果を確認する。
+
 ### 未投入データの追いつきフロー（2026-08-13時点）
 
 通常の日次取得とは別に、2026年5月末までの未投入試合をまとめて追加する場合は、次の順序で進める。
