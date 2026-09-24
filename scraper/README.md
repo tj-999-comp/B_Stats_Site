@@ -33,20 +33,20 @@ cp .env.example .env
 
 ```bash
 # 特定の1日のみ取得
-python -m scripts.scraping.scraper --date 2024-10-05
+python -m scripts.scraping.scraper --date 2026-09-24
 
 # シーズンを明示する場合
-python -m scripts.scraping.scraper --date 2024-10-05 --season 2024-25
+python -m scripts.scraping.scraper --date 2026-09-24 --season 2026-27
 ```
 
 ### 期間指定
 
 ```bash
 # 開始日〜終了日の範囲を取得
-python -m scripts.scraping.scraper --start-date 2024-10-05 --end-date 2024-10-11
+python -m scripts.scraping.scraper --start-date 2026-09-24 --end-date 2026-09-30
 
 # シーズンを明示する場合
-python -m scripts.scraping.scraper --start-date 2024-10-05 --end-date 2024-10-11 --season 2024-25
+python -m scripts.scraping.scraper --start-date 2026-09-24 --end-date 2026-09-30 --season 2026-27
 ```
 
 ### 補完候補の日付を一括取得
@@ -92,7 +92,7 @@ python -m scripts.dev.refetch_game_detail \
 | `--date YYYY-MM-DD` | 指定した1日分の試合データを取得 |
 | `--start-date YYYY-MM-DD` | 期間指定の開始日（`--end-date` と併用） |
 | `--end-date YYYY-MM-DD` | 期間指定の終了日（`--start-date` と併用） |
-| `--season SEASON` | シーズン識別子（例: `2024-25`）。省略時は `config.py` の `SEASONS[0]` を使用 |
+| `--season SEASON` | シーズン識別子（例: `2026-27`）。省略時は `config.py` の `SEASONS[0]` を使用 |
 | `--include-play-by-play` | `play_by_plays` データも取得する（デフォルト: 無効） |
 | `--max-retries N` | `game_detail` 取得時の最大リトライ回数（デフォルト: `3`） |
 

@@ -912,12 +912,29 @@ def scrape_date_range_games(
 
 
 def output_path_for_date_range(season: str, start_date: date, end_date: date) -> Path:
-    root = SCRAPER_ROOT
-    output_dir = root / 'data'
+    output_dir = season_data_directory(season)
     output_dir.mkdir(parents=True, exist_ok=True)
     if start_date == end_date:
         return output_dir / f'games_{season}_{start_date.isoformat()}.json'
     return output_dir / f'games_{season}_{start_date.isoformat()}_{end_date.isoformat()}.json'
+
+
+def season_data_directory(season: str) -> Path:
+    """Return the tracked data directory for a short season identifier.
+
+    JSON files use the short identifier (for example, ``2026-27``), while
+    season directories use four digits for both years (``season_2026-2027``).
+    """
+    match = re.fullmatch(r'(?P<start>\d{4})-(?P<end>\d{2})', season)
+    if match is None:
+        raise ValueError(f'シーズン識別子が不正です: {season}')
+
+    start_year = int(match.group('start'))
+    end_year = int(f'{start_year // 100}{match.group("end")}')
+    if end_year != start_year + 1:
+        raise ValueError(f'シーズン識別子の年度が連続していません: {season}')
+
+    return SCRAPER_ROOT / 'data' / f'season_{start_year}-{end_year}'
 
 
 def save_date_range_games(

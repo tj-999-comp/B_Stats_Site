@@ -33,7 +33,7 @@ python3 scripts/dev/fix_game_datetimes.py \
 python3 - <<'PY'
 from scripts.scraping.game_scraper import save_date_range_games
 from datetime import date
-save_date_range_games(date(2025,5,1), date(2025,6,30), '2024-25')
+save_date_range_games(date(2026,9,24), date(2026,9,30), '2026-27')
 PY
 ```
 

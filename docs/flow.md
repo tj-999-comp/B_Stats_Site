@@ -34,7 +34,7 @@ psql $DATABASE_URL -f supabase/rebuild/00_rebuild_all.sql
 ```bash
 python -m scripts.scraping.scraper --date YYYY-MM-DD
 # または期間指定
-python -m scripts.scraping.scraper --start-date YYYY-MM-DD --end-date YYYY-MM-DD --season 2024-25
+python -m scripts.scraping.scraper --start-date YYYY-MM-DD --end-date YYYY-MM-DD --season 2026-27
 ```
 
 #### 失敗分のみ再取得して月次JSONへマージ
@@ -67,7 +67,7 @@ python -m scripts.scraping.scraper \
 
 ### ステップ 3: JSONファイルに保存
 
-**出力:** `games_{season}_{date}.json`
+**出力:** `scraper/data/season_YYYY-YYYY/games_{season}_{date}.json`
 
 - `game_scraper.py` がスクレイピング結果をJSONとしてローカルに保存
 

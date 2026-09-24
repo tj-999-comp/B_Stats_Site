@@ -26,25 +26,25 @@ def main() -> None:
         '--date',
         type=str,
         metavar='YYYY-MM-DD',
-        help='スクレイピングする日付（例: 2024-10-05）',
+        help='スクレイピングする日付（例: 2026-09-24）',
     )
     parser.add_argument(
         '--start-date',
         type=str,
         metavar='YYYY-MM-DD',
-        help='スクレイピング開始日（例: 2024-10-05）。--end-date と併用',
+        help='スクレイピング開始日（例: 2026-09-24）。--end-date と併用',
     )
     parser.add_argument(
         '--end-date',
         type=str,
         metavar='YYYY-MM-DD',
-        help='スクレイピング終了日（例: 2024-10-11）。--start-date と併用',
+        help='スクレイピング終了日（例: 2026-09-30）。--start-date と併用',
     )
     parser.add_argument(
         '--season',
         type=str,
         metavar='SEASON',
-        help='シーズン識別子（例: 2024-25）。省略時は config.py の SEASONS[0] を使用',
+        help='シーズン識別子（例: 2026-27）。省略時は config.py の SEASONS[0] を使用',
     )
     parser.add_argument(
         '--include-play-by-play',
