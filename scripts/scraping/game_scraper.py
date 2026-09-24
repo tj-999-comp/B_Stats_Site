@@ -17,10 +17,9 @@ from scripts.db.config import BASE_URL, HEADERS, SCRAPER_ROOT
 
 
 SCHEDULE_KEY_PATTERN = re.compile(r'ScheduleKey=(\d+)')
-# tab=1/2 are the current B1/B2 score feeds. The tab=3 B.LEAGUE NEXT feed
-# may expose schedule headers without a box score and is not an ingestible
-# game-stat source until its official detail endpoint is available.
-SCHEDULE_TABS = ('1', '2')
+# The current ingestion scope is B1 only. B2 is not supported by the current
+# database schema and must not be fetched into the regular game-data flow.
+SCHEDULE_TABS = ('1',)
 
 
 def _game_detail_fetch_log_path() -> Path:
