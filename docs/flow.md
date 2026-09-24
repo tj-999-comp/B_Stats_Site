@@ -40,6 +40,8 @@ python -m scripts.scraping.scraper --start-date YYYY-MM-DD --end-date YYYY-MM-DD
 python -m scripts.scraping.daily_batch --date YYYY-MM-DD --season 2026-27
 ```
 
+GitHub Actionsの`Daily B.League game scrape`は毎日03:00 JSTに前日分を取得し、取得JSONとログをArtifactへ保存する。詳細取得の失敗がある場合は`--retry-failed`相当の再取得を行い、最終JSONに失敗キーが残ればWorkflowを失敗にする。Workflowはlive DBを変更しない。
+
 #### 失敗分のみ再取得して月次JSONへマージ
 
 スクレイピング後に失敗が残った場合、対象の月次JSONを指定して失敗分だけ再取得・上書きできる。

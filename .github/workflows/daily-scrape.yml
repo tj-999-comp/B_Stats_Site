@@ -1,0 +1,129 @@
+name: Daily B.League game scrape
+
+on:
+  schedule:
+    # GitHub Actions cron is UTC: 18:00 UTC = 03:00 JST on the next day.
+    - cron: '0 18 * * *'
+  workflow_dispatch:
+    inputs:
+      target_date:
+        description: '取得対象日（JST, YYYY-MM-DD）。空欄なら前日'
+        required: false
+        type: string
+      season:
+        description: 'シーズン識別子'
+        required: false
+        default: '2026-27'
+        type: string
+      max_retries:
+        description: 'game_detail取得の最大リトライ回数'
+        required: false
+        default: '3'
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: daily-b-league-scrape
+  cancel-in-progress: false
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install scraper dependencies
+        run: pip install -r scraper/requirements.txt
+
+      - name: Resolve JST target date and output path
+        id: target
+        env:
+          INPUT_TARGET_DATE: ${{ inputs.target_date }}
+          INPUT_SEASON: ${{ inputs.season || '2026-27' }}
+        run: |
+          set -euo pipefail
+          if [[ -n "$INPUT_TARGET_DATE" ]]; then
+            target_date="$INPUT_TARGET_DATE"
+          else
+            target_date="$(TZ=Asia/Tokyo date -d 'yesterday' +%F)"
+          fi
+          output_path="$(python - "$target_date" "$INPUT_SEASON" <<'PY'
+          import sys
+          from datetime import date
+          from scripts.scraping.game_scraper import output_path_for_date_range
+
+          target = date.fromisoformat(sys.argv[1])
+          print(output_path_for_date_range(sys.argv[2], target, target))
+          PY
+          )"
+          echo "target_date=$target_date" >> "$GITHUB_OUTPUT"
+          echo "season=$INPUT_SEASON" >> "$GITHUB_OUTPUT"
+          echo "output_path=$output_path" >> "$GITHUB_OUTPUT"
+          echo "target_date=$target_date season=$INPUT_SEASON output=$output_path"
+
+      - name: Run daily batch
+        id: daily
+        continue-on-error: true
+        run: |
+          python -m scripts.scraping.daily_batch \
+            --date '${{ steps.target.outputs.target_date }}' \
+            --season '${{ steps.target.outputs.season }}' \
+            --max-retries '${{ inputs.max_retries || '3' }}'
+
+      - name: Retry failed game details or rerun schedule fetch
+        id: retry
+        if: steps.daily.outcome == 'failure'
+        run: |
+          set -euo pipefail
+          output_path='${{ steps.target.outputs.output_path }}'
+          if [[ -f "$output_path" ]] && python - "$output_path" <<'PY'
+          import json
+          import sys
+          from pathlib import Path
+
+          payload = json.loads(Path(sys.argv[1]).read_text(encoding='utf-8'))
+          raise SystemExit(0 if payload.get('failed_schedule_keys') else 1)
+          PY
+          then
+            python -m scripts.scraping.scraper \
+              --retry-failed \
+              --merge-into "$output_path" \
+              --max-retries '${{ inputs.max_retries || '3' }}'
+          else
+            python -m scripts.scraping.daily_batch \
+              --date '${{ steps.target.outputs.target_date }}' \
+              --season '${{ steps.target.outputs.season }}' \
+              --max-retries '${{ inputs.max_retries || '3' }}'
+          fi
+
+      - name: Validate output and failure state
+        if: always()
+        env:
+          DAILY_OUTCOME: ${{ steps.daily.outcome }}
+          RETRY_OUTCOME: ${{ steps.retry.outcome }}
+        run: |
+          set -euo pipefail
+          python -m scripts.dev.validate_daily_batch_output \
+            --input '${{ steps.target.outputs.output_path }}'
+          if [[ "$DAILY_OUTCOME" == 'failure' && "$RETRY_OUTCOME" != 'success' ]]; then
+            echo "daily batch failed and retry did not succeed" >&2
+            exit 1
+          fi
+
+      - name: Upload daily scrape artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: b-league-${{ steps.target.outputs.season }}-${{ steps.target.outputs.target_date }}
+          if-no-files-found: warn
+          path: |
+            ${{ steps.target.outputs.output_path }}
+            scraper/logs/game_detail_fetch_log.json
+            scraper/logs/schedule_fetch_log.json

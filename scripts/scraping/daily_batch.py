@@ -8,12 +8,41 @@ import logging
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
-from scripts.db.config import SEASONS
+from scripts.db.config import SCRAPER_ROOT, SEASONS
 from scripts.scraping.game_scraper import output_path_for_date_range, save_date_range_games
 
 
 JST = timezone(timedelta(hours=9))
 logger = logging.getLogger(__name__)
+
+
+def _new_schedule_fetch_failures(run_started_at: datetime, target_date: date) -> list[dict[str, object]]:
+    """Return schedule API failures appended during this batch run."""
+    path = SCRAPER_ROOT / 'logs' / 'schedule_fetch_log.json'
+    if not path.exists():
+        return []
+
+    try:
+        entries = json.loads(path.read_text(encoding='utf-8'))
+    except (OSError, json.JSONDecodeError):
+        return []
+    if not isinstance(entries, list):
+        return []
+
+    failures: list[dict[str, object]] = []
+    for entry in entries:
+        if not isinstance(entry, dict) or entry.get('date') != target_date.isoformat():
+            continue
+        timestamp = entry.get('timestamp')
+        if not isinstance(timestamp, str):
+            continue
+        try:
+            logged_at = datetime.fromisoformat(timestamp)
+        except ValueError:
+            continue
+        if logged_at >= run_started_at and entry.get('result') == 'failed_return_empty_topics':
+            failures.append(entry)
+    return failures
 
 
 def resolve_target_date(date_text: str | None) -> date:
@@ -78,6 +107,7 @@ def run_batch(
         target_date,
         output_path,
     )
+    run_started_at = datetime.now(timezone.utc)
     saved_path = save_date_range_games(
         target_date,
         target_date,
@@ -98,6 +128,10 @@ def run_batch(
     )
     if isinstance(failed_keys, list) and failed_keys:
         logger.error('Daily batch has failed schedule keys: %s', failed_keys)
+        return 1
+    schedule_failures = _new_schedule_fetch_failures(run_started_at, target_date)
+    if schedule_failures:
+        logger.error('Daily batch has schedule API failures: %s', schedule_failures)
         return 1
     return 0
 

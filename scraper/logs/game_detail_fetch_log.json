@@ -1133,5 +1133,15 @@
     "failed_count": 0,
     "failed_schedule_keys": [],
     "failed_games": []
+  },
+  {
+    "run_at": "2026-09-24T01:56:40.545413+00:00",
+    "season": "2026-27",
+    "start_date": "2026-09-22",
+    "end_date": "2026-09-22",
+    "game_count": 1,
+    "failed_count": 0,
+    "failed_schedule_keys": [],
+    "failed_games": []
   }
 ]
