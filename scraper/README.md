@@ -39,6 +39,20 @@ python -m scripts.scraping.scraper --date 2026-09-24
 python -m scripts.scraping.scraper --date 2026-09-24 --season 2026-27
 ```
 
+### 日次バッチ
+
+日次運用では、JSTの日付を基準に専用入口を実行します。`--date`を省略すると実行時のJST日付を対象にします。
+
+```bash
+# 対象日と保存先だけ確認
+python -m scripts.scraping.daily_batch --date 2026-09-24 --season 2026-27 --dry-run
+
+# 2026-09-24（JST）の試合を取得
+python -m scripts.scraping.daily_batch --date 2026-09-24 --season 2026-27
+```
+
+同じ対象日を再実行した場合は、同じシーズンディレクトリ内のJSONを置き換えます。取得失敗した`ScheduleKey`が残る場合は終了コード1となり、後続の再取得処理で扱います。`play_by_play`は取得しません。
+
 ### 期間指定
 
 ```bash

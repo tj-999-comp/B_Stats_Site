@@ -35,6 +35,9 @@ psql $DATABASE_URL -f supabase/rebuild/00_rebuild_all.sql
 python -m scripts.scraping.scraper --date YYYY-MM-DD
 # または期間指定
 python -m scripts.scraping.scraper --start-date YYYY-MM-DD --end-date YYYY-MM-DD --season 2026-27
+
+# 日次運用の入口（JST。対象日を省略すると実行日のJST日付）
+python -m scripts.scraping.daily_batch --date YYYY-MM-DD --season 2026-27
 ```
 
 #### 失敗分のみ再取得して月次JSONへマージ
